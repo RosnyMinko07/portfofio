@@ -28,7 +28,7 @@ export default async function handler(req, res) {
         <p><strong>Sujet:</strong> ${subject}</p>
         <p><strong>Message:</strong></p>
         <p>${message.replace(/\n/g, "<br>")}</p>
-      `,
+      `
     });
 
     return res.status(200).json({ success: true, message: "Votre message a été envoyé avec succès !" });
