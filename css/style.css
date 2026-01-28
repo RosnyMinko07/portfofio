@@ -569,10 +569,14 @@ h3.my-profession{
 }
 /* portfolio */
 /* Portfolio Section */
+/* ---------------- Portfolio ---------------- */
+
+/* Container principal */
 .portfolio .container {
     padding-bottom: 60px;
 }
 
+/* Titre de section */
 .portfolio .portfolio-heading {
     flex: 0 0 100%;
     max-width: 100%;
@@ -585,27 +589,34 @@ h3.my-profession{
     font-size: 24px;
 }
 
-/* Container pour la mise en page en 3 colonnes */
+/* Layout en colonnes */
 .portfolio .portfolio-row {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -20px;
+    margin: 0 -15px;
 }
 
+/* Carte Portfolio */
 .portfolio .portfolio-item {
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;
+    flex: 0 0 33.3333%;
+    max-width: 33.3333%;
+    padding: 0 15px;
     margin-bottom: 40px;
-    padding: 0 20px;
     box-sizing: border-box;
+    animation: fadeInUp 0.6s ease forwards;
 }
+
+.portfolio .portfolio-item:nth-child(2) { animation-delay: 0.1s; }
+.portfolio .portfolio-item:nth-child(3) { animation-delay: 0.2s; }
+.portfolio .portfolio-item:nth-child(4) { animation-delay: 0.3s; }
+.portfolio .portfolio-item:nth-child(5) { animation-delay: 0.4s; }
+.portfolio .portfolio-item:nth-child(6) { animation-delay: 0.5s; }
 
 /* Lien cliquable */
 .portfolio .portfolio-link {
     display: block;
     text-decoration: none;
     color: inherit;
-    height: 100%;
     transition: transform 0.3s ease;
 }
 
@@ -613,18 +624,18 @@ h3.my-profession{
     transform: scale(1.02);
 }
 
-/* Item de portfolio */
+/* Carte intérieure */
 .portfolio .portfolio-item-inner {
     border: 8px solid var(--bg-black-100);
     border-radius: 15px;
     overflow: hidden;
     cursor: pointer;
-    height: 450px; /* Plus haut pour inclure le texte */
+    height: 480px; /* Taille uniforme pour toutes les cartes */
+    display: flex;
+    flex-direction: column; /* Image + texte */
     transition: all 0.4s ease;
     position: relative;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column; /* Pour empiler image et texte */
 }
 
 .portfolio .portfolio-item-inner:hover {
@@ -633,27 +644,22 @@ h3.my-profession{
     border-color: var(--primary-color, #3498db);
 }
 
-/* Conteneur d'image - Prend plus d'espace */
+/* Image */
 .portfolio .portfolio-img {
-    position: relative;
     width: 100%;
-    height: 320px; /* Hauteur fixe pour l'image */
+    height: 300px; /* Taille uniforme pour toutes les images */
     overflow: hidden;
-    flex-shrink: 0; /* Empêche de rétrécir */
-    background-color: #f8f9fa; /* Fond uni */
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #f8f9fa;
 }
 
-/* Image qui montre TOUTE L'IMAGE */
 .portfolio .portfolio-img img {
-    max-width: 90%; /* Laisse un peu de marge */
-    max-height: 90%; /* Laisse un peu de marge */
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Image entièrement visible */
     display: block;
-    object-fit: contain; /* Affiche toute l'image */
     transition: transform 0.6s ease;
 }
 
@@ -661,14 +667,14 @@ h3.my-profession{
     transform: scale(1.05);
 }
 
-/* Section info sous l'image */
+/* Info sous l'image */
 .portfolio .portfolio-info {
     padding: 20px;
     background: white;
-    flex-grow: 1; /* Prend l'espace restant */
+    flex-grow: 1; /* Texte prend l’espace restant */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
     border-top: 1px solid #eee;
 }
@@ -688,131 +694,57 @@ h3.my-profession{
     opacity: 0.8;
 }
 
-/* Pour les images portrait (plus hautes que larges) */
-.portfolio .portfolio-img.portrait img {
-    max-height: 85%;
-    max-width: 75%;
+.portfolio .portfolio-info p {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
 }
 
-/* Pour les images landscape (plus larges que hautes) */
-.portfolio .portfolio-img.landscape img {
-    max-width: 95%;
-    max-height: 85%;
+/* Animation */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive Design */
+/* ---------------- Responsive ---------------- */
 @media (max-width: 1199px) {
-    .portfolio .portfolio-item-inner {
-        height: 420px;
-    }
-    
-    .portfolio .portfolio-img {
-        height: 280px;
-    }
-    
-    .portfolio .portfolio-row {
-        margin: 0 -15px;
-    }
-    
-    .portfolio .portfolio-item {
-        padding: 0 15px;
-    }
+    .portfolio .portfolio-item-inner { height: 460px; }
+    .portfolio .portfolio-img { height: 280px; }
 }
 
 @media (max-width: 991px) {
     .portfolio .portfolio-item {
         flex: 0 0 50%;
         max-width: 50%;
-        margin-bottom: 35px;
     }
-    
-    .portfolio .portfolio-item-inner {
-        height: 450px;
-    }
-    
-    .portfolio .portfolio-img {
-        height: 300px;
-    }
-    
-    .portfolio .portfolio-title {
-        font-size: 17px;
-    }
+    .portfolio .portfolio-item-inner { height: 450px; }
+    .portfolio .portfolio-img { height: 260px; }
+    .portfolio .portfolio-title { font-size: 17px; }
 }
 
 @media (max-width: 767px) {
     .portfolio .portfolio-item {
         flex: 0 0 100%;
         max-width: 100%;
-        margin-bottom: 30px;
     }
-    
-    .portfolio .portfolio-item-inner {
-        height: 500px;
-        max-width: 500px;
-        margin: 0 auto;
-    }
-    
-    .portfolio .portfolio-img {
-        height: 350px;
-    }
-    
-    .portfolio .portfolio-heading h2 {
-        font-size: 22px;
-    }
-    
-    .portfolio .portfolio-title {
-        font-size: 19px;
-    }
+    .portfolio .portfolio-item-inner { height: auto; }
+    .portfolio .portfolio-img { height: 220px; }
+    .portfolio .portfolio-heading h2 { font-size: 22px; }
+    .portfolio .portfolio-title { font-size: 19px; }
 }
 
 @media (max-width: 575px) {
-    .portfolio .portfolio-item {
-        padding: 0 15px;
-    }
-    
-    .portfolio .portfolio-item-inner {
-        height: 420px;
-        border-width: 6px;
-    }
-    
-    .portfolio .portfolio-img {
-        height: 280px;
-    }
-    
-    .portfolio .portfolio-info {
-        padding: 15px;
-    }
-    
-    .portfolio .portfolio-title {
-        font-size: 16px;
-    }
-    
-    .portfolio .portfolio-date {
-        font-size: 13px;
-    }
+    .portfolio .portfolio-item-inner { border-width: 6px; }
+    .portfolio .portfolio-img { height: 200px; }
+    .portfolio .portfolio-info { padding: 15px; }
+    .portfolio .portfolio-title { font-size: 16px; }
+    .portfolio .portfolio-date { font-size: 13px; }
+    .portfolio .portfolio-info p { font-size: 13px; }
 }
 
-/* Animation d'entrée */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-.portfolio .portfolio-item {
-    animation: fadeInUp 0.6s ease forwards;
-}
 
-.portfolio .portfolio-item:nth-child(2) { animation-delay: 0.1s; }
-.portfolio .portfolio-item:nth-child(3) { animation-delay: 0.2s; }
-.portfolio .portfolio-item:nth-child(4) { animation-delay: 0.3s; }
-.portfolio .portfolio-item:nth-child(5) { animation-delay: 0.4s; }
-.portfolio .portfolio-item:nth-child(6) { animation-delay: 0.5s; }
 /* Contact */
 .contact-title{
 	color: var(--skin-color);
