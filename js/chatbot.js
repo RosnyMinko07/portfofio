@@ -137,16 +137,29 @@ document.addEventListener('DOMContentLoaded', function() {
         conversationHistory.push({ role: 'assistant', content: data.message });
       } else {
         // En cas d'erreur, afficher le message d'erreur de l'API
-        const errorMsg = data.message || `Erreur serveur (${response.status}). Veuillez réessayer.`;
-        addMessage(errorMsg, 'bot');
-        console.error('Erreur API:', {
+        let errorMsg = data.message || `Erreur serveur (${response.status}). Veuillez réessayer.`;
+        
+        // Afficher les détails complets dans la console pour le débogage
+        console.error('❌ Erreur API complète:', {
           status: response.status,
           statusText: response.statusText,
-          data: data
+          data: data,
+          error: data.error,
+          message: data.message
         });
+        
+        // Afficher le message d'erreur complet dans la console
+        console.error('📋 Message d\'erreur:', data.message);
         if (data.error) {
-          console.error('Détails de l\'erreur:', data.error);
+          console.error('🔍 Détails techniques:', data.error);
         }
+        
+        // Si c'est une erreur de configuration API, afficher un message plus clair
+        if (data.message && (data.message.includes('Configuration API manquante') || data.message.includes('GOOGLE_GEMINI_API_KEY'))) {
+          errorMsg = '⚠️ La clé API Google Gemini n\'est pas configurée sur Vercel.\n\nPour corriger:\n1. Allez sur vercel.com\n2. Votre projet → Settings → Environment Variables\n3. Ajoutez GOOGLE_GEMINI_API_KEY avec votre clé\n4. Redéployez';
+        }
+        
+        addMessage(errorMsg, 'bot');
       }
     } catch (error) {
       // Retirer le message de chargement

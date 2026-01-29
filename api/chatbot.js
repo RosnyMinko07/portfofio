@@ -150,11 +150,15 @@ Réponds de manière concise mais informative.`;
       });
     }
     
-    // Retourner le message d'erreur pour le débogage (en production, vous pouvez le masquer)
+    // Retourner le message d'erreur pour le débogage
+    const errorMessage = error.message || 'Erreur inconnue';
+    console.error('Message d\'erreur complet:', errorMessage);
+    
     return res.status(500).json({ 
       success: false, 
-      message: 'Désolé, une erreur est survenue. Veuillez réessayer.',
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      message: `Erreur serveur: ${errorMessage}`,
+      error: errorMessage,
+      type: error.name || 'UnknownError'
     });
   }
 };
