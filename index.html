@@ -545,7 +545,7 @@
 
     feedback.style.display = "block";
     feedback.innerHTML = "Envoi en cours...";
-    feedback.style.color = "black";
+    feedback.style.color = "blue";
 
     const data = {
       name: form.name.value,
@@ -555,7 +555,8 @@
     };
 
     try {
-      const response = await fetch("api/send-email", { // remplace par le chemin de ton API
+      // IMPORTANT: Utilisez le bon chemin
+      const response = await fetch("api/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -566,18 +567,23 @@
       const result = await response.json();
 
       if (result.success) {
-        feedback.innerHTML = result.message;
+        feedback.innerHTML = "✅ " + result.message;
         feedback.style.color = "green";
         form.reset(); // vide le formulaire
       } else {
-        feedback.innerHTML = result.message;
+        feedback.innerHTML = "❌ " + result.message;
         feedback.style.color = "red";
       }
     } catch (err) {
-      feedback.innerHTML = "Erreur lors de l'envoi. Veuillez réessayer plus tard.";
-      feedback.style.color = "red";
+      feedback.innerHTML = "⚠️ Erreur réseau. Veuillez réessayer ou me contacter directement par email.";
+      feedback.style.color = "orange";
       console.error(err);
     }
+    
+    // Cacher le message après 10 secondes
+    setTimeout(() => {
+      feedback.style.display = "none";
+    }, 10000);
   });
 </script>
 
