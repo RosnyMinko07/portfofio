@@ -42,8 +42,9 @@ module.exports = async (req, res) => {
 
     // Initialiser Google Gemini
     const genAI = new GoogleGenerativeAI(apiKey);
-    // Utiliser gemini-1.5-flash (plus récent et plus rapide)
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    // Utiliser gemini-pro (compatible avec l'API v1)
+    // Note: gemini-1.5-flash nécessite l'API v1beta, on utilise donc gemini-pro
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
     // Construire le contexte pour l'IA
     const systemPrompt = `Tu es l'assistant IA de Rosny OTSINA, un développeur web et mobile freelance basé à Libreville, Gabon.
