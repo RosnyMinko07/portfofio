@@ -1,0 +1,25 @@
+{
+  "name": "portfolio-rosny",
+  "version": "1.0.0",
+  "description": "Portfolio de Rosny OTSINA avec chatbot IA intégré",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required'"
+  },
+  "keywords": [
+    "portfolio",
+    "chatbot",
+    "gemini",
+    "ai"
+  ],
+  "author": "Rosny OTSINA",
+  "license": "MIT",
+  "dependencies": {
+    "@google/generative-ai": "^0.2.1",
+    "resend": "^6.9.1"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}
