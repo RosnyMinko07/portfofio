@@ -1,6 +1,76 @@
 // api/chatbot.js - API backend pour le chatbot avec Google Gemini
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
+// Fonction pour appeler l'API Gemini directement via REST (v1beta)
+async function callGeminiAPI(apiKey, prompt) {
+  const https = require('https');
+  const url = require('url');
+  
+  return new Promise((resolve, reject) => {
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const parsedUrl = url.parse(apiUrl);
+    
+    const postData = JSON.stringify({
+      contents: [{
+        parts: [{
+          text: prompt
+        }]
+      }]
+    });
+    
+    const options = {
+      hostname: parsedUrl.hostname,
+      path: parsedUrl.path,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(postData)
+      }
+    };
+    
+    const req = https.request(options, (res) => {
+      let data = '';
+      
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+      
+      res.on('end', () => {
+        try {
+          if (res.statusCode !== 200) {
+            reject(new Error(`Erreur API Gemini (${res.statusCode}): ${data}`));
+            return;
+          }
+          
+          const response = JSON.parse(data);
+          
+          // Vérifier les erreurs dans la réponse
+          if (response.error) {
+            reject(new Error(`Erreur Gemini API: ${response.error.message || JSON.stringify(response.error)}`));
+            return;
+          }
+          
+          if (response.candidates && response.candidates[0] && response.candidates[0].content) {
+            const text = response.candidates[0].content.parts[0].text;
+            resolve(text);
+          } else {
+            reject(new Error('Réponse invalide de l\'API Gemini: ' + JSON.stringify(response)));
+          }
+        } catch (e) {
+          reject(new Error('Erreur lors du parsing de la réponse: ' + e.message + ' | Data: ' + data.substring(0, 200)));
+        }
+      });
+    });
+    
+    req.on('error', (e) => {
+      reject(new Error('Erreur de requête: ' + e.message));
+    });
+    
+    req.write(postData);
+    req.end();
+  });
+}
+
 module.exports = async (req, res) => {
   // Autoriser les requêtes cross-origin
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -40,11 +110,37 @@ module.exports = async (req, res) => {
       });
     }
 
-    // Initialiser Google Gemini
+    // Initialiser Google Gemini avec l'API v1beta pour les modèles récents
     const genAI = new GoogleGenerativeAI(apiKey);
-    // Utiliser gemini-pro (compatible avec l'API v1)
-    // Note: gemini-1.5-flash nécessite l'API v1beta, on utilise donc gemini-pro
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    
+    // Essayer d'abord avec gemini-1.5-flash (modèle rapide et récent)
+    // Si ça ne fonctionne pas, essayer gemini-pro
+    let model;
+    let modelName = 'gemini-1.5-flash';
+    
+    try {
+      // Essayer gemini-1.5-flash d'abord (nécessite parfois v1beta)
+      model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      console.log('✅ Utilisation du modèle: gemini-1.5-flash');
+    } catch (e1) {
+      console.log('⚠️ gemini-1.5-flash non disponible, essai avec gemini-pro...');
+      try {
+        // Fallback vers gemini-pro
+        model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+        modelName = 'gemini-pro';
+        console.log('✅ Utilisation du modèle: gemini-pro');
+      } catch (e2) {
+        console.log('⚠️ gemini-pro non disponible, essai avec gemini-1.0-pro...');
+        try {
+          // Dernier essai avec gemini-1.0-pro
+          model = genAI.getGenerativeModel({ model: 'gemini-1.0-pro' });
+          modelName = 'gemini-1.0-pro';
+          console.log('✅ Utilisation du modèle: gemini-1.0-pro');
+        } catch (e3) {
+          throw new Error(`Aucun modèle Gemini disponible. Erreurs: ${e1.message}, ${e2.message}, ${e3.message}. Vérifiez votre clé API.`);
+        }
+      }
+    }
 
     // Construire le contexte pour l'IA
     const systemPrompt = `Tu es l'assistant IA de Rosny OTSINA, un développeur web et mobile freelance basé à Libreville, Gabon.
@@ -110,11 +206,23 @@ Réponds de manière concise mais informative.`;
     conversationContext += `Visiteur: ${message}\nAssistant:`;
 
     // Générer la réponse avec Gemini
-    console.log('Envoi de la requête à Gemini...');
-    const result = await model.generateContent(conversationContext);
-    const response = await result.response;
-    const aiResponse = response.text();
-    console.log('Réponse reçue de Gemini avec succès');
+    console.log(`Envoi de la requête à Gemini avec le modèle ${modelName}...`);
+    
+    let aiResponse;
+    try {
+      const result = await model.generateContent(conversationContext);
+      const response = await result.response;
+      aiResponse = response.text();
+      console.log('✅ Réponse reçue de Gemini avec succès');
+    } catch (modelError) {
+      // Si l'erreur indique que le modèle n'est pas disponible, essayer avec l'API REST v1beta
+      if (modelError.message && modelError.message.includes('404') && modelError.message.includes('not found')) {
+        console.log('⚠️ Modèle non disponible avec SDK, utilisation de l\'API REST v1beta...');
+        aiResponse = await callGeminiAPI(apiKey, conversationContext);
+      } else {
+        throw modelError;
+      }
+    }
 
     return res.status(200).json({ 
       success: true, 
