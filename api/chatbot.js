@@ -31,24 +31,19 @@ module.exports = async (req, res) => {
 
     // Vérifier que la clé API est configurée
     const apiKey = process.env.GOOGLE_GEMINI_API_KEY;
+    console.log('Vérification de la clé API...', apiKey ? 'Clé présente' : 'Clé manquante');
     if (!apiKey) {
-      console.error('GOOGLE_GEMINI_API_KEY n\'est pas configurée');
+      console.error('❌ GOOGLE_GEMINI_API_KEY n\'est pas configurée');
       return res.status(500).json({ 
         success: false, 
-        message: 'Configuration API manquante. Veuillez contacter l\'administrateur.' 
+        message: 'Configuration API manquante. La clé GOOGLE_GEMINI_API_KEY n\'est pas configurée sur Vercel.' 
       });
     }
 
     // Initialiser Google Gemini
     const genAI = new GoogleGenerativeAI(apiKey);
-    // Utiliser gemini-1.5-flash (plus récent et plus rapide) ou gemini-pro en fallback
-    let model;
-    try {
-      model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-    } catch (e) {
-      // Fallback vers gemini-pro si gemini-1.5-flash n'est pas disponible
-      model = genAI.getGenerativeModel({ model: 'gemini-pro' });
-    }
+    // Utiliser gemini-1.5-flash (plus récent et plus rapide)
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
     // Construire le contexte pour l'IA
     const systemPrompt = `Tu es l'assistant IA de Rosny OTSINA, un développeur web et mobile freelance basé à Libreville, Gabon.
@@ -114,9 +109,11 @@ Réponds de manière concise mais informative.`;
     conversationContext += `Visiteur: ${message}\nAssistant:`;
 
     // Générer la réponse avec Gemini
+    console.log('Envoi de la requête à Gemini...');
     const result = await model.generateContent(conversationContext);
     const response = await result.response;
     const aiResponse = response.text();
+    console.log('Réponse reçue de Gemini avec succès');
 
     return res.status(200).json({ 
       success: true, 

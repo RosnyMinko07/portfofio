@@ -115,25 +115,35 @@ document.addEventListener('DOMContentLoaded', function() {
         })
       });
 
-      // Vérifier si la réponse est OK
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      // Récupérer les données même si le status n'est pas OK
+      let data;
+      try {
+        data = await response.json();
+      } catch (e) {
+        // Si la réponse n'est pas du JSON, créer un objet d'erreur
+        const text = await response.text();
+        data = { 
+          success: false, 
+          message: `Erreur serveur (${response.status}): ${text || 'Réponse invalide'}` 
+        };
       }
-
-      const data = await response.json();
 
       // Retirer le message de chargement
       loadingMessage.remove();
 
-      if (data.success) {
+      if (response.ok && data.success) {
         // Ajouter la réponse de l'IA
         addMessage(data.message, 'bot');
         conversationHistory.push({ role: 'assistant', content: data.message });
       } else {
         // En cas d'erreur, afficher le message d'erreur de l'API
-        const errorMsg = data.message || 'Désolé, une erreur est survenue. Veuillez réessayer.';
+        const errorMsg = data.message || `Erreur serveur (${response.status}). Veuillez réessayer.`;
         addMessage(errorMsg, 'bot');
-        console.error('Erreur API:', data);
+        console.error('Erreur API:', {
+          status: response.status,
+          statusText: response.statusText,
+          data: data
+        });
         if (data.error) {
           console.error('Détails de l\'erreur:', data.error);
         }
