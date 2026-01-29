@@ -6,6 +6,9 @@
 # Dépendances
 node_modules/
 
+# Build output
+public/
+
 # Logs
 *.log
 npm-debug.log*
