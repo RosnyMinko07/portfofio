@@ -115,6 +115,11 @@ document.addEventListener('DOMContentLoaded', function() {
         })
       });
 
+      // Vérifier si la réponse est OK
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
 
       // Retirer le message de chargement
@@ -125,17 +130,26 @@ document.addEventListener('DOMContentLoaded', function() {
         addMessage(data.message, 'bot');
         conversationHistory.push({ role: 'assistant', content: data.message });
       } else {
-        // En cas d'erreur, afficher un message d'erreur
-        addMessage('Désolé, une erreur est survenue. Veuillez réessayer.', 'bot');
-        console.error('Erreur API:', data.message);
+        // En cas d'erreur, afficher le message d'erreur de l'API
+        const errorMsg = data.message || 'Désolé, une erreur est survenue. Veuillez réessayer.';
+        addMessage(errorMsg, 'bot');
+        console.error('Erreur API:', data);
+        if (data.error) {
+          console.error('Détails de l\'erreur:', data.error);
+        }
       }
     } catch (error) {
       // Retirer le message de chargement
       loadingMessage.remove();
       
       // En cas d'erreur réseau, afficher un message d'erreur
-      addMessage('Erreur de connexion. Vérifiez votre connexion internet et réessayez.', 'bot');
+      let errorMessage = 'Erreur de connexion. Vérifiez votre connexion internet et réessayez.';
+      if (error.message && error.message.includes('HTTP error')) {
+        errorMessage = 'Erreur serveur. Veuillez réessayer dans quelques instants.';
+      }
+      addMessage(errorMessage, 'bot');
       console.error('Erreur réseau:', error);
+      console.error('Détails:', error.message);
     } finally {
       // Réactiver l'input
       chatbotInput.disabled = false;

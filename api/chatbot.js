@@ -41,7 +41,14 @@ module.exports = async (req, res) => {
 
     // Initialiser Google Gemini
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    // Utiliser gemini-1.5-flash (plus récent et plus rapide) ou gemini-pro en fallback
+    let model;
+    try {
+      model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    } catch (e) {
+      // Fallback vers gemini-pro si gemini-1.5-flash n'est pas disponible
+      model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    }
 
     // Construire le contexte pour l'IA
     const systemPrompt = `Tu es l'assistant IA de Rosny OTSINA, un développeur web et mobile freelance basé à Libreville, Gabon.
@@ -118,25 +125,39 @@ Réponds de manière concise mais informative.`;
     
   } catch (error) {
     console.error('Erreur Gemini API:', error);
+    console.error('Détails de l\'erreur:', {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    });
     
     // Gérer les erreurs spécifiques
-    if (error.message && error.message.includes('API_KEY')) {
+    if (error.message && (error.message.includes('API_KEY') || error.message.includes('API key'))) {
       return res.status(500).json({ 
         success: false, 
         message: 'Erreur de configuration API. Veuillez contacter l\'administrateur.' 
       });
     }
     
-    if (error.message && error.message.includes('quota')) {
+    if (error.message && (error.message.includes('quota') || error.message.includes('QUOTA'))) {
       return res.status(429).json({ 
         success: false, 
         message: 'Limite de requêtes atteinte. Veuillez réessayer plus tard.' 
       });
     }
     
+    if (error.message && error.message.includes('MODEL_NOT_FOUND')) {
+      return res.status(500).json({ 
+        success: false, 
+        message: 'Modèle IA non disponible. Veuillez contacter l\'administrateur.' 
+      });
+    }
+    
+    // Retourner le message d'erreur pour le débogage (en production, vous pouvez le masquer)
     return res.status(500).json({ 
       success: false, 
-      message: 'Désolé, une erreur est survenue. Veuillez réessayer.' 
+      message: 'Désolé, une erreur est survenue. Veuillez réessayer.',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 };
