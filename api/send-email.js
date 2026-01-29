@@ -1,39 +1,45 @@
-import { Resend } from "resend";
+const { Resend } = require('resend');
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ success: false, message: "Méthode non autorisée" });
+module.exports = async (req, res) => {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  const { name, email, subject, message } = req.body;
-
-  // Validation
-  if (!name || name.length < 2) return res.status(400).json({ success: false, message: "Nom invalide" });
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ success: false, message: "Email invalide" });
-  if (!subject || subject.length < 3) return res.status(400).json({ success: false, message: "Sujet invalide" });
-  if (!message || message.length < 10) return res.status(400).json({ success: false, message: "Message trop court" });
-
   try {
-    await resend.emails.send({
-      from: `Portfolio <${process.env.PORTFOLIO_EMAIL}>`,
-      to: [process.env.PORTFOLIO_EMAIL],
-      replyTo: email,
-      subject: `Nouveau message depuis votre portfolio: ${subject}`,
+    const { name, email, subject, message } = req.body;
+
+    const { data, error } = await resend.emails.send({
+      from: 'Portfolio Contact <onboarding@resend.dev>',
+      to: 'rodrigueotsina@gmail.com',
+      subject: `Nouveau message: ${subject}`,
       html: `
-        <h2>Nouveau message depuis votre portfolio</h2>
+        <h2>Nouveau message de contact</h2>
         <p><strong>Nom:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Sujet:</strong> ${subject}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, "<br>")}</p>
+        <p><strong>Message:</strong> ${message}</p>
       `
     });
 
-    return res.status(200).json({ success: true, message: "Votre message a été envoyé avec succès !" });
+    if (error) {
+      console.error('Resend error:', error);
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Erreur lors de l\'envoi de l\'email' 
+      });
+    }
+
+    return res.status(200).json({ 
+      success: true, 
+      message: 'Message envoyé avec succès!' 
+    });
   } catch (error) {
-    console.error("Erreur Resend:", error);
-    return res.status(500).json({ success: false, message: "Erreur lors de l'envoi du message." });
+    console.error('Server error:', error);
+    return res.status(500).json({ 
+      success: false, 
+      message: 'Erreur serveur' 
+    });
   }
-}
+};

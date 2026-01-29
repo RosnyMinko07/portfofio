@@ -1,3 +1,4 @@
+
 {
   "name": "portfolio-rosny",
   "version": "1.0.0",
@@ -8,5 +9,7 @@
   "dependencies": {
     "resend": "^2.0.0"
   },
-  "devDependencies": {}
+  "engines": {
+    "node": "18.x"
+  }
 }
