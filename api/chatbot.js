@@ -1,83 +1,11 @@
-// api/chatbot.js - API backend pour le chatbot avec Google Gemini
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-
-// Fonction pour appeler l'API Gemini directement via REST (v1beta)
-async function callGeminiAPI(apiKey, prompt) {
-  const https = require('https');
-  const url = require('url');
-  
-  return new Promise((resolve, reject) => {
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-    const parsedUrl = url.parse(apiUrl);
-    
-    const postData = JSON.stringify({
-      contents: [{
-        parts: [{
-          text: prompt
-        }]
-      }]
-    });
-    
-    const options = {
-      hostname: parsedUrl.hostname,
-      path: parsedUrl.path,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(postData)
-      }
-    };
-    
-    const req = https.request(options, (res) => {
-      let data = '';
-      
-      res.on('data', (chunk) => {
-        data += chunk;
-      });
-      
-      res.on('end', () => {
-        try {
-          if (res.statusCode !== 200) {
-            reject(new Error(`Erreur API Gemini (${res.statusCode}): ${data}`));
-            return;
-          }
-          
-          const response = JSON.parse(data);
-          
-          // Vérifier les erreurs dans la réponse
-          if (response.error) {
-            reject(new Error(`Erreur Gemini API: ${response.error.message || JSON.stringify(response.error)}`));
-            return;
-          }
-          
-          if (response.candidates && response.candidates[0] && response.candidates[0].content) {
-            const text = response.candidates[0].content.parts[0].text;
-            resolve(text);
-          } else {
-            reject(new Error('Réponse invalide de l\'API Gemini: ' + JSON.stringify(response)));
-          }
-        } catch (e) {
-          reject(new Error('Erreur lors du parsing de la réponse: ' + e.message + ' | Data: ' + data.substring(0, 200)));
-        }
-      });
-    });
-    
-    req.on('error', (e) => {
-      reject(new Error('Erreur de requête: ' + e.message));
-    });
-    
-    req.write(postData);
-    req.end();
-  });
-}
+// api/chatbot.js - API backend pour le chatbot avec DeepSeek via OpenRouter
 
 module.exports = async (req, res) => {
-  // Autoriser les requêtes cross-origin
+  // Configuration CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   
-  // Gérer les requêtes OPTIONS pour CORS
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
@@ -99,58 +27,28 @@ module.exports = async (req, res) => {
       });
     }
 
-    // Vérifier que la clé API est configurée
-    const apiKey = process.env.GOOGLE_GEMINI_API_KEY;
-    console.log('Vérification de la clé API...', apiKey ? 'Clé présente' : 'Clé manquante');
+    // Vérifier la clé API OpenRouter
+    const apiKey = process.env.OPENROUTER_API_KEY;
+    console.log('Vérification de la clé OpenRouter API...', apiKey ? 'Clé présente' : 'Clé manquante');
+    
     if (!apiKey) {
-      console.error('❌ GOOGLE_GEMINI_API_KEY n\'est pas configurée');
+      console.error('❌ OPENROUTER_API_KEY n\'est pas configurée');
       return res.status(500).json({ 
         success: false, 
-        message: 'Configuration API manquante. La clé GOOGLE_GEMINI_API_KEY n\'est pas configurée sur Vercel.' 
+        message: 'Configuration API manquante. La clé OPENROUTER_API_KEY n\'est pas configurée sur Vercel.' 
       });
     }
 
-    // Initialiser Google Gemini avec l'API v1beta pour les modèles récents
-    const genAI = new GoogleGenerativeAI(apiKey);
-    
-    // Essayer d'abord avec gemini-1.5-flash (modèle rapide et récent)
-    // Si ça ne fonctionne pas, essayer gemini-pro
-    let model;
-    let modelName = 'gemini-1.5-flash';
-    
-    try {
-      // Essayer gemini-1.5-flash d'abord (nécessite parfois v1beta)
-      model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-      console.log('✅ Utilisation du modèle: gemini-1.5-flash');
-    } catch (e1) {
-      console.log('⚠️ gemini-1.5-flash non disponible, essai avec gemini-pro...');
-      try {
-        // Fallback vers gemini-pro
-        model = genAI.getGenerativeModel({ model: 'gemini-pro' });
-        modelName = 'gemini-pro';
-        console.log('✅ Utilisation du modèle: gemini-pro');
-      } catch (e2) {
-        console.log('⚠️ gemini-pro non disponible, essai avec gemini-1.0-pro...');
-        try {
-          // Dernier essai avec gemini-1.0-pro
-          model = genAI.getGenerativeModel({ model: 'gemini-1.0-pro' });
-          modelName = 'gemini-1.0-pro';
-          console.log('✅ Utilisation du modèle: gemini-1.0-pro');
-        } catch (e3) {
-          throw new Error(`Aucun modèle Gemini disponible. Erreurs: ${e1.message}, ${e2.message}, ${e3.message}. Vérifiez votre clé API.`);
-        }
-      }
-    }
+    // Informations sur Rosny pour le contexte
+    const rosnyInfo = `
+ROSNY OTSINA - Développeur Web & Mobile Freelance
 
-    // Construire le contexte pour l'IA
-    const systemPrompt = `Tu es l'assistant IA de Rosny OTSINA, un développeur web et mobile freelance basé à Libreville, Gabon.
-
-INFORMATIONS SUR ROSNY:
-- Compétences Frontend: HTML (Avancé), CSS (Intermédiaire), JavaScript/TypeScript, Vue.js/React.js/Bootstrap
-- Compétences Backend: PHP/Laravel, Node.js/Express.js/NestJS, Python (Django/FastAPI), Java
-- Compétences Mobile: Flutter, Java/Kotlin (Android)
-- Bases de données: MySQL/PostgreSQL/SQLite, MongoDB
-- Autres: Sécurité informatique, Maintenance, Déploiement
+COMPÉTENCES TECHNIQUES:
+• Frontend: HTML (Avancé), CSS (Intermédiaire), JavaScript/TypeScript, Vue.js/React.js/Bootstrap
+• Backend: PHP/Laravel, Node.js/Express.js/NestJS, Python (Django/FastAPI), Java
+• Mobile: Flutter, Java/Kotlin (Android)
+• Bases de données: MySQL/PostgreSQL/SQLite, MongoDB
+• Autres: Sécurité informatique, Maintenance, Déploiement
 
 PROJETS RÉALISÉS:
 1. Application de traduction des langues gabonaises - Application innovante pour préserver et traduire les langues locales
@@ -160,114 +58,121 @@ PROJETS RÉALISÉS:
 5. Site immobilier - Plateforme complète avec inscription, connexion et gestion d'annonces
 6. Permis Virtuel - Application web pour permis de conduire dématérialisés
 
-SERVICES:
-- Développement Web (sites, applications, API)
+SERVICES PROPOSÉS:
+- Développement Web (sites vitrines, applications web, API REST)
 - Développement Mobile (Android/iOS avec Flutter)
-- Conception de bases de données
-- Sécurité informatique
+- Conception et optimisation de bases de données
+- Audit et renforcement de la sécurité informatique
 - Maintenance et support technique
-- Déploiement et hébergement
+- Déploiement et hébergement sur serveurs
 
-CONTACT:
-- Email: rodrigueotsina@gmail.com
-- Téléphone: +241 077 12 24 85
-- Localisation: Libreville, Gabon
-- GitHub: https://github.com/RosnyMinko07
-- Statut: Disponible immédiatement en freelance
+INFORMATIONS DE CONTACT:
+• Email: rodrigueotsina@gmail.com
+• Téléphone: +241 077 12 24 85
+• Localisation: Libreville, Gabon
+• GitHub: https://github.com/RosnyMinko07
+• Statut: Disponible immédiatement pour des missions freelance
 
 FORMATION:
-- Licence professionnelle en Informatique - INPTIC
-- Master Intelligence Artificielle (en cours)
-- Spécialisation: Génie Logiciel
+• Licence professionnelle en Informatique - INPTIC
+• Master Intelligence Artificielle (en cours)
+• Spécialisation: Génie Logiciel
 
-TON RÔLE:
-- Répondre de manière amicale et professionnelle
-- Fournir des informations précises sur Rosny, ses compétences, projets et services
-- Encourager les visiteurs à contacter Rosny pour des projets
-- Répondre en français de manière naturelle et conversationnelle
-- Utiliser des emojis avec modération pour rendre les réponses plus engageantes
-- Si tu ne connais pas quelque chose, redirige vers les informations que tu connais ou suggère de contacter directement Rosny
+TON RÔLE EN TANT QU'ASSISTANT IA:
+- Tu es l'assistant IA personnel de Rosny OTSINA
+- Réponds toujours en français de manière professionnelle et amicale
+- Utilise les informations ci-dessus pour répondre aux questions
+- Encourage les visiteurs à contacter Rosny pour des projets
+- Sois précis sur ses compétences techniques et ses projets
+- Si tu ne sais pas quelque chose, redirige vers les informations disponibles
+- Utilise un ton conversationnel naturel, avec quelques emojis appropriés
+`;
 
-Réponds de manière concise mais informative.`;
-
-    // Construire l'historique de conversation
-    let conversationContext = systemPrompt + '\n\n';
-    
-    // Ajouter l'historique récent (derniers 5 échanges pour garder le contexte)
-    const recentHistory = conversationHistory.slice(-5);
-    if (recentHistory.length > 0) {
-      conversationContext += 'HISTORIQUE DE LA CONVERSATION:\n';
-      recentHistory.forEach(({ role, content }) => {
-        conversationContext += `${role === 'user' ? 'Visiteur' : 'Assistant'}: ${content}\n`;
-      });
-      conversationContext += '\n';
-    }
-
-    conversationContext += `Visiteur: ${message}\nAssistant:`;
-
-    // Générer la réponse avec Gemini
-    console.log(`Envoi de la requête à Gemini avec le modèle ${modelName}...`);
-    
-    let aiResponse;
-    try {
-      const result = await model.generateContent(conversationContext);
-      const response = await result.response;
-      aiResponse = response.text();
-      console.log('✅ Réponse reçue de Gemini avec succès');
-    } catch (modelError) {
-      // Si l'erreur indique que le modèle n'est pas disponible, essayer avec l'API REST v1beta
-      if (modelError.message && modelError.message.includes('404') && modelError.message.includes('not found')) {
-        console.log('⚠️ Modèle non disponible avec SDK, utilisation de l\'API REST v1beta...');
-        aiResponse = await callGeminiAPI(apiKey, conversationContext);
-      } else {
-        throw modelError;
+    // Construire le système de messages pour OpenRouter
+    const messages = [
+      {
+        role: "system",
+        content: rosnyInfo + "\n\nInstructions importantes: Réponds uniquement en français. Sois concis mais informatif. Ne mentionne pas que tu es une IA, agis comme l'assistant personnel de Rosny."
       }
+    ];
+
+    // Ajouter l'historique de conversation
+    conversationHistory.forEach(msg => {
+      messages.push({
+        role: msg.role === 'user' ? 'user' : 'assistant',
+        content: msg.content
+      });
+    });
+
+    // Ajouter le message actuel
+    messages.push({
+      role: 'user',
+      content: message
+    });
+
+    console.log('Envoi de la requête à OpenRouter (DeepSeek R1 0528)...');
+
+    // Appeler l'API OpenRouter
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'HTTP-Referer': req.headers.origin || 'https://rosny-portfolio.vercel.app',
+        'X-Title': 'Portfolio Rosny OTSINA',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'deepseek/deepseek-r1-0528:free',
+        messages: messages,
+        max_tokens: 1000,
+        temperature: 0.7
+      })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Erreur OpenRouter:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorText
+      });
+      
+      throw new Error(`Erreur OpenRouter (${response.status}): ${errorText.substring(0, 200)}`);
     }
+
+    const data = await response.json();
+    
+    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+      throw new Error('Réponse invalide de l\'API OpenRouter');
+    }
+
+    const aiResponse = data.choices[0].message.content.trim();
+    
+    console.log('✅ Réponse reçue avec succès de DeepSeek R1 0528');
 
     return res.status(200).json({ 
       success: true, 
-      message: aiResponse.trim()
+      message: aiResponse
     });
     
   } catch (error) {
-    console.error('Erreur Gemini API:', error);
-    console.error('Détails de l\'erreur:', {
-      message: error.message,
-      stack: error.stack,
-      name: error.name
-    });
+    console.error('Erreur dans l\'API chatbot:', error);
+    console.error('Détails:', error.message);
     
-    // Gérer les erreurs spécifiques
-    if (error.message && (error.message.includes('API_KEY') || error.message.includes('API key'))) {
-      return res.status(500).json({ 
-        success: false, 
-        message: 'Erreur de configuration API. Veuillez contacter l\'administrateur.' 
-      });
+    let errorMessage = 'Erreur lors de la génération de la réponse.';
+    
+    if (error.message.includes('OPENROUTER_API_KEY') || error.message.includes('API key')) {
+      errorMessage = 'Configuration API manquante. Veuillez configurer la clé OpenRouter.';
+    } else if (error.message.includes('429') || error.message.includes('quota')) {
+      errorMessage = 'Limite de requêtes atteinte. Veuillez réessayer plus tard.';
+    } else if (error.message.includes('401') || error.message.includes('Unauthorized')) {
+      errorMessage = 'Clé API invalide. Veuillez vérifier la configuration.';
     }
-    
-    if (error.message && (error.message.includes('quota') || error.message.includes('QUOTA'))) {
-      return res.status(429).json({ 
-        success: false, 
-        message: 'Limite de requêtes atteinte. Veuillez réessayer plus tard.' 
-      });
-    }
-    
-    if (error.message && error.message.includes('MODEL_NOT_FOUND')) {
-      return res.status(500).json({ 
-        success: false, 
-        message: 'Modèle IA non disponible. Veuillez contacter l\'administrateur.' 
-      });
-    }
-    
-    // Retourner le message d'erreur pour le débogage
-    const errorMessage = error.message || 'Erreur inconnue';
-    console.error('Message d\'erreur complet:', errorMessage);
     
     return res.status(500).json({ 
       success: false, 
-      message: `Erreur serveur: ${errorMessage}`,
-      error: errorMessage,
-      type: error.name || 'UnknownError'
+      message: errorMessage,
+      error: error.message
     });
   }
 };

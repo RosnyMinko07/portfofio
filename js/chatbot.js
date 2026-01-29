@@ -8,8 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const chatbotSend = document.getElementById('chatbot-send');
   const chatbotMessages = document.getElementById('chatbot-messages');
   
-  // Données de Rosny pour les réponses
+  // Données de Rosny pour le contexte
   const rosnyData = {
+    // ... (garder les mêmes données)
     competences: {
       frontend: ["HTML (Avancé)", "CSS (Intermédiaire)", "JavaScript/TypeScript", "Vue.js/React.js/Bootstrap"],
       backend: ["PHP/Laravel", "Node.js/Express.js/NestJS", "Python (Django/FastAPI)", "Java"],
@@ -22,26 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         nom: "Application de traduction des langues gabonaises",
         desc: "Application innovante pour préserver et traduire les langues locales"
       },
-      {
-        nom: "Système de facturation TECH INFO PLUS",
-        desc: "Application web de facturation et suivi de stock pour PME"
-      },
-      {
-        nom: "Application de gestion des notes",
-        desc: "Application multiplateforme pour suivre les notes étudiants"
-      },
-      {
-        nom: "Shopping App & Food App",
-        desc: "Applications mobiles e-commerce avec panier et notifications"
-      },
-      {
-        nom: "Site immobilier",
-        desc: "Plateforme complète avec inscription, connexion et gestion d'annonces"
-      },
-      {
-        nom: "Permis Virtuel",
-        desc: "Application web pour permis de conduire dématérialisés"
-      }
+      // ... (garder les autres projets)
     ],
     services: [
       "Développement Web (sites, applications, API)",
@@ -77,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     chatbotContainer.classList.remove('open');
   }
 
-  // Historique de conversation pour le contexte
+  // Historique de conversation
   let conversationHistory = [];
 
   // Envoyer un message
@@ -103,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadingMessage.classList.add('loading');
 
     try {
-      // Appeler l'API backend
+      // Appeler notre API backend Vercel
       const response = await fetch('/api/chatbot', {
         method: 'POST',
         headers: {
@@ -111,16 +93,14 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         body: JSON.stringify({
           message: message,
-          conversationHistory: conversationHistory.slice(-5) // Garder seulement les 5 derniers messages pour le contexte
+          conversationHistory: conversationHistory.slice(-6) // Garder 6 derniers messages
         })
       });
 
-      // Récupérer les données même si le status n'est pas OK
       let data;
       try {
         data = await response.json();
       } catch (e) {
-        // Si la réponse n'est pas du JSON, créer un objet d'erreur
         const text = await response.text();
         data = { 
           success: false, 
@@ -136,45 +116,25 @@ document.addEventListener('DOMContentLoaded', function() {
         addMessage(data.message, 'bot');
         conversationHistory.push({ role: 'assistant', content: data.message });
       } else {
-        // En cas d'erreur, afficher le message d'erreur de l'API
         let errorMsg = data.message || `Erreur serveur (${response.status}). Veuillez réessayer.`;
         
-        // Afficher les détails complets dans la console pour le débogage
-        console.error('❌ Erreur API complète:', {
-          status: response.status,
-          statusText: response.statusText,
-          data: data,
-          error: data.error,
-          message: data.message
-        });
-        
-        // Afficher le message d'erreur complet dans la console
-        console.error('📋 Message d\'erreur:', data.message);
-        if (data.error) {
-          console.error('🔍 Détails techniques:', data.error);
-        }
-        
-        // Si c'est une erreur de configuration API, afficher un message plus clair
-        if (data.message && (data.message.includes('Configuration API manquante') || data.message.includes('GOOGLE_GEMINI_API_KEY'))) {
-          errorMsg = '⚠️ La clé API Google Gemini n\'est pas configurée sur Vercel.\n\nPour corriger:\n1. Allez sur vercel.com\n2. Votre projet → Settings → Environment Variables\n3. Ajoutez GOOGLE_GEMINI_API_KEY avec votre clé\n4. Redéployez';
+        // Si c'est une erreur de configuration API
+        if (data.message && data.message.includes('OPENROUTER_API_KEY')) {
+          errorMsg = '⚠️ La clé API OpenRouter n\'est pas configurée sur Vercel.\n\nPour corriger:\n1. Allez sur vercel.com\n2. Votre projet → Settings → Environment Variables\n3. Ajoutez OPENROUTER_API_KEY avec votre clé\n4. Redéployez';
         }
         
         addMessage(errorMsg, 'bot');
       }
     } catch (error) {
-      // Retirer le message de chargement
       loadingMessage.remove();
       
-      // En cas d'erreur réseau, afficher un message d'erreur
       let errorMessage = 'Erreur de connexion. Vérifiez votre connexion internet et réessayez.';
       if (error.message && error.message.includes('HTTP error')) {
         errorMessage = 'Erreur serveur. Veuillez réessayer dans quelques instants.';
       }
       addMessage(errorMessage, 'bot');
-      console.error('Erreur réseau:', error);
-      console.error('Détails:', error.message);
+      console.error('Erreur:', error);
     } finally {
-      // Réactiver l'input
       chatbotInput.disabled = false;
       chatbotSend.disabled = false;
       chatbotInput.focus();
@@ -186,32 +146,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const messageDiv = document.createElement('div');
     messageDiv.className = `chatbot-message ${sender}`;
     
-    // Si c'est un message de chargement, ajouter une animation
     if (text === '...') {
       messageDiv.innerHTML = '<span class="typing-indicator"><span></span><span></span><span></span></span>';
     } else {
-      messageDiv.textContent = text;
+      // Formater les sauts de ligne
+      messageDiv.innerHTML = text.replace(/\n/g, '<br>');
     }
     
     chatbotMessages.appendChild(messageDiv);
-    
-    // Animation
     messageDiv.style.animation = 'messageAppear 0.3s ease';
-    
-    // Scroll automatique
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
     
     return messageDiv;
   }
 
-  // Note: Les réponses sont maintenant générées par l'API backend avec Google Gemini
-  // Les données rosnyData sont conservées pour référence mais ne sont plus utilisées directement
-
-  // Ajouter un message de bienvenue après 3 secondes sur la page
+  // Message de bienvenue
   setTimeout(() => {
     if (!sessionStorage.getItem('chatbotWelcomed')) {
-      addMessage("💡 Astuce : Cliquez sur le robot en bas à droite pour discuter avec l'assistant IA !", 'bot');
+      addMessage("👋 Bonjour ! Je suis l'assistant IA de Rosny OTSINA. Je peux vous parler de ses compétences, projets et services. Comment puis-je vous aider ?", 'bot');
       sessionStorage.setItem('chatbotWelcomed', 'true');
     }
-  }, 3000);
+  }, 1000);
 });
