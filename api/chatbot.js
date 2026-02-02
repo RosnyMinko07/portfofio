@@ -1,5 +1,4 @@
-// api/chatbot.js - API backend pour le chatbot avec DeepSeek via OpenRouter
-
+// api/chatbot.js - API backend optimisée pour la vitesse
 module.exports = async (req, res) => {
   // Configuration CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -29,7 +28,6 @@ module.exports = async (req, res) => {
 
     // Vérifier la clé API OpenRouter
     const apiKey = process.env.OPENROUTER_API_KEY;
-    console.log('Vérification de la clé OpenRouter API...', apiKey ? 'Clé présente' : 'Clé manquante');
     
     if (!apiKey) {
       console.error('❌ OPENROUTER_API_KEY n\'est pas configurée');
@@ -110,64 +108,140 @@ TON RÔLE EN TANT QU'ASSISTANT IA:
       content: message
     });
 
-    console.log('Envoi de la requête à OpenRouter (DeepSeek R1 0528)...');
-
-    // Appeler l'API OpenRouter
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'HTTP-Referer': req.headers.origin || 'https://rosny-portfolio.vercel.app',
-        'X-Title': 'Portfolio Rosny OTSINA',
-        'Content-Type': 'application/json'
+    // Liste des modèles ORDONNÉS PAR VITESSE (du plus rapide au plus lent)
+    const models = [
+      {
+        name: 'Qwen 2.5 3B',
+        id: 'qwen/qwen-2.5-3b-instruct:free',
+        priority: 1,
+        timeout: 5000
       },
-      body: JSON.stringify({
-        model: 'deepseek/deepseek-r1-0528:free',
-        messages: messages,
-        max_tokens: 1000,
-        temperature: 0.7
-      })
-    });
+      {
+        name: 'Mistral Free',
+        id: 'mistralai/mistral-7b-instruct:free',
+        priority: 2,
+        timeout: 7000
+      },
+      {
+        name: 'Gemma 3 27B',
+        id: 'google/gemma-3-27b-it:free',
+        priority: 3,
+        timeout: 10000
+      },
+      {
+        name: 'DeepSeek R1',
+        id: 'deepseek/deepseek-r1-0528:free',
+        priority: 4,
+        timeout: 15000
+      }
+    ];
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Erreur OpenRouter:', {
-        status: response.status,
-        statusText: response.statusText,
-        error: errorText
-      });
+    // Trier par priorité (du plus rapide au plus lent)
+    models.sort((a, b) => a.priority - b.priority);
+
+    let lastError = null;
+    let aiResponse = null;
+    let usedModel = null;
+
+    // Essayer chaque modèle jusqu'à ce qu'un fonctionne
+    for (const model of models) {
+      try {
+        console.log(`⚡ Essai avec ${model.name} (le plus rapide d'abord)...`);
+        
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), model.timeout);
+
+        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+          method: 'POST',
+          signal: controller.signal,
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'HTTP-Referer': req.headers.origin || 'https://rosny-portfolio.vercel.app',
+            'X-Title': 'Portfolio Rosny OTSINA',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            model: model.id,
+            messages: messages,
+            max_tokens: 1000,
+            temperature: 0.7
+          })
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error(`❌ ${model.name} indisponible: ${response.status}`);
+          continue; // Essayer le modèle suivant
+        }
+
+        const data = await response.json();
+        
+        if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+          console.error(`❌ Réponse invalide de ${model.name}`);
+          continue;
+        }
+
+        aiResponse = data.choices[0].message.content.trim();
+        usedModel = model.name;
+        console.log(`✅ Réponse rapide reçue de ${model.name}`);
+        break; // Sortir de la boucle si succès
+        
+      } catch (error) {
+        console.error(`⏱️ ${model.name} timeout/erreur: ${error.message}`);
+        lastError = error;
+        continue; // Essayer le modèle suivant
+      }
+    }
+
+    // Si aucun modèle n'a fonctionné
+    if (!aiResponse) {
+      console.error('❌ Tous les modèles ont échoué:', lastError?.message);
       
-      throw new Error(`Erreur OpenRouter (${response.status}): ${errorText.substring(0, 200)}`);
-    }
+      // Message d'erreur avec informations de contact
+      const fallbackMessage = `Désolé, le service IA est temporairement indisponible. 🛠️
 
-    const data = await response.json();
-    
-    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
-      throw new Error('Réponse invalide de l\'API OpenRouter');
-    }
+En attendant, voici comment contacter Rosny directement :
 
-    const aiResponse = data.choices[0].message.content.trim();
-    
-    console.log('✅ Réponse reçue avec succès de DeepSeek R1 0528');
+📧 **Email** : rodrigueotsina@gmail.com
+📱 **Téléphone** : +241 077 12 24 85
+📍 **Localisation** : Libreville, Gabon
+💻 **GitHub** : https://github.com/RosnyMinko07
+
+**Compétences principales** :
+• Développement Web & Mobile
+• Conception de bases de données
+• Sécurité informatique
+• Maintenance et déploiement
+
+**Disponible immédiatement** pour vos projets en freelance ! 🚀`;
+      
+      return res.status(200).json({ 
+        success: true, 
+        message: fallbackMessage,
+        fallback: true
+      });
+    }
 
     return res.status(200).json({ 
       success: true, 
-      message: aiResponse
+      message: aiResponse,
+      model: usedModel
     });
     
   } catch (error) {
-    console.error('Erreur dans l\'API chatbot:', error);
-    console.error('Détails:', error.message);
+    console.error('Erreur globale dans l\'API chatbot:', error);
     
-    let errorMessage = 'Erreur lors de la génération de la réponse.';
-    
-    if (error.message.includes('OPENROUTER_API_KEY') || error.message.includes('API key')) {
-      errorMessage = 'Configuration API manquante. Veuillez configurer la clé OpenRouter.';
-    } else if (error.message.includes('429') || error.message.includes('quota')) {
-      errorMessage = 'Limite de requêtes atteinte. Veuillez réessayer plus tard.';
-    } else if (error.message.includes('401') || error.message.includes('Unauthorized')) {
-      errorMessage = 'Clé API invalide. Veuillez vérifier la configuration.';
-    }
+    // Message d'erreur générique avec infos de contact
+    const errorMessage = `Désolé, une erreur technique est survenue. ⚠️
+
+Vous pouvez contacter Rosny directement :
+• Email : rodrigueotsina@gmail.com
+• Téléphone : +241 077 12 24 85
+• GitHub : RosnyMinko07
+
+Il est disponible pour vos projets en développement web et mobile ! 💻📱`;
     
     return res.status(500).json({ 
       success: false, 
