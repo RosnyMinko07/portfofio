@@ -349,16 +349,16 @@
         <div class="row portfolio-project">
             <div class="portfolio-heading padd-15">
                 <h2>Application de traduction des langues gabonaises</h2>
-                <p class="project-description">Application mobile permettant la traduction entre différentes langues locales du Gabon avec interface intuitive et base de données linguistique.</p>
+                <p class="project-description">Application web responsive permettant la traduction entre différentes langues locales du Gabon avec interface intuitive et base de données linguistique.</p>
             </div>
             <div class="portfolio-item padd-15">
                 <a href="https://github.com/tonrepo/translation-app" class="portfolio-link" target="_blank">
                     <div class="portfolio-item-inner shadow-dark">
                         <div class="portfolio-img">
-                            <img src="images/projets/traduction.jpg" alt="App de traduction - Interface principale">
+                            <img src="images/Traduction.png" alt="App de traduction - Interface principale">
                         </div>
                         <div class="portfolio-info">
-                            <h3 class="portfolio-title">Interface principale</h3>
+                            <h3 class="portfolio-title">Interface de Traduction</h3>
                             <span class="portfolio-date">Décembre 2024</span>
                             <p class="portfolio-desc">Écran principal avec sélection des langues et champ de traduction.</p>
                         </div>
@@ -369,12 +369,54 @@
                 <a href="https://github.com/tonrepo/translation-app" class="portfolio-link" target="_blank">
                     <div class="portfolio-item-inner shadow-dark">
                         <div class="portfolio-img">
-                            <img src="images/projets/traduction2.jpg" alt="App de traduction - Historique">
+                            <img src="images/Dictionnaire.png" alt="App de traduction - Historique">
                         </div>
                         <div class="portfolio-info">
-                            <h3 class="portfolio-title">Historique des traductions</h3>
+                            <h3 class="portfolio-title">Interface Dictionnaire</h3>
                             <span class="portfolio-date">Décembre 2024</span>
-                            <p class="portfolio-desc">Gestion de l'historique avec sauvegarde locale des traductions récentes.</p>
+                            <p class="portfolio-desc">Interface de consultation du dictionnaire des langues gabonaises avec recherche et suggestions.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="portfolio-item padd-15">
+                <a href="https://github.com/tonrepo/translation-app" class="portfolio-link" target="_blank">
+                    <div class="portfolio-item-inner shadow-dark">
+                        <div class="portfolio-img">
+                            <img src="images/Apprentissage.png" alt="App de traduction - Interface Apprentissage">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3 class="portfolio-title">Interface Apprentissage</h3>
+                            <span class="portfolio-date">Décembre 2024</span>
+                            <p class="portfolio-desc">Interface d'apprentissage des langues gabonaises avec exercices interactifs.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="portfolio-item padd-15">
+                <a href="https://github.com/tonrepo/translation-app" class="portfolio-link" target="_blank">
+                    <div class="portfolio-item-inner shadow-dark">
+                        <div class="portfolio-img">
+                            <img src="images/Communaute.png" alt="App de traduction - Interface Communaute">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3 class="portfolio-title">Interface Communaute</h3>
+                            <span class="portfolio-date">Décembre 2024</span>
+                            <p class="portfolio-desc">Interface de gestion de la communauté des utilisateurs de l'application.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="portfolio-item padd-15">
+                <a href="https://github.com/tonrepo/translation-app" class="portfolio-link" target="_blank">
+                    <div class="portfolio-item-inner shadow-dark">
+                        <div class="portfolio-img">
+                            <img src="images/Profil.png" alt="App de traduction - Interface Profil">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3 class="portfolio-title">Interface Profil</h3>
+                            <span class="portfolio-date">Décembre 2024</span>
+                            <p class="portfolio-desc">Interface de gestion du profil utilisateur avec paramètres de personnalisation.</p>
                         </div>
                     </div>
                 </a>
@@ -664,29 +706,61 @@
     <!-- Style Switcher End -->
 
     <!-- Chatbot IA -->
+<!-- Chatbot IA avec Avatar Féminin -->
 <div id="chatbot-container">
   <div class="chatbot-header">
-    <h4><i class="fas fa-robot"></i> Assistant IA Rosny</h4>
-    <button class="chatbot-close"><i class="fas fa-times"></i></button>
-  </div>
-  <div id="chatbot-messages">
-    <div class="chatbot-message bot">
-      👋 Bonjour ! Je suis l'assistant IA de Rosny OTSINA, développeur web et mobile freelance. 
-      Je peux vous parler de ses compétences, projets, services, et vous aider à le contacter. 
-      Comment puis-je vous aider aujourd'hui ?
+    <div class="chatbot-header-left">
+      <div class="chatbot-avatar">
+        <!-- Mettez le chemin de votre image de femme ici -->
+        <img src="/api/placeholder/45/45" alt="Sophia" id="chatbot-avatar-img">
+      </div>
+      <div class="chatbot-title">
+        <h4><i class="fas fa-robot"></i> Sophia - IA</h4>
+        <span class="chatbot-status">
+          <span class="status-dot"></span> 
+          En ligne • Voix féminine
+        </span>
+      </div>
+    </div>
+    <div class="chatbot-actions">
+      <button class="chatbot-voice-btn" id="chatbot-voice-toggle" title="Activer/Désactiver la voix">
+        <i class="fas fa-volume-up"></i>
+      </button>
+      <button class="chatbot-close" id="chatbot-close-btn"><i class="fas fa-times"></i></button>
     </div>
   </div>
+  
+  <div id="chatbot-messages">
+    <!-- Message de bienvenue avec avatar -->
+    <div class="message-wrapper bot-wrapper">
+      <div class="message-avatar">
+        <img src="/api/placeholder/35/35" alt="Sophia">
+      </div>
+      <div class="message-content">
+        <div class="chatbot-message bot">
+          👋 Bonjour ! Je suis Sophia, l'assistante IA de Rosny OTSINA. Je peux vous parler de ses compétences, projets et services. Comment puis-je vous aider aujourd'hui ?
+        </div>
+        <div class="message-audio-control">
+          <button class="audio-play-btn" onclick="playMessageAudio(this, 'Bonjour ! Je suis Sophia, l\'assistante IA de Rosny OTSINA.')">
+            <i class="fas fa-play"></i>
+          </button>
+          <span class="message-time">À l'instant</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <div class="chatbot-input">
-    <input type="text" id="chatbot-input" placeholder="Ex: Parle-moi de tes projets...">
+    <input type="text" id="chatbot-input" placeholder="Posez votre question à Sophia...">
     <button id="chatbot-send"><i class="fas fa-paper-plane"></i></button>
   </div>
 </div>
 
+<!-- Bouton toggle avec image de femme -->
 <button id="chatbot-toggle" class="chatbot-toggle-btn">
-  <i class="fas fa-robot"></i>
+  <img src="/api/placeholder/65/65" alt="Sophia Assistant" id="chatbot-toggle-img">
   <span class="chatbot-pulse"></span>
 </button>
-
 
     <!-- JS Files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" referrerpolicy="no-referrer"></script>
