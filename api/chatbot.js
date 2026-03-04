@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
     const apiKey = process.env.OPENROUTER_API_KEY;
     
     if (!apiKey) {
-      console.error('❌ OPENROUTER_API_KEY n\'est pas configurée');
+      console.error(' OPENROUTER_API_KEY n\'est pas configurée');
       return res.status(500).json({ 
         success: false, 
         message: 'Configuration API manquante.' 
@@ -222,27 +222,27 @@ Tu peux répondre à presque toutes les questions dans ces limites.`
         const lowerMessage = message.toLowerCase();
         
         if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('téléphone')) {
-          aiResponse = "📞 **Contact de Rosny OTSINA :**\n\n" +
+          aiResponse = " **Contact de Rosny OTSINA :**\n\n" +
                       "• Email : rodrigueotsina@gmail.com\n" +
                       "• Téléphone : +241 077 12 24 85\n" +
                       "• Localisation : Libreville, Gabon\n" +
                       "• GitHub : github.com/RosnyMinko07\n\n" +
-                      "Disponible pour vos projets web et mobile ! 🚀";
+                      "Disponible pour vos projets web et mobile ! ";
         } else if (lowerMessage.includes('compétence') || lowerMessage.includes('technique')) {
           aiResponse = "💼 **Compétences de Rosny :**\n\n" +
                       "• Développement Web (HTML/CSS/JS, React, Vue, Laravel, Node.js)\n" +
                       "• Développement Mobile (Flutter, Android)\n" +
                       "• Bases de données (MySQL, MongoDB)\n" +
                       "• Sécurité & DevOps\n\n" +
-                      "Full Stack expérimenté ! 🛠️";
+                      "Full Stack expérimenté ! ";
         } else {
           aiResponse = "Je suis l'assistant de Rosny OTSINA, développeur freelance. Pour plus d'informations, contactez-le directement :\n" +
-                      "📧 rodrigueotsina@gmail.com | 📱 +241 077 12 24 85\n\n" +
-                      "Il peut vous aider avec vos projets de développement ! 💻";
+                      " rodrigueotsina@gmail.com |  +241 077 12 24 85\n\n" +
+                      "Il peut vous aider avec vos projets de développement ! ";
         }
       } else {
         // Fallback pour questions générales
-        aiResponse = "Désolé, je rencontre des difficultés techniques. 🛠️\n\n" +
+        aiResponse = "Désolé, je rencontre des difficultés techniques. \n\n" +
                     "En attendant, voici ce que je peux dire :\n" +
                     "• Je suis l'assistant de Rosny OTSINA, développeur freelance\n" +
                     "• Je peux répondre à des questions techniques et générales\n" +
@@ -263,10 +263,10 @@ Tu peux répondre à presque toutes les questions dans ces limites.`
     console.error('Erreur:', error);
     
     // Réponse d'erreur polyvalente
-    const errorMessage = "Je rencontre des difficultés techniques. ⚠️\n\n" +
+    const errorMessage = "Je rencontre des difficultés techniques. \n\n" +
                         "Pour contacter Rosny OTSINA (développeur freelance) :\n" +
-                        "📧 rodrigueotsina@gmail.com\n" +
-                        "📱 +241 077 12 24 85\n\n" +
+                        " rodrigueotsina@gmail.com\n" +
+                        " +241 077 12 24 85\n\n" +
                         "Réessayez votre question plus tard !";
     
     return res.status(500).json({ 
