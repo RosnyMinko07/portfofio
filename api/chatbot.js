@@ -26,11 +26,12 @@ module.exports = async (req, res) => {
       });
     }
 
-    // Vérifier la clé API OpenRouter
-    const apiKey = process.env.OPENROUTER_API_KEY;
+    // Vérifier les clés API
+    const openRouterApiKey = process.env.OPENROUTER_API_KEY;
+    const groqApiKey = process.env.GROQ_API_KEY;
     
-    if (!apiKey) {
-      console.error(' OPENROUTER_API_KEY n\'est pas configurée');
+    if (!openRouterApiKey && !groqApiKey) {
+      console.error('Aucune clé API configurée');
       return res.status(500).json({ 
         success: false, 
         message: 'Configuration API manquante.' 
@@ -151,26 +152,50 @@ Tu peux répondre à presque toutes les questions dans ces limites.`
       content: message
     });
 
-    // Liste des modèles ordonnés par vitesse
+    // Liste des modèles ordonnés par priorité (Groq en premier)
     const models = [
+      // Groq Models (les plus rapides)
+      {
+        name: 'Groq - Mixtral 8x7B',
+        id: 'mixtral-8x7b-32768',
+        provider: 'groq',
+        timeout: 5000
+      },
+      {
+        name: 'Groq - Llama 3 70B',
+        id: 'llama3-70b-8192',
+        provider: 'groq',
+        timeout: 6000
+      },
+      {
+        name: 'Groq - Gemma 2 9B',
+        id: 'gemma2-9b-it',
+        provider: 'groq',
+        timeout: 5000
+      },
+      // OpenRouter Models (fallback)
       {
         name: 'Qwen 2.5 3B',
         id: 'qwen/qwen-2.5-3b-instruct:free',
+        provider: 'openrouter',
         timeout: 5000
       },
       {
         name: 'Mistral 7B',
         id: 'mistralai/mistral-7b-instruct:free',
+        provider: 'openrouter',
         timeout: 7000
       },
       {
         name: 'Gemma 3 27B',
         id: 'google/gemma-3-27b-it:free',
+        provider: 'openrouter',
         timeout: 10000
       },
       {
         name: 'DeepSeek R1',
         id: 'deepseek/deepseek-r1-0528:free',
+        provider: 'openrouter',
         timeout: 15000
       }
     ];
@@ -180,25 +205,54 @@ Tu peux répondre à presque toutes les questions dans ces limites.`
 
     // Essayer chaque modèle
     for (const model of models) {
+      // Vérifier si la clé API correspondante est disponible
+      if (model.provider === 'groq' && !groqApiKey) {
+        continue; // Passer ce modèle si pas de clé Groq
+      }
+      if (model.provider === 'openrouter' && !openRouterApiKey) {
+        continue; // Passer ce modèle si pas de clé OpenRouter
+      }
+
       try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), model.timeout);
 
-        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-          method: 'POST',
-          signal: controller.signal,
-          headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/json',
-            'HTTP-Referer': req.headers.origin || 'https://rosny-portfolio.vercel.app'
-          },
-          body: JSON.stringify({
-            model: model.id,
-            messages: messages,
-            max_tokens: 1200,
-            temperature: 0.7
-          })
-        });
+        let response;
+        
+        if (model.provider === 'groq') {
+          // Appel à Groq API
+          response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+            method: 'POST',
+            signal: controller.signal,
+            headers: {
+              'Authorization': `Bearer ${groqApiKey}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              model: model.id,
+              messages: messages,
+              max_tokens: 1200,
+              temperature: 0.7
+            })
+          });
+        } else {
+          // Appel à OpenRouter API
+          response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+            method: 'POST',
+            signal: controller.signal,
+            headers: {
+              'Authorization': `Bearer ${openRouterApiKey}`,
+              'Content-Type': 'application/json',
+              'HTTP-Referer': req.headers.origin || 'https://rosny-portfolio.vercel.app'
+            },
+            body: JSON.stringify({
+              model: model.id,
+              messages: messages,
+              max_tokens: 1200,
+              temperature: 0.7
+            })
+          });
+        }
 
         clearTimeout(timeoutId);
 
@@ -211,6 +265,7 @@ Tu peux répondre à presque toutes les questions dans ces limites.`
           }
         }
       } catch (error) {
+        console.error(`Erreur avec ${model.name}:`, error.message);
         continue;
       }
     }
