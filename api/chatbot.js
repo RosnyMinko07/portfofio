@@ -26,12 +26,11 @@ module.exports = async (req, res) => {
       });
     }
 
-    // Vérifier les clés API
-    const openRouterApiKey = process.env.OPENROUTER_API_KEY;
-    const groqApiKey = process.env.GROQ_API_KEY;
+    // Vérifier la clé API OpenRouter
+    const apiKey = process.env.OPENROUTER_API_KEY;
     
-    if (!openRouterApiKey && !groqApiKey) {
-      console.error('Aucune clé API configurée');
+    if (!apiKey) {
+      console.error(' OPENROUTER_API_KEY n\'est pas configurée');
       return res.status(500).json({ 
         success: false, 
         message: 'Configuration API manquante.' 
@@ -152,126 +151,47 @@ Tu peux répondre à presque toutes les questions dans ces limites.`
       content: message
     });
 
-    // Liste des modèles ordonnés par priorité (Groq en premier)
-    const models = [
-      // Groq Models (les plus rapides)
-      {
-        name: 'Groq - Mixtral 8x7B',
-        id: 'mixtral-8x7b-32768',
-        provider: 'groq',
-        timeout: 5000
-      },
-      {
-        name: 'Groq - Llama 3 70B',
-        id: 'llama3-70b-8192',
-        provider: 'groq',
-        timeout: 6000
-      },
-      {
-        name: 'Groq - Gemma 2 9B',
-        id: 'gemma2-9b-it',
-        provider: 'groq',
-        timeout: 5000
-      },
-      // OpenRouter Models (fallback)
-      {
-        name: 'Qwen 2.5 3B',
-        id: 'qwen/qwen-2.5-3b-instruct:free',
-        provider: 'openrouter',
-        timeout: 5000
-      },
-      {
-        name: 'Mistral 7B',
-        id: 'mistralai/mistral-7b-instruct:free',
-        provider: 'openrouter',
-        timeout: 7000
-      },
-      {
-        name: 'Gemma 3 27B',
-        id: 'google/gemma-3-27b-it:free',
-        provider: 'openrouter',
-        timeout: 10000
-      },
-      {
-        name: 'DeepSeek R1',
-        id: 'deepseek/deepseek-r1-0528:free',
-        provider: 'openrouter',
-        timeout: 15000
-      }
-    ];
-
     let aiResponse = null;
     let usedModel = null;
 
-    // Essayer chaque modèle
-    for (const model of models) {
-      // Vérifier si la clé API correspondante est disponible
-      if (model.provider === 'groq' && !groqApiKey) {
-        continue; // Passer ce modèle si pas de clé Groq
-      }
-      if (model.provider === 'openrouter' && !openRouterApiKey) {
-        continue; // Passer ce modèle si pas de clé OpenRouter
-      }
+    try {
+      // Utiliser uniquement DeepSeek R1
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 20000); // Timeout de 20 secondes pour DeepSeek
 
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), model.timeout);
+      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        signal: controller.signal,
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+          'HTTP-Referer': req.headers.origin || 'https://rosny-portfolio.vercel.app'
+        },
+        body: JSON.stringify({
+          model: 'deepseek/deepseek-r1-0528:free',
+          messages: messages,
+          max_tokens: 1500,
+          temperature: 0.7
+        })
+      });
 
-        let response;
-        
-        if (model.provider === 'groq') {
-          // Appel à Groq API
-          response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-            method: 'POST',
-            signal: controller.signal,
-            headers: {
-              'Authorization': `Bearer ${groqApiKey}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              model: model.id,
-              messages: messages,
-              max_tokens: 1200,
-              temperature: 0.7
-            })
-          });
-        } else {
-          // Appel à OpenRouter API
-          response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-            method: 'POST',
-            signal: controller.signal,
-            headers: {
-              'Authorization': `Bearer ${openRouterApiKey}`,
-              'Content-Type': 'application/json',
-              'HTTP-Referer': req.headers.origin || 'https://rosny-portfolio.vercel.app'
-            },
-            body: JSON.stringify({
-              model: model.id,
-              messages: messages,
-              max_tokens: 1200,
-              temperature: 0.7
-            })
-          });
+      clearTimeout(timeoutId);
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.choices?.[0]?.message?.content) {
+          aiResponse = data.choices[0].message.content.trim();
+          usedModel = 'DeepSeek R1';
         }
-
-        clearTimeout(timeoutId);
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.choices?.[0]?.message?.content) {
-            aiResponse = data.choices[0].message.content.trim();
-            usedModel = model.name;
-            break;
-          }
-        }
-      } catch (error) {
-        console.error(`Erreur avec ${model.name}:`, error.message);
-        continue;
+      } else {
+        const errorData = await response.text();
+        console.error('Erreur DeepSeek:', errorData);
+        throw new Error(`Erreur API: ${response.status}`);
       }
-    }
-
-    // Si aucun modèle ne fonctionne, utiliser un fallback
-    if (!aiResponse) {
+    } catch (error) {
+      console.error('Erreur avec DeepSeek R1:', error.message);
+      
+      // Fallback en cas d'erreur
       if (aboutRosny) {
         // Fallback pour questions sur Rosny
         const lowerMessage = message.toLowerCase();
@@ -297,14 +217,14 @@ Tu peux répondre à presque toutes les questions dans ces limites.`
         }
       } else {
         // Fallback pour questions générales
-        aiResponse = "Désolé, je rencontre des difficultés techniques. \n\n" +
+        aiResponse = "Désolé, je rencontre des difficultés techniques avec DeepSeek R1. \n\n" +
                     "En attendant, voici ce que je peux dire :\n" +
                     "• Je suis l'assistant de Rosny OTSINA, développeur freelance\n" +
                     "• Je peux répondre à des questions techniques et générales\n" +
                     "• Pour des questions spécifiques sur Rosny, contactez-le directement\n\n" +
                     "Réessayez votre question dans quelques instants !";
       }
-      usedModel = 'Fallback';
+      usedModel = 'Fallback (DeepSeek indisponible)';
     }
 
     return res.status(200).json({ 
