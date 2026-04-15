@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
     const apiKey = process.env.OPENROUTER_API_KEY;
     
     if (!apiKey) {
-      console.error(' OPENROUTER_API_KEY n\'est pas configurée');
+      console.error('❌ OPENROUTER_API_KEY n\'est pas configurée');
       return res.status(500).json({ 
         success: false, 
         message: 'Configuration API manquante.' 
@@ -56,7 +56,7 @@ module.exports = async (req, res) => {
     // Construire le système de messages adaptatif
     const messages = [];
     
-    // D'abord, déterminer si c'est une question sur Rosny
+    // Déterminer si c'est une question sur Rosny
     const aboutRosny = isAboutRosny(message);
     
     if (aboutRosny) {
@@ -138,12 +138,16 @@ Tu peux répondre à presque toutes les questions dans ces limites.`
     }
 
     // Ajouter l'historique de conversation
-    conversationHistory.forEach(msg => {
-      messages.push({
-        role: msg.role === 'user' ? 'user' : 'assistant',
-        content: msg.content
+    if (conversationHistory && conversationHistory.length > 0) {
+      conversationHistory.forEach(msg => {
+        if (msg.role && msg.content) {
+          messages.push({
+            role: msg.role === 'user' ? 'user' : 'assistant',
+            content: msg.content
+          });
+        }
       });
-    });
+    }
 
     // Ajouter le message actuel
     messages.push({
@@ -155,76 +159,128 @@ Tu peux répondre à presque toutes les questions dans ces limites.`
     let usedModel = null;
 
     try {
-      // Utiliser uniquement DeepSeek R1
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 20000); // Timeout de 20 secondes pour DeepSeek
-
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-        method: 'POST',
-        signal: controller.signal,
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-          'HTTP-Referer': req.headers.origin || 'https://rosny-portfolio.vercel.app'
-        },
-        body: JSON.stringify({
-          model: 'deepseek/deepseek-r1-0528:free',
-          messages: messages,
-          max_tokens: 1500,
-          temperature: 0.7
-        })
-      });
-
-      clearTimeout(timeoutId);
-
-      if (response.ok) {
-        const data = await response.json();
-        if (data.choices?.[0]?.message?.content) {
-          aiResponse = data.choices[0].message.content.trim();
-          usedModel = 'DeepSeek R1';
-        }
-      } else {
-        const errorData = await response.text();
-        console.error('Erreur DeepSeek:', errorData);
-        throw new Error(`Erreur API: ${response.status}`);
-      }
-    } catch (error) {
-      console.error('Erreur avec DeepSeek R1:', error.message);
+      // Liste des modèles DeepSeek fonctionnels sur OpenRouter
+      const deepseekModels = [
+        'deepseek/deepseek-chat',           // Modèle standard DeepSeek
+        'deepseek/deepseek-coder',          // Spécialisé en code
+        'deepseek/deepseek-r1-distill-qwen-32b'  // Version distillée de R1
+      ];
       
-      // Fallback en cas d'erreur
+      let lastError = null;
+      
+      // Essayer chaque modèle DeepSeek jusqu'à ce qu'un fonctionne
+      for (const model of deepseekModels) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 25000); // Timeout 25 secondes
+
+          const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+            method: 'POST',
+            signal: controller.signal,
+            headers: {
+              'Authorization': `Bearer ${apiKey}`,
+              'Content-Type': 'application/json',
+              'HTTP-Referer': req.headers.origin || 'https://rosny-portfolio.vercel.app',
+              'X-Title': 'Rosny Portfolio Chatbot'
+            },
+            body: JSON.stringify({
+              model: model,
+              messages: messages,
+              max_tokens: 1500,
+              temperature: 0.7,
+              top_p: 0.9,
+              frequency_penalty: 0.5,
+              presence_penalty: 0.5
+            })
+          });
+
+          clearTimeout(timeoutId);
+
+          if (response.ok) {
+            const data = await response.json();
+            if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+              aiResponse = data.choices[0].message.content.trim();
+              usedModel = model === 'deepseek/deepseek-chat' ? 'DeepSeek V3' :
+                         (model === 'deepseek/deepseek-coder' ? 'DeepSeek Coder' : 'DeepSeek R1');
+              console.log(`✅ Succès avec le modèle: ${model}`);
+              break; // Sortir de la boucle si réussi
+            }
+          } else {
+            const errorText = await response.text();
+            console.warn(`⚠️ Échec avec ${model}: ${response.status} - ${errorText.substring(0, 100)}`);
+            lastError = new Error(`Modèle ${model} échoué: ${response.status}`);
+          }
+        } catch (modelError) {
+          console.warn(`⚠️ Erreur avec ${model}:`, modelError.message);
+          lastError = modelError;
+        }
+      }
+      
+      // Si aucun modèle n'a fonctionné
+      if (!aiResponse) {
+        throw lastError || new Error('Tous les modèles DeepSeek ont échoué');
+      }
+      
+    } catch (error) {
+      console.error('❌ Erreur avec DeepSeek:', error.message);
+      
+      // Fallback intelligent basé sur le type de question
+      const lowerMessage = message.toLowerCase();
+      
       if (aboutRosny) {
         // Fallback pour questions sur Rosny
-        const lowerMessage = message.toLowerCase();
-        
-        if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('téléphone')) {
-          aiResponse = " **Contact de Rosny OTSINA :**\n\n" +
+        if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('téléphone') || lowerMessage.includes('tel')) {
+          aiResponse = "📧 **Contact de Rosny OTSINA :**\n\n" +
                       "• Email : rodrigueotsina@gmail.com\n" +
                       "• Téléphone : +241 077 12 24 85\n" +
                       "• Localisation : Libreville, Gabon\n" +
                       "• GitHub : github.com/RosnyMinko07\n\n" +
-                      "Disponible pour vos projets web et mobile ! ";
-        } else if (lowerMessage.includes('compétence') || lowerMessage.includes('technique')) {
-          aiResponse = "💼 **Compétences de Rosny :**\n\n" +
-                      "• Développement Web (HTML/CSS/JS, React, Vue, Laravel, Node.js)\n" +
-                      "• Développement Mobile (Flutter, Android)\n" +
-                      "• Bases de données (MySQL, MongoDB)\n" +
-                      "• Sécurité & DevOps\n\n" +
-                      "Full Stack expérimenté ! ";
+                      "💼 Disponible pour vos projets web et mobile ! N'hésitez pas à le contacter.";
+        } else if (lowerMessage.includes('compétence') || lowerMessage.includes('technique') || lowerMessage.includes('sait faire')) {
+          aiResponse = "💼 **Compétences techniques de Rosny :**\n\n" +
+                      "**Frontend :** HTML5, CSS3, JavaScript, React.js, Vue.js, Bootstrap\n" +
+                      "**Backend :** PHP/Laravel, Node.js/Express.js, Python/Django, Java\n" +
+                      "**Mobile :** Flutter, Android (Java/Kotlin)\n" +
+                      "**Base de données :** MySQL, PostgreSQL, MongoDB\n" +
+                      "**DevOps & Outils :** Docker, Git, CI/CD, Sécurité\n\n" +
+                      "🌟 Rosny est un développeur Full Stack expérimenté !";
+        } else if (lowerMessage.includes('projet') || lowerMessage.includes('réalisation')) {
+          aiResponse = "📁 **Projets réalisés par Rosny :**\n\n" +
+                      "1. Application de traduction des langues gabonaises\n" +
+                      "2. Système de facturation TECH INFO PLUS\n" +
+                      "3. Application de gestion des notes\n" +
+                      "4. Shopping App & Food App (e-commerce)\n" +
+                      "5. Site immobilier complet\n" +
+                      "6. Application Permis Virtuel\n\n" +
+                      "💪 Un portfolio varié qui démontre son expertise !";
+        } else if (lowerMessage.includes('prix') || lowerMessage.includes('tarif') || lowerMessage.includes('coût')) {
+          aiResponse = "💰 **Tarifs & Services :**\n\n" +
+                      "Les tarifs de Rosny varient selon la complexité du projet. Pour un devis personnalisé :\n\n" +
+                      "📧 rodrigueotsina@gmail.com\n" +
+                      "📞 +241 077 12 24 85\n\n" +
+                      "Il répond sous 24h avec une proposition adaptée à votre budget !";
         } else {
-          aiResponse = "Je suis l'assistant de Rosny OTSINA, développeur freelance. Pour plus d'informations, contactez-le directement :\n" +
-                      " rodrigueotsina@gmail.com |  +241 077 12 24 85\n\n" +
-                      "Il peut vous aider avec vos projets de développement ! ";
+          aiResponse = "👋 Je suis l'assistant de **Rosny OTSINA**, développeur freelance Full Stack.\n\n" +
+                      "📧 **Contact :** rodrigueotsina@gmail.com\n" +
+                      "📞 **Téléphone :** +241 077 12 24 85\n" +
+                      "💻 **GitHub :** github.com/RosnyMinko07\n\n" +
+                      "✨ Il est spécialisé en développement web, mobile et création d'API.\n\n" +
+                      "❓ Pour toute question spécifique sur ses compétences ou projets, n'hésitez pas à le contacter directement !";
         }
       } else {
-        // Fallback pour questions générales
-        aiResponse = "Désolé, je rencontre des difficultés techniques avec DeepSeek R1. \n\n" +
-                    "En attendant, voici ce que je peux dire :\n" +
-                    "• Je suis l'assistant de Rosny OTSINA, développeur freelance\n" +
-                    "• Je peux répondre à des questions techniques et générales\n" +
-                    "• Pour des questions spécifiques sur Rosny, contactez-le directement\n\n" +
-                    "Réessayez votre question dans quelques instants !";
+        // Fallback pour questions générales avec réponse plus utile
+        aiResponse = "🤖 **DeepSeek API temporairement indisponible**\n\n" +
+                    "En attendant, voici quelques informations :\n\n" +
+                    "💼 **À propos de Rosny OTSINA :**\n" +
+                    "Développeur Full Stack freelance basé à Libreville, Gabon.\n" +
+                    "Spécialisé dans les applications web, mobiles et API.\n\n" +
+                    "📧 **Contact :** rodrigueotsina@gmail.com\n" +
+                    "📞 **Tél :** +241 077 12 24 85\n\n" +
+                    "🔄 **Conseil :** Rafraîchissez la page ou réessayez dans quelques minutes.\n\n" +
+                    "📝 **Votre question était :** \"" + message.substring(0, 100) + (message.length > 100 ? "..." : "") + "\"\n\n" +
+                    "Pour une réponse plus précise, veuillez contacter Rosny directement ou réessayer plus tard.";
       }
-      usedModel = 'Fallback (DeepSeek indisponible)';
+      usedModel = 'Mode Hors-ligne (API temporairement indisponible)';
     }
 
     return res.status(200).json({ 
@@ -235,14 +291,17 @@ Tu peux répondre à presque toutes les questions dans ces limites.`
     });
     
   } catch (error) {
-    console.error('Erreur:', error);
+    console.error('❌ Erreur générale:', error);
     
-    // Réponse d'erreur polyvalente
-    const errorMessage = "Je rencontre des difficultés techniques. \n\n" +
-                        "Pour contacter Rosny OTSINA (développeur freelance) :\n" +
-                        " rodrigueotsina@gmail.com\n" +
-                        " +241 077 12 24 85\n\n" +
-                        "Réessayez votre question plus tard !";
+    // Réponse d'erreur finale
+    const errorMessage = "⚠️ **Problème technique rencontré**\n\n" +
+                        "L'assistant rencontre des difficultés momentanées.\n\n" +
+                        "📧 **Contacter Rosny OTSINA (développeur freelance) :**\n" +
+                        "• Email : rodrigueotsina@gmail.com\n" +
+                        "• Téléphone : +241 077 12 24 85\n" +
+                        "• GitHub : github.com/RosnyMinko07\n\n" +
+                        "🔧 **Solution :** Rafraîchissez la page ou réessayez dans quelques instants.\n\n" +
+                        "Merci pour votre compréhension !";
     
     return res.status(500).json({ 
       success: false, 
