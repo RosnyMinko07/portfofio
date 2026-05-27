@@ -1,147 +1,246 @@
-// chatbot.js - Version avec Avatar Féminin et Synthèse Vocale
-document.addEventListener('DOMContentLoaded', function() {
-  // Éléments du DOM
+// chatbot.js - Version Complète avec Avatar Animé, Voix Féminine, Projets & Certifications
+document.addEventListener('DOMContentLoaded', function () {
+
+  // ===================== ÉLÉMENTS DOM =====================
   const chatbotContainer = document.getElementById('chatbot-container');
-  const chatbotToggle = document.getElementById('chatbot-toggle');
-  const chatbotClose = document.getElementById('chatbot-close-btn');
-  const chatbotInput = document.getElementById('chatbot-input');
-  const chatbotSend = document.getElementById('chatbot-send');
+  const chatbotToggle   = document.getElementById('chatbot-toggle');
+  const chatbotClose    = document.getElementById('chatbot-close-btn');
+  const chatbotInput    = document.getElementById('chatbot-input');
+  const chatbotSend     = document.getElementById('chatbot-send');
   const chatbotMessages = document.getElementById('chatbot-messages');
-  const voiceToggle = document.getElementById('chatbot-voice-toggle');
-  
-  // URLs des images (à remplacer par vos propres images)
-  const avatarImages = {
-    main: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&auto=format', // Femme professionnelle
-    toggle: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&auto=format' // Avatar pour le bouton
-  };
-  
-  // Appliquer les images
-  document.getElementById('chatbot-avatar-img').src = avatarImages.main;
-  document.getElementById('chatbot-toggle-img').src = avatarImages.toggle;
-  
-  // Configuration de la synthèse vocale (voix féminine)
-  let synth = window.speechSynthesis;
+  const voiceToggle     = document.getElementById('chatbot-voice-toggle');
+  const avatarImg       = document.getElementById('chatbot-avatar-img');
+  const toggleImg       = document.getElementById('chatbot-toggle-img');
+
+  // ===================== AVATAR =====================
+  const AVATAR_URL = 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&auto=format';
+  const USER_AVATAR = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&auto=format';
+
+  if (avatarImg) avatarImg.src = AVATAR_URL;
+  if (toggleImg) toggleImg.src = AVATAR_URL;
+
+  // ===================== SYNTHÈSE VOCALE =====================
+  const synth = window.speechSynthesis;
   let voiceEnabled = true;
   let currentUtterance = null;
-  
-  // Fonction pour obtenir une voix féminine
+  let isSpeaking = false;
+
+  // Nettoyer les emojis et caractères spéciaux pour la TTS
+  function cleanTextForSpeech(text) {
+    return text
+      // Supprimer les emojis (plages Unicode)
+      .replace(/[\u{1F600}-\u{1F64F}]/gu, '')
+      .replace(/[\u{1F300}-\u{1F5FF}]/gu, '')
+      .replace(/[\u{1F680}-\u{1F6FF}]/gu, '')
+      .replace(/[\u{1F700}-\u{1F77F}]/gu, '')
+      .replace(/[\u{1F780}-\u{1F7FF}]/gu, '')
+      .replace(/[\u{1F800}-\u{1F8FF}]/gu, '')
+      .replace(/[\u{1F900}-\u{1F9FF}]/gu, '')
+      .replace(/[\u{1FA00}-\u{1FA6F}]/gu, '')
+      .replace(/[\u{1FA70}-\u{1FAFF}]/gu, '')
+      .replace(/[\u{2600}-\u{26FF}]/gu, '')
+      .replace(/[\u{2700}-\u{27BF}]/gu, '')
+      .replace(/[\u{FE00}-\u{FE0F}]/gu, '')
+      .replace(/[\u{1F1E0}-\u{1F1FF}]/gu, '')
+      // Supprimer les balises HTML
+      .replace(/<[^>]*>/g, '')
+      // Supprimer les caractères markdown
+      .replace(/[*_~`#]/g, '')
+      // Nettoyer les espaces multiples
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  // Obtenir une voix féminine française
   function getFemaleVoice() {
     return new Promise((resolve) => {
-      // Attendre que les voix soient chargées
-      if (synth.getVoices().length > 0) {
+      const tryFind = () => {
         const voices = synth.getVoices();
-        // Chercher une voix féminine française d'abord
-        let femaleVoice = voices.find(voice => 
-          (voice.lang.includes('fr') && voice.name.toLowerCase().includes('female')) ||
-          (voice.lang.includes('fr') && voice.name.toLowerCase().includes('féminine')) ||
-          (voice.lang.includes('fr') && voice.name.includes('Google français'))
+        if (!voices.length) return null;
+
+        // Priorité 1 : voix féminine française explicite
+        let v = voices.find(v =>
+          v.lang.startsWith('fr') && (
+            v.name.toLowerCase().includes('female') ||
+            v.name.toLowerCase().includes('féminin') ||
+            v.name.toLowerCase().includes('amélie') ||
+            v.name.toLowerCase().includes('thomas') === false
+          )
         );
-        
-        // Sinon, prendre n'importe quelle voix féminine
-        if (!femaleVoice) {
-          femaleVoice = voices.find(voice => 
-            voice.name.toLowerCase().includes('female') || 
-            voice.name.toLowerCase().includes('samantha') ||
-            voice.name.toLowerCase().includes('victoria')
-          );
-        }
-        
-        // Dernier recours : première voix française
-        if (!femaleVoice) {
-          femaleVoice = voices.find(voice => voice.lang.includes('fr'));
-        }
-        
-        resolve(femaleVoice || voices[0]);
-      } else {
-        // Attendre que les voix soient chargées
-        synth.addEventListener('voiceschanged', () => {
-          const voices = synth.getVoices();
-          const femaleVoice = voices.find(voice => 
-            voice.lang.includes('fr') || voice.name.toLowerCase().includes('female')
-          );
-          resolve(femaleVoice || voices[0]);
-        }, { once: true });
-      }
+        // Priorité 2 : Google Français
+        if (!v) v = voices.find(v => v.name.includes('Google français') || v.name.includes('Google French'));
+        // Priorité 3 : n'importe quelle voix française
+        if (!v) v = voices.find(v => v.lang.startsWith('fr'));
+        // Priorité 4 : voix féminine générique
+        if (!v) v = voices.find(v =>
+          v.name.toLowerCase().includes('female') ||
+          v.name.toLowerCase().includes('samantha') ||
+          v.name.toLowerCase().includes('victoria') ||
+          v.name.toLowerCase().includes('karen')
+        );
+        return v || voices[0];
+      };
+
+      const found = tryFind();
+      if (found) { resolve(found); return; }
+
+      synth.addEventListener('voiceschanged', () => resolve(tryFind()), { once: true });
     });
   }
-  
-  // Fonction pour parler avec voix féminine
-  async function speakWithFemaleVoice(text) {
+
+  // Démarrer l'animation "speaking" sur l'avatar
+  function startSpeakingAnimation() {
+    isSpeaking = true;
+    if (avatarImg) avatarImg.closest('.chatbot-avatar')?.classList.add('avatar-speaking');
+    if (toggleImg) toggleImg.closest('.chatbot-toggle-btn')?.classList.add('avatar-speaking');
+    document.querySelectorAll('.message-avatar img').forEach(img => {
+      img.closest('.message-avatar')?.classList.add('avatar-bounce');
+    });
+  }
+
+  function stopSpeakingAnimation() {
+    isSpeaking = false;
+    if (avatarImg) avatarImg.closest('.chatbot-avatar')?.classList.remove('avatar-speaking');
+    if (toggleImg) toggleImg.closest('.chatbot-toggle-btn')?.classList.remove('avatar-speaking');
+    document.querySelectorAll('.message-avatar').forEach(el => el.classList.remove('avatar-bounce'));
+  }
+
+  // Parler avec voix féminine
+  async function speakWithFemaleVoice(rawText) {
     if (!voiceEnabled || !synth) return;
-    
-    // Arrêter la parole en cours
-    if (currentUtterance) {
-      synth.cancel();
-    }
-    
+
+    const text = cleanTextForSpeech(rawText);
+    if (!text) return;
+
+    if (currentUtterance) synth.cancel();
+
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'fr-FR';
-    utterance.rate = 0.95; // Légèrement plus lent
-    utterance.pitch = 1.2; // Voix plus féminine (plus aiguë)
-    utterance.volume = 1;
-    
-    // Obtenir une voix féminine
+    utterance.lang    = 'fr-FR';
+    utterance.rate    = 0.92;
+    utterance.pitch   = 1.15;
+    utterance.volume  = 1;
+
     const femaleVoice = await getFemaleVoice();
-    if (femaleVoice) {
-      utterance.voice = femaleVoice;
-    }
-    
-    // Événements
+    if (femaleVoice) utterance.voice = femaleVoice;
+
     utterance.onstart = () => {
       currentUtterance = utterance;
-      // Mettre à jour l'UI
       voiceToggle.innerHTML = '<i class="fas fa-stop"></i>';
       voiceToggle.classList.add('active');
+      startSpeakingAnimation();
+      showSoundWaves(true);
     };
-    
+
     utterance.onend = () => {
       currentUtterance = null;
       voiceToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
       voiceToggle.classList.remove('active');
+      stopSpeakingAnimation();
+      showSoundWaves(false);
+      // Réinitialiser tous les boutons play
+      document.querySelectorAll('.audio-play-btn.playing').forEach(btn => {
+        btn.classList.remove('playing');
+        btn.innerHTML = '<i class="fas fa-play"></i>';
+      });
     };
-    
+
     utterance.onerror = () => {
       currentUtterance = null;
       voiceToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
       voiceToggle.classList.remove('active');
+      stopSpeakingAnimation();
+      showSoundWaves(false);
     };
-    
+
     synth.speak(utterance);
   }
-  
+
   // Arrêter la parole
   function stopSpeaking() {
-    if (currentUtterance) {
-      synth.cancel();
-      currentUtterance = null;
-      voiceToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
-      voiceToggle.classList.remove('active');
-    }
+    if (synth.speaking) synth.cancel();
+    currentUtterance = null;
+    voiceToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+    voiceToggle.classList.remove('active');
+    stopSpeakingAnimation();
+    showSoundWaves(false);
+    document.querySelectorAll('.audio-play-btn.playing').forEach(btn => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '<i class="fas fa-play"></i>';
+    });
   }
-  
-  // Données de Rosny pour le contexte
+
+  // Vagues sonores
+  function showSoundWaves(show) {
+    const waves = document.querySelectorAll('.sound-waves');
+    waves.forEach(w => w.classList.toggle('active', show));
+  }
+
+  // ===================== DONNÉES ROSNY =====================
+  const projets = [
+    {
+      id: 1,
+      nom: "Application de traduction des langues gabonaises",
+      desc: "Application web responsive permettant la traduction entre différentes langues locales du Gabon. Elle inclut un dictionnaire, un module d'apprentissage et une interface communautaire.",
+      tech: "HTML, CSS, JavaScript, PHP",
+      date: "Décembre 2024"
+    },
+    {
+      id: 2,
+      nom: "Application Web de Facturation - Tech Info Plus",
+      desc: "Système complet de facturation et de suivi de stock pour une PME à Port-Gentil. Gestion des clients, fournisseurs, articles, devis, règlements et rapports.",
+      tech: "Laravel, MySQL, Bootstrap",
+      date: "2024",
+      lien: "https://tech-info-plus.vercel.app/"
+    },
+    {
+      id: 3,
+      nom: "Application GABON - Lieux populaires",
+      desc: "Application WinDev répertoriant les endroits populaires de tout le Gabon avec système de connexion, inscription et navigation par région.",
+      tech: "WinDev",
+      date: "2024"
+    },
+    {
+      id: 4,
+      nom: "Application Web Mini Market",
+      desc: "Plateforme e-commerce pour la gestion d'un mini market en ligne avec espace vendeur, panier, paiement et tableau de bord administrateur.",
+      tech: "HTML, CSS, JavaScript, PHP, MySQL",
+      date: "Projet scolaire"
+    },
+    {
+      id: 5,
+      nom: "Application Mobile de Vote",
+      desc: "Application mobile Flutter pour la réalisation de votes électroniques en temps réel avec interface administrateur et saisie des résultats.",
+      tech: "Flutter, Firebase",
+      date: "2024"
+    },
+    {
+      id: 6,
+      nom: "Portfolio Professionnel",
+      desc: "Site web portfolio responsive présentant les compétences, projets et services de Rosny OTSINA avec chatbot IA intégré et synthèse vocale.",
+      tech: "HTML, CSS, JavaScript, Node.js",
+      date: "2025"
+    }
+  ];
+
   const rosnyData = {
+    nom: "Rosny OTSINA MINKO Jean Rodrigue Rismin",
+    titre: "Développeur Web et Mobile Freelance",
+    email: "rodrigueotsina@gmail.com",
+    phone: "+241 077 12 24 85",
+    location: "Libreville, Gabon",
+    github: "https://github.com/RosnyMinko07",
+    disponibilite: "Disponible immédiatement",
+    formation: {
+      licence: "Licence professionnelle en Informatique - INPTIC (Génie Logiciel)",
+      master: "Master Intelligence Artificielle (en cours)"
+    },
     competences: {
-      frontend: ["HTML (Avancé)", "CSS (Intermédiaire)", "JavaScript/TypeScript", "Vue.js/React.js/Bootstrap"],
+      frontend: ["HTML (Avancé)", "CSS", "JavaScript/TypeScript", "Vue.js", "React.js", "Bootstrap"],
       backend: ["PHP/Laravel", "Node.js/Express.js/NestJS", "Python (Django/FastAPI)", "Java"],
       mobile: ["Flutter", "Java/Kotlin (Android)"],
-      databases: ["MySQL/PostgreSQL/SQLite", "MongoDB"],
-      autres: ["Sécurité informatique", "Maintenance", "Déploiement"]
+      databases: ["MySQL", "PostgreSQL", "SQLite", "MongoDB"],
+      autres: ["Sécurité informatique", "Maintenance", "Déploiement", "WinDev"]
     },
-    projets: [
-      {
-        nom: "Application de traduction des langues gabonaises",
-        desc: "Application innovante pour préserver et traduire les langues locales"
-      },
-      {
-        nom: "Plateforme de streaming pour artistes gabonais",
-        desc: "Plateforme dédiée à la promotion des artistes locaux"
-      },
-      {
-        nom: "Portfolio professionnel",
-        desc: "Site web responsive présentant les compétences et projets"
-      }
-    ],
     services: [
       "Développement Web (sites, applications, API)",
       "Développement Mobile (Android/iOS avec Flutter)",
@@ -150,31 +249,85 @@ document.addEventListener('DOMContentLoaded', function() {
       "Maintenance et support technique",
       "Déploiement et hébergement"
     ],
-    contact: {
-      email: "rodrigueotsina@gmail.com",
-      phone: "+241 077 12 24 85",
-      location: "Libreville, Gabon",
-      github: "https://github.com/RosnyMinko07",
-      freelance: "Disponible immédiatement"
-    },
-    formation: {
-      licence: "Licence professionnelle en Informatique - INPTIC",
-      master: "Master Intelligence Artificielle (en cours)",
-      specialisation: "Génie Logiciel"
-    }
+    projets: projets
   };
 
-  // Ouvrir/fermer le chatbot
+  // ===================== DÉTECTION PROJETS =====================
+  const projectKeywords = [
+    'projet', 'projets', 'portfolio', 'réalisation', 'travaux', 'application',
+    'développé', 'créé', 'fait', 'travail', 'oeuvre', 'production'
+  ];
+
+  function isProjectRequest(message) {
+    const lower = message.toLowerCase();
+    return projectKeywords.some(kw => lower.includes(kw));
+  }
+
+  function buildProjectsResponse() {
+    let response = "Voici les 6 projets de Rosny OTSINA :\n\n";
+    projets.forEach((p, i) => {
+      response += `${i + 1}. ${p.nom}\n`;
+      response += `   ${p.desc}\n`;
+      response += `   Technologies : ${p.tech}\n`;
+      if (p.lien) response += `   Lien : ${p.lien}\n`;
+      response += '\n';
+    });
+    response += "Vous pouvez voir tous ces projets dans la section Portfolio du site !";
+    return response;
+  }
+
+  // ===================== RÉPONSES LOCALES =====================
+  function getLocalResponse(message) {
+    const lower = message.toLowerCase();
+
+    if (isProjectRequest(lower)) {
+      return buildProjectsResponse();
+    }
+
+    if (lower.includes('compétence') || lower.includes('competence') || lower.includes('skill') || lower.includes('technologie')) {
+      return `Rosny maîtrise :\n\nFrontend : ${rosnyData.competences.frontend.join(', ')}\n\nBackend : ${rosnyData.competences.backend.join(', ')}\n\nMobile : ${rosnyData.competences.mobile.join(', ')}\n\nBases de données : ${rosnyData.competences.databases.join(', ')}\n\nAutres : ${rosnyData.competences.autres.join(', ')}`;
+    }
+
+    if (lower.includes('contact') || lower.includes('email') || lower.includes('téléphone') || lower.includes('joindre')) {
+      return `Pour contacter Rosny :\n\nEmail : ${rosnyData.email}\nTéléphone : ${rosnyData.phone}\nLocalisation : ${rosnyData.location}\nGitHub : ${rosnyData.github}\nDisponibilité : ${rosnyData.disponibilite}`;
+    }
+
+    if (lower.includes('service') || lower.includes('offre') || lower.includes('propose')) {
+      return `Rosny propose les services suivants :\n\n${rosnyData.services.map((s, i) => `${i + 1}. ${s}`).join('\n')}`;
+    }
+
+    if (lower.includes('formation') || lower.includes('étude') || lower.includes('diplôme') || lower.includes('université')) {
+      return `Formation de Rosny :\n\n${rosnyData.formation.licence}\n\n${rosnyData.formation.master}`;
+    }
+
+    if (lower.includes('qui') && (lower.includes('rosny') || lower.includes('toi') || lower.includes('vous'))) {
+      return `Je suis Sophia, l'assistante IA de ${rosnyData.nom}. Il est ${rosnyData.titre} basé à ${rosnyData.location}. Il est ${rosnyData.disponibilite} pour vos projets !`;
+    }
+
+    if (lower.includes('bonjour') || lower.includes('salut') || lower.includes('hello') || lower.includes('bonsoir')) {
+      return `Bonjour ! Je suis Sophia, l'assistante IA de Rosny OTSINA. Comment puis-je vous aider aujourd'hui ? Je peux vous parler de ses projets, compétences, services ou vous donner ses coordonnées.`;
+    }
+
+    if (lower.includes('merci') || lower.includes('thank')) {
+      return `De rien ! N'hésitez pas si vous avez d'autres questions sur Rosny ou ses projets.`;
+    }
+
+    return null; // Passer à l'API
+  }
+
+  // ===================== INTERFACE =====================
   chatbotToggle.addEventListener('click', toggleChatbot);
   chatbotClose.addEventListener('click', closeChatbot);
-  
-  // Toggle vocal
+
   voiceToggle.addEventListener('click', () => {
-    if (currentUtterance) {
+    if (synth.speaking) {
       stopSpeaking();
     } else {
       voiceEnabled = !voiceEnabled;
-      voiceToggle.innerHTML = voiceEnabled ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+      voiceToggle.innerHTML = voiceEnabled
+        ? '<i class="fas fa-volume-up"></i>'
+        : '<i class="fas fa-volume-mute"></i>';
+      voiceToggle.title = voiceEnabled ? 'Désactiver la voix' : 'Activer la voix';
     }
   });
 
@@ -182,165 +335,196 @@ document.addEventListener('DOMContentLoaded', function() {
     chatbotContainer.classList.toggle('open');
     if (chatbotContainer.classList.contains('open')) {
       chatbotInput.focus();
+      chatbotToggle.classList.add('open');
+    } else {
+      chatbotToggle.classList.remove('open');
+      stopSpeaking();
     }
   }
 
   function closeChatbot() {
     chatbotContainer.classList.remove('open');
-    stopSpeaking(); // Arrêter la voix en fermant
+    chatbotToggle.classList.remove('open');
+    stopSpeaking();
   }
 
-  // Historique de conversation
+  // ===================== MESSAGES =====================
   let conversationHistory = [];
 
-  // Fonction pour ajouter un message avec avatar
   function addMessage(text, sender, playVoice = false) {
-    const messageWrapper = document.createElement('div');
-    messageWrapper.className = `message-wrapper ${sender}-wrapper`;
-    
-    // Ajouter l'avatar pour les messages du bot
+    const wrapper = document.createElement('div');
+    wrapper.className = `message-wrapper ${sender}-wrapper`;
+
+    // Avatar
+    const avatarDiv = document.createElement('div');
+    avatarDiv.className = 'message-avatar';
     if (sender === 'bot') {
-      const avatarDiv = document.createElement('div');
-      avatarDiv.className = 'message-avatar';
-      avatarDiv.innerHTML = `<img src="${avatarImages.main}" alt="Sophia">`;
-      messageWrapper.appendChild(avatarDiv);
+      avatarDiv.innerHTML = `<img src="${AVATAR_URL}" alt="Sophia">`;
     } else {
-      // Avatar utilisateur (optionnel)
-      const avatarDiv = document.createElement('div');
-      avatarDiv.className = 'message-avatar';
-      avatarDiv.innerHTML = `<img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&auto=format" alt="User">`;
-      messageWrapper.appendChild(avatarDiv);
+      avatarDiv.innerHTML = `<img src="${USER_AVATAR}" alt="Vous">`;
     }
-    
-    const messageContent = document.createElement('div');
-    messageContent.className = 'message-content';
-    
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `chatbot-message ${sender}`;
-    
+    wrapper.appendChild(avatarDiv);
+
+    // Contenu
+    const content = document.createElement('div');
+    content.className = 'message-content';
+
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `chatbot-message ${sender}`;
+
     if (text === '...') {
-      messageDiv.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+      msgDiv.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
     } else {
-      messageDiv.innerHTML = text.replace(/\n/g, '<br>');
+      msgDiv.innerHTML = text.replace(/\n/g, '<br>');
     }
-    
-    messageContent.appendChild(messageDiv);
-    
-    // Ajouter les contrôles audio pour les messages du bot
+
+    content.appendChild(msgDiv);
+
+    // Contrôles audio + horodatage pour les messages bot
     if (sender === 'bot' && text !== '...') {
-      const audioControl = document.createElement('div');
-      audioControl.className = 'message-audio-control';
-      
+      const audioCtrl = document.createElement('div');
+      audioCtrl.className = 'message-audio-control';
+
       const time = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-      
-      audioControl.innerHTML = `
-        <button class="audio-play-btn" onclick="playMessageAudio(this, '${text.replace(/'/g, "\\'")}')">
+      const safeText = text.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+
+      audioCtrl.innerHTML = `
+        <button class="audio-play-btn" data-text="${safeText}" title="Lire ce message">
           <i class="fas fa-play"></i>
         </button>
+        <div class="sound-waves">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
         <span class="message-time">${time}</span>
       `;
-      
-      messageContent.appendChild(audioControl);
-      
-      // Jouer automatiquement si demandé
+
+      // Attacher l'événement directement (évite les problèmes d'échappement)
+      const playBtn = audioCtrl.querySelector('.audio-play-btn');
+      playBtn.addEventListener('click', function () {
+        handlePlayButton(this, text);
+      });
+
+      content.appendChild(audioCtrl);
+
       if (playVoice && voiceEnabled) {
-        setTimeout(() => {
-          speakWithFemaleVoice(text);
-        }, 100);
+        setTimeout(() => speakWithFemaleVoice(text), 300);
       }
     } else if (sender === 'user') {
       const timeSpan = document.createElement('span');
       timeSpan.className = 'message-time';
       timeSpan.textContent = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-      messageContent.appendChild(timeSpan);
+      content.appendChild(timeSpan);
     }
-    
-    messageWrapper.appendChild(messageContent);
-    chatbotMessages.appendChild(messageWrapper);
-    
-    // Animation
-    messageWrapper.style.animation = 'fadeInUp 0.3s ease';
+
+    wrapper.appendChild(content);
+
+    // Animation d'apparition
+    wrapper.style.opacity = '0';
+    wrapper.style.transform = 'translateY(15px)';
+    chatbotMessages.appendChild(wrapper);
+
+    requestAnimationFrame(() => {
+      wrapper.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+      wrapper.style.opacity = '1';
+      wrapper.style.transform = 'translateY(0)';
+    });
+
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    
-    return messageDiv;
+    return msgDiv;
   }
 
-  // Fonction globale pour jouer l'audio d'un message
-  window.playMessageAudio = function(button, text) {
+  function handlePlayButton(button, text) {
     const isPlaying = button.classList.contains('playing');
-    
+
+    // Arrêter tous les autres
+    document.querySelectorAll('.audio-play-btn.playing').forEach(btn => {
+      if (btn !== button) {
+        btn.classList.remove('playing');
+        btn.innerHTML = '<i class="fas fa-play"></i>';
+      }
+    });
+
     if (isPlaying) {
       stopSpeaking();
       button.classList.remove('playing');
       button.innerHTML = '<i class="fas fa-play"></i>';
     } else {
-      // Arrêter tous les autres boutons
-      document.querySelectorAll('.audio-play-btn').forEach(btn => {
-        btn.classList.remove('playing');
-        btn.innerHTML = '<i class="fas fa-play"></i>';
-      });
-      
       button.classList.add('playing');
       button.innerHTML = '<i class="fas fa-stop"></i>';
-      
       speakWithFemaleVoice(text);
-      
-      // Réinitialiser le bouton à la fin
-      const checkInterval = setInterval(() => {
-        if (!currentUtterance) {
+
+      // Surveiller la fin
+      const check = setInterval(() => {
+        if (!synth.speaking) {
           button.classList.remove('playing');
           button.innerHTML = '<i class="fas fa-play"></i>';
-          clearInterval(checkInterval);
+          clearInterval(check);
         }
-      }, 100);
+      }, 200);
     }
+  }
+
+  // Exposer globalement pour compatibilité
+  window.playMessageAudio = function (button, text) {
+    handlePlayButton(button, text);
   };
 
-  // Envoyer un message
+  // ===================== ENVOI MESSAGE =====================
   chatbotSend.addEventListener('click', sendMessage);
-  chatbotInput.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') sendMessage();
+  chatbotInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
+
+  // Indicateur de frappe en temps réel
+  let typingTimer;
+  chatbotInput.addEventListener('input', () => {
+    clearTimeout(typingTimer);
+    chatbotInput.classList.add('typing');
+    typingTimer = setTimeout(() => chatbotInput.classList.remove('typing'), 1000);
   });
 
   async function sendMessage() {
     const message = chatbotInput.value.trim();
     if (!message) return;
 
-    // Ajouter message utilisateur
     addMessage(message, 'user');
     conversationHistory.push({ role: 'user', content: message });
-    
     chatbotInput.value = '';
     chatbotInput.disabled = true;
     chatbotSend.disabled = true;
-    
-    // Afficher indicateur de frappe avec avatar
+
+    // Indicateur de frappe
     const typingWrapper = document.createElement('div');
-    typingWrapper.className = 'message-wrapper bot-wrapper';
+    typingWrapper.className = 'message-wrapper bot-wrapper typing-msg';
     typingWrapper.innerHTML = `
-      <div class="message-avatar">
-        <img src="${avatarImages.main}" alt="Sophia">
-      </div>
+      <div class="message-avatar"><img src="${AVATAR_URL}" alt="Sophia"></div>
       <div class="message-content">
         <div class="chatbot-message bot">
-          <div class="typing-indicator">
-            <span></span><span></span><span></span>
-          </div>
+          <div class="typing-indicator"><span></span><span></span><span></span></div>
         </div>
-      </div>
-    `;
+      </div>`;
     chatbotMessages.appendChild(typingWrapper);
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 
+    // Vérifier réponse locale d'abord
+    const localResp = getLocalResponse(message);
+
+    if (localResp) {
+      await new Promise(r => setTimeout(r, 600)); // Délai naturel
+      typingWrapper.remove();
+      addMessage(localResp, 'bot', voiceEnabled);
+      conversationHistory.push({ role: 'assistant', content: localResp });
+      chatbotInput.disabled = false;
+      chatbotSend.disabled = false;
+      chatbotInput.focus();
+      return;
+    }
+
+    // Appel API
     try {
-      // Appeler l'API backend
       const response = await fetch('/api/chatbot', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          message: message,
+          message,
           conversationHistory: conversationHistory.slice(-6)
         })
       });
@@ -348,38 +532,23 @@ document.addEventListener('DOMContentLoaded', function() {
       let data;
       try {
         data = await response.json();
-      } catch (e) {
-        const text = await response.text();
-        data = { 
-          success: false, 
-          message: `Erreur serveur (${response.status}): ${text || 'Réponse invalide'}` 
-        };
+      } catch {
+        data = { success: false, message: `Erreur serveur (${response.status})` };
       }
 
-      // Retirer l'indicateur de frappe
       typingWrapper.remove();
 
       if (response.ok && data.success) {
-        // Ajouter la réponse de l'IA avec voix
         addMessage(data.message, 'bot', voiceEnabled);
         conversationHistory.push({ role: 'assistant', content: data.message });
       } else {
-        let errorMsg = data.message || `Erreur serveur (${response.status}). Veuillez réessayer.`;
-        
-        if (data.message && data.message.includes('OPENROUTER_API_KEY')) {
-          errorMsg = '⚠️ La clé API OpenRouter n\'est pas configurée.';
-        }
-        
-        addMessage(errorMsg, 'bot');
-        if (voiceEnabled) speakWithFemaleVoice(errorMsg);
+        const errMsg = data.message || 'Une erreur est survenue. Veuillez réessayer.';
+        addMessage(errMsg, 'bot', voiceEnabled);
       }
-    } catch (error) {
+    } catch {
       typingWrapper.remove();
-      
-      let errorMessage = 'Erreur de connexion. Vérifiez votre connexion internet.';
-      addMessage(errorMessage, 'bot');
-      if (voiceEnabled) speakWithFemaleVoice(errorMessage);
-      console.error('Erreur:', error);
+      const errMsg = 'Erreur de connexion. Vérifiez votre connexion internet.';
+      addMessage(errMsg, 'bot', voiceEnabled);
     } finally {
       chatbotInput.disabled = false;
       chatbotSend.disabled = false;
@@ -387,12 +556,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Message de bienvenue avec voix
+  // ===================== MESSAGE DE BIENVENUE =====================
   setTimeout(() => {
     if (!sessionStorage.getItem('chatbotWelcomed')) {
-      const welcomeMsg = "Bonjour ! Je suis Sophia, l'assistante IA de Rosny OTSINA. Je peux vous parler de ses compétences, projets et services. Comment puis-je vous aider aujourd'hui ?";
-      // La voix est déjà jouée dans le HTML initial via l'événement onclick
       sessionStorage.setItem('chatbotWelcomed', 'true');
+      // Le message est déjà dans le HTML, on joue juste la voix si activée
     }
-  }, 1000);
+  }, 1500);
+
 });

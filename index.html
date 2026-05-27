@@ -1,10 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Rosny </title>
+
+    <!-- SEO Meta -->
+    <title>Rosny OTSINA — Développeur Web & Mobile Freelance | Libreville, Gabon</title>
+    <meta name="description" content="Portfolio de Rosny OTSINA, développeur web et mobile freelance basé à Libreville, Gabon. Spécialisé en Laravel, Flutter, Node.js, React. Disponible pour vos projets.">
+    <meta name="keywords" content="développeur web, développeur mobile, freelance, Gabon, Libreville, Laravel, Flutter, React, Node.js, PHP, portfolio">
+    <meta name="author" content="Rosny OTSINA MINKO Jean Rodrigue Rismin">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph (réseaux sociaux) -->
+    <meta property="og:title" content="Rosny OTSINA — Développeur Web & Mobile Freelance">
+    <meta property="og:description" content="Développeur web et mobile freelance basé à Libreville, Gabon. Spécialisé en Laravel, Flutter, Node.js, React.">
+    <meta property="og:image" content="images/rororo.png">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rosny OTSINA — Développeur Web & Mobile Freelance">
+    <meta name="twitter:description" content="Portfolio de Rosny OTSINA, développeur freelance au Gabon.">
+    <meta name="twitter:image" content="images/rororo.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/rororo.png">
+    <link rel="apple-touch-icon" href="images/rororo.png">
+
     <!--- CSS Files -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/skins/color-1.css">
@@ -17,7 +41,24 @@
     <link rel="stylesheet" href="css/style-switcher.css">
 </head>
 
-<body >
+<body>
+
+    <!-- ===== LOADER ===== -->
+    <div id="page-loader">
+        <div class="loader-inner">
+            <div class="loader-logo">R<span>N</span></div>
+            <div class="loader-bar"><div class="loader-progress"></div></div>
+        </div>
+    </div>
+
+    <!-- ===== CURSEUR PERSONNALISÉ ===== -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- ===== BOUTON RETOUR EN HAUT ===== -->
+    <button id="back-to-top" title="Retour en haut">
+        <i class="fas fa-chevron-up"></i>
+    </button>
     <!--Main Start-->
     <div class="main-container">
         <div class="aside">
@@ -31,7 +72,9 @@
                 <li><a href="#home" class="active"><i class="fa fa-home"></i>Menu</a></li>
                 <li><a href="#about" ><i class="fa fa-user"></i>A propos </a></li>
                 <li><a href="#services" ><i class="fa fa-list"></i>Services</a></li>
+                <li><a href="#skills" ><i class="fa fa-code"></i>Compétences</a></li>
                 <li><a href="#portfolio" ><i class="fa fa-briefcase"></i>Portfolio</a></li>
+                <li><a href="#certifications" ><i class="fa fa-certificate"></i>Certifications</a></li>
                 <li><a href="#contact" ><i class="fa fa-comment"></i>Contact</a></li>
             </ul>
         </div>
@@ -48,6 +91,22 @@
                                  du backend au frontend, en passant par le design et le déploiement. Mon portfolio présente mes projets,
                                   alliant techniques modernes, créativité et solutions concrètes, pour démontrer ma capacité à mener un projet de A à Z.</p>
                             <a href="#contact" data-section-index="1" class="btn hire-me">Engagez moi</a>
+
+                            <!-- Stats -->
+                            <div class="home-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number" data-target="5">0</span>
+                                    <span class="stat-label">Projets réalisés</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" data-target="3">0</span>
+                                    <span class="stat-label">Ans d'expérience</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" data-target="10">0</span>
+                                    <span class="stat-label">Technologies</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="home-img padd-15">
                             <img src="images/rororo.png" alt="">
@@ -101,167 +160,32 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="skills padd-15">
-    <div class="row">
+                            </div>
 
-        <!-- Frontend -->
-        <div class="skill-category padd-15">
-            <h4>Frontend</h4>
-            <div class="skill-item padd-10">
-                <i class="fab fa-html5"></i> HTML
-                <span class="skill-badge advanced">Avancé</span>
-            </div>
-            <div class="skill-item padd-10">
-                <i class="fab fa-css3-alt"></i> CSS
-                <span class="skill-badge intermediate">Intermédiaire</span>
-            </div>
-            <div class="skill-item padd-10">
-                <i class="fab fa-js-square"></i> JavaScript / TypeScript
-                <span class="skill-badge intermediate">Intermédiaire</span>
-            </div>
-            <div class="skill-item padd-10">
-                <i class="fab fa-vuejs"></i> Vue.js / React.js / Bootstrap
-                <span class="skill-badge intermediate">Intermédiaire</span>
-            </div>
-        </div>
-
-        <!-- Backend -->
-        <div class="skill-category padd-15">
-            <h4>Backend</h4>
-            <div class="skill-item padd-10">
-                <i class="fab fa-php"></i> PHP / Laravel
-                <span class="skill-badge intermediate">Intermédiaire</span>
-            </div>
-            <div class="skill-item padd-10">
-                <i class="fab fa-node-js"></i> Node.js / Express.js / NestJS
-                <span class="skill-badge intermediate">Intermédiaire</span>
-            </div>
-            <div class="skill-item padd-10">
-                <i class="fab fa-python"></i> Python (Django / FastAPI)
-                <span class="skill-badge intermediate">Intermédiaire</span>
-            </div>
-            <div class="skill-item padd-10">
-                <i class="fab fa-java"></i> Java
-                <span class="skill-badge intermediate">Intermédiaire</span>
-            </div>
-        </div>
-
-        <!-- Mobile -->
-        <div class="skill-category padd-15">
-            <h4>Mobile / Cross-Platform</h4>
-            <div class="skill-item padd-10">
-                <i class="fas fa-mobile-alt"></i> Flutter
-                <span class="skill-badge intermediate">Intermédiaire</span>
-            </div>
-            <div class="skill-item padd-10">
-                <i class="fab fa-java"></i> Java / Kotlin (Android)
-                <span class="skill-badge intermediate">Intermédiaire</span>
-            </div>
-        </div>
-
-        <!-- Base de données -->
-        <div class="skill-category padd-15">
-            <h4>Base de données</h4>
-            <div class="skill-item padd-10">
-                <i class="fas fa-database"></i> MySQL / PostgreSQL / SQLite
-                <span class="skill-badge intermediate">Intermédiaire</span>
-            </div>
-            <div class="skill-item padd-10">
-                <i class="fas fa-database"></i> MongoDB
-                <span class="skill-badge intermediate">Intermédiaire</span>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- CSS badges et mise en page responsive -->
-<style>
-
-.skill-category {
-    flex: 1 1 300px;
-    box-sizing: border-box;
-}
-.skill-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 15px;
-    color: #fff;
-    font-size: 0.85em;
-    font-weight: 500;
-    margin-left: 10px;
-}
-.skill-badge.advanced { background-color: #28a745; } /* vert */
-.skill-badge.intermediate { background-color: #ffc107; } /* jaune/orange */
-.skill-badge.beginner { background-color: #dc3545; } /* rouge */
-.skill-item i {
-    margin-right: 8px;
-    color: #333;
-}
-</style>
-
-                       <div class="row">
-    <!-- Education -->
-    <div class="education padd-15">
-        <h3 class="title">Éducation</h3>
-        <div class="timeline-box padd-15">
-            <div class="timeline shadow-dark">
-                <div class="timeline-item">
-                    <div class="circle-dot"></div>
-                    <h3 class="timeline-date">
-                        <i class="fa fa-calendar"></i> 
-                    </h3>
-                    <h4 class="timeline-title">Licence professionelle en Informatique  INPTIC</h4>
-                    <p class="timeline-text">
-                        Formation Genie Logiciels.
-                    </p>
-                </div>
-                <div class="timeline-item">
-                    <div class="circle-dot"></div>
-                    <h3 class="timeline-date">
-                        <i class="fa fa-calendar"></i> 
-                    </h3>
-                    <h4 class="timeline-title">Master (en cours) </h4>
-                    <p class="timeline-text">
-                        Intelligence Artificielle
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Experience -->
-    <div class="experience padd-15">
-        <h3 class="title">Expérience</h3>
-        <div class="timeline-box padd-15">
-            <div class="timeline shadow-dark">
-                <div class="timeline-item">
-                    <div class="circle-dot"></div>
-                    <h3 class="timeline-date">
-                        <i class="fa fa-calendar"></i> 
-                    </h3>
-                    <h4 class="timeline-title">Application de gestion des notes</h4>
-                    <p class="timeline-text">
-                        Développement d'une application multiplateforme pour gérer et suivre les notes des étudiants.
-                    </p>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="circle-dot"></div>
-                    <h3 class="timeline-date">
-                        <i class="fa fa-calendar"></i> 
-                    </h3>
-                    <h4 class="timeline-title">Systeme de facturation</h4>
-                    <p class="timeline-text">
-                        Développement d'une application web informatise de facturation et de suivi de stock d'une PME. Cas de TECH INFO PLUS a port-gentil 
-                        <a href="https://tech-info-plus.vercel.app/" target="_blank">Voir le projet</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+                            <!-- ===== EXPÉRIENCE ===== -->
+                            <div class="row">
+                                <div class="experience padd-15">
+                                    <h3 class="title">Expérience</h3>
+                                    <div class="timeline-box padd-15">
+                                        <div class="timeline shadow-dark">
+                                            <div class="timeline-item">
+                                                <div class="circle-dot"></div>
+                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> 2024</h3>
+                                                <h4 class="timeline-title">Application de gestion des notes</h4>
+                                                <p class="timeline-text">Développement d'une application multiplateforme pour gérer et suivre les notes des étudiants.</p>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <div class="circle-dot"></div>
+                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> 2024</h3>
+                                                <h4 class="timeline-title">Système de facturation — Tech Info Plus</h4>
+                                                <p class="timeline-text">
+                                                    Développement d'une application web de facturation et de suivi de stock pour une PME à Port-Gentil.
+                                                    <a href="https://tech-info-plus.vercel.app/" target="_blank">Voir le projet</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -337,6 +261,147 @@
 <!-- Services Section End -->
 
             <!-- Services Section End -->
+
+<!-- ===== COMPÉTENCES Section Start ===== -->
+<section class="skills-section section" id="skills">
+    <div class="container">
+        <div class="row">
+            <div class="section-title padd-15">
+                <h2>Compétences</h2>
+            </div>
+        </div>
+
+        <!-- Frontend -->
+        <div class="skills-category padd-15">
+            <h3 class="skills-cat-title"><i class="fas fa-laptop-code"></i> Frontend</h3>
+            <div class="skills-icons-grid">
+                <div class="skill-icon-card">
+                    <i class="fab fa-html5" style="color:#e34c26"></i>
+                    <span>HTML</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-css3-alt" style="color:#264de4"></i>
+                    <span>CSS</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-js-square" style="color:#f7df1e"></i>
+                    <span>JavaScript</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-vuejs" style="color:#42b883"></i>
+                    <span>Vue.js</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-react" style="color:#61dafb"></i>
+                    <span>React.js</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-bootstrap" style="color:#7952b3"></i>
+                    <span>Bootstrap</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="skills-category padd-15">
+            <h3 class="skills-cat-title"><i class="fas fa-server"></i> Backend</h3>
+            <div class="skills-icons-grid">
+                <div class="skill-icon-card">
+                    <i class="fab fa-php" style="color:#8892be"></i>
+                    <span>PHP</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fas fa-fire" style="color:#FF2D20"></i>
+                    <span>Laravel</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-node-js" style="color:#68a063"></i>
+                    <span>Node.js</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-python" style="color:#3572A5"></i>
+                    <span>Python</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-java" style="color:#b07219"></i>
+                    <span>Java</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="skills-category padd-15">
+            <h3 class="skills-cat-title"><i class="fas fa-mobile-alt"></i> Mobile</h3>
+            <div class="skills-icons-grid">
+                <div class="skill-icon-card">
+                    <i class="fas fa-mobile-alt" style="color:#54c5f8"></i>
+                    <span>Flutter</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-android" style="color:#3ddc84"></i>
+                    <span>Android</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-java" style="color:#7f52ff"></i>
+                    <span>Kotlin</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Base de données -->
+        <div class="skills-category padd-15">
+            <h3 class="skills-cat-title"><i class="fas fa-database"></i> Base de données</h3>
+            <div class="skills-icons-grid">
+                <div class="skill-icon-card">
+                    <i class="fas fa-database" style="color:#00758f"></i>
+                    <span>MySQL</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fas fa-database" style="color:#336791"></i>
+                    <span>PostgreSQL</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fas fa-leaf" style="color:#4db33d"></i>
+                    <span>MongoDB</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fas fa-database" style="color:#003b57"></i>
+                    <span>SQLite</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Outils -->
+        <div class="skills-category padd-15">
+            <h3 class="skills-cat-title"><i class="fas fa-tools"></i> Outils &amp; Autres</h3>
+            <div class="skills-icons-grid">
+                <div class="skill-icon-card">
+                    <i class="fab fa-git-alt" style="color:#f05032"></i>
+                    <span>Git</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-github" style="color:var(--text-black-900)"></i>
+                    <span>GitHub</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fas fa-shield-alt" style="color:#2196f3"></i>
+                    <span>Sécurité</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fas fa-cloud-upload-alt" style="color:#ff9800"></i>
+                    <span>Déploiement</span>
+                </div>
+                <div class="skill-icon-card">
+                    <i class="fab fa-docker" style="color:#2496ed"></i>
+                    <span>Docker</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- COMPÉTENCES Section End -->
+
    <!-- Portfolio Section Start -->
 <section class="portfolio section" id="portfolio">
     <div class="container">
@@ -346,842 +411,225 @@
             </div>
         </div>
 
-        <!-- Projet 1: Application de traduction -->
-        <div class="row portfolio-project">
-            <div class="portfolio-heading padd-15">
-                <h2>Application de traduction des langues gabonaises</h2>
-                <p class="project-description">Application web responsive permettant la traduction entre différentes langues locales du Gabon avec interface intuitive et base de données linguistique.</p>
+        <!-- Filtres -->
+        <div class="portfolio-filters padd-15">
+            <button class="filter-btn active" data-filter="all">Tous</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="mobile">Mobile</button>
+            <button class="filter-btn" data-filter="desktop">Desktop</button>
+        </div>
+
+        <!-- ===== PROJET 1 ===== -->
+        <div class="project-card padd-15 reveal" data-category="web mobile">
+            <div class="project-card-header">
+                <div class="project-card-info">
+                    <h2>Application de traduction des langues gabonaises</h2>
+                    <p>Application web responsive permettant la traduction entre différentes langues locales du Gabon avec interface intuitive et base de données linguistique.</p>
+                    <span class="project-tech-tag">HTML</span>
+                    <span class="project-tech-tag">CSS</span>
+                    <span class="project-tech-tag">JavaScript</span>
+                    <span class="project-tech-tag">PHP</span>
+                </div>
+                <div class="project-card-btns">
+                    <button class="proj-btn btn-images" onclick="openCarousel('carousel-1')">
+                        <i class="fas fa-chevron-up"></i> Masquer les images
+                    </button>
+                    <a class="proj-btn btn-github" href="https://github.com/RosnyMinko07" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
             </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/translation-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/Traduction.png" alt="App de traduction - Interface principale">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Interface de Traduction</h3>
-                            <span class="portfolio-date">Décembre 2024</span>
-                            <p class="portfolio-desc">Écran principal avec sélection des langues et champ de traduction.</p>
-                        </div>
+            <!-- Carousel 1 -->
+            <div class="proj-carousel" id="carousel-1">
+                <button class="carousel-arrow left" onclick="slideCarousel('carousel-1',-1)"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-track-wrap">
+                    <div class="carousel-track">
+                        <div class="carousel-slide"><img src="images/Traduction.png" alt="Interface de Traduction"><span>Interface de Traduction</span></div>
+                        <div class="carousel-slide"><img src="images/Dictionnaire.png" alt="Interface Dictionnaire"><span>Interface Dictionnaire</span></div>
+                        <div class="carousel-slide"><img src="images/Apprentissage.png" alt="Interface Apprentissage"><span>Interface Apprentissage</span></div>
+                        <div class="carousel-slide"><img src="images/Communaute.png" alt="Interface Communauté"><span>Interface Communauté</span></div>
+                        <div class="carousel-slide"><img src="images/Profil.png" alt="Interface Profil"><span>Interface Profil</span></div>
                     </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/translation-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/Dictionnaire.png" alt="App de traduction - Historique">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Interface Dictionnaire</h3>
-                            <span class="portfolio-date">Décembre 2024</span>
-                            <p class="portfolio-desc">Interface de consultation du dictionnaire des langues gabonaises avec recherche et suggestions.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/translation-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/Apprentissage.png" alt="App de traduction - Interface Apprentissage">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Interface Apprentissage</h3>
-                            <span class="portfolio-date">Décembre 2024</span>
-                            <p class="portfolio-desc">Interface d'apprentissage des langues gabonaises avec exercices interactifs.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/translation-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/Communaute.png" alt="App de traduction - Interface Communaute">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Interface Communaute</h3>
-                            <span class="portfolio-date">Décembre 2024</span>
-                            <p class="portfolio-desc">Interface de gestion de la communauté des utilisateurs de l'application.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/translation-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/Profil.png" alt="App de traduction - Interface Profil">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Interface Profil</h3>
-                            <span class="portfolio-date">Décembre 2024</span>
-                            <p class="portfolio-desc">Interface de gestion du profil utilisateur avec paramètres de personnalisation.</p>
-                        </div>
-                    </div>
-                </a>
+                </div>
+                <button class="carousel-arrow right" onclick="slideCarousel('carousel-1',1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="dots-carousel-1"></div>
             </div>
         </div>
 
-        <!-- Projet 2: Application Shopping -->
-        <div class="row portfolio-project">
-            <div class="portfolio-heading padd-15">
-                <h2>Application Web de Facturation pour l'entreprise Tech Info Plus</h2>
-                <p class="project-description">Application de facturation et de suivi de stock.
-                    <a href="https://tech-info-plus.vercel.app/" target="_blank">Voir le projet</a>
-                </p>
+        <!-- ===== PROJET 2 ===== -->
+        <div class="project-card padd-15 reveal" data-category="web">
+            <div class="project-card-header">
+                <div class="project-card-info">
+                    <h2>Application Web de Facturation — Tech Info Plus</h2>
+                    <p>Système complet de facturation et de suivi de stock pour une PME à Port-Gentil. Gestion clients, fournisseurs, articles, devis, règlements et rapports.</p>
+                    <span class="project-tech-tag">Laravel</span>
+                    <span class="project-tech-tag">MySQL</span>
+                    <span class="project-tech-tag">Bootstrap</span>
+                </div>
+                <div class="project-card-btns">
+                    <button class="proj-btn btn-images" onclick="openCarousel('carousel-2')">
+                        <i class="fas fa-chevron-up"></i> Masquer les images
+                    </button>
+                    <a class="proj-btn btn-demo" href="https://tech-info-plus.vercel.app/" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Voir la démo
+                    </a>
+                    <a class="proj-btn btn-github" href="https://github.com/RosnyMinko07" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
             </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/interfaceconnexion.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Page de Connexion</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface de la page de connexion ou tous les utilisateurs se connectent.</p>
-                        </div>
+            <!-- Carousel 2 -->
+            <div class="proj-carousel" id="carousel-2">
+                <button class="carousel-arrow left" onclick="slideCarousel('carousel-2',-1)"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-track-wrap">
+                    <div class="carousel-track">
+                        <div class="carousel-slide"><img src="images/interfaceconnexion.png" alt="Connexion"><span>Page de Connexion</span></div>
+                        <div class="carousel-slide"><img src="images/dashboard1.png" alt="Dashboard 1"><span>Dashboard</span></div>
+                        <div class="carousel-slide"><img src="images/dashboard2.png" alt="Dashboard 2"><span>Dashboard 2</span></div>
+                        <div class="carousel-slide"><img src="images/dashboard3.png" alt="Dashboard 3"><span>Dashboard 3</span></div>
+                        <div class="carousel-slide"><img src="images/dashboard4.png" alt="Dashboard 4"><span>Dashboard 4</span></div>
+                        <div class="carousel-slide"><img src="images/dashboard5.png" alt="Dashboard 5"><span>Dashboard 5</span></div>
+                        <div class="carousel-slide"><img src="images/client.png" alt="Clients"><span>Gestion Clients</span></div>
+                        <div class="carousel-slide"><img src="images/fournisseur.png" alt="Fournisseurs"><span>Fournisseurs</span></div>
+                        <div class="carousel-slide"><img src="images/gestionarticle.png" alt="Articles"><span>Gestion Articles</span></div>
+                        <div class="carousel-slide"><img src="images/listearticle.png" alt="Liste Articles"><span>Liste Articles</span></div>
+                        <div class="carousel-slide"><img src="images/gestiondevis.png" alt="Devis"><span>Gestion Devis</span></div>
+                        <div class="carousel-slide"><img src="images/facturation.png" alt="Facturation"><span>Facturation</span></div>
+                        <div class="carousel-slide"><img src="images/comptoiradmin.png" alt="Comptoir Admin"><span>Comptoir Admin</span></div>
+                        <div class="carousel-slide"><img src="images/ticketcomptoir.png" alt="Ticket"><span>Ticket Comptoir</span></div>
+                        <div class="carousel-slide"><img src="images/detailcomptoir.png" alt="Détail"><span>Détail Comptoir</span></div>
+                        <div class="carousel-slide"><img src="images/historiquecomptoir.png" alt="Historique"><span>Historique</span></div>
+                        <div class="carousel-slide"><img src="images/gestionreglement.png" alt="Règlement"><span>Règlements</span></div>
+                        <div class="carousel-slide"><img src="images/gestionbug.png" alt="Bugs"><span>Gestion Bugs</span></div>
+                        <div class="carousel-slide"><img src="images/signalerbug.png" alt="Signaler Bug"><span>Signaler Bug</span></div>
+                        <div class="carousel-slide"><img src="images/inventaires.png" alt="Inventaires"><span>Inventaires</span></div>
+                        <div class="carousel-slide"><img src="images/inventaire1.png" alt="Inventaire 1"><span>Inventaire 1</span></div>
+                        <div class="carousel-slide"><img src="images/inventaire2.png" alt="Inventaire 2"><span>Inventaire 2</span></div>
+                        <div class="carousel-slide"><img src="images/stocks.png" alt="Stocks"><span>Stocks</span></div>
+                        <div class="carousel-slide"><img src="images/rapports.png" alt="Rapports"><span>Rapports</span></div>
+                        <div class="carousel-slide"><img src="images/users.png" alt="Utilisateurs"><span>Utilisateurs</span></div>
+                        <div class="carousel-slide"><img src="images/comptablestock.png" alt="Comptable Stock"><span>Comptable Stock</span></div>
+                        <div class="carousel-slide"><img src="images/devisrodrigue.png" alt="Devis"><span>Devis</span></div>
                     </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/dashboard1.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/dashboard2.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/dashboard3.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/dashboard4.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/dashboard5.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/client.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc"></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/fournisseur.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/gestionarticle.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/listearticle.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/gestiondevis.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/facturation.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/comptoiradmin.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/ticketcomptoir.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc"></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/detailcomptoir.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/historiquecomptoir.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc"></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/gestionreglement.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc"></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/gestionbug.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc"></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/signalerbug.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc"></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/inventaires.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc"></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/inventaire1.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc"></p>
-                        </div>
-                    </div>
-                </a>
-            </div><div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/inventaire2.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc"></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/stocks.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc"></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/rapports.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc"></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/users.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc"></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/comptablestock.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc"></p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/shopping-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/devisrodrigue.png" alt="Application Facturation">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title"></h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc"></p>
-                        </div>
-                    </div>
-                </a>
+                </div>
+                <button class="carousel-arrow right" onclick="slideCarousel('carousel-2',1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="dots-carousel-2"></div>
             </div>
         </div>
 
-        <!-- Projet 3: Food App -->
-        <div class="row portfolio-project">
-            <div class="portfolio-heading padd-15">
-                <h2>Application GABON</h2>
-                <p class="project-description">Endroit populaire de tout le GABON</p>
+        <!-- ===== PROJET 3 ===== -->
+        <div class="project-card padd-15 reveal" data-category="desktop">
+            <div class="project-card-header">
+                <div class="project-card-info">
+                    <h2>Application GABON — Lieux populaires</h2>
+                    <p>Application répertoriant les endroits populaires de tout le Gabon avec système de connexion, inscription et navigation par région.</p>
+                    <span class="project-tech-tag">WinDev</span>
+                </div>
+                <div class="project-card-btns">
+                    <button class="proj-btn btn-images" onclick="openCarousel('carousel-3')">
+                        <i class="fas fa-chevron-up"></i> Masquer les images
+                    </button>
+                    <a class="proj-btn btn-github" href="https://github.com/RosnyMinko07" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
             </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/food-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/windev1 (1).png" alt="Food App - Sélection restaurant">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Page de connexion</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
+            <!-- Carousel 3 -->
+            <div class="proj-carousel" id="carousel-3">
+                <button class="carousel-arrow left" onclick="slideCarousel('carousel-3',-1)"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-track-wrap">
+                    <div class="carousel-track">
+                        <div class="carousel-slide"><img src="images/windev1 (1).png" alt="Connexion"><span>Page de connexion</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (2).png" alt="Inscription"><span>Page Inscription</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (3).png" alt="Accueil"><span>Page d'Accueil</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (4).png" alt="G1"><span>Vue G1</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (6).png" alt="G2"><span>Vue G2</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (7).png" alt="G4"><span>Vue G4</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (8).png" alt="G6"><span>Vue G6</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (5).png" alt="G8"><span>Vue G8</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (9).png" alt="G9"><span>Vue G9</span></div>
                     </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/food-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/windev1 (2).png" alt="Food App - Sélection restaurant">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Page Inscription</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/food-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/windev1 (3).png" alt="Food App - Sélection restaurant">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Page d'Acceuil</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/food-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/windev1 (4).png" alt="Food App - Sélection restaurant">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">G1</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/food-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/windev1 (6).png" alt="Food App - Sélection restaurant">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">G2</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/food-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/windev1 (7).png" alt="Food App - Sélection restaurant">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">G4</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/food-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/windev1 (8).png" alt="Food App - Sélection restaurant">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">G6</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/food-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/windev1 (5).png" alt="Food App - Sélection restaurant">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">G8</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="https://github.com/tonrepo/food-app" class="portfolio-link" target="_blank">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/windev1 (9).png" alt="Food App - Sélection restaurant">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">G9</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">.</p>
-                        </div>
-                    </div>
-                </a>
+                </div>
+                <button class="carousel-arrow right" onclick="slideCarousel('carousel-3',1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="dots-carousel-3"></div>
             </div>
         </div>
 
-        <!-- Projet 4: Site immobilier -->
-        <div class="row portfolio-project">
-            <div class="portfolio-heading padd-15">
-                <h2>Application web de mini market (Projet Scolaire)</h2>
-                <p class="project-description">Application web pour la gestion d'un mini market en ligne.</p>
+        <!-- ===== PROJET 4 ===== -->
+        <div class="project-card padd-15 reveal" data-category="web">
+            <div class="project-card-header">
+                <div class="project-card-info">
+                    <h2>Application Web Mini Market (Projet Scolaire)</h2>
+                    <p>Plateforme e-commerce pour la gestion d'un mini market en ligne avec espace vendeur, panier, paiement et tableau de bord administrateur.</p>
+                    <span class="project-tech-tag">HTML</span>
+                    <span class="project-tech-tag">CSS</span>
+                    <span class="project-tech-tag">PHP</span>
+                    <span class="project-tech-tag">MySQL</span>
+                </div>
+                <div class="project-card-btns">
+                    <button class="proj-btn btn-images" onclick="openCarousel('carousel-4')">
+                        <i class="fas fa-chevron-up"></i> Masquer les images
+                    </button>
+                    <a class="proj-btn btn-github" href="https://github.com/RosnyMinko07" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
             </div>
-            <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/ordi (1).png" alt="Application web de mini market - Ecran de démarrage">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Page d'acceuil</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface de l'application web de mini market.</p>
-                        </div>
+            <!-- Carousel 4 -->
+            <div class="proj-carousel" id="carousel-4">
+                <button class="carousel-arrow left" onclick="slideCarousel('carousel-4',-1)"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-track-wrap">
+                    <div class="carousel-track">
+                        <div class="carousel-slide"><img src="images/ordi (1).png" alt="Accueil"><span>Page d'accueil</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (2).png" alt="Accueil 2"><span>Page d'accueil 2</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (3).png" alt="Inscription"><span>Page d'inscription</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (4).png" alt="Connexion"><span>Page de connexion</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (5).png" alt="Dashboard vendeur"><span>Dashboard vendeur</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (6).png" alt="Interface visiteurs"><span>Interface visiteurs</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (7).png" alt="Panier"><span>Panier</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (8).png" alt="Confirmation"><span>Confirmation commande</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (9).png" alt="Paiement"><span>Mode de paiement</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (10).png" alt="Admin"><span>Dashboard admin</span></div>
                     </div>
-                </a>
-            </div>
-             <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/ordi (2).png" alt="Application web de mini market - Ecran de démarrage">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Page d'acceuil</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface de l'application web de mini market.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-             <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/ordi (3).png" alt="Application web de mini market - Ecran de démarrage">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Page d'inscription</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Formulaire d'inscription pour les utilisateurs de l'application web de mini market.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-             <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/ordi (4).png" alt="Application web de mini market - Ecran de démarrage">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Page de connexion</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface de connexion pour les utilisateurs de l'application web de mini market.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-             <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/ordi (5).png" alt="Application web de mini market - Ecran de démarrage">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Tableau de bord vendeur</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface de gestion pour les vendeurs de l'application web de mini market.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-             <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/ordi (6).png" alt="Application web de mini market - Ecran de démarrage">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Interface visiteurs</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface pour les visiteurs de l'application web de mini market.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-             <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/ordi (7).png" alt="Application web de mini market - Ecran de démarrage">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Panier du visiteur</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface  du panier pour les visiteurs de l'application web de mini market.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-             <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/ordi (8).png" alt="Application web de mini market - Ecran de démarrage">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Interface confirmation de la commande</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface de confirmation de la commande pour les visiteurs de l'application web de mini market.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-             <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/ordi (9).png" alt="Application web de mini market - Ecran de démarrage">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Mode de paiement</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface de sélection du mode de paiement pour les visiteurs de l'application web de mini market.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-             <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/ordi (10).png" alt="Application web de mini market - Ecran de démarrage">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Tableau de bord admin</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface du tableau de bord pour les administrateurs de l'application web de mini market.</p>
-                        </div>
-                    </div>
-                </a>
+                </div>
+                <button class="carousel-arrow right" onclick="slideCarousel('carousel-4',1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="dots-carousel-4"></div>
             </div>
         </div>
 
-        <!-- Projet 5: Permis Virtuel -->
-        <div class="row portfolio-project">
-            <div class="portfolio-heading padd-15">
-                <h2>Application mobile de vote</h2>
-                <p class="project-description">Application mobile pour la réalisation de votes électroniques en temps réel.</p>
+        <!-- ===== PROJET 5 ===== -->
+        <div class="project-card padd-15 reveal" data-category="mobile">
+            <div class="project-card-header">
+                <div class="project-card-info">
+                    <h2>Application Mobile de Vote</h2>
+                    <p>Application mobile pour la réalisation de votes électroniques en temps réel avec interface administrateur et saisie des résultats.</p>
+                    <span class="project-tech-tag">Flutter</span>
+                    <span class="project-tech-tag">Firebase</span>
+                </div>
+                <div class="project-card-btns">
+                    <button class="proj-btn btn-images" onclick="openCarousel('carousel-5')">
+                        <i class="fas fa-chevron-up"></i> Masquer les images
+                    </button>
+                    <a class="proj-btn btn-github" href="https://github.com/RosnyMinko07" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
             </div>
-            <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/vote (1).jpg" alt="Application mobile de vote - Dashboard">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Ecran de demarrage</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface de l'application mobile de vote.</p>
-                        </div>
+            <!-- Carousel 5 -->
+            <div class="proj-carousel" id="carousel-5">
+                <button class="carousel-arrow left" onclick="slideCarousel('carousel-5',-1)"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-track-wrap">
+                    <div class="carousel-track">
+                        <div class="carousel-slide"><img src="images/vote (1).jpg" alt="Démarrage"><span>Écran de démarrage</span></div>
+                        <div class="carousel-slide"><img src="images/vote (2).jpg" alt="Connexion"><span>Interface de connexion</span></div>
+                        <div class="carousel-slide"><img src="images/vote (3).jpg" alt="Inscription"><span>Interface d'inscription</span></div>
+                        <div class="carousel-slide"><img src="images/vote (4).jpg" alt="Admin"><span>Dashboard administrateur</span></div>
+                        <div class="carousel-slide"><img src="images/vote (5).jpg" alt="Menu"><span>Menu burger</span></div>
+                        <div class="carousel-slide"><img src="images/vote (14).jpg" alt="Résultats"><span>Saisie des résultats</span></div>
                     </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/vote (2).jpg" alt="Application mobile de vote - Dashboard">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Interface de connexion</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface de connexion pour les utilisateurs de l'application mobile de vote.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/vote (3).jpg" alt="Application mobile de vote - Dashboard">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Interface d'inscription</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Formulaire d'inscription pour les utilisateurs de l'application mobile de vote.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/vote (4).jpg" alt="Application mobile de vote - Dashboard">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Tableau de bord interface administrateur</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface de gestion pour les administrateurs de l'application mobile de vote.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/vote (5).jpg" alt="Application mobile de vote - Dashboard">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Burgur Menu</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface de menu pour l'application mobile de vote.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="portfolio-item padd-15">
-                <a href="#" class="portfolio-link">
-                    <div class="portfolio-item-inner shadow-dark">
-                        <div class="portfolio-img">
-                            <img src="images/vote (14).jpg" alt="Application mobile de vote - Dashboard">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3 class="portfolio-title">Ecran de saisie des resultats</h3>
-                            <span class="portfolio-date"></span>
-                            <p class="portfolio-desc">Interface de saisie des résultats pour les utilisateurs de l'application mobile de vote.</p>
-                        </div>
-                    </div>
-                </a>
+                </div>
+                <button class="carousel-arrow right" onclick="slideCarousel('carousel-5',1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="dots-carousel-5"></div>
             </div>
         </div>
 
@@ -1189,8 +637,258 @@
 </section>
 <!-- Portfolio Section End -->
 
+<!-- Modal carousel plein écran -->
+<div id="carousel-modal" class="carousel-modal-overlay" onclick="closeCarouselModal(event)">
+    <div class="carousel-modal-box">
+        <button class="carousel-modal-close" onclick="closeCarouselModal()"><i class="fas fa-times"></i></button>
+        <h3 id="carousel-modal-title"></h3>
+        <div class="carousel-modal-inner">
+            <button class="carousel-arrow left" id="modal-prev" onclick="modalSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+            <div class="carousel-modal-img-wrap">
+                <img id="carousel-modal-img" src="" alt="">
+                <span id="carousel-modal-caption"></span>
+            </div>
+            <button class="carousel-arrow right" id="modal-next" onclick="modalSlide(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="carousel-modal-counter"><span id="modal-current">1</span> / <span id="modal-total">1</span></div>
+        <!-- Miniatures -->
+        <div class="modal-thumbnails" id="modal-thumbnails"></div>
+    </div>
+</div>
 
-            <!-- Portfolio Section End -->
+<script>
+// ===== CAROUSEL LOGIC =====
+var carousels = {};
+
+function openCarousel(id) {
+    var el = document.getElementById(id);
+    el.classList.toggle('closed');
+    // Mettre à jour le texte du bouton
+    var btn = el.closest('.project-card').querySelector('.btn-images');
+    if (el.classList.contains('closed')) {
+        btn.innerHTML = '<i class="fas fa-images"></i> Voir les images';
+    } else {
+        btn.innerHTML = '<i class="fas fa-chevron-up"></i> Masquer les images';
+    }
+}
+
+function initCarousel(id) {
+    var el = document.getElementById(id);
+    var slides = el.querySelectorAll('.carousel-slide');
+    var dotsContainer = document.getElementById('dots-' + id);
+    carousels[id] = { current: 0, total: slides.length };
+    dotsContainer.innerHTML = '';
+    slides.forEach(function(_, i) {
+        var dot = document.createElement('span');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = function() { goToSlide(id, i); };
+        dotsContainer.appendChild(dot);
+    });
+    // Clic sur image → ouvre modal
+    slides.forEach(function(slide, i) {
+        slide.querySelector('img').addEventListener('click', function() {
+            openModalFromCarousel(id, i);
+        });
+    });
+    updateCarousel(id);
+}
+
+function slideCarousel(id, dir) {
+    if (!carousels[id]) initCarousel(id);
+    var c = carousels[id];
+    c.current = (c.current + dir + c.total) % c.total;
+    updateCarousel(id);
+}
+
+function goToSlide(id, index) {
+    if (!carousels[id]) initCarousel(id);
+    carousels[id].current = index;
+    updateCarousel(id);
+}
+
+function updateCarousel(id) {
+    var el = document.getElementById(id);
+    var c = carousels[id];
+    var track = el.querySelector('.carousel-track');
+    track.style.transform = 'translateX(-' + (c.current * 100) + '%)';
+    var dots = document.querySelectorAll('#dots-' + id + ' .carousel-dot');
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === c.current); });
+}
+
+// Initialiser tous les carousels au chargement
+document.addEventListener('DOMContentLoaded', function() {
+    ['carousel-1','carousel-2','carousel-3','carousel-4','carousel-5'].forEach(function(id) {
+        if (document.getElementById(id)) {
+            initCarousel(id);
+            // Mettre le bouton en mode "masquer" puisque ouvert par défaut
+            var btn = document.getElementById(id).closest('.project-card').querySelector('.btn-images');
+            if (btn) btn.innerHTML = '<i class="fas fa-chevron-up"></i> Masquer les images';
+        }
+    });
+});
+
+// ===== MODAL PLEIN ÉCRAN =====
+var modalData = { slides: [], current: 0 };
+
+function openModalFromCarousel(carouselId, startIndex) {
+    var el = document.getElementById(carouselId);
+    var slides = el.querySelectorAll('.carousel-slide');
+    var title = el.closest('.project-card').querySelector('h2').textContent;
+    modalData.slides = Array.from(slides).map(function(s) {
+        return { src: s.querySelector('img').src, caption: s.querySelector('span').textContent };
+    });
+    modalData.current = startIndex;
+    document.getElementById('carousel-modal-title').textContent = title;
+    document.getElementById('modal-total').textContent = modalData.slides.length;
+    buildThumbnails();
+    renderModalSlide();
+    document.getElementById('carousel-modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function buildThumbnails() {
+    var container = document.getElementById('modal-thumbnails');
+    container.innerHTML = '';
+    modalData.slides.forEach(function(s, i) {
+        var thumb = document.createElement('div');
+        thumb.className = 'modal-thumb' + (i === modalData.current ? ' active' : '');
+        thumb.innerHTML = '<img src="' + s.src + '" alt="' + s.caption + '">';
+        thumb.addEventListener('click', function(e) {
+            e.stopPropagation();
+            modalData.current = i;
+            renderModalSlide();
+        });
+        container.appendChild(thumb);
+    });
+    // Scroll vers la miniature active
+    scrollThumbIntoView();
+}
+
+function scrollThumbIntoView() {
+    var container = document.getElementById('modal-thumbnails');
+    var active = container.querySelector('.modal-thumb.active');
+    if (active) {
+        container.scrollLeft = active.offsetLeft - container.offsetWidth / 2 + active.offsetWidth / 2;
+    }
+}
+
+function renderModalSlide() {
+    var s = modalData.slides[modalData.current];
+    var img = document.getElementById('carousel-modal-img');
+    img.style.opacity = '0';
+    img.src = s.src;
+    img.onload = function() { img.style.opacity = '1'; };
+    document.getElementById('carousel-modal-caption').textContent = s.caption;
+    document.getElementById('modal-current').textContent = modalData.current + 1;
+    // Sync miniatures
+    var thumbs = document.querySelectorAll('#modal-thumbnails .modal-thumb');
+    thumbs.forEach(function(t, i) { t.classList.toggle('active', i === modalData.current); });
+    scrollThumbIntoView();
+}
+
+function modalSlide(dir) {
+    modalData.current = (modalData.current + dir + modalData.slides.length) % modalData.slides.length;
+    renderModalSlide();
+}
+
+function closeCarouselModal(e) {
+    if (e && e.target !== document.getElementById('carousel-modal')) return;
+    document.getElementById('carousel-modal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) {
+    var modal = document.getElementById('carousel-modal');
+    if (!modal.classList.contains('active')) return;
+    if (e.key === 'ArrowRight') modalSlide(1);
+    if (e.key === 'ArrowLeft') modalSlide(-1);
+    if (e.key === 'Escape') { modal.classList.remove('active'); document.body.style.overflow = ''; }
+});
+</script>
+            
+
+            <!-- Certifications Section Start -->
+            <section class="certifications section" id="certifications">
+                <div class="container">
+                    <div class="row">
+                        <div class="section-title padd-15">
+                            <h2>Certifications</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="padd-15" style="width:100%">
+                            <p style="color:var(--text-black-700); margin-bottom:30px;">
+                                Mes certifications et formations obtenues.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="certifications-grid padd-15">
+
+                        <!--
+                        =====================================================
+                        COMMENT AJOUTER UNE CERTIFICATION :
+                        Copie le bloc ci-dessous et remplis les informations.
+                        Pour l'image : mets ton fichier dans le dossier images/
+                        et remplace "images/ton-certificat.png" par le bon nom.
+                        =====================================================
+
+                        <div class="cert-card">
+                            <div class="cert-icon"><i class="fab fa-python"></i></div>
+                            <h4>Nom de la certification</h4>
+                            <p class="cert-issuer"><i class="fas fa-building"></i> Organisme (ex: Coursera, Udemy...)</p>
+                            <p class="cert-date"><i class="fa fa-calendar"></i> Année</p>
+                            <span class="cert-badge">Catégorie</span>
+                            <br>
+                            <button class="cert-view-btn" onclick="openCertModal('images/ton-certificat.png','Nom de la certification')">
+                                <i class="fas fa-eye"></i> Voir le certificat
+                            </button>
+                        </div>
+                        -->
+
+                        <!-- Ajoute tes certifications ici -->
+
+                    </div>
+                </div>
+            </section>
+            <!-- Certifications Section End -->
+
+            <!-- Modal Certificat -->
+            <div id="cert-modal" class="cert-modal-overlay" onclick="closeCertModal(this)">
+                <div class="cert-modal-box">
+                    <button class="cert-modal-close" onclick="closeCertModal()"><i class="fas fa-times"></i></button>
+                    <h3 id="cert-modal-title"></h3>
+                    <div class="cert-modal-img-wrap">
+                        <img id="cert-modal-img" src="" alt="Certificat">
+                        <div class="cert-modal-placeholder">
+                            <i class="fas fa-certificate"></i>
+                            <p>Image du certificat non disponible.<br>Ajoutez l'image dans le dossier <code>images/</code></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+            function openCertModal(imgSrc, title) {
+                const modal = document.getElementById('cert-modal');
+                const img   = document.getElementById('cert-modal-img');
+                const ph    = modal.querySelector('.cert-modal-placeholder');
+                document.getElementById('cert-modal-title').textContent = title;
+                img.src = imgSrc;
+                img.style.display = 'none';
+                ph.style.display  = 'flex';
+                img.onload  = () => { img.style.display = 'block'; ph.style.display = 'none'; };
+                img.onerror = () => { img.style.display = 'none';  ph.style.display = 'flex'; };
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeCertModal(overlay) {
+                if (overlay && overlay.id !== 'cert-modal' && !overlay.classList.contains('cert-modal-overlay')) return;
+                document.getElementById('cert-modal').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCertModal(); });
+            </script>
+
             <!-- Contact Section Start -->
             <section class="contact section" id="contact">
                 <div class="container">
@@ -1329,10 +1027,32 @@
                 </div>
             </section>
             <!-- Contact Section End -->
+
         </div>
         <!-- Main Content End -->
     </div>
     <!-- Main End -->
+
+    <!-- ===== FOOTER FIXE (visible partout) ===== -->
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div class="site-footer-left">
+                <span class="footer-logo-sm">Ros<span>Ny</span></span>
+                <span class="footer-sep">|</span>
+                <span>Développeur Web &amp; Mobile Freelance</span>
+            </div>
+            <div class="site-footer-socials">
+                <a href="https://github.com/RosnyMinko07" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://wa.me/24177124485" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:rodrigueotsina@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="site-footer-right">
+                <span>&copy; <span id="footer-year"></span> Rosny OTSINA</span>
+            </div>
+        </div>
+    </footer>
+
     <!-- Style Switcher Start -->
     <div class="style-switcher">
         <div class="style-switcher-toggler s-icon">
@@ -1351,20 +1071,18 @@
     </div>
     <!-- Style Switcher End -->
 
-    <!-- Chatbot IA -->
-<!-- Chatbot IA avec Avatar Féminin -->
+    <!-- Chatbot IA avec Avatar Animé et Voix Féminine -->
 <div id="chatbot-container">
   <div class="chatbot-header">
     <div class="chatbot-header-left">
       <div class="chatbot-avatar">
-        <!-- Mettez le chemin de votre image de femme ici -->
-        <img src="/api/placeholder/45/45" alt="Sophia" id="chatbot-avatar-img">
+        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&auto=format" alt="Sophia" id="chatbot-avatar-img">
       </div>
       <div class="chatbot-title">
         <h4><i class="fas fa-robot"></i> Sophia - IA</h4>
         <span class="chatbot-status">
-          <span class="status-dot"></span> 
-          En ligne • Voix féminine
+          <span class="status-dot"></span>
+          En ligne &bull; Voix féminine
         </span>
       </div>
     </div>
@@ -1375,44 +1093,270 @@
       <button class="chatbot-close" id="chatbot-close-btn"><i class="fas fa-times"></i></button>
     </div>
   </div>
-  
+
   <div id="chatbot-messages">
-    <!-- Message de bienvenue avec avatar -->
+    <!-- Message de bienvenue -->
     <div class="message-wrapper bot-wrapper">
       <div class="message-avatar">
-        <img src="/api/placeholder/35/35" alt="Sophia">
+        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&auto=format" alt="Sophia">
       </div>
       <div class="message-content">
         <div class="chatbot-message bot">
-           Bonjour ! Je suis Sophia, l'assistante IA de Rosny OTSINA. Je peux vous parler de ses compétences, projets et services. Comment puis-je vous aider aujourd'hui ?
+          Bonjour ! Je suis Sophia, l'assistante IA de Rosny OTSINA. Je peux vous parler de ses projets, compétences et services. Comment puis-je vous aider ?
         </div>
         <div class="message-audio-control">
-          <button class="audio-play-btn" onclick="playMessageAudio(this, 'Bonjour ! Je suis Sophia, l\'assistante IA de Rosny OTSINA.')">
+          <button class="audio-play-btn" id="welcome-play-btn" title="Lire ce message">
             <i class="fas fa-play"></i>
           </button>
+          <div class="sound-waves">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
           <span class="message-time">À l'instant</span>
         </div>
       </div>
     </div>
   </div>
-  
+
   <div class="chatbot-input">
     <input type="text" id="chatbot-input" placeholder="Posez votre question à Sophia...">
     <button id="chatbot-send"><i class="fas fa-paper-plane"></i></button>
   </div>
 </div>
 
-<!-- Bouton toggle avec image de femme -->
-<button id="chatbot-toggle" class="chatbot-toggle-btn">
-  <img src="/api/placeholder/65/65" alt="Sophia Assistant" id="chatbot-toggle-img">
+<!-- Bouton toggle flottant avec avatar -->
+<!--
+  ICÔNE CHATBOT PERSONNALISABLE :
+  Option 1 - Utiliser une image : remplace l'icône par <img src="images/ton-image.png" alt="Chat">
+  Option 2 - Changer l'icône FontAwesome : remplace "fa-comment-dots" par une autre icône
+  Exemples : fa-robot / fa-comment-alt / fa-headset / fa-comments
+-->
+<button id="chatbot-toggle" class="chatbot-toggle-btn" title="Parler à Sophia">
+  <!-- ICÔNE ICI — change fa-comment-dots par ce que tu veux -->
+  <i class="fas fa-comment-dots chatbot-toggle-icon"></i>
   <span class="chatbot-pulse"></span>
 </button>
+
+<script>
+  // Attacher l'événement du bouton de bienvenue après chargement
+  document.addEventListener('DOMContentLoaded', function() {
+    const welcomeBtn = document.getElementById('welcome-play-btn');
+    if (welcomeBtn) {
+      welcomeBtn.addEventListener('click', function() {
+        if (window.playMessageAudio) {
+          window.playMessageAudio(this, 'Bonjour ! Je suis Sophia, l\'assistante IA de Rosny OTSINA. Je peux vous parler de ses projets, compétences et services. Comment puis-je vous aider ?');
+        }
+      });
+    }
+  });
+</script>
 
     <!-- JS Files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" referrerpolicy="no-referrer"></script>
     <script src="js/script.js"></script>
     <script src="js/style-switcher.js"></script>
     <script src="js/chatbot.js"></script>
-    
+
+    <!-- Animation barres de compétences -->
+    <script>
+    (function() {
+        function animateBars() {
+            document.querySelectorAll('.skill-bar-fill').forEach(function(bar) {
+                var w = bar.getAttribute('data-width');
+                if (w && bar.style.width === '') {
+                    bar.style.width = w + '%';
+                }
+            });
+        }
+        // Observer pour déclencher l'animation quand la section about est visible
+        var aboutSection = document.getElementById('about');
+        if (aboutSection) {
+            var observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(m) {
+                    if (m.target.classList.contains('active')) {
+                        setTimeout(animateBars, 200);
+                    }
+                });
+            });
+            observer.observe(aboutSection, { attributes: true, attributeFilter: ['class'] });
+        }
+        // Aussi au clic sur le lien about
+        var aboutLink = document.querySelector('a[href="#about"]');
+        if (aboutLink) {
+            aboutLink.addEventListener('click', function() {
+                setTimeout(animateBars, 400);
+            });
+        }
+        // Si about est déjà active au chargement
+        if (aboutSection && aboutSection.classList.contains('active')) {
+            setTimeout(animateBars, 500);
+        }
+    })();
+    </script>
+
+    <!-- ===== SCRIPTS PRINCIPAUX ===== -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // ===== LOADER =====
+        var loader = document.getElementById('page-loader');
+        var progress = loader ? loader.querySelector('.loader-progress') : null;
+        if (loader) {
+            var pct = 0;
+            var iv = setInterval(function() {
+                pct += Math.random() * 18;
+                if (pct >= 100) { pct = 100; clearInterval(iv); }
+                if (progress) progress.style.width = pct + '%';
+            }, 80);
+            window.addEventListener('load', function() {
+                if (progress) progress.style.width = '100%';
+                setTimeout(function() {
+                    loader.classList.add('hidden');
+                    setTimeout(function() { loader.style.display = 'none'; }, 500);
+                }, 400);
+            });
+        }
+
+        // ===== CURSEUR PERSONNALISÉ =====
+        var dot  = document.querySelector('.cursor-dot');
+        var ring = document.querySelector('.cursor-ring');
+        var mx = 0, my = 0, rx = 0, ry = 0;
+
+        document.addEventListener('mousemove', function(e) {
+            mx = e.clientX; my = e.clientY;
+            if (dot) { dot.style.left = mx + 'px'; dot.style.top = my + 'px'; }
+        });
+
+        function animRing() {
+            rx += (mx - rx) * 0.12;
+            ry += (my - ry) * 0.12;
+            if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
+            requestAnimationFrame(animRing);
+        }
+        animRing();
+
+        document.querySelectorAll('a, button, .proj-btn, .skill-icon-card, .cert-card').forEach(function(el) {
+            el.addEventListener('mouseenter', function() {
+                if (dot)  dot.classList.add('hovered');
+                if (ring) ring.classList.add('hovered');
+            });
+            el.addEventListener('mouseleave', function() {
+                if (dot)  dot.classList.remove('hovered');
+                if (ring) ring.classList.remove('hovered');
+            });
+        });
+
+        // ===== BOUTON RETOUR EN HAUT =====
+        var backBtn = document.getElementById('back-to-top');
+        var mainContent = document.querySelector('.main-content');
+        if (backBtn && mainContent) {
+            mainContent.addEventListener('scroll', function() {
+                backBtn.classList.toggle('visible', mainContent.scrollTop > 300);
+            });
+            // Aussi sur les sections individuelles
+            document.querySelectorAll('.section').forEach(function(sec) {
+                sec.addEventListener('scroll', function() {
+                    backBtn.classList.toggle('visible', sec.scrollTop > 300);
+                });
+            });
+            backBtn.addEventListener('click', function() {
+                // Scroll la section active vers le haut
+                var activeSection = document.querySelector('.section.active');
+                if (activeSection) activeSection.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // ===== COMPTEUR STATS =====
+        function animateCounter(el) {
+            var target = parseInt(el.getAttribute('data-target'));
+            var current = 0;
+            var step = Math.ceil(target / 40);
+            var iv = setInterval(function() {
+                current += step;
+                if (current >= target) { current = target; clearInterval(iv); }
+                el.textContent = current + '+';
+            }, 40);
+        }
+
+        var statsAnimated = false;
+        function triggerStats() {
+            if (statsAnimated) return;
+            var stats = document.querySelectorAll('.stat-number');
+            if (stats.length) {
+                statsAnimated = true;
+                stats.forEach(function(el) { animateCounter(el); });
+            }
+        }
+
+        // Déclencher au chargement si home est active
+        if (document.querySelector('#home.active')) triggerStats();
+        document.querySelector('a[href="#home"]') && document.querySelector('a[href="#home"]').addEventListener('click', function() {
+            statsAnimated = false;
+            setTimeout(triggerStats, 400);
+        });
+        // Aussi au chargement direct
+        setTimeout(triggerStats, 800);
+
+        // ===== FOOTER =====
+        var footerYear = document.getElementById('footer-year');
+        if (footerYear) footerYear.textContent = new Date().getFullYear();
+
+        document.querySelectorAll('.footer-links a').forEach(function(a) {
+            a.addEventListener('click', function(e) {
+                e.preventDefault();
+                var target = this.getAttribute('href').replace('#', '');
+                var navLinks = document.querySelectorAll('.nav li a');
+                navLinks.forEach(function(link) {
+                    if (link.getAttribute('href') === '#' + target) link.click();
+                });
+            });
+        });
+
+        // ===== FILTRE PORTFOLIO =====
+        var filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                var filter = btn.getAttribute('data-filter');
+                document.querySelectorAll('.project-card').forEach(function(card) {
+                    if (filter === 'all') {
+                        card.style.display = '';
+                        card.style.opacity = '1';
+                    } else {
+                        var cats = card.getAttribute('data-category') || '';
+                        if (cats.includes(filter)) {
+                            card.style.display = '';
+                            setTimeout(function() { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 10);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(function() { card.style.display = 'none'; }, 300);
+                        }
+                    }
+                });
+            });
+        });
+
+        // ===== ANIMATION AU SCROLL (reveal) =====
+        var revealEls = document.querySelectorAll('.reveal');
+        var revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealEls.forEach(function(el) { revealObserver.observe(el); });
+
+        // Observer aussi les sections pour reveal
+        document.querySelectorAll('.service-item, .skill-icon-card, .cert-card, .timeline-item').forEach(function(el) {
+            el.classList.add('reveal');
+            revealObserver.observe(el);
+        });
+
+    });
+    </script>
 </body>
 </html>
