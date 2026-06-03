@@ -2798,3 +2798,62 @@ h3.my-profession {
         transform: none !important;
     }
 }
+
+
+/* ========== AVATAR CHATBOT - ICÔNE PAR DÉFAUT ========== */
+.chatbot-avatar-icon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--skin-color), #c850c0);
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+}
+
+.message-avatar .chatbot-avatar-icon {
+    font-size: 16px;
+}
+
+.chatbot-avatar-icon.user-icon {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+
+/* ========== OPTIMISATION PERFORMANCE ========== */
+
+/* Éviter le layout shift sur les images */
+.carousel-slide img,
+.portfolio-img img,
+.home-img img {
+    content-visibility: auto;
+}
+
+/* Accélération GPU pour les animations */
+.chatbot-toggle-btn,
+.chatbot-avatar,
+.carousel-track,
+.proj-carousel,
+.cursor-dot,
+.cursor-ring {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Réduire les repaints sur les éléments animés */
+.chatbot-message,
+.message-wrapper,
+.skill-icon-card,
+.cert-card,
+.service-item-inner {
+    backface-visibility: hidden;
+}
+
+/* Images : éviter le débordement et forcer les dimensions */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}

@@ -29,10 +29,18 @@
     <link rel="icon" type="image/png" href="images/rororo.png">
     <link rel="apple-touch-icon" href="images/rororo.png">
 
+    <!-- Preload ressources critiques -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="js/script.js" as="script">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
     <!--- CSS Files -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/skins/color-1.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- FontAwesome chargé en async -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"></noscript>
     <!-- Style Switcher -->
     <link rel="stylesheet" href="css/skins/color-1.css" class="alternate-style" title="color-1" disabled>
     <link rel="stylesheet" href="css/skins/color-2.css" class="alternate-style" title="color-2" disabled>
@@ -444,11 +452,11 @@
                 <button class="carousel-arrow left" onclick="slideCarousel('carousel-1',-1)"><i class="fas fa-chevron-left"></i></button>
                 <div class="carousel-track-wrap">
                     <div class="carousel-track">
-                        <div class="carousel-slide"><img src="images/Traduction.png" alt="Interface de Traduction"><span>Interface de Traduction</span></div>
-                        <div class="carousel-slide"><img src="images/Dictionnaire.png" alt="Interface Dictionnaire"><span>Interface Dictionnaire</span></div>
-                        <div class="carousel-slide"><img src="images/Apprentissage.png" alt="Interface Apprentissage"><span>Interface Apprentissage</span></div>
-                        <div class="carousel-slide"><img src="images/Communaute.png" alt="Interface Communauté"><span>Interface Communauté</span></div>
-                        <div class="carousel-slide"><img src="images/Profil.png" alt="Interface Profil"><span>Interface Profil</span></div>
+                        <div class="carousel-slide"><img src="images/Traduction.png" loading="lazy" alt="Interface de Traduction"><span>Interface de Traduction</span></div>
+                        <div class="carousel-slide"><img src="images/Dictionnaire.png" loading="lazy" alt="Interface Dictionnaire"><span>Interface Dictionnaire</span></div>
+                        <div class="carousel-slide"><img src="images/Apprentissage.png" loading="lazy" alt="Interface Apprentissage"><span>Interface Apprentissage</span></div>
+                        <div class="carousel-slide"><img src="images/Communaute.png" loading="lazy" alt="Interface Communauté"><span>Interface Communauté</span></div>
+                        <div class="carousel-slide"><img src="images/Profil.png" loading="lazy" alt="Interface Profil"><span>Interface Profil</span></div>
                     </div>
                 </div>
                 <button class="carousel-arrow right" onclick="slideCarousel('carousel-1',1)"><i class="fas fa-chevron-right"></i></button>
@@ -483,33 +491,33 @@
                 <button class="carousel-arrow left" onclick="slideCarousel('carousel-2',-1)"><i class="fas fa-chevron-left"></i></button>
                 <div class="carousel-track-wrap">
                     <div class="carousel-track">
-                        <div class="carousel-slide"><img src="images/interfaceconnexion.png" alt="Connexion"><span>Page de Connexion</span></div>
-                        <div class="carousel-slide"><img src="images/dashboard1.png" alt="Dashboard 1"><span>Dashboard</span></div>
-                        <div class="carousel-slide"><img src="images/dashboard2.png" alt="Dashboard 2"><span>Dashboard 2</span></div>
-                        <div class="carousel-slide"><img src="images/dashboard3.png" alt="Dashboard 3"><span>Dashboard 3</span></div>
-                        <div class="carousel-slide"><img src="images/dashboard4.png" alt="Dashboard 4"><span>Dashboard 4</span></div>
-                        <div class="carousel-slide"><img src="images/dashboard5.png" alt="Dashboard 5"><span>Dashboard 5</span></div>
-                        <div class="carousel-slide"><img src="images/client.png" alt="Clients"><span>Gestion Clients</span></div>
-                        <div class="carousel-slide"><img src="images/fournisseur.png" alt="Fournisseurs"><span>Fournisseurs</span></div>
-                        <div class="carousel-slide"><img src="images/gestionarticle.png" alt="Articles"><span>Gestion Articles</span></div>
-                        <div class="carousel-slide"><img src="images/listearticle.png" alt="Liste Articles"><span>Liste Articles</span></div>
-                        <div class="carousel-slide"><img src="images/gestiondevis.png" alt="Devis"><span>Gestion Devis</span></div>
-                        <div class="carousel-slide"><img src="images/facturation.png" alt="Facturation"><span>Facturation</span></div>
-                        <div class="carousel-slide"><img src="images/comptoiradmin.png" alt="Comptoir Admin"><span>Comptoir Admin</span></div>
-                        <div class="carousel-slide"><img src="images/ticketcomptoir.png" alt="Ticket"><span>Ticket Comptoir</span></div>
-                        <div class="carousel-slide"><img src="images/detailcomptoir.png" alt="Détail"><span>Détail Comptoir</span></div>
-                        <div class="carousel-slide"><img src="images/historiquecomptoir.png" alt="Historique"><span>Historique</span></div>
-                        <div class="carousel-slide"><img src="images/gestionreglement.png" alt="Règlement"><span>Règlements</span></div>
-                        <div class="carousel-slide"><img src="images/gestionbug.png" alt="Bugs"><span>Gestion Bugs</span></div>
-                        <div class="carousel-slide"><img src="images/signalerbug.png" alt="Signaler Bug"><span>Signaler Bug</span></div>
-                        <div class="carousel-slide"><img src="images/inventaires.png" alt="Inventaires"><span>Inventaires</span></div>
-                        <div class="carousel-slide"><img src="images/inventaire1.png" alt="Inventaire 1"><span>Inventaire 1</span></div>
-                        <div class="carousel-slide"><img src="images/inventaire2.png" alt="Inventaire 2"><span>Inventaire 2</span></div>
-                        <div class="carousel-slide"><img src="images/stocks.png" alt="Stocks"><span>Stocks</span></div>
-                        <div class="carousel-slide"><img src="images/rapports.png" alt="Rapports"><span>Rapports</span></div>
-                        <div class="carousel-slide"><img src="images/users.png" alt="Utilisateurs"><span>Utilisateurs</span></div>
-                        <div class="carousel-slide"><img src="images/comptablestock.png" alt="Comptable Stock"><span>Comptable Stock</span></div>
-                        <div class="carousel-slide"><img src="images/devisrodrigue.png" alt="Devis"><span>Devis</span></div>
+                        <div class="carousel-slide"><img src="images/interfaceconnexion.png" loading="lazy" alt="Connexion"><span>Page de Connexion</span></div>
+                        <div class="carousel-slide"><img src="images/dashboard1.png" loading="lazy" alt="Dashboard 1"><span>Dashboard</span></div>
+                        <div class="carousel-slide"><img src="images/dashboard2.png" loading="lazy" alt="Dashboard 2"><span>Dashboard 2</span></div>
+                        <div class="carousel-slide"><img src="images/dashboard3.png" loading="lazy" alt="Dashboard 3"><span>Dashboard 3</span></div>
+                        <div class="carousel-slide"><img src="images/dashboard4.png" loading="lazy" alt="Dashboard 4"><span>Dashboard 4</span></div>
+                        <div class="carousel-slide"><img src="images/dashboard5.png" loading="lazy" alt="Dashboard 5"><span>Dashboard 5</span></div>
+                        <div class="carousel-slide"><img src="images/client.png" loading="lazy" alt="Clients"><span>Gestion Clients</span></div>
+                        <div class="carousel-slide"><img src="images/fournisseur.png" loading="lazy" alt="Fournisseurs"><span>Fournisseurs</span></div>
+                        <div class="carousel-slide"><img src="images/gestionarticle.png" loading="lazy" alt="Articles"><span>Gestion Articles</span></div>
+                        <div class="carousel-slide"><img src="images/listearticle.png" loading="lazy" alt="Liste Articles"><span>Liste Articles</span></div>
+                        <div class="carousel-slide"><img src="images/gestiondevis.png" loading="lazy" alt="Devis"><span>Gestion Devis</span></div>
+                        <div class="carousel-slide"><img src="images/facturation.png" loading="lazy" alt="Facturation"><span>Facturation</span></div>
+                        <div class="carousel-slide"><img src="images/comptoiradmin.png" loading="lazy" alt="Comptoir Admin"><span>Comptoir Admin</span></div>
+                        <div class="carousel-slide"><img src="images/ticketcomptoir.png" loading="lazy" alt="Ticket"><span>Ticket Comptoir</span></div>
+                        <div class="carousel-slide"><img src="images/detailcomptoir.png" loading="lazy" alt="Détail"><span>Détail Comptoir</span></div>
+                        <div class="carousel-slide"><img src="images/historiquecomptoir.png" loading="lazy" alt="Historique"><span>Historique</span></div>
+                        <div class="carousel-slide"><img src="images/gestionreglement.png" loading="lazy" alt="Règlement"><span>Règlements</span></div>
+                        <div class="carousel-slide"><img src="images/gestionbug.png" loading="lazy" alt="Bugs"><span>Gestion Bugs</span></div>
+                        <div class="carousel-slide"><img src="images/signalerbug.png" loading="lazy" alt="Signaler Bug"><span>Signaler Bug</span></div>
+                        <div class="carousel-slide"><img src="images/inventaires.png" loading="lazy" alt="Inventaires"><span>Inventaires</span></div>
+                        <div class="carousel-slide"><img src="images/inventaire1.png" loading="lazy" alt="Inventaire 1"><span>Inventaire 1</span></div>
+                        <div class="carousel-slide"><img src="images/inventaire2.png" loading="lazy" alt="Inventaire 2"><span>Inventaire 2</span></div>
+                        <div class="carousel-slide"><img src="images/stocks.png" loading="lazy" alt="Stocks"><span>Stocks</span></div>
+                        <div class="carousel-slide"><img src="images/rapports.png" loading="lazy" alt="Rapports"><span>Rapports</span></div>
+                        <div class="carousel-slide"><img src="images/users.png" loading="lazy" alt="Utilisateurs"><span>Utilisateurs</span></div>
+                        <div class="carousel-slide"><img src="images/comptablestock.png" loading="lazy" alt="Comptable Stock"><span>Comptable Stock</span></div>
+                        <div class="carousel-slide"><img src="images/devisrodrigue.png" loading="lazy" alt="Devis"><span>Devis</span></div>
                     </div>
                 </div>
                 <button class="carousel-arrow right" onclick="slideCarousel('carousel-2',1)"><i class="fas fa-chevron-right"></i></button>
@@ -539,15 +547,15 @@
                 <button class="carousel-arrow left" onclick="slideCarousel('carousel-3',-1)"><i class="fas fa-chevron-left"></i></button>
                 <div class="carousel-track-wrap">
                     <div class="carousel-track">
-                        <div class="carousel-slide"><img src="images/windev1 (1).png" alt="Connexion"><span>Page de connexion</span></div>
-                        <div class="carousel-slide"><img src="images/windev1 (2).png" alt="Inscription"><span>Page Inscription</span></div>
-                        <div class="carousel-slide"><img src="images/windev1 (3).png" alt="Accueil"><span>Page d'Accueil</span></div>
-                        <div class="carousel-slide"><img src="images/windev1 (4).png" alt="G1"><span>Vue G1</span></div>
-                        <div class="carousel-slide"><img src="images/windev1 (6).png" alt="G2"><span>Vue G2</span></div>
-                        <div class="carousel-slide"><img src="images/windev1 (7).png" alt="G4"><span>Vue G4</span></div>
-                        <div class="carousel-slide"><img src="images/windev1 (8).png" alt="G6"><span>Vue G6</span></div>
-                        <div class="carousel-slide"><img src="images/windev1 (5).png" alt="G8"><span>Vue G8</span></div>
-                        <div class="carousel-slide"><img src="images/windev1 (9).png" alt="G9"><span>Vue G9</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (1).png" loading="lazy" alt="Connexion"><span>Page de connexion</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (2).png" loading="lazy" alt="Inscription"><span>Page Inscription</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (3).png" loading="lazy" alt="Accueil"><span>Page d'Accueil</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (4).png" loading="lazy" alt="G1"><span>Vue G1</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (6).png" loading="lazy" alt="G2"><span>Vue G2</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (7).png" loading="lazy" alt="G4"><span>Vue G4</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (8).png" loading="lazy" alt="G6"><span>Vue G6</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (5).png" loading="lazy" alt="G8"><span>Vue G8</span></div>
+                        <div class="carousel-slide"><img src="images/windev1 (9).png" loading="lazy" alt="G9"><span>Vue G9</span></div>
                     </div>
                 </div>
                 <button class="carousel-arrow right" onclick="slideCarousel('carousel-3',1)"><i class="fas fa-chevron-right"></i></button>
@@ -580,16 +588,16 @@
                 <button class="carousel-arrow left" onclick="slideCarousel('carousel-4',-1)"><i class="fas fa-chevron-left"></i></button>
                 <div class="carousel-track-wrap">
                     <div class="carousel-track">
-                        <div class="carousel-slide"><img src="images/ordi (1).png" alt="Accueil"><span>Page d'accueil</span></div>
-                        <div class="carousel-slide"><img src="images/ordi (2).png" alt="Accueil 2"><span>Page d'accueil 2</span></div>
-                        <div class="carousel-slide"><img src="images/ordi (3).png" alt="Inscription"><span>Page d'inscription</span></div>
-                        <div class="carousel-slide"><img src="images/ordi (4).png" alt="Connexion"><span>Page de connexion</span></div>
-                        <div class="carousel-slide"><img src="images/ordi (5).png" alt="Dashboard vendeur"><span>Dashboard vendeur</span></div>
-                        <div class="carousel-slide"><img src="images/ordi (6).png" alt="Interface visiteurs"><span>Interface visiteurs</span></div>
-                        <div class="carousel-slide"><img src="images/ordi (7).png" alt="Panier"><span>Panier</span></div>
-                        <div class="carousel-slide"><img src="images/ordi (8).png" alt="Confirmation"><span>Confirmation commande</span></div>
-                        <div class="carousel-slide"><img src="images/ordi (9).png" alt="Paiement"><span>Mode de paiement</span></div>
-                        <div class="carousel-slide"><img src="images/ordi (10).png" alt="Admin"><span>Dashboard admin</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (1).png" loading="lazy" alt="Accueil"><span>Page d'accueil</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (2).png" loading="lazy" alt="Accueil 2"><span>Page d'accueil 2</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (3).png" loading="lazy" alt="Inscription"><span>Page d'inscription</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (4).png" loading="lazy" alt="Connexion"><span>Page de connexion</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (5).png" loading="lazy" alt="Dashboard vendeur"><span>Dashboard vendeur</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (6).png" loading="lazy" alt="Interface visiteurs"><span>Interface visiteurs</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (7).png" loading="lazy" alt="Panier"><span>Panier</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (8).png" loading="lazy" alt="Confirmation"><span>Confirmation commande</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (9).png" loading="lazy" alt="Paiement"><span>Mode de paiement</span></div>
+                        <div class="carousel-slide"><img src="images/ordi (10).png" loading="lazy" alt="Admin"><span>Dashboard admin</span></div>
                     </div>
                 </div>
                 <button class="carousel-arrow right" onclick="slideCarousel('carousel-4',1)"><i class="fas fa-chevron-right"></i></button>
@@ -620,12 +628,12 @@
                 <button class="carousel-arrow left" onclick="slideCarousel('carousel-5',-1)"><i class="fas fa-chevron-left"></i></button>
                 <div class="carousel-track-wrap">
                     <div class="carousel-track">
-                        <div class="carousel-slide"><img src="images/vote (1).jpg" alt="Démarrage"><span>Écran de démarrage</span></div>
-                        <div class="carousel-slide"><img src="images/vote (2).jpg" alt="Connexion"><span>Interface de connexion</span></div>
-                        <div class="carousel-slide"><img src="images/vote (3).jpg" alt="Inscription"><span>Interface d'inscription</span></div>
-                        <div class="carousel-slide"><img src="images/vote (4).jpg" alt="Admin"><span>Dashboard administrateur</span></div>
-                        <div class="carousel-slide"><img src="images/vote (5).jpg" alt="Menu"><span>Menu burger</span></div>
-                        <div class="carousel-slide"><img src="images/vote (14).jpg" alt="Résultats"><span>Saisie des résultats</span></div>
+                        <div class="carousel-slide"><img src="images/vote (1).jpg" loading="lazy" alt="Démarrage"><span>Écran de démarrage</span></div>
+                        <div class="carousel-slide"><img src="images/vote (2).jpg" loading="lazy" alt="Connexion"><span>Interface de connexion</span></div>
+                        <div class="carousel-slide"><img src="images/vote (3).jpg" loading="lazy" alt="Inscription"><span>Interface d'inscription</span></div>
+                        <div class="carousel-slide"><img src="images/vote (4).jpg" loading="lazy" alt="Admin"><span>Dashboard administrateur</span></div>
+                        <div class="carousel-slide"><img src="images/vote (5).jpg" loading="lazy" alt="Menu"><span>Menu burger</span></div>
+                        <div class="carousel-slide"><img src="images/vote (14).jpg" loading="lazy" alt="Résultats"><span>Saisie des résultats</span></div>
                     </div>
                 </div>
                 <button class="carousel-arrow right" onclick="slideCarousel('carousel-5',1)"><i class="fas fa-chevron-right"></i></button>
@@ -1076,7 +1084,14 @@ document.addEventListener('keydown', function(e) {
   <div class="chatbot-header">
     <div class="chatbot-header-left">
       <div class="chatbot-avatar">
-        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&auto=format" alt="Sophia" id="chatbot-avatar-img">
+        <!--
+          AVATAR CHATBOT — mets ton image ici :
+          <img src="images/ton-avatar.png" loading="lazy" alt="Sophia" id="chatbot-avatar-img">
+          Ou garde l'icône par défaut ci-dessous
+        -->
+        <div class="chatbot-avatar-icon" id="chatbot-avatar-img">
+          <i class="fas fa-robot"></i>
+        </div>
       </div>
       <div class="chatbot-title">
         <h4><i class="fas fa-robot"></i> Sophia - IA</h4>
@@ -1098,7 +1113,11 @@ document.addEventListener('keydown', function(e) {
     <!-- Message de bienvenue -->
     <div class="message-wrapper bot-wrapper">
       <div class="message-avatar">
-        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&auto=format" alt="Sophia">
+        <!--
+          AVATAR MESSAGE — mets ton image ici :
+          <img src="images/ton-avatar.png" loading="lazy" alt="Sophia">
+        -->
+        <div class="chatbot-avatar-icon"><i class="fas fa-robot"></i></div>
       </div>
       <div class="message-content">
         <div class="chatbot-message bot">
@@ -1126,7 +1145,7 @@ document.addEventListener('keydown', function(e) {
 <!-- Bouton toggle flottant avec avatar -->
 <!--
   ICÔNE CHATBOT PERSONNALISABLE :
-  Option 1 - Utiliser une image : remplace l'icône par <img src="images/ton-image.png" alt="Chat">
+  Option 1 - Utiliser une image : remplace l'icône par <img src="images/ton-image.png" loading="lazy" alt="Chat">
   Option 2 - Changer l'icône FontAwesome : remplace "fa-comment-dots" par une autre icône
   Exemples : fa-robot / fa-comment-alt / fa-headset / fa-comments
 -->
@@ -1152,9 +1171,9 @@ document.addEventListener('keydown', function(e) {
 
     <!-- JS Files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" referrerpolicy="no-referrer"></script>
-    <script src="js/script.js"></script>
-    <script src="js/style-switcher.js"></script>
-    <script src="js/chatbot.js"></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/style-switcher.js" defer></script>
+    <script src="js/chatbot.js" defer></script>
 
     <!-- Animation barres de compétences -->
     <script>

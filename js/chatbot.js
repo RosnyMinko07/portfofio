@@ -11,13 +11,30 @@ document.addEventListener('DOMContentLoaded', function () {
   const voiceToggle     = document.getElementById('chatbot-voice-toggle');
   const avatarImg       = document.getElementById('chatbot-avatar-img');
   const toggleImg       = document.getElementById('chatbot-toggle-img');
+  // Pour changer l'avatar : remplace le chemin ci-dessous par ton image
+  // Ex: const AVATAR_URL = 'images/mon-avatar.png';
+  const AVATAR_URL = null; // null = utilise l'icône par défaut
+  const USER_AVATAR = null;
 
-  // ===================== AVATAR =====================
-  const AVATAR_URL = 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&auto=format';
-  const USER_AVATAR = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&auto=format';
-
-  if (avatarImg) avatarImg.src = AVATAR_URL;
-  if (toggleImg) toggleImg.src = AVATAR_URL;
+  // Fonction pour créer un avatar (icône ou image)
+  function createAvatar(isBot) {
+    const div = document.createElement('div');
+    div.className = 'message-avatar';
+    if (isBot) {
+      if (AVATAR_URL) {
+        div.innerHTML = `<img src="${AVATAR_URL}" alt="Sophia">`;
+      } else {
+        div.innerHTML = `<div class="chatbot-avatar-icon"><i class="fas fa-robot"></i></div>`;
+      }
+    } else {
+      if (USER_AVATAR) {
+        div.innerHTML = `<img src="${USER_AVATAR}" alt="Vous">`;
+      } else {
+        div.innerHTML = `<div class="chatbot-avatar-icon user-icon"><i class="fas fa-user"></i></div>`;
+      }
+    }
+    return div;
+  }
 
   // ===================== SYNTHÈSE VOCALE =====================
   const synth = window.speechSynthesis;
@@ -356,13 +373,7 @@ document.addEventListener('DOMContentLoaded', function () {
     wrapper.className = `message-wrapper ${sender}-wrapper`;
 
     // Avatar
-    const avatarDiv = document.createElement('div');
-    avatarDiv.className = 'message-avatar';
-    if (sender === 'bot') {
-      avatarDiv.innerHTML = `<img src="${AVATAR_URL}" alt="Sophia">`;
-    } else {
-      avatarDiv.innerHTML = `<img src="${USER_AVATAR}" alt="Vous">`;
-    }
+    const avatarDiv = createAvatar(sender === 'bot');
     wrapper.appendChild(avatarDiv);
 
     // Contenu
@@ -494,13 +505,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Indicateur de frappe
     const typingWrapper = document.createElement('div');
     typingWrapper.className = 'message-wrapper bot-wrapper typing-msg';
-    typingWrapper.innerHTML = `
-      <div class="message-avatar"><img src="${AVATAR_URL}" alt="Sophia"></div>
-      <div class="message-content">
-        <div class="chatbot-message bot">
-          <div class="typing-indicator"><span></span><span></span><span></span></div>
-        </div>
-      </div>`;
+    const typingAvatar = createAvatar(true);
+    typingWrapper.appendChild(typingAvatar);
+    const typingContent = document.createElement('div');
+    typingContent.className = 'message-content';
+    typingContent.innerHTML = `<div class="chatbot-message bot"><div class="typing-indicator"><span></span><span></span><span></span></div></div>`;
+    typingWrapper.appendChild(typingContent);
     chatbotMessages.appendChild(typingWrapper);
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 
