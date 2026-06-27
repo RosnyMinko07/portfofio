@@ -35,9 +35,6 @@
 .style-switcher .style-switcher-toggler{
     top: 0;
 }
-.style-switcher .day-night{
-    top: 55px;
-}
 .style-switcher h4{
     margin: 0 0 10px;
     color: var(--text-black-700);
@@ -49,25 +46,24 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    gap: 8px;
 }
 .style-switcher .colors span{
     display: inline-block;
     height: 30px;
     width: 30px;
     border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid transparent;
 }
-.style-switcher .color-1{
-    background: #ec1819;
+.style-switcher .colors span:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
-.style-switcher .color-2{
-    background: #fa5b0f;
-}
-.style-switcher .color-3{
-    background: #37b182;
-}
-.style-switcher .color-4{
-    background: #1854b4;
-}
-.style-switcher .color-5{
-    background: #f021b2;
-}
+
+/* Couleurs mises à jour */
+.style-switcher .color-1 { background: #00ff88; } /* Vert néon - Hacker */
+.style-switcher .color-2 { background: #00d4ff; } /* Cyan électrique */
+.style-switcher .color-3 { background: #a855f7; } /* Violet */
+.style-switcher .color-4 { background: #ff6b35; } /* Orange vif */

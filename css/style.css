@@ -2,19 +2,29 @@
 
 /* ==================== VARIABLES ==================== */
 :root {
-    --bg-black-900: #f2f2fc;
-    --bg-black-100: #fdf9ff;
-    --bg-black-50: #e8dfec;
-    --text-black-900: #302e4d;
-    --text-black-700: #504e70;
+    --bg-black-900: rgba(0, 0, 0, 0.95);
+    --bg-black-100: rgba(15, 15, 15, 0.75);
+    --bg-black-50:  rgba(255, 255, 255, 0.07);
+    --text-black-900: #f0f0f0;
+    --text-black-700: #b0b0b0;
 }
 
+/* Mode dark identique */
 body.dark {
-    --bg-black-900: #151515;
-    --bg-black-100: #222222;
-    --bg-black-50: #393939;
-    --text-black-900: #ffffff;
-    --text-black-700: #e9e9e9;
+    --bg-black-900: rgba(0, 0, 0, 0.95);
+    --bg-black-100: rgba(15, 15, 15, 0.75);
+    --bg-black-50:  rgba(255, 255, 255, 0.07);
+    --text-black-900: #f0f0f0;
+    --text-black-700: #b0b0b0;
+}
+
+/* Fond global du body — dégradé sombre avec texture */
+body {
+    background: #050505;
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(0,255,136,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(0,212,255,0.03) 0%, transparent 50%);
+    background-attachment: fixed;
 }
 
 /* ==================== BASE STYLES ==================== */
@@ -2831,13 +2841,9 @@ h3.my-profession {
     content-visibility: auto;
 }
 
-/* Accélération GPU pour les animations */
+/* Accélération GPU pour les animations — éléments ciblés uniquement */
 .chatbot-toggle-btn,
-.chatbot-avatar,
-.carousel-track,
-.proj-carousel,
-.cursor-dot,
-.cursor-ring {
+.carousel-track {
     will-change: transform;
     transform: translateZ(0);
 }
@@ -2856,4 +2862,210 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+}
+
+
+/* ========== THÈME NOIR - AJUSTEMENTS ========== */
+
+/* Ombres adaptées au dark */
+.shadow-dark {
+    box-shadow: 0 0 20px rgba(0,0,0,0.6) !important;
+}
+
+/* Inputs formulaire */
+.form-control {
+    background: #1e1e1e !important;
+    border-color: #2a2a2a !important;
+    color: #f0f0f0 !important;
+}
+
+.form-control::placeholder {
+    color: #666 !important;
+}
+
+.form-control:focus {
+    border-color: var(--skin-color) !important;
+    box-shadow: 0 0 0 3px rgba(var(--skin-color-rgb), 0.15) !important;
+}
+
+/* Timeline */
+.about .about-content .timeline {
+    background-color: #141414 !important;
+}
+
+/* Aside / sidebar */
+.aside {
+    background: #0a0a0a !important;
+    border-right: 1px solid #1e1e1e;
+}
+
+/* Scrollbar globale */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #0d0d0d;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--skin-color);
+    border-radius: 6px;
+}
+
+/* Style switcher dark */
+.style-switcher {
+    background: #141414 !important;
+    box-shadow: -3px 0 10px rgba(0,0,0,0.5) !important;
+}
+
+/* Loader dark */
+#page-loader {
+    background: #0d0d0d !important;
+}
+
+/* Site footer dark */
+.site-footer {
+    background: #0a0a0a !important;
+    border-top-color: #1e1e1e !important;
+}
+
+/* Chatbot dark */
+#chatbot-container {
+    background: #141414 !important;
+    border-color: #1e1e1e !important;
+}
+
+#chatbot-messages {
+    background: #0d0d0d !important;
+}
+
+#chatbot-input {
+    background: #1e1e1e !important;
+    color: #f0f0f0 !important;
+    border-color: #2a2a2a !important;
+}
+
+.chatbot-message.bot {
+    background: #1e1e1e !important;
+    border-color: #2a2a2a !important;
+    color: #f0f0f0 !important;
+}
+
+.chatbot-input {
+    background: #141414 !important;
+    border-top-color: #1e1e1e !important;
+}
+
+
+/* ========== GLASSMORPHISM — BLACK TRANSPARENT ========== */
+
+/* Sidebar — blur gardé, c'est fixe donc peu coûteux */
+.aside {
+    background: rgba(0, 0, 0, 0.92) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-right: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+/* Sections — fond solide, pas de blur */
+.section {
+    background: #080808 !important;
+}
+
+/* Cartes — fond solide léger, pas de blur */
+.service-item-inner {
+    background: #111111 !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+.skill-icon-card {
+    background: #111111 !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+.cert-card {
+    background: #111111 !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+.project-card {
+    background: #111111 !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+.about .about-content .timeline {
+    background: #111111 !important;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Chatbot — blur gardé, petit élément fixe */
+#chatbot-container {
+    background: rgba(8, 8, 8, 0.95) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+#chatbot-messages {
+    background: #050505 !important;
+}
+
+.chatbot-input {
+    background: #0a0a0a !important;
+    border-top: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+#chatbot-input {
+    background: #111111 !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    color: #f0f0f0 !important;
+}
+
+.chatbot-message.bot {
+    background: #161616 !important;
+    border: 1px solid rgba(255,255,255,0.07) !important;
+    color: #f0f0f0 !important;
+}
+
+/* Style switcher — fond solide */
+.style-switcher {
+    background: #0d0d0d !important;
+    border: 1px solid rgba(255,255,255,0.07) !important;
+}
+
+.style-switcher .s-icon {
+    background: #0d0d0d !important;
+    border: 1px solid rgba(255,255,255,0.07) !important;
+}
+
+/* Footer */
+.site-footer {
+    background: #080808 !important;
+    border-top: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* Formulaire contact */
+.form-control {
+    background: #111111 !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    color: #f0f0f0 !important;
+}
+
+.form-control:focus {
+    background: #161616 !important;
+    border-color: var(--skin-color) !important;
+}
+
+/* Loader */
+#page-loader {
+    background: #050505 !important;
+}
+
+/* Carousel modal */
+.carousel-modal-box {
+    background: #0d0d0d !important;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.shadow-dark {
+    box-shadow: 0 0 20px rgba(0,0,0,0.7) !important;
 }
