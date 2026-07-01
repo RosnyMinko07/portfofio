@@ -2829,3 +2829,45 @@ h3.my-profession {
         display: none !important;
     }
 }
+
+
+/* ========== IMAGES PROJETS PLUS GRANDES EN MOBILE ========== */
+@media (max-width: 767px) {
+
+    .proj-carousel.open,
+    .proj-carousel {
+        max-height: 320px !important;
+    }
+
+    .carousel-slide {
+        padding: 8px 40px !important;
+    }
+
+    .carousel-slide img {
+        max-height: 280px !important;
+        width: 100% !important;
+        object-fit: contain !important;
+    }
+
+    /* Modal plein écran — image encore plus grande */
+    .carousel-modal-img-wrap img {
+        max-height: 55vh !important;
+        width: 100% !important;
+        object-fit: contain !important;
+    }
+
+    .carousel-modal-box {
+        padding: 12px !important;
+        height: 95vh !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .carousel-slide img {
+        max-height: 240px !important;
+    }
+
+    .proj-carousel {
+        max-height: 280px !important;
+    }
+}
