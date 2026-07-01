@@ -164,7 +164,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="buttons padd-15">
-                                            <a href="pdf/OTSINA MINKO Jean Rodrigue Rismin.pdf" class="btn" download>Telecharger mon CV</a>
+                                            <a href="pdf/OTSINA MINKO Jean Rodrigue Rismin.pdf" class="btn" target="_blank">Voir mon CV</a>
                                         </div>
                                     </div>
                                 </div>
@@ -685,22 +685,47 @@
 </section>
 <!-- Portfolio Section End -->
 
-<!-- Modal carousel plein écran -->
+<!-- Modal carousel plein écran avec zoom + swipe -->
 <div id="carousel-modal" class="carousel-modal-overlay" onclick="closeCarouselModal(event)">
     <div class="carousel-modal-box">
         <button class="carousel-modal-close" onclick="closeCarouselModal()"><i class="fas fa-times"></i></button>
         <h3 id="carousel-modal-title"></h3>
         <div class="carousel-modal-inner">
             <button class="carousel-arrow left" id="modal-prev" onclick="modalSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-            <div class="carousel-modal-img-wrap">
+            <div class="carousel-modal-img-wrap" id="modal-img-wrap">
                 <img id="carousel-modal-img" src="" alt="">
                 <span id="carousel-modal-caption"></span>
             </div>
             <button class="carousel-arrow right" id="modal-next" onclick="modalSlide(1)"><i class="fas fa-chevron-right"></i></button>
         </div>
         <div class="carousel-modal-counter"><span id="modal-current">1</span> / <span id="modal-total">1</span></div>
-        <!-- Miniatures -->
         <div class="modal-thumbnails" id="modal-thumbnails"></div>
+    </div>
+</div>
+
+<!-- Modal CV — visualiser avant télécharger -->
+<div id="cv-modal" class="cv-modal-overlay" onclick="closeCVModal(event)">
+    <div class="cv-modal-box">
+        <div class="cv-modal-header">
+            <h3><i class="fas fa-file-pdf"></i> CV — Rosny OTSINA</h3>
+            <div class="cv-modal-actions">
+                <a id="cv-download-btn" href="pdf/OTSINA MINKO Jean Rodrigue Rismin.pdf" target="_blank" class="btn cv-dl-btn">
+                    <i class="fas fa-external-link-alt"></i> Ouvrir / Télécharger
+                </a>
+                <button class="cv-close-btn" onclick="closeCVModal()"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <div class="cv-modal-body">
+            <iframe id="cv-iframe" src="" title="CV Rosny OTSINA"></iframe>
+            <!-- Fallback si iframe ne marche pas -->
+            <div class="cv-fallback" id="cv-fallback">
+                <i class="fas fa-file-pdf"></i>
+                <p>Aperçu non disponible sur ce navigateur.</p>
+                <a href="pdf/OTSINA MINKO Jean Rodrigue Rismin.pdf" download class="btn">
+                    <i class="fas fa-download"></i> Télécharger le CV
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -837,12 +862,14 @@ function renderModalSlide() {
 function modalSlide(dir) {
     modalData.current = (modalData.current + dir + modalData.slides.length) % modalData.slides.length;
     renderModalSlide();
+    resetZoom();
 }
 
 function closeCarouselModal(e) {
     if (e && e.target !== document.getElementById('carousel-modal')) return;
     document.getElementById('carousel-modal').classList.remove('active');
     document.body.style.overflow = '';
+    resetZoom();
 }
 
 document.addEventListener('keydown', function(e) {
@@ -850,7 +877,165 @@ document.addEventListener('keydown', function(e) {
     if (!modal.classList.contains('active')) return;
     if (e.key === 'ArrowRight') modalSlide(1);
     if (e.key === 'ArrowLeft') modalSlide(-1);
-    if (e.key === 'Escape') { modal.classList.remove('active'); document.body.style.overflow = ''; }
+    if (e.key === 'Escape') { modal.classList.remove('active'); document.body.style.overflow = ''; resetZoom(); }
+});
+
+// ===== ZOOM + SWIPE sur l'image du modal =====
+(function() {
+    var imgWrap = null;
+    var img     = null;
+    var scale   = 1, minScale = 1, maxScale = 4;
+    var posX = 0, posY = 0;
+    var lastTouchDist = 0;
+    var isDragging = false, startX = 0, startY = 0, lastPosX = 0, lastPosY = 0;
+    var swipeStartX = 0, swipeStartY = 0;
+
+    function resetZoom() {
+        scale = 1; posX = 0; posY = 0;
+        if (img) { img.style.transform = 'scale(1) translate(0,0)'; img.style.cursor = 'zoom-in'; }
+    }
+    window.resetZoom = resetZoom;
+
+    function applyTransform() {
+        if (img) img.style.transform = 'scale('+scale+') translate('+posX/scale+'px,'+posY/scale+'px)';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        imgWrap = document.getElementById('modal-img-wrap');
+        img     = document.getElementById('carousel-modal-img');
+        if (!imgWrap || !img) return;
+
+        // Double-clic → zoom/dézoom
+        img.addEventListener('dblclick', function(e) {
+            e.stopPropagation();
+            if (scale > 1) { resetZoom(); }
+            else {
+                scale = 2.5;
+                var rect = img.getBoundingClientRect();
+                posX = (e.clientX - rect.left - rect.width/2) * (scale-1);
+                posY = (e.clientY - rect.top  - rect.height/2) * (scale-1);
+                img.style.cursor = 'grab';
+                applyTransform();
+            }
+        });
+
+        // Drag quand zoomé
+        img.addEventListener('mousedown', function(e) {
+            if (scale <= 1) return;
+            isDragging = true; startX = e.clientX - posX; startY = e.clientY - posY;
+            img.style.cursor = 'grabbing'; e.preventDefault();
+        });
+        document.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            posX = e.clientX - startX; posY = e.clientY - startY;
+            applyTransform();
+        });
+        document.addEventListener('mouseup', function() {
+            if (!isDragging) return;
+            isDragging = false;
+            img.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
+        });
+
+        // Molette souris → zoom
+        imgWrap.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            scale = Math.min(maxScale, Math.max(minScale, scale - e.deltaY * 0.002));
+            if (scale <= 1) { scale = 1; posX = 0; posY = 0; img.style.cursor = 'zoom-in'; }
+            else { img.style.cursor = 'grab'; }
+            applyTransform();
+        }, { passive: false });
+
+        // Touch — pinch zoom + swipe
+        imgWrap.addEventListener('touchstart', function(e) {
+            if (e.touches.length === 2) {
+                lastTouchDist = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+            } else if (e.touches.length === 1) {
+                swipeStartX = e.touches[0].clientX;
+                swipeStartY = e.touches[0].clientY;
+                if (scale > 1) {
+                    isDragging = true;
+                    startX = e.touches[0].clientX - posX;
+                    startY = e.touches[0].clientY - posY;
+                }
+            }
+        }, { passive: true });
+
+        imgWrap.addEventListener('touchmove', function(e) {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                var dist = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                scale = Math.min(maxScale, Math.max(minScale, scale * (dist / lastTouchDist)));
+                lastTouchDist = dist;
+                if (scale <= 1) { scale = 1; posX = 0; posY = 0; }
+                applyTransform();
+            } else if (e.touches.length === 1 && isDragging && scale > 1) {
+                posX = e.touches[0].clientX - startX;
+                posY = e.touches[0].clientY - startY;
+                applyTransform();
+            }
+        }, { passive: false });
+
+        imgWrap.addEventListener('touchend', function(e) {
+            isDragging = false;
+            if (scale <= 1 && e.changedTouches.length === 1) {
+                var dx = e.changedTouches[0].clientX - swipeStartX;
+                var dy = e.changedTouches[0].clientY - swipeStartY;
+                if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+                    modalSlide(dx < 0 ? 1 : -1);
+                }
+            }
+        }, { passive: true });
+    });
+})();
+
+// ===== MODAL CV =====
+function previewCV(e) {
+    e.preventDefault();
+    var pdfUrl = e.currentTarget.getAttribute('data-pdf');
+    var modal  = document.getElementById('cv-modal');
+    var iframe = document.getElementById('cv-iframe');
+    var fallback = document.getElementById('cv-fallback');
+
+    iframe.src = '';
+    fallback.style.display = 'none';
+    iframe.style.display = 'block';
+
+    // Tenter de charger le PDF dans l'iframe
+    iframe.src = pdfUrl;
+    iframe.onerror = function() {
+        iframe.style.display = 'none';
+        fallback.style.display = 'flex';
+    };
+
+    // Sur mobile l'iframe PDF fonctionne rarement — afficher fallback
+    if (/iPhone|iPad|Android/i.test(navigator.userAgent)) {
+        setTimeout(function() {
+            iframe.style.display = 'none';
+            fallback.style.display = 'flex';
+        }, 800);
+    }
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCVModal(e) {
+    if (e && e.target !== document.getElementById('cv-modal')) return;
+    var modal  = document.getElementById('cv-modal');
+    var iframe = document.getElementById('cv-iframe');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    setTimeout(function() { iframe.src = ''; }, 400);
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeCVModal();
 });
 </script>
             

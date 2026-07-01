@@ -1001,7 +1001,7 @@ h3.my-profession {
 /* ==================== CHATBOT IA ==================== */
 #chatbot-container {
     position: fixed;
-    bottom: 80px;
+    bottom: 185px;
     right: 20px;
     width: 380px;
     height: 550px;
@@ -1330,7 +1330,7 @@ h3.my-profession {
 
 .chatbot-toggle-btn {
     position: fixed;
-    bottom: 55px;
+    bottom: 110px;
     right: 25px;
     width: 65px;
     height: 65px;
@@ -2427,184 +2427,120 @@ h3.my-profession {
     .section-title h2 { font-size: 35px; }
 }
 
-/* ── MOBILE (≤ 767px) : SCROLL NORMAL, PAS DE BURGER ── */
+/* ── MOBILE (≤ 767px) : BURGER + SCROLL ── */
 @media (max-width: 767px) {
 
-    /* ── Cacher le burger complètement ── */
-    .aside .nav-toggler { display: none !important; }
+    .aside .nav-toggler { display: flex !important; }
 
-    /* ── Sidebar → nav fixe en bas ── */
     .aside {
-        left: 0 !important;
-        top: auto !important;
+        position: fixed !important;
+        left: -270px !important;
+        top: 0 !important;
         bottom: 0 !important;
-        width: 100% !important;
-        height: 56px !important;
+        width: 270px !important;
+        height: 100% !important;
         display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: space-around !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
         z-index: 999 !important;
-        padding: 0 !important;
-        border-right: none !important;
-        border-top: 1px solid rgba(255,255,255,0.07) !important;
-        overflow: hidden !important;
+        padding: 30px 0 !important;
+        border-right: 1px solid rgba(255,255,255,0.07) !important;
+        overflow-y: auto !important;
+        transition: left 0.3s ease !important;
     }
 
-    /* Cacher logo et nav-toggler dans la barre du bas */
-    .aside .logo { display: none !important; }
+    .aside.open { left: 0 !important; }
+    .aside .logo { display: block !important; }
 
-    /* Nav horizontale */
     .aside .nav {
         display: flex !important;
-        flex-direction: row !important;
+        flex-direction: column !important;
         width: 100% !important;
-        justify-content: space-around !important;
         padding: 0 !important;
-        margin: 0 !important;
     }
-
-    .aside .nav li { margin: 0 !important; }
 
     .aside .nav li a {
         display: flex !important;
-        flex-direction: column !important;
+        flex-direction: row !important;
         align-items: center !important;
-        justify-content: center !important;
-        padding: 6px 4px !important;
-        font-size: 9px !important;
-        gap: 3px !important;
+        padding: 12px 30px !important;
+        font-size: 14px !important;
+        gap: 10px !important;
         color: var(--text-black-700) !important;
-        white-space: nowrap !important;
     }
 
-    .aside .nav li a i {
-        font-size: 18px !important;
-        margin: 0 !important;
-    }
+    .aside .nav li a i { font-size: 16px !important; width: 20px !important; }
+    .aside .nav li a.active { color: var(--skin-color) !important; }
 
-    .aside .nav li a.active {
-        color: var(--skin-color) !important;
-    }
-
-    /* ── Sections → scroll snap ── */
     .section {
         position: relative !important;
         left: 0 !important;
         top: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        min-height: calc(100vh - 90px) !important;
-        height: auto !important;
         display: block !important;
-        overflow: visible !important;
-        padding: 20px 15px 30px 15px !important;
-        z-index: auto !important;
+        min-height: 100vh !important;
+        height: auto !important;
+        padding: 20px 15px !important;
         opacity: 1 !important;
         transform: none !important;
         animation: none !important;
-        scroll-snap-align: start;
     }
 
-    /* Conteneur principal — scroll natif iOS compatible */
-    .main-content {
-        position: static !important;
-        left: auto !important;
-        top: auto !important;
-        right: auto !important;
-        bottom: auto !important;
-        overflow-y: visible !important;
-        height: auto !important;
-    }
+    body { overflow-y: auto !important; height: auto !important; padding-bottom: 48px !important; }
 
-    /* Body scrollable */
-    body {
-        overflow-y: auto !important;
-        height: auto !important;
-        padding-bottom: 90px !important; /* espace pour nav + footer */
-    }
+    .main-content { position: static !important; overflow: visible !important; height: auto !important; }
+    .main-container { padding-left: 0 !important; }
 
-    /* Aside nav bas — fixe au bas de la fenêtre */
-    .aside {
+    .site-footer {
         position: fixed !important;
         bottom: 0 !important;
         left: 0 !important;
-        top: auto !important;
+        right: 0 !important;
+        height: 38px !important;
+        display: flex !important;
+        z-index: 997 !important;
     }
 
-    /* Main container sans marge gauche */
-    .main-container { padding-left: 0 !important; }
+    .chatbot-toggle-btn { bottom: 50px !important; right: 15px !important; }
+    #chatbot-container { bottom: 120px !important; width: 96% !important; right: 2% !important; height: 65vh !important; max-height: 460px !important; }
+    #back-to-top { bottom: 50px !important; left: 12px !important; right: auto !important; }
 
-    /* Footer fixe au-dessus de la nav */
-    .site-footer {
-        bottom: 56px !important;
-        left: 0 !important;
-        height: 34px !important;
-    }
-
-    /* Back to top */
-    #back-to-top { bottom: 100px !important; left: 12px !important; right: auto !important; }
-
-    /* Chatbot */
-    .chatbot-toggle-btn { bottom: 100px !important; right: 12px !important; }
-    #chatbot-container  {
-        bottom: 160px !important;
-        width: 96% !important;
-        right: 2% !important;
-        height: 75vh !important;
-        max-height: 480px !important;
-    }
-
-    /* Grilles */
     .service .service-item,
     .about .about-content .experience,
     .about .about-content .personal-info,
-    .contact .contact-info-item {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-
+    .contact .contact-info-item { flex: 0 0 100%; max-width: 100%; }
     .contact .contact-form .col-6 { flex: 0 0 100%; max-width: 100%; }
 
-    /* Home */
-    h3.hello        { font-size: 22px; }
+    h3.hello { font-size: 22px; }
     h3.my-profession { font-size: 20px; }
-    .home-info p    { font-size: 14px; }
+    .home-info p { font-size: 14px; }
     .home .home-img img { height: 240px; }
-    .home-stats     { justify-content: center; gap: 20px; }
-    .stat-number    { font-size: 26px; }
+    .home-stats { justify-content: center; gap: 20px; }
+    .stat-number { font-size: 26px; }
 
-    /* Carousel */
     .carousel-slide { padding: 10px 45px; }
     .carousel-slide img { max-height: 200px; }
     .carousel-arrow { width: 30px; height: 30px; font-size: 11px; }
 
-    /* Project cards */
     .project-card-header { flex-direction: column; padding: 15px; }
-    .project-card-btns   { width: 100%; }
-    .proj-btn            { padding: 7px 14px; font-size: 12px; }
+    .project-card-btns { width: 100%; }
+    .proj-btn { padding: 7px 14px; font-size: 12px; }
     .project-card-info h2 { font-size: 15px; }
 
-    /* Compétences */
-    .skills-icons-grid   { justify-content: center; gap: 10px; }
-    .skill-icon-card     { width: 80px; padding: 12px 6px; }
-    .skill-icon-card i   { font-size: 32px; }
+    .skills-icons-grid { justify-content: center; gap: 10px; }
+    .skill-icon-card { width: 80px; padding: 12px 6px; }
+    .skill-icon-card i { font-size: 32px; }
     .skill-icon-card span { font-size: 10px; }
 
-    /* Certifications */
     .certifications-grid { grid-template-columns: 1fr; }
-
-    /* Sections titre */
     .section-title h2 { font-size: 28px; }
     .section .container { padding-top: 30px; padding-bottom: 40px; }
 
-    /* Chatbot messages */
-    .chatbot-message  { font-size: 13px; padding: 8px 12px; }
-    .message-avatar   { width: 30px; height: 30px; }
+    .chatbot-message { font-size: 13px; padding: 8px 12px; }
+    .message-avatar { width: 30px; height: 30px; }
     .chatbot-title h4 { font-size: 14px; }
-    .chatbot-status   { font-size: 10px; }
+    .chatbot-status { font-size: 10px; }
 }
-
 /* ── Très petits mobiles (≤ 400px) ── */
 @media (max-width: 400px) {
     .aside .nav li a { font-size: 8px; }
@@ -2678,5 +2614,218 @@ h3.my-profession {
     .carousel-slide {
         min-width: 100% !important;
         max-width: 100% !important;
+    }
+}
+
+
+/* ========== IMAGE ZOOMABLE DANS MODAL ========== */
+#modal-img-wrap {
+    overflow: hidden;
+    cursor: zoom-in;
+    border-radius: 8px;
+    touch-action: none;
+}
+
+#carousel-modal-img {
+    transform-origin: center center;
+    transition: transform 0.15s ease;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* ========== MODAL CV ========== */
+.cv-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    padding: 15px;
+}
+
+.cv-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cv-modal-box {
+    background: #111;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 800px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.cv-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    flex-shrink: 0;
+}
+
+.cv-modal-header h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-black-900);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cv-modal-header h3 i {
+    color: #e74c3c;
+}
+
+.cv-modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cv-dl-btn {
+    padding: 7px 16px !important;
+    font-size: 13px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+.cv-close-btn {
+    background: rgba(255,255,255,0.07);
+    border: none;
+    color: var(--text-black-900);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+
+.cv-close-btn:hover {
+    background: var(--skin-color);
+    color: white;
+}
+
+.cv-modal-body {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.cv-modal-body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+.cv-fallback {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    height: 100%;
+    color: var(--text-black-700);
+    text-align: center;
+    padding: 30px;
+}
+
+.cv-fallback i {
+    font-size: 60px;
+    color: #e74c3c;
+    opacity: 0.7;
+}
+
+.cv-fallback p {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+@media (max-width: 767px) {
+    .cv-modal-box {
+        height: 85vh;
+    }
+    .cv-modal-header h3 {
+        font-size: 13px;
+    }
+}
+
+
+/* ========== BURGER MOBILE — repositionné en haut à gauche du contenu ========== */
+@media (max-width: 767px) {
+
+    /* Burger fixe en haut à gauche, toujours visible */
+    .aside .nav-toggler {
+        position: fixed !important;
+        top: 12px !important;
+        left: 12px !important;
+        right: auto !important;
+        z-index: 1001 !important;
+        background: rgba(0,0,0,0.85) !important;
+        border: 1px solid rgba(255,255,255,0.1) !important;
+        width: 42px !important;
+        height: 42px !important;
+        border-radius: 10px !important;
+    }
+
+    /* Quand sidebar ouverte, burger passe à droite de la sidebar */
+    .aside .nav-toggler.open {
+        left: 280px !important;
+        top: 12px !important;
+    }
+
+    /* Logo en haut dans la sidebar, pas de conflit */
+    .aside .logo {
+        padding: 0 20px 20px 20px !important;
+        margin-top: 20px !important;
+        border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+        width: 100% !important;
+    }
+
+    /* Nav commence après le logo */
+    .aside .nav {
+        margin-top: 10px !important;
+    }
+
+    /* Décaler le contenu principal pour ne pas être caché par le burger */
+    .main-content {
+        padding-top: 60px !important;
+    }
+
+    /* Overlay sombre quand sidebar ouverte */
+    .aside.open::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 270px;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 998;
+    }
+}
+
+
+/* Cacher le logo dans la sidebar sur mobile */
+@media (max-width: 767px) {
+    .aside .logo {
+        display: none !important;
     }
 }
