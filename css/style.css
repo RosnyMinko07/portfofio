@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Clicker+Script&family=Poppins:wght@200;300;400;500;600;700&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Clicker+Script&family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 /* ==================== VARIABLES ==================== */
 :root {
@@ -2212,7 +2212,8 @@ h3.my-profession {
 #back-to-top {
     position: fixed;
     bottom: 55px;
-    right: 25px;
+    left: 25px;
+    right: auto;
     width: 44px;
     height: 44px;
     background: var(--skin-color);
@@ -2394,678 +2395,213 @@ h3.my-profession {
     white-space: nowrap;
 }
 
-/* ==================== RESPONSIVE DESIGN (CORRIGÉ) ==================== */
+/* ==================== RESPONSIVE DESIGN ==================== */
 
-/* Tablettes et petits écrans (≤ 1199px) */
+/* ── Tablettes larges (≤ 1199px) : sidebar cachée + burger ── */
 @media (max-width: 1199px) {
     .aside {
         left: -270px;
+        transition: left 0.3s ease;
     }
-    
-    .aside.open {
-        left: 0;
-    }
-    
+    .aside.open        { left: 0; }
     .aside .nav-toggler {
         display: flex;
         left: 30px;
     }
-    
-    .aside .nav-toggler.open {
-        left: 300px;
-    }
-    
-    .section {
-        left: 0;
-    }
-    
-    .section.open {
-        left: 270px;
-    }
-    
-    .site-footer {
-        left: 0;
-    }
+    .aside .nav-toggler.open { left: 300px; }
+    .section  { left: 0; }
+    .section.open { left: 270px; }
+    .site-footer { left: 0; }
 }
 
-/* Tablettes (≤ 991px) */
+/* ── Tablettes (≤ 991px) ── */
 @media (max-width: 991px) {
-    .contact .contact-info-item,
-    .portfolio .portfolio-item,
-    .service .service-item {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-    
-    /* HOME SECTION */
-    .home .row {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    
-    .home .home-info {
-        flex: 0 0 100%;
-        max-width: 100%;
-        order: 1;
-    }
-    
-    .home .home-img {
-        flex: 0 0 100%;
-        max-width: 100%;
-        margin-top: 40px;
-        order: 2;
-        display: flex !important;
-        justify-content: center;
-    }
-    
-    .home .home-img img {
-        height: 350px;
-        width: auto;
-        max-width: 90%;
-    }
-    
-    .home-img::before,
-    .home-img::after {
-        display: none;
-    }
-    
-    h3.hello {
-        font-size: 26px;
-    }
-    
-    h3.my-profession {
-        font-size: 24px;
-    }
-    
-    .home-info p {
-        font-size: 18px;
-        margin-bottom: 50px;
-    }
-    
-    .section .container {
-        padding-top: 50px;
-        padding-bottom: 60px;
-    }
-    
-    .section-title h2 {
-        font-size: 35px;
-    }
+    .service .service-item { flex: 0 0 50%; max-width: 50%; }
+    .home .row { flex-direction: column; align-items: center; text-align: center; }
+    .home .home-info { flex: 0 0 100%; max-width: 100%; order: 1; }
+    .home .home-img  { flex: 0 0 100%; max-width: 100%; margin-top: 40px; order: 2; display: flex !important; justify-content: center; }
+    .home .home-img img { height: 320px; width: auto; max-width: 90%; }
+    .home-img::before, .home-img::after { display: none; }
+    h3.hello { font-size: 26px; }
+    h3.my-profession { font-size: 24px; }
+    .section-title h2 { font-size: 35px; }
 }
 
-/* Mobiles (≤ 767px) */
+/* ── MOBILE (≤ 767px) : SCROLL NORMAL, PAS DE BURGER ── */
 @media (max-width: 767px) {
-    /* Sections */
+
+    /* ── Cacher le burger complètement ── */
+    .aside .nav-toggler { display: none !important; }
+
+    /* ── Sidebar → nav fixe en bas ── */
+    .aside {
+        left: 0 !important;
+        top: auto !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        height: 56px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-around !important;
+        z-index: 999 !important;
+        padding: 0 !important;
+        border-right: none !important;
+        border-top: 1px solid rgba(255,255,255,0.07) !important;
+        overflow: hidden !important;
+    }
+
+    /* Cacher logo et nav-toggler dans la barre du bas */
+    .aside .logo { display: none !important; }
+
+    /* Nav horizontale */
+    .aside .nav {
+        display: flex !important;
+        flex-direction: row !important;
+        width: 100% !important;
+        justify-content: space-around !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .aside .nav li { margin: 0 !important; }
+
+    .aside .nav li a {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 6px 4px !important;
+        font-size: 9px !important;
+        gap: 3px !important;
+        color: var(--text-black-700) !important;
+        white-space: nowrap !important;
+    }
+
+    .aside .nav li a i {
+        font-size: 18px !important;
+        margin: 0 !important;
+    }
+
+    .aside .nav li a.active {
+        color: var(--skin-color) !important;
+    }
+
+    /* ── Sections → scroll snap ── */
     .section {
-        padding: 0 20px 52px 20px;
-    }
-    
-    /* Grilles */
-    .contact .contact-info-item,
-    .portfolio .portfolio-item,
-    .service .service-item,
-    .about .about-content .experience,
-    .about .about-content .education,
-    .about .about-content .skills,
-    .about .about-content .personal-info {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    
-    .contact .contact-info-item {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-    
-    .contact .contact-form .col-6 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    
-    /* HOME SECTION */
-    .home .home-img img {
-        height: 280px;
-        max-width: 85%;
-    }
-    
-    h3.hello {
-        font-size: 24px;
-    }
-    
-    h3.my-profession {
-        font-size: 22px;
-    }
-    
-    .home-info p {
-        font-size: 15px;
-        margin-bottom: 40px;
-    }
-    
-    .home-stats {
-        justify-content: center;
-        gap: 25px;
-    }
-    
-    .stat-number {
-        font-size: 28px;
-    }
-    
-    /* Portfolio - Carrousels */
-    .carousel-slide {
-        padding: 12px 20px;
-    }
-    
-    .carousel-slide img {
-        max-height: 220px;
-    }
-    
-    .carousel-arrow {
-        width: 32px;
-        height: 32px;
-        font-size: 12px;
-    }
-    
-    /* Project cards */
-    .project-card-header {
-        flex-direction: column;
-        padding: 18px;
-    }
-    
-    .project-card-btns {
-        width: 100%;
-        justify-content: flex-start;
-    }
-    
-    .proj-btn {
-        padding: 6px 14px;
-        font-size: 12px;
-    }
-    
-    .project-card-info h2 {
-        font-size: 16px;
-    }
-    
-    /* Compétences */
-    .skills-icons-grid {
-        justify-content: center;
-        gap: 12px;
-    }
-    
-    .skill-icon-card {
-        width: 85px;
-        padding: 14px 8px;
-    }
-    
-    .skill-icon-card i {
-        font-size: 34px;
-    }
-    
-    .skill-icon-card span {
-        font-size: 11px;
-    }
-    
-    /* Formulaire */
-    .contact .contact-form .form-control {
-        height: 45px;
-        font-size: 14px;
-    }
-    
-    .contact .contact-form .btn {
-        width: 100%;
-        max-width: 200px;
-    }
-    
-    /* Chatbot */
-    #chatbot-container {
-        bottom: 95px !important;
-    }
-    
-    .chatbot-toggle-btn {
-        bottom: 50px !important;
-    }
-    
-    #back-to-top {
-        bottom: 50px !important;
-    }
-    
-    /* Footer */
-    .site-footer-left span:last-of-type {
-        display: none;
-    }
-    
-    .site-footer {
-        height: 38px;
-    }
-    
-    /* Boutons */
-    .btn {
-        padding: 10px 25px;
-        font-size: 14px;
-    }
-    
-    .section .container {
-        padding-top: 40px;
-        padding-bottom: 50px;
-    }
-    
-    .section-title h2 {
-        font-size: 30px;
-    }
-    
-    /* Typographie */
-    .contact-title {
-        font-size: 22px;
-    }
-    
-    .about .about-content .about-text h3 {
-        font-size: 20px;
-    }
-}
-
-/* Très petits mobiles (≤ 575px) */
-@media (max-width: 575px) {
-    /* Home */
-    .home .home-img img {
-        height: 250px;
-        max-width: 80%;
-    }
-    
-    h3.hello {
-        font-size: 20px;
-    }
-    
-    h3.my-profession {
-        font-size: 18px;
-    }
-    
-    .typing {
-        font-size: 18px;
-    }
-    
-    .home-info p {
-        font-size: 14px;
-    }
-    
-    /* Contact */
-    .contact .contact-info-item {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    
-    /* Compétences */
-    .skill-icon-card {
-        width: 75px;
-        padding: 12px 6px;
-    }
-    
-    .skill-icon-card i {
-        font-size: 28px;
-    }
-    
-    .skill-icon-card span {
-        font-size: 10px;
-    }
-    
-    /* Certifications */
-    .certifications-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Chatbot */
-    #chatbot-container {
-        width: 96%;
-        right: 2%;
-        height: 480px;
-        bottom: 90px !important;
-    }
-    
-    .chatbot-header {
-        padding: 12px 15px;
-    }
-    
-    .chatbot-avatar {
-        width: 38px;
-        height: 38px;
-    }
-    
-    .chatbot-title h4 {
-        font-size: 14px;
-    }
-    
-    .chatbot-status {
-        font-size: 10px;
-    }
-    
-    .chatbot-message {
-        font-size: 12px;
-        padding: 8px 12px;
-    }
-    
-    .message-avatar {
-        width: 30px;
-        height: 30px;
-    }
-    
-    /* Modals */
-    .cert-modal-box {
-        padding: 20px;
-        width: 95%;
-    }
-    
-    .cert-modal-img-wrap img {
-        max-height: 50vh;
-    }
-    
-    .carousel-modal-box {
-        padding: 15px;
-    }
-    
-    .modal-thumb {
-        width: 50px;
-        height: 38px;
-    }
-    
-    /* Section title */
-    .section-title h2 {
-        font-size: 26px;
-    }
-    
-    /* Stats */
-    .home-stats {
-        gap: 20px;
-    }
-    
-    .stat-number {
-        font-size: 24px;
-    }
-    
-    .stat-label {
-        font-size: 10px;
-    }
-}
-
-/* Préférences de mouvement réduit */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-    
-    .section.active {
-        animation: none;
-    }
-    
-    .service-item,
-    .portfolio-item,
-    .contact-info-item,
-    .reveal {
-        animation: none !important;
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        min-height: calc(100vh - 90px) !important;
+        height: auto !important;
+        display: block !important;
+        overflow: visible !important;
+        padding: 20px 15px 30px 15px !important;
+        z-index: auto !important;
         opacity: 1 !important;
         transform: none !important;
+        animation: none !important;
+        scroll-snap-align: start;
     }
+
+    /* Conteneur principal — scroll normal fluide */
+    .main-content {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        right: 0 !important;
+        bottom: 90px !important;
+        overflow-y: scroll !important;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+
+    /* Sections — hauteur auto, pas de snap */
+    .section {
+        scroll-snap-align: none !important;
+    }
+
+    /* Main container sans marge gauche */
+    .main-container { padding-left: 0 !important; }
+
+    /* Footer fixe au-dessus de la nav */
+    .site-footer {
+        bottom: 56px !important;
+        left: 0 !important;
+        height: 34px !important;
+    }
+
+    /* Back to top */
+    #back-to-top { bottom: 100px !important; left: 12px !important; right: auto !important; }
+
+    /* Chatbot */
+    .chatbot-toggle-btn { bottom: 100px !important; right: 12px !important; }
+    #chatbot-container  {
+        bottom: 160px !important;
+        width: 96% !important;
+        right: 2% !important;
+        height: 75vh !important;
+        max-height: 480px !important;
+    }
+
+    /* Grilles */
+    .service .service-item,
+    .about .about-content .experience,
+    .about .about-content .personal-info,
+    .contact .contact-info-item {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .contact .contact-form .col-6 { flex: 0 0 100%; max-width: 100%; }
+
+    /* Home */
+    h3.hello        { font-size: 22px; }
+    h3.my-profession { font-size: 20px; }
+    .home-info p    { font-size: 14px; }
+    .home .home-img img { height: 240px; }
+    .home-stats     { justify-content: center; gap: 20px; }
+    .stat-number    { font-size: 26px; }
+
+    /* Carousel */
+    .carousel-slide { padding: 10px 45px; }
+    .carousel-slide img { max-height: 200px; }
+    .carousel-arrow { width: 30px; height: 30px; font-size: 11px; }
+
+    /* Project cards */
+    .project-card-header { flex-direction: column; padding: 15px; }
+    .project-card-btns   { width: 100%; }
+    .proj-btn            { padding: 7px 14px; font-size: 12px; }
+    .project-card-info h2 { font-size: 15px; }
+
+    /* Compétences */
+    .skills-icons-grid   { justify-content: center; gap: 10px; }
+    .skill-icon-card     { width: 80px; padding: 12px 6px; }
+    .skill-icon-card i   { font-size: 32px; }
+    .skill-icon-card span { font-size: 10px; }
+
+    /* Certifications */
+    .certifications-grid { grid-template-columns: 1fr; }
+
+    /* Sections titre */
+    .section-title h2 { font-size: 28px; }
+    .section .container { padding-top: 30px; padding-bottom: 40px; }
+
+    /* Chatbot messages */
+    .chatbot-message  { font-size: 13px; padding: 8px 12px; }
+    .message-avatar   { width: 30px; height: 30px; }
+    .chatbot-title h4 { font-size: 14px; }
+    .chatbot-status   { font-size: 10px; }
 }
 
-
-/* ========== AVATAR CHATBOT - ICÔNE PAR DÉFAUT ========== */
-.chatbot-avatar-icon {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--skin-color), #c850c0);
-    border-radius: 50%;
-    color: white;
-    font-size: 20px;
+/* ── Très petits mobiles (≤ 400px) ── */
+@media (max-width: 400px) {
+    .aside .nav li a { font-size: 8px; }
+    .aside .nav li a i { font-size: 16px; }
+    h3.hello { font-size: 19px; }
+    h3.my-profession { font-size: 17px; }
+    .skill-icon-card { width: 70px; }
 }
 
-.message-avatar .chatbot-avatar-icon {
-    font-size: 16px;
-}
-
-.chatbot-avatar-icon.user-icon {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-}
-
-
-/* ========== OPTIMISATION PERFORMANCE ========== */
-
-/* Éviter le layout shift sur les images */
-.carousel-slide img,
-.portfolio-img img,
-.home-img img {
-    content-visibility: auto;
-}
-
-/* Accélération GPU pour les animations — éléments ciblés uniquement */
-.chatbot-toggle-btn,
-.carousel-track {
-    will-change: transform;
-    transform: translateZ(0);
-}
-
-/* Réduire les repaints sur les éléments animés */
-.chatbot-message,
-.message-wrapper,
-.skill-icon-card,
-.cert-card,
-.service-item-inner {
-    backface-visibility: hidden;
-}
-
-/* Images : éviter le débordement et forcer les dimensions */
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-
-/* ========== THÈME NOIR - AJUSTEMENTS ========== */
-
-/* Ombres adaptées au dark */
-.shadow-dark {
-    box-shadow: 0 0 20px rgba(0,0,0,0.6) !important;
-}
-
-/* Inputs formulaire */
-.form-control {
-    background: #1e1e1e !important;
-    border-color: #2a2a2a !important;
-    color: #f0f0f0 !important;
-}
-
-.form-control::placeholder {
-    color: #666 !important;
-}
-
-.form-control:focus {
-    border-color: var(--skin-color) !important;
-    box-shadow: 0 0 0 3px rgba(var(--skin-color-rgb), 0.15) !important;
-}
-
-/* Timeline */
-.about .about-content .timeline {
-    background-color: #141414 !important;
-}
-
-/* Aside / sidebar */
-.aside {
-    background: #0a0a0a !important;
-    border-right: 1px solid #1e1e1e;
-}
-
-/* Scrollbar globale */
-::-webkit-scrollbar {
-    width: 6px;
-}
-::-webkit-scrollbar-track {
-    background: #0d0d0d;
-}
-::-webkit-scrollbar-thumb {
-    background: var(--skin-color);
-    border-radius: 6px;
-}
-
-/* Style switcher dark */
-.style-switcher {
-    background: #141414 !important;
-    box-shadow: -3px 0 10px rgba(0,0,0,0.5) !important;
-}
-
-/* Loader dark */
-#page-loader {
-    background: #0d0d0d !important;
-}
-
-/* Site footer dark */
-.site-footer {
-    background: #0a0a0a !important;
-    border-top-color: #1e1e1e !important;
-}
-
-/* Chatbot dark */
-#chatbot-container {
-    background: #141414 !important;
-    border-color: #1e1e1e !important;
-}
-
-#chatbot-messages {
-    background: #0d0d0d !important;
-}
-
-#chatbot-input {
-    background: #1e1e1e !important;
-    color: #f0f0f0 !important;
-    border-color: #2a2a2a !important;
-}
-
-.chatbot-message.bot {
-    background: #1e1e1e !important;
-    border-color: #2a2a2a !important;
-    color: #f0f0f0 !important;
-}
-
-.chatbot-input {
-    background: #141414 !important;
-    border-top-color: #1e1e1e !important;
-}
-
-
-/* ========== GLASSMORPHISM — BLACK TRANSPARENT ========== */
-
-/* Sidebar — blur gardé, c'est fixe donc peu coûteux */
-.aside {
-    background: rgba(0, 0, 0, 0.92) !important;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-right: 1px solid rgba(255,255,255,0.05) !important;
-}
-
-/* Sections — fond solide, pas de blur */
-.section {
-    background: #080808 !important;
-}
-
-/* Cartes — fond solide léger, pas de blur */
-.service-item-inner {
-    background: #111111 !important;
-    border: 1px solid rgba(255,255,255,0.06) !important;
-}
-
-.skill-icon-card {
-    background: #111111 !important;
-    border: 1px solid rgba(255,255,255,0.06) !important;
-}
-
-.cert-card {
-    background: #111111 !important;
-    border: 1px solid rgba(255,255,255,0.06) !important;
-}
-
-.project-card {
-    background: #111111 !important;
-    border: 1px solid rgba(255,255,255,0.06) !important;
-}
-
-.about .about-content .timeline {
-    background: #111111 !important;
-    border: 1px solid rgba(255,255,255,0.05);
-}
-
-/* Chatbot — blur gardé, petit élément fixe */
-#chatbot-container {
-    background: rgba(8, 8, 8, 0.95) !important;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.08) !important;
-}
-
-#chatbot-messages {
-    background: #050505 !important;
-}
-
-.chatbot-input {
-    background: #0a0a0a !important;
-    border-top: 1px solid rgba(255,255,255,0.05) !important;
-}
-
-#chatbot-input {
-    background: #111111 !important;
-    border: 1px solid rgba(255,255,255,0.08) !important;
-    color: #f0f0f0 !important;
-}
-
-.chatbot-message.bot {
-    background: #161616 !important;
-    border: 1px solid rgba(255,255,255,0.07) !important;
-    color: #f0f0f0 !important;
-}
-
-/* Style switcher — fond solide */
-.style-switcher {
-    background: #0d0d0d !important;
-    border: 1px solid rgba(255,255,255,0.07) !important;
-}
-
-.style-switcher .s-icon {
-    background: #0d0d0d !important;
-    border: 1px solid rgba(255,255,255,0.07) !important;
-}
-
-/* Footer */
-.site-footer {
-    background: #080808 !important;
-    border-top: 1px solid rgba(255,255,255,0.06) !important;
-}
-
-/* Formulaire contact */
-.form-control {
-    background: #111111 !important;
-    border: 1px solid rgba(255,255,255,0.08) !important;
-    color: #f0f0f0 !important;
-}
-
-.form-control:focus {
-    background: #161616 !important;
-    border-color: var(--skin-color) !important;
-}
-
-/* Loader */
-#page-loader {
-    background: #050505 !important;
-}
-
-/* Carousel modal */
-.carousel-modal-box {
-    background: #0d0d0d !important;
-    border: 1px solid rgba(255,255,255,0.08);
-}
-
-.shadow-dark {
-    box-shadow: 0 0 20px rgba(0,0,0,0.7) !important;
-}

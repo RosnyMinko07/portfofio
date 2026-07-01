@@ -263,6 +263,61 @@
                     <p>Assurance du bon fonctionnement de vos ordinateurs et serveurs, avec un suivi fiable et réactif.</p>
                 </div>
             </div>
+
+            <!-- Service 6 -->
+            <div class="service-item padd-15">
+                <div class="service-item-inner">
+                    <div class="icon">
+                        <i class="fa fa-network-wired"></i>
+                    </div>
+                    <h4>Administration Réseau</h4>
+                    <p>Configuration, surveillance et gestion des infrastructures réseau pour garantir disponibilité et sécurité des communications.</p>
+                </div>
+            </div>
+
+            <!-- Service 7 -->
+            <div class="service-item padd-15">
+                <div class="service-item-inner">
+                    <div class="icon">
+                        <i class="fa fa-database"></i>
+                    </div>
+                    <h4>Administration DBA</h4>
+                    <p>Gestion, optimisation et maintenance de vos bases de données pour garantir performance, intégrité et disponibilité des données.</p>
+                </div>
+            </div>
+
+            <!-- Service 8 -->
+            <div class="service-item padd-15">
+                <div class="service-item-inner">
+                    <div class="icon">
+                        <i class="fa fa-pencil-ruler"></i>
+                    </div>
+                    <h4>Conception de Maquettes</h4>
+                    <p>Création de maquettes et prototypes UI/UX modernes et intuitifs avant le développement, pour valider l'expérience utilisateur.</p>
+                </div>
+            </div>
+
+            <!-- Service 9 -->
+            <div class="service-item padd-15">
+                <div class="service-item-inner">
+                    <div class="icon">
+                        <i class="fa fa-brain"></i>
+                    </div>
+                    <h4>Solutions Intelligence Artificielle</h4>
+                    <p>Intégration de solutions IA dans vos applications : chatbots, recommandations, analyse de données et automatisation intelligente.</p>
+                </div>
+            </div>
+
+            <!-- Service 10 -->
+            <div class="service-item padd-15">
+                <div class="service-item-inner">
+                    <div class="icon">
+                        <i class="fa fa-cloud-upload-alt"></i>
+                    </div>
+                    <h4>Déploiement &amp; Cloud</h4>
+                    <p>Déploiement de vos applications sur des plateformes cloud (Vercel, AWS, VPS) avec configuration CI/CD et gestion des environnements.</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -442,9 +497,6 @@
                     <button class="proj-btn btn-images" onclick="openCarousel('carousel-1')">
                         <i class="fas fa-chevron-up"></i> Masquer les images
                     </button>
-                    <a class="proj-btn btn-github" href="https://github.com/RosnyMinko07" target="_blank">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
                 </div>
             </div>
             <!-- Carousel 1 -->
@@ -480,9 +532,6 @@
                     </button>
                     <a class="proj-btn btn-demo" href="https://tech-info-plus.vercel.app/" target="_blank">
                         <i class="fas fa-external-link-alt"></i> Voir la démo
-                    </a>
-                    <a class="proj-btn btn-github" href="https://github.com/RosnyMinko07" target="_blank">
-                        <i class="fab fa-github"></i> GitHub
                     </a>
                 </div>
             </div>
@@ -537,9 +586,6 @@
                     <button class="proj-btn btn-images" onclick="openCarousel('carousel-3')">
                         <i class="fas fa-chevron-up"></i> Masquer les images
                     </button>
-                    <a class="proj-btn btn-github" href="https://github.com/RosnyMinko07" target="_blank">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
                 </div>
             </div>
             <!-- Carousel 3 -->
@@ -578,9 +624,6 @@
                     <button class="proj-btn btn-images" onclick="openCarousel('carousel-4')">
                         <i class="fas fa-chevron-up"></i> Masquer les images
                     </button>
-                    <a class="proj-btn btn-github" href="https://github.com/RosnyMinko07" target="_blank">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
                 </div>
             </div>
             <!-- Carousel 4 -->
@@ -618,9 +661,6 @@
                     <button class="proj-btn btn-images" onclick="openCarousel('carousel-5')">
                         <i class="fas fa-chevron-up"></i> Masquer les images
                     </button>
-                    <a class="proj-btn btn-github" href="https://github.com/RosnyMinko07" target="_blank">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
                 </div>
             </div>
             <!-- Carousel 5 -->
@@ -1263,21 +1303,33 @@ document.addEventListener('keydown', function(e) {
 
         // ===== BOUTON RETOUR EN HAUT =====
         var backBtn = document.getElementById('back-to-top');
-        var mainContent = document.querySelector('.main-content');
-        if (backBtn && mainContent) {
-            mainContent.addEventListener('scroll', function() {
-                backBtn.classList.toggle('visible', mainContent.scrollTop > 300);
-            });
-            // Aussi sur les sections individuelles
-            document.querySelectorAll('.section').forEach(function(sec) {
-                sec.addEventListener('scroll', function() {
-                    backBtn.classList.toggle('visible', sec.scrollTop > 300);
-                });
-            });
+
+        // Détecter le scroll sur tous les conteneurs possibles
+        function handleScroll(scrollTop) {
+            if (backBtn) backBtn.classList.toggle('visible', scrollTop > 300);
+        }
+
+        // Desktop : section active scroll
+        document.querySelectorAll('.section').forEach(function(sec) {
+            sec.addEventListener('scroll', function() { handleScroll(sec.scrollTop); });
+        });
+
+        // Mobile : main-content scroll
+        var mc = document.querySelector('.main-content');
+        if (mc) mc.addEventListener('scroll', function() { handleScroll(mc.scrollTop); });
+
+        // Click : remonter selon le contexte
+        if (backBtn) {
             backBtn.addEventListener('click', function() {
-                // Scroll la section active vers le haut
-                var activeSection = document.querySelector('.section.active');
-                if (activeSection) activeSection.scrollTo({ top: 0, behavior: 'smooth' });
+                if (window.innerWidth <= 767) {
+                    // Mobile : scroll snap → remonter au début du main-content
+                    var mainC = document.querySelector('.main-content');
+                    if (mainC) mainC.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    // Desktop : remonter la section active
+                    var active = document.querySelector('.section.active');
+                    if (active) active.scrollTo({ top: 0, behavior: 'smooth' });
+                }
             });
         }
 
@@ -1311,6 +1363,59 @@ document.addEventListener('keydown', function(e) {
         });
         // Aussi au chargement direct
         setTimeout(triggerStats, 800);
+
+        // ===== SCROLL SNAP MOBILE — nav active =====
+        function initMobileScroll() {
+            if (window.innerWidth > 767) return;
+
+            var mainContent = document.querySelector('.main-content');
+            if (!mainContent) return;
+
+            var sections = document.querySelectorAll('.section');
+            var navLinks = document.querySelectorAll('.aside .nav li a');
+
+            // Clic sur nav → scroll vers la section + marquer active
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth > 767) return;
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    var targetId = this.getAttribute('href').replace('#', '');
+                    var target = document.getElementById(targetId);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                    // Mettre active immédiatement
+                    navLinks.forEach(function(l) { l.classList.remove('active'); });
+                    this.classList.add('active');
+                }, true); // capture phase pour intercepter avant script.js
+            });
+
+            // IntersectionObserver → mettre à jour la nav active pendant le scroll
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
+                        var id = entry.target.getAttribute('id');
+                        navLinks.forEach(function(link) {
+                            var href = link.getAttribute('href').replace('#', '');
+                            link.classList.toggle('active', href === id);
+                        });
+                    }
+                });
+            }, {
+                root: mainContent,
+                threshold: 0.35
+            });
+
+            sections.forEach(function(s) {
+                if (s.getAttribute('id')) observer.observe(s);
+            });
+        }
+
+        initMobileScroll();
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 767) initMobileScroll();
+        });
 
         // ===== FOOTER =====
         var footerYear = document.getElementById('footer-year');
