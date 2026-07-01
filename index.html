@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- SEO Meta -->
     <title>Rosny OTSINA — Développeur Web & Mobile Freelance | Libreville, Gabon</title>
@@ -1303,29 +1303,21 @@ document.addEventListener('keydown', function(e) {
         // ===== BOUTON RETOUR EN HAUT =====
         var backBtn = document.getElementById('back-to-top');
 
-        // Détecter le scroll sur tous les conteneurs possibles
-        function handleScroll(scrollTop) {
-            if (backBtn) backBtn.classList.toggle('visible', scrollTop > 300);
-        }
-
-        // Desktop : section active scroll
-        document.querySelectorAll('.section').forEach(function(sec) {
-            sec.addEventListener('scroll', function() { handleScroll(sec.scrollTop); });
+        window.addEventListener('scroll', function() {
+            if (backBtn) backBtn.classList.toggle('visible', window.pageYOffset > 300);
         });
 
-        // Mobile : main-content scroll
-        var mc = document.querySelector('.main-content');
-        if (mc) mc.addEventListener('scroll', function() { handleScroll(mc.scrollTop); });
+        document.querySelectorAll('.section').forEach(function(sec) {
+            sec.addEventListener('scroll', function() {
+                if (backBtn) backBtn.classList.toggle('visible', sec.scrollTop > 300);
+            });
+        });
 
-        // Click : remonter selon le contexte
         if (backBtn) {
             backBtn.addEventListener('click', function() {
                 if (window.innerWidth <= 767) {
-                    // Mobile : scroll snap → remonter au début du main-content
-                    var mainC = document.querySelector('.main-content');
-                    if (mainC) mainC.scrollTo({ top: 0, behavior: 'smooth' });
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else {
-                    // Desktop : remonter la section active
                     var active = document.querySelector('.section.active');
                     if (active) active.scrollTo({ top: 0, behavior: 'smooth' });
                 }
@@ -1367,9 +1359,6 @@ document.addEventListener('keydown', function(e) {
         function initMobileScroll() {
             if (window.innerWidth > 767) return;
 
-            var mainContent = document.querySelector('.main-content');
-            if (!mainContent) return;
-
             var sections = document.querySelectorAll('.section');
             var navLinks = document.querySelectorAll('.aside .nav li a');
 
@@ -1382,18 +1371,18 @@ document.addEventListener('keydown', function(e) {
                     var targetId = this.getAttribute('href').replace('#', '');
                     var target = document.getElementById(targetId);
                     if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        var offset = target.getBoundingClientRect().top + window.pageYOffset - 10;
+                        window.scrollTo({ top: offset, behavior: 'smooth' });
                     }
-                    // Mettre active immédiatement
                     navLinks.forEach(function(l) { l.classList.remove('active'); });
                     this.classList.add('active');
-                }, true); // capture phase pour intercepter avant script.js
+                }, true);
             });
 
-            // IntersectionObserver → mettre à jour la nav active pendant le scroll
+            // IntersectionObserver — root null = viewport
             var observer = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
-                    if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
                         var id = entry.target.getAttribute('id');
                         navLinks.forEach(function(link) {
                             var href = link.getAttribute('href').replace('#', '');
@@ -1402,8 +1391,9 @@ document.addEventListener('keydown', function(e) {
                     }
                 });
             }, {
-                root: mainContent,
-                threshold: 0.35
+                root: null, /* viewport natif */
+                threshold: 0.3,
+                rootMargin: '0px 0px -20% 0px'
             });
 
             sections.forEach(function(s) {
