@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Clicker+Script&family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Clicker+Script&family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 /* ==================== VARIABLES ==================== */
 :root {
@@ -1001,10 +1001,11 @@ h3.my-profession {
 /* ==================== CHATBOT IA ==================== */
 #chatbot-container {
     position: fixed;
-    bottom: 185px;
-    right: 20px;
+    bottom: 115px;
+    right: 25px;
     width: 380px;
-    height: 550px;
+    height: 510px;
+    max-height: calc(100vh - 135px);
     background: var(--bg-black-100);
     border-radius: 20px;
     box-shadow: 0 15px 40px rgba(0,0,0,0.25);
@@ -1330,10 +1331,10 @@ h3.my-profession {
 
 .chatbot-toggle-btn {
     position: fixed;
-    bottom: 110px;
+    bottom: 50px;
     right: 25px;
-    width: 65px;
-    height: 65px;
+    width: 56px;
+    height: 56px;
     background: linear-gradient(135deg, var(--skin-color), #c850c0);
     border: 3px solid white;
     border-radius: 50%;
@@ -2486,6 +2487,7 @@ h3.my-profession {
         animation: none !important;
     }
 
+    html, body { overflow-x: hidden !important; max-width: 100vw !important; }
     body { overflow-y: auto !important; height: auto !important; padding-bottom: 48px !important; }
 
     .main-content { position: static !important; overflow: visible !important; height: auto !important; }
@@ -2502,7 +2504,6 @@ h3.my-profession {
     }
 
     .chatbot-toggle-btn { bottom: 50px !important; right: 15px !important; }
-    #chatbot-container { bottom: 120px !important; width: 96% !important; right: 2% !important; height: 65vh !important; max-height: 460px !important; }
     #back-to-top { bottom: 50px !important; left: 12px !important; right: auto !important; }
 
     .service .service-item,
@@ -2552,19 +2553,31 @@ h3.my-profession {
 
 
 
-/* ========== CHATBOT MOBILE — fixe, pas de zoom ========== */
+/* ========== CHATBOT MOBILE — fixe, bas d'écran propre ========== */
 @media (max-width: 767px) {
 
-    /* Chatbot fixe par rapport à la fenêtre, pas au scroll */
+    /* Chatbot ancré au bas de l'écran (ne monte pas vers le haut) */
     #chatbot-container {
         position: fixed !important;
-        bottom: 125px !important;
-        left: 2% !important;
-        right: 2% !important;
-        width: 96% !important;
-        height: 70vh !important;
-        max-height: 460px !important;
-        transform: none !important;
+        bottom: 45px !important;
+        left: 10px !important;
+        right: 10px !important;
+        width: auto !important;
+        height: 68vh !important;
+        max-height: 480px !important;
+        border-radius: 16px !important;
+        transform: translateY(20px) scale(0.96) !important;
+    }
+
+    #chatbot-container.open {
+        transform: translateY(0) scale(1) !important;
+    }
+
+    /* Masquer le bouton rond quand le chatbot est ouvert pour ne pas encombrer */
+    .chatbot-toggle-btn.open {
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: scale(0.4) !important;
     }
 
     /* Input 16px minimum — empêche le zoom iOS/Android */
@@ -2573,7 +2586,7 @@ h3.my-profession {
         padding: 10px 14px !important;
     }
 
-    /* Empêcher le redimensionnement du chatbot quand le clavier s'ouvre */
+    /* Empêcher le redimensionnement bizarre quand le clavier s'ouvre */
     #chatbot-messages {
         flex: 1 !important;
         min-height: 0 !important;
@@ -2582,10 +2595,10 @@ h3.my-profession {
 
     .chatbot-toggle-btn {
         position: fixed !important;
-        bottom: 65px !important;
+        bottom: 50px !important;
         right: 15px !important;
-        width: 52px !important;
-        height: 52px !important;
+        width: 50px !important;
+        height: 50px !important;
     }
 }
 

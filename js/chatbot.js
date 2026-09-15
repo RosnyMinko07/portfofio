@@ -350,7 +350,9 @@ document.addEventListener('DOMContentLoaded', function () {
   function toggleChatbot() {
     chatbotContainer.classList.toggle('open');
     if (chatbotContainer.classList.contains('open')) {
-      chatbotInput.focus();
+      if (window.innerWidth > 767) {
+        chatbotInput.focus({ preventScroll: true });
+      }
       chatbotToggle.classList.add('open');
     } else {
       chatbotToggle.classList.remove('open');
@@ -523,7 +525,7 @@ document.addEventListener('DOMContentLoaded', function () {
       conversationHistory.push({ role: 'assistant', content: localResp });
       chatbotInput.disabled = false;
       chatbotSend.disabled = false;
-      chatbotInput.focus();
+      if (window.innerWidth > 767) chatbotInput.focus({ preventScroll: true });
       return;
     }
 
@@ -561,7 +563,7 @@ document.addEventListener('DOMContentLoaded', function () {
     } finally {
       chatbotInput.disabled = false;
       chatbotSend.disabled = false;
-      chatbotInput.focus();
+      if (window.innerWidth > 767) chatbotInput.focus({ preventScroll: true });
     }
   }
 

@@ -1530,7 +1530,27 @@ document.addEventListener('keydown', function(e) {
                     }
                     navLinks.forEach(function(l) { l.classList.remove('active'); });
                     this.classList.add('active');
+
+                    // Fermer automatiquement le menu burger sur mobile après un clic
+                    var aside = document.querySelector('.aside');
+                    var navToggler = document.querySelector('.nav-toggler');
+                    if (aside && aside.classList.contains('open')) {
+                        aside.classList.remove('open');
+                        if (navToggler) navToggler.classList.remove('open');
+                    }
                 }, true);
+            });
+
+            // Fermer la sidebar si on clique en dehors (overlay) sur mobile
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth <= 767) {
+                    var aside = document.querySelector('.aside');
+                    var navToggler = document.querySelector('.nav-toggler');
+                    if (aside && aside.classList.contains('open') && !aside.contains(e.target) && !navToggler.contains(e.target)) {
+                        aside.classList.remove('open');
+                        if (navToggler) navToggler.classList.remove('open');
+                    }
+                }
             });
 
             // IntersectionObserver — root null = viewport
