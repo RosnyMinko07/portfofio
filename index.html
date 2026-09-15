@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -144,10 +144,10 @@
                                 <div class="personal-info padd-15">
                                     <div class="row">
                                         <div class="info-item padd-15">
-                                            <p>Anniversaire : <span></span></p>
+                                            <p>Nationalité : <span>Gabonaise</span></p>
                                         </div>
                                         <div class="info-item padd-15">
-                                            <p>Siteweb : <span>en cours</span></p>
+                                            <p>GitHub : <span><a href="https://github.com/RosnyMinko07" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">github.com/RosnyMinko07</a></span></p>
                                         </div>
                                         <div class="info-item padd-15">
                                             <p>Email : <span>rodrigueotsina@gmail.com</span></p>
@@ -156,7 +156,7 @@
                                             <p>Phone : <span>+241 077 12 24 85</span></p>
                                         </div>
                                         <div class="info-item padd-15">
-                                            <p>City : <span>Owendo sa m'etonne</span></p>
+                                            <p>Ville : <span>Libreville / Owendo, Gabon</span></p>
                                         </div>
                                         <div class="info-item padd-15">
                                             <p>Freelance : <span>Disponible</span></p>
@@ -164,7 +164,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="buttons padd-15">
-                                            <a href="pdf/OTSINA CV.pdf" class="btn" target="_blank">Voir mon CV</a>
+                                            <a href="pdf/OTSINA CV.pdf" data-pdf="pdf/OTSINA CV.pdf" onclick="previewCV(event)" class="btn" target="_blank">Voir mon CV</a>
                                         </div>
                                     </div>
                                 </div>
@@ -686,8 +686,8 @@
         <div class="cv-modal-header">
             <h3><i class="fas fa-file-pdf"></i> CV — Rosny OTSINA</h3>
             <div class="cv-modal-actions">
-                <a id="cv-download-btn" href="pdf/OTSINA MINKO Jean Rodrigue Rismin.pdf" target="_blank" class="btn cv-dl-btn">
-                    <i class="fas fa-external-link-alt"></i> Ouvrir / Télécharger
+                <a id="cv-download-btn" href="pdf/OTSINA CV.pdf" target="_blank" download="OTSINA CV.pdf" class="btn cv-dl-btn">
+                    <i class="fas fa-download"></i> Télécharger le CV
                 </a>
                 <button class="cv-close-btn" onclick="closeCVModal()"><i class="fas fa-times"></i></button>
             </div>
@@ -698,7 +698,7 @@
             <div class="cv-fallback" id="cv-fallback">
                 <i class="fas fa-file-pdf"></i>
                 <p>Aperçu non disponible sur ce navigateur.</p>
-                <a href="pdf/OTSINA MINKO Jean Rodrigue Rismin.pdf" download class="btn">
+                <a href="pdf/OTSINA CV.pdf" download="OTSINA CV.pdf" class="btn">
                     <i class="fas fa-download"></i> Télécharger le CV
                 </a>
             </div>
@@ -973,11 +973,14 @@ document.addEventListener('keydown', function(e) {
 
 // ===== MODAL CV =====
 function previewCV(e) {
-    e.preventDefault();
-    var pdfUrl = e.currentTarget.getAttribute('data-pdf');
+    if (e) e.preventDefault();
+    var pdfUrl = (e && e.currentTarget && e.currentTarget.getAttribute('data-pdf')) || 'pdf/OTSINA CV.pdf';
     var modal  = document.getElementById('cv-modal');
     var iframe = document.getElementById('cv-iframe');
     var fallback = document.getElementById('cv-fallback');
+    var downloadBtn = document.getElementById('cv-download-btn');
+
+    if (downloadBtn) downloadBtn.setAttribute('href', pdfUrl);
 
     iframe.src = '';
     fallback.style.display = 'none';
@@ -1114,28 +1117,28 @@ document.addEventListener('keydown', function(e) {
                         <div class="contact-info-item">
                             <div class="icon"><i class="fa fa-phone"></i></div>
                             <h4>Contactez moi au</h4>
-                            <p>+241 077 12 24 85</p>
+                            <p><a href="tel:+24177122485" style="color: inherit;">+241 077 12 24 85</a></p>
                         </div>
                         <!-- Contact Info End -->
                         <!-- Contact Info Start-->
                         <div class="contact-info-item">
                             <div class="icon"><i class="fa fa-map-marker"></i></div>
                             <h4>Localité</h4>
-                            <p>Libreville</p>
+                            <p>Libreville, Gabon</p>
                         </div>
                         <!-- Contact Info End -->
                         <!-- Contact Info Start-->
                         <div class="contact-info-item">
                             <div class="icon"><i class="fa fa-envelope"></i></div>
                             <h4>Email</h4>
-                            <p>rodrigueotsina@gmail.com</p>
+                            <p><a href="mailto:rodrigueotsina@gmail.com" style="color: inherit;">rodrigueotsina@gmail.com</a></p>
                         </div>
                         <!-- Contact Info End -->
                         <!-- Contact Info Start-->
                         <div class="contact-info-item">
-                            <div class="icon"><i class="fa fa-globe-europe"></i></div>
-                            <h4>Website</h4>
-                            <p>www.https://github.com/RosnyMinko07/</p>
+                            <div class="icon"><i class="fab fa-github"></i></div>
+                            <h4>GitHub</h4>
+                            <p><a href="https://github.com/RosnyMinko07" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">github.com/RosnyMinko07</a></p>
                         </div>
                         <!-- Contact Info End -->
                     </div>
@@ -1202,8 +1205,7 @@ document.addEventListener('keydown', function(e) {
     };
 
     try {
-      // IMPORTANT: Utilisez le bon chemin
-      const response = await fetch("api/send-email", {
+      const response = await fetch("/api/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -1252,8 +1254,9 @@ document.addEventListener('keydown', function(e) {
                 <span>Développeur Web &amp; Mobile Freelance</span>
             </div>
             <div class="site-footer-socials">
-                <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://wa.me/24177124485" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://github.com/RosnyMinko07" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://wa.me/24177122485" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 <a href="mailto:rodrigueotsina@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
             </div>
             <div class="site-footer-right">
@@ -1282,14 +1285,7 @@ document.addEventListener('keydown', function(e) {
   <div class="chatbot-header">
     <div class="chatbot-header-left">
       <div class="chatbot-avatar">
-        <!--
-          AVATAR CHATBOT — mets ton image ici :
-          <img src="images/ton-avatar.png" loading="lazy" alt="Sophia" id="chatbot-avatar-img">
-          Ou garde l'icône par défaut ci-dessous
-        -->
-        <div class="chatbot-avatar-icon" id="chatbot-avatar-img">
-          <i class="fas fa-robot"></i>
-        </div>
+        <img src="images/sophia.png" loading="lazy" alt="Sophia" id="chatbot-avatar-img">
       </div>
       <div class="chatbot-title">
         <h4><i class="fas fa-robot"></i> Sophia - IA</h4>
@@ -1311,11 +1307,7 @@ document.addEventListener('keydown', function(e) {
     <!-- Message de bienvenue -->
     <div class="message-wrapper bot-wrapper">
       <div class="message-avatar">
-        <!--
-          AVATAR MESSAGE — mets ton image ici :
-          <img src="images/ton-avatar.png" loading="lazy" alt="Sophia">
-        -->
-        <div class="chatbot-avatar-icon"><i class="fas fa-robot"></i></div>
+        <img src="images/sophia.png" loading="lazy" alt="Sophia">
       </div>
       <div class="message-content">
         <div class="chatbot-message bot">

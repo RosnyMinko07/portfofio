@@ -11,9 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const voiceToggle     = document.getElementById('chatbot-voice-toggle');
   const avatarImg       = document.getElementById('chatbot-avatar-img');
   const toggleImg       = document.getElementById('chatbot-toggle-img');
-  // Pour changer l'avatar : remplace le chemin ci-dessous par ton image
-  // Ex: const AVATAR_URL = 'images/mon-avatar.png';
-  const AVATAR_URL = null; // null = utilise l'icône par défaut
+  // Avatar Sophia
+  const AVATAR_URL = 'images/sophia.png';
   const USER_AVATAR = null;
 
   // Fonction pour créer un avatar (icône ou image)
