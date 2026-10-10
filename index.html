@@ -67,25 +67,32 @@
     <button id="back-to-top" title="Retour en haut">
         <i class="fas fa-chevron-up"></i>
     </button>
-    <!--Main Start-->
-    <div class="main-container">
-        <div class="aside">
+    <!-- Header Start -->
+    <header class="site-header" id="site-header">
+        <div class="header-container">
             <div class="logo">
-                <a href="#"><span>Ros</span>Ny</a>
+                <a href="#home"><span>Ros</span>Ny</a>
             </div>
-            <div class="nav-toggler">
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav">
+                    <li><a href="#home" class="active">Menu</a></li>
+                    <li><a href="#about">A propos</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#skills">Compétences</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#certifications">Certifications</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-toggler" id="nav-toggler" aria-label="Menu de navigation">
                 <span></span>
             </div>
-            <ul class="nav">
-                <li><a href="#home" class="active"><i class="fa fa-home"></i>Menu</a></li>
-                <li><a href="#about" ><i class="fa fa-user"></i>A propos </a></li>
-                <li><a href="#services" ><i class="fa fa-list"></i>Services</a></li>
-                <li><a href="#skills" ><i class="fa fa-code"></i>Compétences</a></li>
-                <li><a href="#portfolio" ><i class="fa fa-briefcase"></i>Portfolio</a></li>
-                <li><a href="#certifications" ><i class="fa fa-certificate"></i>Certifications</a></li>
-                <li><a href="#contact" ><i class="fa fa-comment"></i>Contact</a></li>
-            </ul>
         </div>
+    </header>
+    <!-- Header End -->
+
+    <!--Main Start-->
+    <div class="main-container">
         <!-- Main Content Start -->
         <div class="main-content">
             <!-- Nav-bar-->
@@ -164,15 +171,64 @@
                                     </div>
                                     <div class="row">
                                         <div class="buttons padd-15">
-                                            <a href="pdf/OTSINA CV.pdf" data-pdf="pdf/OTSINA CV.pdf" onclick="previewCV(event)" class="btn" target="_blank">Voir mon CV</a>
+                                            <a href="pdf/OTSINA MINKO Rodrigue cv.pdf" data-pdf="pdf/OTSINA MINKO Rodrigue cv.pdf" onclick="previewCV(event)" class="btn" target="_blank">Voir mon CV</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- ===== EXPÉRIENCE ===== -->
-                            
-                        </div>
+                            <div class="row">
+                                <div class="experience padd-15">
+                                    <h3 class="title">Expériences Professionnelles</h3>
+                                    <div class="timeline-box padd-15">
+                                        <div class="timeline shadow-dark">
+                                            <!-- Expérience 1 -->
+                                            <div class="timeline-item">
+                                                <div class="circle-dot"></div>
+                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> Jan. 2026 - Présent · Libreville</h3>
+                                                <h4 class="timeline-title">Développeur Full-Stack Freelance — HÔTEL YA</h4>
+                                                <p class="timeline-text">Conception d'une solution complète de gestion hôtelière : application mobile (Flutter), site web (React / Next.js) et logiciel desktop — réservations en ligne, facturation, suivi clients, gestion de stock, tableau de bord admin. Architecture API REST, base de données MySQL / PostgreSQL, authentification et déploiement.</p>
+                                            </div>
+                                            <!-- Expérience 2 -->
+                                            <div class="timeline-item">
+                                                <div class="circle-dot"></div>
+                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> Avril 2026 - Présent · Libreville</h3>
+                                                <h4 class="timeline-title">Développeur Backend Freelance — AARTFLIX</h4>
+                                                <p class="timeline-text">Développement du backend, gestion de la base de données et administration de la plateforme de streaming.</p>
+                                            </div>
+                                            <!-- Expérience 3 -->
+                                            <div class="timeline-item">
+                                                <div class="circle-dot"></div>
+                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> Août - Oct. 2025 · Port-Gentil</h3>
+                                                <h4 class="timeline-title">Développeur Full-Stack — TECH INFO PLUS</h4>
+                                                <p class="timeline-text">Conception et développement d'un système de facturation et de gestion de stock, de la modélisation des données à l'interface utilisateur. Optimisation des performances, diagnostic et correction d'anomalies (débogage, maintenance corrective).</p>
+                                            </div>
+                                            <!-- Expérience 4 -->
+                                            <div class="timeline-item">
+                                                <div class="circle-dot"></div>
+                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> Juil. - Sept. 2024 · Libreville</h3>
+                                                <h4 class="timeline-title">Développeur Full-Stack — INPTIC</h4>
+                                                <p class="timeline-text">Développement d'une application multiplateforme de suivi et de gestion des notes (PHP, MySQL, Bootstrap) : conception de la base de données, authentification, gestion des notes, calcul automatique des moyennes.</p>
+                                            </div>
+                                            <!-- Expérience 5 -->
+                                            <div class="timeline-item">
+                                                <div class="circle-dot"></div>
+                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> Jan. - Juin 2024 · Libreville</h3>
+                                                <h4 class="timeline-title">Développeur Mobile & Web Freelance</h4>
+                                                <p class="timeline-text">Applications web et mobiles sur mesure pour des clients locaux (gestion commerciale, suivi de commandes, interfaces admin) : analyse des besoins, prototypage, développement et livraison.</p>
+                                            </div>
+                                            <!-- Expérience 6 -->
+                                            <div class="timeline-item">
+                                                <div class="circle-dot"></div>
+                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> Mars - Déc. 2023 · Libreville</h3>
+                                                <h4 class="timeline-title">Développeur Mobile Freelance — SUIVI DE LIVRAISONS</h4>
+                                                <p class="timeline-text">Application mobile Android OS (Flutter) pour le suivi de livraisons et la gestion de commandes d'un commerce local : création de commande, attribution livreur, suivi GPS temps réel, confirmation, historique et facturation. Backend API REST (Node.js / PHP), MySQL, notifications push.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </section>
@@ -686,7 +742,7 @@
         <div class="cv-modal-header">
             <h3><i class="fas fa-file-pdf"></i> CV — Rosny OTSINA</h3>
             <div class="cv-modal-actions">
-                <a id="cv-download-btn" href="pdf/OTSINA CV.pdf" target="_blank" download="OTSINA CV.pdf" class="btn cv-dl-btn">
+                <a id="cv-download-btn" href="pdf/OTSINA MINKO Rodrigue cv.pdf" target="_blank" download="OTSINA MINKO Rodrigue cv.pdf" class="btn cv-dl-btn">
                     <i class="fas fa-download"></i> Télécharger le CV
                 </a>
                 <button class="cv-close-btn" onclick="closeCVModal()"><i class="fas fa-times"></i></button>
@@ -698,7 +754,7 @@
             <div class="cv-fallback" id="cv-fallback">
                 <i class="fas fa-file-pdf"></i>
                 <p>Aperçu non disponible sur ce navigateur.</p>
-                <a href="pdf/OTSINA CV.pdf" download="OTSINA CV.pdf" class="btn">
+                <a href="pdf/OTSINA MINKO Rodrigue cv.pdf" download="OTSINA MINKO Rodrigue cv.pdf" class="btn">
                     <i class="fas fa-download"></i> Télécharger le CV
                 </a>
             </div>
@@ -974,7 +1030,7 @@ document.addEventListener('keydown', function(e) {
 // ===== MODAL CV =====
 function previewCV(e) {
     if (e) e.preventDefault();
-    var pdfUrl = (e && e.currentTarget && e.currentTarget.getAttribute('data-pdf')) || 'pdf/OTSINA CV.pdf';
+    var pdfUrl = (e && e.currentTarget && e.currentTarget.getAttribute('data-pdf')) || 'pdf/OTSINA MINKO Rodrigue cv.pdf';
     var modal  = document.getElementById('cv-modal');
     var iframe = document.getElementById('cv-iframe');
     var fallback = document.getElementById('cv-fallback');
@@ -1037,28 +1093,44 @@ document.addEventListener('keydown', function(e) {
                     </div>
                     <div class="certifications-grid padd-15">
 
-                        <!--
-                        =====================================================
-                        COMMENT AJOUTER UNE CERTIFICATION :
-                        Copie le bloc ci-dessous et remplis les informations.
-                        Pour l'image : mets ton fichier dans le dossier images/
-                        et remplace "images/ton-certificat.png" par le bon nom.
-                        =====================================================
-
+                        <!-- Certification 1 -->
                         <div class="cert-card">
-                            <div class="cert-icon"><i class="fab fa-python"></i></div>
-                            <h4>Nom de la certification</h4>
-                            <p class="cert-issuer"><i class="fas fa-building"></i> Organisme (ex: Coursera, Udemy...)</p>
-                            <p class="cert-date"><i class="fa fa-calendar"></i> Année</p>
-                            <span class="cert-badge">Catégorie</span>
-                            <br>
-                            <button class="cert-view-btn" onclick="openCertModal('images/ton-certificat.png','Nom de la certification')">
-                                <i class="fas fa-eye"></i> Voir le certificat
-                            </button>
+                            <div class="cert-thumb" onclick="openCertModal('images/certificat/Rodrigue OTSINA MINKO - Intro to Machine Learning.png', 'Intro to Machine Learning')">
+                                <img src="images/certificat/Rodrigue OTSINA MINKO - Intro to Machine Learning.png" alt="Intro to Machine Learning" loading="lazy">
+                                <div class="cert-thumb-overlay">
+                                    <span class="cert-zoom-btn"><i class="fas fa-search-plus"></i> Agrandir</span>
+                                </div>
+                            </div>
+                            <h4>Intro to Machine Learning</h4>
+                            <p class="cert-issuer"><i class="fas fa-award"></i> Kaggle / Google</p>
+                            <span class="cert-badge">Machine Learning</span>
                         </div>
-                        -->
 
-                        <!-- Ajoute tes certifications ici -->
+                        <!-- Certification 2 -->
+                        <div class="cert-card">
+                            <div class="cert-thumb" onclick="openCertModal('images/certificat/Rodrigue OTSINA MINKO - Python.png', 'Python')">
+                                <img src="images/certificat/Rodrigue OTSINA MINKO - Python.png" alt="Python" loading="lazy">
+                                <div class="cert-thumb-overlay">
+                                    <span class="cert-zoom-btn"><i class="fas fa-search-plus"></i> Agrandir</span>
+                                </div>
+                            </div>
+                            <h4>Python</h4>
+                            <p class="cert-issuer"><i class="fas fa-award"></i> Kaggle / Google</p>
+                            <span class="cert-badge">Programmation</span>
+                        </div>
+
+                        <!-- Certification 3 -->
+                        <div class="cert-card">
+                            <div class="cert-thumb" onclick="openCertModal('images/certificat/Rodrigue OTSINA MINKO - Intro to SQL.png', 'Intro to SQL')">
+                                <img src="images/certificat/Rodrigue OTSINA MINKO - Intro to SQL.png" alt="Intro to SQL" loading="lazy">
+                                <div class="cert-thumb-overlay">
+                                    <span class="cert-zoom-btn"><i class="fas fa-search-plus"></i> Agrandir</span>
+                                </div>
+                            </div>
+                            <h4>Intro to SQL</h4>
+                            <p class="cert-issuer"><i class="fas fa-award"></i> Kaggle / Google</p>
+                            <span class="cert-badge">Bases de données</span>
+                        </div>
 
                     </div>
                 </div>
@@ -1066,10 +1138,10 @@ document.addEventListener('keydown', function(e) {
             <!-- Certifications Section End -->
 
             <!-- Modal Certificat -->
-            <div id="cert-modal" class="cert-modal-overlay" onclick="closeCertModal(this)">
-                <div class="cert-modal-box">
-                    <button class="cert-modal-close" onclick="closeCertModal()"><i class="fas fa-times"></i></button>
-                    <h3 id="cert-modal-title"></h3>
+            <div id="cert-modal" class="cert-modal-overlay" onclick="closeCertModal(event)">
+                <div class="cert-modal-box" onclick="event.stopPropagation()">
+                    <button class="cert-modal-close" onclick="closeCertModal()" title="Fermer"><i class="fas fa-times"></i></button>
+                    <h3 id="cert-modal-title">Certificat</h3>
                     <div class="cert-modal-img-wrap">
                         <img id="cert-modal-img" src="" alt="Certificat">
                         <div class="cert-modal-placeholder">
@@ -1085,17 +1157,17 @@ document.addEventListener('keydown', function(e) {
                 const modal = document.getElementById('cert-modal');
                 const img   = document.getElementById('cert-modal-img');
                 const ph    = modal.querySelector('.cert-modal-placeholder');
-                document.getElementById('cert-modal-title').textContent = title;
+                document.getElementById('cert-modal-title').textContent = title || 'Certificat';
                 img.src = imgSrc;
                 img.style.display = 'none';
-                ph.style.display  = 'flex';
-                img.onload  = () => { img.style.display = 'block'; ph.style.display = 'none'; };
-                img.onerror = () => { img.style.display = 'none';  ph.style.display = 'flex'; };
+                if (ph) ph.style.display = 'flex';
+                img.onload  = () => { img.style.display = 'block'; if (ph) ph.style.display = 'none'; };
+                img.onerror = () => { img.style.display = 'none';  if (ph) ph.style.display = 'flex'; };
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
-            function closeCertModal(overlay) {
-                if (overlay && overlay.id !== 'cert-modal' && !overlay.classList.contains('cert-modal-overlay')) return;
+            function closeCertModal(e) {
+                if (e && e.target && e.target !== document.getElementById('cert-modal') && !e.target.closest('.cert-modal-close')) return;
                 document.getElementById('cert-modal').classList.remove('active');
                 document.body.style.overflow = '';
             }
@@ -1378,15 +1450,15 @@ document.addEventListener('keydown', function(e) {
         }
         // Observer pour déclencher l'animation quand la section about est visible
         var aboutSection = document.getElementById('about');
-        if (aboutSection) {
-            var observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(m) {
-                    if (m.target.classList.contains('active')) {
-                        setTimeout(animateBars, 200);
+        if (aboutSection && 'IntersectionObserver' in window) {
+            var barObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        setTimeout(animateBars, 150);
                     }
                 });
-            });
-            observer.observe(aboutSection, { attributes: true, attributeFilter: ['class'] });
+            }, { threshold: 0.15 });
+            barObserver.observe(aboutSection);
         }
         // Aussi au clic sur le lien about
         var aboutLink = document.querySelector('a[href="#about"]');
@@ -1395,10 +1467,7 @@ document.addEventListener('keydown', function(e) {
                 setTimeout(animateBars, 400);
             });
         }
-        // Si about est déjà active au chargement
-        if (aboutSection && aboutSection.classList.contains('active')) {
-            setTimeout(animateBars, 500);
-        }
+        setTimeout(animateBars, 1000);
     })();
     </script>
 
@@ -1461,20 +1530,9 @@ document.addEventListener('keydown', function(e) {
             if (backBtn) backBtn.classList.toggle('visible', window.pageYOffset > 300);
         });
 
-        document.querySelectorAll('.section').forEach(function(sec) {
-            sec.addEventListener('scroll', function() {
-                if (backBtn) backBtn.classList.toggle('visible', sec.scrollTop > 300);
-            });
-        });
-
         if (backBtn) {
             backBtn.addEventListener('click', function() {
-                if (window.innerWidth <= 767) {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                    var active = document.querySelector('.section.active');
-                    if (active) active.scrollTo({ top: 0, behavior: 'smooth' });
-                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         }
 
@@ -1500,85 +1558,24 @@ document.addEventListener('keydown', function(e) {
             }
         }
 
-        // Déclencher au chargement si home est active
-        if (document.querySelector('#home.active')) triggerStats();
-        document.querySelector('a[href="#home"]') && document.querySelector('a[href="#home"]').addEventListener('click', function() {
-            statsAnimated = false;
-            setTimeout(triggerStats, 400);
-        });
-        // Aussi au chargement direct
-        setTimeout(triggerStats, 800);
-
-        // ===== SCROLL SNAP MOBILE — nav active =====
-        function initMobileScroll() {
-            if (window.innerWidth > 767) return;
-
-            var sections = document.querySelectorAll('.section');
-            var navLinks = document.querySelectorAll('.aside .nav li a');
-
-            // Clic sur nav → scroll vers la section + marquer active
-            navLinks.forEach(function(link) {
-                link.addEventListener('click', function(e) {
-                    if (window.innerWidth > 767) return;
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                    var targetId = this.getAttribute('href').replace('#', '');
-                    var target = document.getElementById(targetId);
-                    if (target) {
-                        var offset = target.getBoundingClientRect().top + window.pageYOffset - 10;
-                        window.scrollTo({ top: offset, behavior: 'smooth' });
-                    }
-                    navLinks.forEach(function(l) { l.classList.remove('active'); });
-                    this.classList.add('active');
-
-                    // Fermer automatiquement le menu burger sur mobile après un clic
-                    var aside = document.querySelector('.aside');
-                    var navToggler = document.querySelector('.nav-toggler');
-                    if (aside && aside.classList.contains('open')) {
-                        aside.classList.remove('open');
-                        if (navToggler) navToggler.classList.remove('open');
-                    }
-                }, true);
-            });
-
-            // Fermer la sidebar si on clique en dehors (overlay) sur mobile
-            document.addEventListener('click', function(e) {
-                if (window.innerWidth <= 767) {
-                    var aside = document.querySelector('.aside');
-                    var navToggler = document.querySelector('.nav-toggler');
-                    if (aside && aside.classList.contains('open') && !aside.contains(e.target) && !navToggler.contains(e.target)) {
-                        aside.classList.remove('open');
-                        if (navToggler) navToggler.classList.remove('open');
-                    }
-                }
-            });
-
-            // IntersectionObserver — root null = viewport
-            var observer = new IntersectionObserver(function(entries) {
+        var statsEl = document.querySelector('.home-stats');
+        if (statsEl && 'IntersectionObserver' in window) {
+            var statsObserver = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
-                    if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
-                        var id = entry.target.getAttribute('id');
-                        navLinks.forEach(function(link) {
-                            var href = link.getAttribute('href').replace('#', '');
-                            link.classList.toggle('active', href === id);
-                        });
+                    if (entry.isIntersecting) {
+                        triggerStats();
+                        statsObserver.unobserve(entry.target);
                     }
                 });
-            }, {
-                root: null, /* viewport natif */
-                threshold: 0.3,
-                rootMargin: '0px 0px -20% 0px'
-            });
-
-            sections.forEach(function(s) {
-                if (s.getAttribute('id')) observer.observe(s);
-            });
+            }, { threshold: 0.2 });
+            statsObserver.observe(statsEl);
+        } else {
+            setTimeout(triggerStats, 800);
         }
 
-        initMobileScroll();
-        window.addEventListener('resize', function() {
-            if (window.innerWidth <= 767) initMobileScroll();
-        });
+
+
+
 
         // ===== FOOTER =====
         var footerYear = document.getElementById('footer-year');
