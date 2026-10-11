@@ -75,17 +75,27 @@
             </div>
             <nav class="nav-menu" id="nav-menu">
                 <ul class="nav">
-                    <li><a href="#home" class="active">Menu</a></li>
-                    <li><a href="#about">A propos</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#skills">Compétences</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#certifications">Certifications</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#home" class="active" data-i18n="nav_home">Menu</a></li>
+                    <li><a href="#about" data-i18n="nav_about">A propos</a></li>
+                    <li><a href="#services" data-i18n="nav_services">Services</a></li>
+                    <li><a href="#process" data-i18n="nav_process">Processus</a></li>
+                    <li><a href="#skills" data-i18n="nav_skills">Compétences</a></li>
+                    <li><a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a></li>
+                    <li><a href="#certifications" data-i18n="nav_certifications">Certifications</a></li>
+                    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
                 </ul>
             </nav>
-            <div class="nav-toggler" id="nav-toggler" aria-label="Menu de navigation">
-                <span></span>
+            <div class="header-actions">
+                <div class="lang-switch-wrap">
+                    <button class="lang-toggle-btn" id="lang-toggle-btn" aria-label="Changer de langue / Switch language" title="Français / English">
+                        <span class="lang-opt active" id="lang-opt-fr">FR</span>
+                        <span class="lang-sep">/</span>
+                        <span class="lang-opt" id="lang-opt-en">EN</span>
+                    </button>
+                </div>
+                <div class="nav-toggler" id="nav-toggler" aria-label="Menu de navigation">
+                    <span></span>
+                </div>
             </div>
         </div>
     </header>
@@ -100,26 +110,26 @@
                 <div class="container">
                     <div class="row">
                         <div class="home-info padd-15">
-                            <h3 class="hello">Salut, moi c'est <span class="name">Rosny OTSINA </span></h3>
-                            <h3 class="my-profession">Je suis <span class="typing">Freelance</span></h3>
-                            <p>Développeur Web et Mobile freelance, je crée des applications robustes, évolutives et maintenables,
+                            <h3 class="hello"><span data-i18n="home_hello">Salut, moi c'est</span> <span class="name">Rosny OTSINA </span></h3>
+                            <h3 class="my-profession"><span data-i18n="home_iam">Je suis</span> <span class="typing">Freelance</span></h3>
+                            <p data-i18n="home_desc">Développeur Web et Mobile freelance, je crée des applications robustes, évolutives et maintenables,
                                  du backend au frontend, en passant par le design et le déploiement. Mon portfolio présente mes projets,
                                   alliant techniques modernes, créativité et solutions concrètes, pour démontrer ma capacité à mener un projet de A à Z.</p>
-                            <a href="#contact" data-section-index="1" class="btn hire-me">Engagez moi</a>
+                            <a href="#contact" data-section-index="1" class="btn hire-me" data-i18n="home_hire_me">Engagez moi</a>
 
                             <!-- Stats -->
                             <div class="home-stats">
                                 <div class="stat-item">
                                     <span class="stat-number" data-target="5">0</span>
-                                    <span class="stat-label">Projets réalisés</span>
+                                    <span class="stat-label" data-i18n="stats_projects">Projets réalisés</span>
                                 </div>
                                 <div class="stat-item">
                                     <span class="stat-number" data-target="3">0</span>
-                                    <span class="stat-label">Ans d'expérience</span>
+                                    <span class="stat-label" data-i18n="stats_years">Ans d'expérience</span>
                                 </div>
                                 <div class="stat-item">
                                     <span class="stat-number" data-target="10">0</span>
-                                    <span class="stat-label">Technologies</span>
+                                    <span class="stat-label" data-i18n="stats_tech">Technologies</span>
                                 </div>
                             </div>
                         </div>
@@ -135,15 +145,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="section-title padd-15">
-                            <h2>A Propos de Moi</h2>
+                            <h2 data-i18n="about_title">A Propos de Moi</h2>
                         </div>
                     </div>
                     <div class="row">
                         <div class="about-content padd-15">
                             <div class="row">
                                 <div class="about-text padd-15">
-                                    <h3>Je suis Rosny, <span>Développeur Web et Mobile Freelance</span></h3>
-<p>Je crée des applications web et mobiles <strong>fiables et évolutives</strong>, alliant <strong>technique, design et performance</strong>. Mon objectif : transformer vos besoins en solutions fonctionnelles et maintenables, du concept jusqu’au déploiement.</p>
+                                    <h3 data-i18n="about_subtitle">Je suis Rosny, <span>Développeur Web et Mobile Freelance</span></h3>
+<p data-i18n="about_desc">Je crée des applications web et mobiles <strong>fiables et évolutives</strong>, alliant <strong>technique, design et performance</strong>. Mon objectif : transformer vos besoins en solutions fonctionnelles et maintenables, du concept jusqu’au déploiement.</p>
 
                                 </div>
                             </div>
@@ -151,27 +161,27 @@
                                 <div class="personal-info padd-15">
                                     <div class="row">
                                         <div class="info-item padd-15">
-                                            <p>Nationalité : <span>Gabonaise</span></p>
+                                            <p><span data-i18n="about_nationality">Nationalité : </span><span data-i18n="about_nationality_val">Gabonaise</span></p>
                                         </div>
                                         <div class="info-item padd-15">
-                                            <p>GitHub : <span><a href="https://github.com/RosnyMinko07" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">github.com/RosnyMinko07</a></span></p>
+                                            <p><span data-i18n="about_exp_label">Expérience : </span><span data-i18n="about_exp_val">3+ ans</span></p>
                                         </div>
                                         <div class="info-item padd-15">
                                             <p>Email : <span>rodrigueotsina@gmail.com</span></p>
                                         </div>
                                         <div class="info-item padd-15">
-                                            <p>Phone : <span>+241 077 12 24 85</span></p>
+                                            <p><span data-i18n="about_phone">Phone : </span><span>+241 077 12 24 85</span></p>
                                         </div>
                                         <div class="info-item padd-15">
-                                            <p>Ville : <span>Libreville / Owendo, Gabon</span></p>
+                                            <p><span data-i18n="about_city">Ville : </span><span data-i18n="about_city_val">Libreville / Owendo, Gabon</span></p>
                                         </div>
                                         <div class="info-item padd-15">
-                                            <p>Freelance : <span>Disponible</span></p>
+                                            <p>Freelance : <span data-i18n="about_freelance_val">Disponible</span></p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="buttons padd-15">
-                                            <a href="pdf/OTSINA MINKO Rodrigue cv.pdf" data-pdf="pdf/OTSINA MINKO Rodrigue cv.pdf" onclick="previewCV(event)" class="btn" target="_blank">Voir mon CV</a>
+                                            <a href="pdf/OTSINA MINKO Rodrigue cv.pdf" data-pdf="pdf/OTSINA MINKO Rodrigue cv.pdf" onclick="previewCV(event)" class="btn" target="_blank" data-i18n="about_cv_btn">Voir mon CV</a>
                                         </div>
                                     </div>
                                 </div>
@@ -180,50 +190,50 @@
                             <!-- ===== EXPÉRIENCE ===== -->
                             <div class="row">
                                 <div class="experience padd-15">
-                                    <h3 class="title">Expériences Professionnelles</h3>
+                                    <h3 class="title" data-i18n="about_exp_title">Expériences Professionnelles</h3>
                                     <div class="timeline-box padd-15">
                                         <div class="timeline shadow-dark">
                                             <!-- Expérience 1 -->
                                             <div class="timeline-item">
                                                 <div class="circle-dot"></div>
-                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> Jan. 2026 - Présent · Libreville</h3>
-                                                <h4 class="timeline-title">Développeur Full-Stack Freelance — HÔTEL YA</h4>
-                                                <p class="timeline-text">Conception d'une solution complète de gestion hôtelière : application mobile (Flutter), site web (React / Next.js) et logiciel desktop — réservations en ligne, facturation, suivi clients, gestion de stock, tableau de bord admin. Architecture API REST, base de données MySQL / PostgreSQL, authentification et déploiement.</p>
+                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> <span data-i18n="exp_date_1">Jan. 2026 - Présent · Libreville</span></h3>
+                                                <h4 class="timeline-title" data-i18n="exp_title_1">Développeur Full-Stack Freelance — HÔTEL YA</h4>
+                                                <p class="timeline-text" data-i18n="exp_text_1">Conception d'une solution complète de gestion hôtelière : application mobile (Flutter), site web (React / Next.js) et logiciel desktop — réservations en ligne, facturation, suivi clients, gestion de stock, tableau de bord admin. Architecture API REST, base de données MySQL / PostgreSQL, authentification et déploiement.</p>
                                             </div>
                                             <!-- Expérience 2 -->
                                             <div class="timeline-item">
                                                 <div class="circle-dot"></div>
-                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> Avril 2026 - Présent · Libreville</h3>
-                                                <h4 class="timeline-title">Développeur Backend Freelance — AARTFLIX</h4>
-                                                <p class="timeline-text">Développement du backend, gestion de la base de données et administration de la plateforme de streaming.</p>
+                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> <span data-i18n="exp_date_2">Avril 2026 - Présent · Libreville</span></h3>
+                                                <h4 class="timeline-title" data-i18n="exp_title_2">Développeur Backend Freelance — AARTFLIX</h4>
+                                                <p class="timeline-text" data-i18n="exp_text_2">Développement du backend, gestion de la base de données et administration de la plateforme de streaming.</p>
                                             </div>
                                             <!-- Expérience 3 -->
                                             <div class="timeline-item">
                                                 <div class="circle-dot"></div>
-                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> Août - Oct. 2025 · Port-Gentil</h3>
-                                                <h4 class="timeline-title">Développeur Full-Stack — TECH INFO PLUS</h4>
-                                                <p class="timeline-text">Conception et développement d'un système de facturation et de gestion de stock, de la modélisation des données à l'interface utilisateur. Optimisation des performances, diagnostic et correction d'anomalies (débogage, maintenance corrective).</p>
+                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> <span data-i18n="exp_date_3">Août - Oct. 2025 · Port-Gentil</span></h3>
+                                                <h4 class="timeline-title" data-i18n="exp_title_3">Développeur Full-Stack — TECH INFO PLUS</h4>
+                                                <p class="timeline-text" data-i18n="exp_text_3">Conception et développement d'un système de facturation et de gestion de stock, de la modélisation des données à l'interface utilisateur. Optimisation des performances, diagnostic et correction d'anomalies (débogage, maintenance corrective).</p>
                                             </div>
                                             <!-- Expérience 4 -->
                                             <div class="timeline-item">
                                                 <div class="circle-dot"></div>
-                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> Juil. - Sept. 2024 · Libreville</h3>
-                                                <h4 class="timeline-title">Développeur Full-Stack — INPTIC</h4>
-                                                <p class="timeline-text">Développement d'une application multiplateforme de suivi et de gestion des notes (PHP, MySQL, Bootstrap) : conception de la base de données, authentification, gestion des notes, calcul automatique des moyennes.</p>
+                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> <span data-i18n="exp_date_4">Juil. - Sept. 2024 · Libreville</span></h3>
+                                                <h4 class="timeline-title" data-i18n="exp_title_4">Développeur Full-Stack — INPTIC</h4>
+                                                <p class="timeline-text" data-i18n="exp_text_4">Développement d'une application multiplateforme de suivi et de gestion des notes (PHP, MySQL, Bootstrap) : conception de la base de données, authentification, gestion des notes, calcul automatique des moyennes.</p>
                                             </div>
                                             <!-- Expérience 5 -->
                                             <div class="timeline-item">
                                                 <div class="circle-dot"></div>
-                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> Jan. - Juin 2024 · Libreville</h3>
-                                                <h4 class="timeline-title">Développeur Mobile & Web Freelance</h4>
-                                                <p class="timeline-text">Applications web et mobiles sur mesure pour des clients locaux (gestion commerciale, suivi de commandes, interfaces admin) : analyse des besoins, prototypage, développement et livraison.</p>
+                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> <span data-i18n="exp_date_5">Jan. - Juin 2024 · Libreville</span></h3>
+                                                <h4 class="timeline-title" data-i18n="exp_title_5">Développeur Mobile & Web Freelance</h4>
+                                                <p class="timeline-text" data-i18n="exp_text_5">Applications web et mobiles sur mesure pour des clients locaux (gestion commerciale, suivi de commandes, interfaces admin) : analyse des besoins, prototypage, développement et livraison.</p>
                                             </div>
                                             <!-- Expérience 6 -->
                                             <div class="timeline-item">
                                                 <div class="circle-dot"></div>
-                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> Mars - Déc. 2023 · Libreville</h3>
-                                                <h4 class="timeline-title">Développeur Mobile Freelance — SUIVI DE LIVRAISONS</h4>
-                                                <p class="timeline-text">Application mobile Android OS (Flutter) pour le suivi de livraisons et la gestion de commandes d'un commerce local : création de commande, attribution livreur, suivi GPS temps réel, confirmation, historique et facturation. Backend API REST (Node.js / PHP), MySQL, notifications push.</p>
+                                                <h3 class="timeline-date"><i class="fa fa-calendar"></i> <span data-i18n="exp_date_6">Mars - Déc. 2023 · Libreville</span></h3>
+                                                <h4 class="timeline-title" data-i18n="exp_title_6">Développeur Mobile Freelance — SUIVI DE LIVRAISONS</h4>
+                                                <p class="timeline-text" data-i18n="exp_text_6">Application mobile Android OS (Flutter) pour le suivi de livraisons et la gestion de commandes d'un commerce local : création de commande, attribution livreur, suivi GPS temps réel, confirmation, historique et facturation. Backend API REST (Node.js / PHP), MySQL, notifications push.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -238,7 +248,7 @@
     <div class="container">
         <div class="row">
             <div class="section-title padd-15">
-                <h2>Services</h2>
+                <h2 data-i18n="services_title">Services</h2>
             </div>
         </div>
         <div class="row">
@@ -248,8 +258,8 @@
                     <div class="icon">
                         <i class="fa fa-mobile-alt"></i>
                     </div>
-                    <h4>Développement Mobile</h4>
-                    <p>Création d'applications Android et iOS performantes et intuitives, adaptées à vos besoins.</p>
+                    <h4 data-i18n="srv_title_1">Développement Mobile</h4>
+                    <p data-i18n="srv_desc_1">Création d'applications Android et iOS performantes et intuitives, adaptées à vos besoins.</p>
                 </div>
             </div>
 
@@ -259,8 +269,8 @@
                     <div class="icon">
                         <i class="fa fa-laptop-code"></i>
                     </div>
-                    <h4>Développement Web</h4>
-                    <p>Conception de sites web et logiciels robustes, modernes et évolutifs pour tous types de projets.</p>
+                    <h4 data-i18n="srv_title_2">Développement Web</h4>
+                    <p data-i18n="srv_desc_2">Conception de sites web et logiciels robustes, modernes et évolutifs pour tous types de projets.</p>
                 </div>
             </div>
 
@@ -270,8 +280,8 @@
                     <div class="icon">
                         <i class="fa fa-database"></i>
                     </div>
-                    <h4>Gestion de Bases de Données</h4>
-                    <p>Mise en place, organisation et sécurisation de vos données pour un accès fiable et protégé.</p>
+                    <h4 data-i18n="srv_title_3">Gestion de Bases de Données</h4>
+                    <p data-i18n="srv_desc_3">Mise en place, organisation et sécurisation de vos données pour un accès fiable et protégé.</p>
                 </div>
             </div>
 
@@ -281,8 +291,8 @@
                     <div class="icon">
                         <i class="fa fa-shield-alt"></i>
                     </div>
-                    <h4>Sécurité Informatique</h4>
-                    <p>Protection de vos systèmes et données sensibles contre les accès non autorisés et les menaces externes.</p>
+                    <h4 data-i18n="srv_title_4">Sécurité Informatique</h4>
+                    <p data-i18n="srv_desc_4">Protection de vos systèmes et données sensibles contre les accès non autorisés et les menaces externes.</p>
                 </div>
             </div>
 
@@ -292,8 +302,8 @@
                     <div class="icon">
                         <i class="fa fa-tools"></i>
                     </div>
-                    <h4>Maintenance Informatique</h4>
-                    <p>Assurance du bon fonctionnement de vos ordinateurs et serveurs, avec un suivi fiable et réactif.</p>
+                    <h4 data-i18n="srv_title_5">Maintenance Informatique</h4>
+                    <p data-i18n="srv_desc_5">Assurance du bon fonctionnement de vos ordinateurs et serveurs, avec un suivi fiable et réactif.</p>
                 </div>
             </div>
 
@@ -303,8 +313,8 @@
                     <div class="icon">
                         <i class="fa fa-network-wired"></i>
                     </div>
-                    <h4>Administration Réseau</h4>
-                    <p>Configuration, surveillance et gestion des infrastructures réseau pour garantir disponibilité et sécurité des communications.</p>
+                    <h4 data-i18n="srv_title_6">Administration Réseau</h4>
+                    <p data-i18n="srv_desc_6">Configuration, surveillance et gestion des infrastructures réseau pour garantir disponibilité et sécurité des communications.</p>
                 </div>
             </div>
 
@@ -314,8 +324,8 @@
                     <div class="icon">
                         <i class="fa fa-database"></i>
                     </div>
-                    <h4>Administration DBA</h4>
-                    <p>Gestion, optimisation et maintenance de vos bases de données pour garantir performance, intégrité et disponibilité des données.</p>
+                    <h4 data-i18n="srv_title_7">Administration DBA</h4>
+                    <p data-i18n="srv_desc_7">Gestion, optimisation et maintenance de vos bases de données pour garantir performance, intégrité et disponibilité des données.</p>
                 </div>
             </div>
 
@@ -325,8 +335,8 @@
                     <div class="icon">
                         <i class="fa fa-pencil-ruler"></i>
                     </div>
-                    <h4>Conception de Maquettes</h4>
-                    <p>Création de maquettes et prototypes UI/UX modernes et intuitifs avant le développement, pour valider l'expérience utilisateur.</p>
+                    <h4 data-i18n="srv_title_8">Conception de Maquettes</h4>
+                    <p data-i18n="srv_desc_8">Création de maquettes et prototypes UI/UX modernes et intuitifs avant le développement, pour valider l'expérience utilisateur.</p>
                 </div>
             </div>
 
@@ -336,8 +346,8 @@
                     <div class="icon">
                         <i class="fa fa-brain"></i>
                     </div>
-                    <h4>Solutions Intelligence Artificielle</h4>
-                    <p>Intégration de solutions IA dans vos applications : chatbots, recommandations, analyse de données et automatisation intelligente.</p>
+                    <h4 data-i18n="srv_title_9">Solutions Intelligence Artificielle</h4>
+                    <p data-i18n="srv_desc_9">Intégration de solutions IA dans vos applications : chatbots, recommandations, analyse de données et automatisation intelligente.</p>
                 </div>
             </div>
 
@@ -347,8 +357,8 @@
                     <div class="icon">
                         <i class="fa fa-cloud-upload-alt"></i>
                     </div>
-                    <h4>Déploiement &amp; Cloud</h4>
-                    <p>Déploiement de vos applications sur des plateformes cloud (Vercel, AWS, VPS) avec configuration CI/CD et gestion des environnements.</p>
+                    <h4 data-i18n="srv_title_10">Déploiement &amp; Cloud</h4>
+                    <p data-i18n="srv_desc_10">Déploiement de vos applications sur des plateformes cloud (Vercel, AWS, VPS) avec configuration CI/CD et gestion des environnements.</p>
                 </div>
             </div>
         </div>
@@ -356,20 +366,135 @@
 </section>
 <!-- Services Section End -->
 
-            <!-- Services Section End -->
+<!-- ===== PROCESSUS SECTION START ===== -->
+<section class="process-section section" id="process">
+    <div class="container">
+        <div class="row">
+            <div class="section-title padd-15">
+                <h2 data-i18n="process_title">Mon Processus de Travail</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="process-header-box padd-15">
+                <p class="process-lead" data-i18n="process_lead">Une méthodologie éprouvée en 5 étapes pour transformer vos idées en solutions numériques fiables, performantes et évolutives.</p>
+            </div>
+        </div>
+
+        <div class="process-grid">
+            <!-- Étape 1 -->
+            <div class="process-card">
+                <div class="process-card-top">
+                    <span class="process-step-num">01</span>
+                    <div class="process-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                </div>
+                <h3 class="process-step-title" data-i18n="process_step_1_title">Cadrage &amp; Analyse</h3>
+                <p class="process-step-desc" data-i18n="process_step_1_desc">Compréhension approfondie de vos objectifs, analyse des besoins utilisateurs, étude de faisabilité et cahier des charges détaillé.</p>
+                <ul class="process-step-list">
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_1_b1">Recueil des besoins &amp; objectifs</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_1_b2">Choix de la stack technique</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_1_b3">Estimation &amp; roadmap projet</span></li>
+                </ul>
+            </div>
+
+            <!-- Étape 2 -->
+            <div class="process-card">
+                <div class="process-card-top">
+                    <span class="process-step-num">02</span>
+                    <div class="process-icon">
+                        <i class="fas fa-pencil-ruler"></i>
+                    </div>
+                </div>
+                <h3 class="process-step-title" data-i18n="process_step_2_title">Design &amp; Architecture</h3>
+                <p class="process-step-desc" data-i18n="process_step_2_desc">Conception de l'architecture logicielle, modélisation des données et prototypage d'interfaces UI/UX intuitives et modernes.</p>
+                <ul class="process-step-list">
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_2_b1">Wireframes &amp; maquettes interactives</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_2_b2">Architecture base de données &amp; API</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_2_b3">Validation du parcours utilisateur</span></li>
+                </ul>
+            </div>
+
+            <!-- Étape 3 -->
+            <div class="process-card">
+                <div class="process-card-top">
+                    <span class="process-step-num">03</span>
+                    <div class="process-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                </div>
+                <h3 class="process-step-title" data-i18n="process_step_3_title">Développement &amp; Tests</h3>
+                <p class="process-step-desc" data-i18n="process_step_3_desc">Développement itératif avec du code propre, modulaire et performant, accompagné de tests continus et démonstrations régulières.</p>
+                <ul class="process-step-list">
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_3_b1">Code robuste &amp; sécurisé</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_3_b2">Tests unitaires &amp; d'intégration</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_3_b3">Démos &amp; retours itératifs</span></li>
+                </ul>
+            </div>
+
+            <!-- Étape 4 -->
+            <div class="process-card">
+                <div class="process-card-top">
+                    <span class="process-step-num">04</span>
+                    <div class="process-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                </div>
+                <h3 class="process-step-title" data-i18n="process_step_4_title">Déploiement &amp; Livraison</h3>
+                <p class="process-step-desc" data-i18n="process_step_4_desc">Mise en production sécurisée sur le cloud, optimisation SEO, configuration des domaines, SSL et remise d'une documentation complète.</p>
+                <ul class="process-step-list">
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_4_b1">Déploiement Cloud &amp; CI/CD</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_4_b2">Optimisation SEO &amp; vitesse</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_4_b3">Documentation &amp; passation claire</span></li>
+                </ul>
+            </div>
+
+            <!-- Étape 5 -->
+            <div class="process-card">
+                <div class="process-card-top">
+                    <span class="process-step-num">05</span>
+                    <div class="process-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                </div>
+                <h3 class="process-step-title" data-i18n="process_step_5_title">Suivi &amp; Maintenance</h3>
+                <p class="process-step-desc" data-i18n="process_step_5_desc">Accompagnement après le lancement, monitoring des performances, sauvegardes automatisées et évolutions selon vos besoins.</p>
+                <ul class="process-step-list">
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_5_b1">Maintenance préventive &amp; corrective</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_5_b2">Surveillance &amp; sauvegardes</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="process_step_5_b3">Évolution &amp; nouvelles fonctionnalités</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Call to Action Banner -->
+        <div class="process-cta-banner padd-15">
+            <div class="process-cta-content">
+                <div class="process-cta-text">
+                    <h4 data-i18n="process_cta_title">Un projet en tête ou une idée à concrétiser ?</h4>
+                    <p data-i18n="process_cta_desc">Bénéficiez d'une méthode claire et éprouvée pour transformer votre vision en réalité avec un accompagnement sur mesure.</p>
+                </div>
+                <div class="process-cta-action">
+                    <a href="#contact" class="btn hire-me" data-i18n="process_cta_btn">Lancer mon projet <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ===== PROCESSUS SECTION END ===== -->
 
 <!-- ===== COMPÉTENCES Section Start ===== -->
 <section class="skills-section section" id="skills">
     <div class="container">
         <div class="row">
             <div class="section-title padd-15">
-                <h2>Compétences</h2>
+                <h2 data-i18n="skills_title">Compétences</h2>
             </div>
         </div>
 
         <!-- Frontend -->
         <div class="skills-category padd-15">
-            <h3 class="skills-cat-title"><i class="fas fa-laptop-code"></i> Frontend</h3>
+            <h3 class="skills-cat-title"><i class="fas fa-laptop-code"></i> <span data-i18n="skills_cat_front">Frontend</span></h3>
             <div class="skills-icons-grid">
                 <div class="skill-icon-card">
                     <i class="fab fa-html5" style="color:#e34c26"></i>
@@ -400,7 +525,7 @@
 
         <!-- Backend -->
         <div class="skills-category padd-15">
-            <h3 class="skills-cat-title"><i class="fas fa-server"></i> Backend</h3>
+            <h3 class="skills-cat-title"><i class="fas fa-server"></i> <span data-i18n="skills_cat_back">Backend</span></h3>
             <div class="skills-icons-grid">
                 <div class="skill-icon-card">
                     <i class="fab fa-php" style="color:#8892be"></i>
@@ -427,7 +552,7 @@
 
         <!-- Mobile -->
         <div class="skills-category padd-15">
-            <h3 class="skills-cat-title"><i class="fas fa-mobile-alt"></i> Mobile</h3>
+            <h3 class="skills-cat-title"><i class="fas fa-mobile-alt"></i> <span data-i18n="skills_cat_mobile">Mobile</span></h3>
             <div class="skills-icons-grid">
                 <div class="skill-icon-card">
                     <i class="fas fa-mobile-alt" style="color:#54c5f8"></i>
@@ -446,7 +571,7 @@
 
         <!-- Base de données -->
         <div class="skills-category padd-15">
-            <h3 class="skills-cat-title"><i class="fas fa-database"></i> Base de données</h3>
+            <h3 class="skills-cat-title"><i class="fas fa-database"></i> <span data-i18n="skills_cat_db">Base de données</span></h3>
             <div class="skills-icons-grid">
                 <div class="skill-icon-card">
                     <i class="fas fa-database" style="color:#00758f"></i>
@@ -469,7 +594,7 @@
 
         <!-- Outils -->
         <div class="skills-category padd-15">
-            <h3 class="skills-cat-title"><i class="fas fa-tools"></i> Outils &amp; Autres</h3>
+            <h3 class="skills-cat-title"><i class="fas fa-tools"></i> <span data-i18n="skills_cat_tools">Outils &amp; Autres</span></h3>
             <div class="skills-icons-grid">
                 <div class="skill-icon-card">
                     <i class="fab fa-git-alt" style="color:#f05032"></i>
@@ -481,11 +606,11 @@
                 </div>
                 <div class="skill-icon-card">
                     <i class="fas fa-shield-alt" style="color:#2196f3"></i>
-                    <span>Sécurité</span>
+                    <span data-i18n="skill_security">Sécurité</span>
                 </div>
                 <div class="skill-icon-card">
                     <i class="fas fa-cloud-upload-alt" style="color:#ff9800"></i>
-                    <span>Déploiement</span>
+                    <span data-i18n="skill_deployment">Déploiement</span>
                 </div>
                 <div class="skill-icon-card">
                     <i class="fab fa-docker" style="color:#2496ed"></i>
@@ -503,24 +628,24 @@
     <div class="container">
         <div class="row">
             <div class="section-title padd-15">
-                <h2>Mes Projets</h2>
+                <h2 data-i18n="portfolio_title">Mes Projets</h2>
             </div>
         </div>
 
         <!-- Filtres -->
         <div class="portfolio-filters padd-15">
-            <button class="filter-btn active" data-filter="all">Tous</button>
-            <button class="filter-btn" data-filter="web">Web</button>
-            <button class="filter-btn" data-filter="mobile">Mobile</button>
-            <button class="filter-btn" data-filter="desktop">Desktop</button>
+            <button class="filter-btn active" data-filter="all" data-i18n="filter_all">Tous</button>
+            <button class="filter-btn" data-filter="web" data-i18n="filter_web">Web</button>
+            <button class="filter-btn" data-filter="mobile" data-i18n="filter_mobile">Mobile</button>
+            <button class="filter-btn" data-filter="desktop" data-i18n="filter_desktop">Desktop</button>
         </div>
 
         <!-- ===== PROJET 1 ===== -->
         <div class="project-card padd-15 reveal" data-category="web mobile">
             <div class="project-card-header">
                 <div class="project-card-info">
-                    <h2>Application de traduction des langues gabonaises</h2>
-                    <p>Application web responsive permettant la traduction entre différentes langues locales du Gabon avec interface intuitive et base de données linguistique.</p>
+                    <h2 data-i18n="proj_title_1">Application de traduction des langues gabonaises</h2>
+                    <p data-i18n="proj_desc_1">Application web responsive permettant la traduction entre différentes langues locales du Gabon avec interface intuitive et base de données linguistique.</p>
                     <span class="project-tech-tag">HTML</span>
                     <span class="project-tech-tag">CSS</span>
                     <span class="project-tech-tag">JavaScript</span>
@@ -528,7 +653,7 @@
                 </div>
                 <div class="project-card-btns">
                     <button class="proj-btn btn-images" onclick="openCarousel('carousel-1')">
-                        <i class="fas fa-chevron-up"></i> Masquer les images
+                        <i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">Masquer les images</span>
                     </button>
                 </div>
             </div>
@@ -553,18 +678,18 @@
         <div class="project-card padd-15 reveal" data-category="web">
             <div class="project-card-header">
                 <div class="project-card-info">
-                    <h2>Application Web de Facturation — Tech Info Plus</h2>
-                    <p>Système complet de facturation et de suivi de stock pour une PME à Port-Gentil. Gestion clients, fournisseurs, articles, devis, règlements et rapports.</p>
+                    <h2 data-i18n="proj_title_2">Application Web de Facturation — Tech Info Plus</h2>
+                    <p data-i18n="proj_desc_2">Système complet de facturation et de suivi de stock pour une PME à Port-Gentil. Gestion clients, fournisseurs, articles, devis, règlements et rapports.</p>
                     <span class="project-tech-tag">Laravel</span>
                     <span class="project-tech-tag">MySQL</span>
                     <span class="project-tech-tag">Bootstrap</span>
                 </div>
                 <div class="project-card-btns">
                     <button class="proj-btn btn-images" onclick="openCarousel('carousel-2')">
-                        <i class="fas fa-chevron-up"></i> Masquer les images
+                        <i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">Masquer les images</span>
                     </button>
                     <a class="proj-btn btn-demo" href="https://tech-info-plus.vercel.app/" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Voir la démo
+                        <i class="fas fa-external-link-alt"></i> <span data-i18n="btn_demo">Voir la démo</span>
                     </a>
                 </div>
             </div>
@@ -611,13 +736,13 @@
         <div class="project-card padd-15 reveal" data-category="desktop">
             <div class="project-card-header">
                 <div class="project-card-info">
-                    <h2>Application GABON — Lieux populaires</h2>
-                    <p>Application répertoriant les endroits populaires de tout le Gabon avec système de connexion, inscription et navigation par région.</p>
+                    <h2 data-i18n="proj_title_3">Application GABON — Lieux populaires</h2>
+                    <p data-i18n="proj_desc_3">Application répertoriant les endroits populaires de tout le Gabon avec système de connexion, inscription et navigation par région.</p>
                     <span class="project-tech-tag">WinDev</span>
                 </div>
                 <div class="project-card-btns">
                     <button class="proj-btn btn-images" onclick="openCarousel('carousel-3')">
-                        <i class="fas fa-chevron-up"></i> Masquer les images
+                        <i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">Masquer les images</span>
                     </button>
                 </div>
             </div>
@@ -646,8 +771,8 @@
         <div class="project-card padd-15 reveal" data-category="web">
             <div class="project-card-header">
                 <div class="project-card-info">
-                    <h2>Application Web Mini Market (Projet Scolaire)</h2>
-                    <p>Plateforme e-commerce pour la gestion d'un mini market en ligne avec espace vendeur, panier, paiement et tableau de bord administrateur.</p>
+                    <h2 data-i18n="proj_title_4">Application Web Mini Market (Projet Scolaire)</h2>
+                    <p data-i18n="proj_desc_4">Plateforme e-commerce pour la gestion d'un mini market en ligne avec espace vendeur, panier, paiement et tableau de bord administrateur.</p>
                     <span class="project-tech-tag">HTML</span>
                     <span class="project-tech-tag">CSS</span>
                     <span class="project-tech-tag">PHP</span>
@@ -655,7 +780,7 @@
                 </div>
                 <div class="project-card-btns">
                     <button class="proj-btn btn-images" onclick="openCarousel('carousel-4')">
-                        <i class="fas fa-chevron-up"></i> Masquer les images
+                        <i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">Masquer les images</span>
                     </button>
                 </div>
             </div>
@@ -685,14 +810,14 @@
         <div class="project-card padd-15 reveal" data-category="mobile">
             <div class="project-card-header">
                 <div class="project-card-info">
-                    <h2>Application Mobile de Vote</h2>
-                    <p>Application mobile pour la réalisation de votes électroniques en temps réel avec interface administrateur et saisie des résultats.</p>
+                    <h2 data-i18n="proj_title_5">Application Mobile de Vote</h2>
+                    <p data-i18n="proj_desc_5">Application mobile pour la réalisation de votes électroniques en temps réel avec interface administrateur et saisie des résultats.</p>
                     <span class="project-tech-tag">Flutter</span>
                     <span class="project-tech-tag">Firebase</span>
                 </div>
                 <div class="project-card-btns">
                     <button class="proj-btn btn-images" onclick="openCarousel('carousel-5')">
-                        <i class="fas fa-chevron-up"></i> Masquer les images
+                        <i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">Masquer les images</span>
                     </button>
                 </div>
             </div>
@@ -740,10 +865,10 @@
 <div id="cv-modal" class="cv-modal-overlay" onclick="closeCVModal(event)">
     <div class="cv-modal-box">
         <div class="cv-modal-header">
-            <h3><i class="fas fa-file-pdf"></i> CV — Rosny OTSINA</h3>
+            <h3><i class="fas fa-file-pdf"></i> <span data-i18n="cv_modal_title">CV — Rosny OTSINA</span></h3>
             <div class="cv-modal-actions">
                 <a id="cv-download-btn" href="pdf/OTSINA MINKO Rodrigue cv.pdf" target="_blank" download="OTSINA MINKO Rodrigue cv.pdf" class="btn cv-dl-btn">
-                    <i class="fas fa-download"></i> Télécharger le CV
+                    <i class="fas fa-download"></i> <span data-i18n="cv_modal_dl">Télécharger le CV</span>
                 </a>
                 <button class="cv-close-btn" onclick="closeCVModal()"><i class="fas fa-times"></i></button>
             </div>
@@ -753,9 +878,9 @@
             <!-- Fallback si iframe ne marche pas -->
             <div class="cv-fallback" id="cv-fallback">
                 <i class="fas fa-file-pdf"></i>
-                <p>Aperçu non disponible sur ce navigateur.</p>
+                <p data-i18n="cv_fallback_text">Aperçu non disponible sur ce navigateur.</p>
                 <a href="pdf/OTSINA MINKO Rodrigue cv.pdf" download="OTSINA MINKO Rodrigue cv.pdf" class="btn">
-                    <i class="fas fa-download"></i> Télécharger le CV
+                    <i class="fas fa-download"></i> <span data-i18n="cv_modal_dl">Télécharger le CV</span>
                 </a>
             </div>
         </div>
@@ -772,9 +897,9 @@ function openCarousel(id) {
     // Mettre à jour le texte du bouton
     var btn = el.closest('.project-card').querySelector('.btn-images');
     if (el.classList.contains('closed')) {
-        btn.innerHTML = '<i class="fas fa-images"></i> Voir les images';
+        btn.innerHTML = '<i class="fas fa-images"></i> <span data-i18n="btn_show_images">' + (window.currentLang === 'en' ? 'View images' : 'Voir les images') + '</span>';
     } else {
-        btn.innerHTML = '<i class="fas fa-chevron-up"></i> Masquer les images';
+        btn.innerHTML = '<i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">' + (window.currentLang === 'en' ? 'Hide images' : 'Masquer les images') + '</span>';
     }
 }
 
@@ -828,7 +953,7 @@ document.addEventListener('DOMContentLoaded', function() {
             initCarousel(id);
             // Mettre le bouton en mode "masquer" puisque ouvert par défaut
             var btn = document.getElementById(id).closest('.project-card').querySelector('.btn-images');
-            if (btn) btn.innerHTML = '<i class="fas fa-chevron-up"></i> Masquer les images';
+            if (btn) btn.innerHTML = '<i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">' + (window.currentLang === 'en' ? 'Hide images' : 'Masquer les images') + '</span>';
         }
     });
 });
@@ -1081,12 +1206,12 @@ document.addEventListener('keydown', function(e) {
                 <div class="container">
                     <div class="row">
                         <div class="section-title padd-15">
-                            <h2>Certifications</h2>
+                            <h2 data-i18n="cert_title">Certifications</h2>
                         </div>
                     </div>
                     <div class="row">
                         <div class="padd-15" style="width:100%">
-                            <p style="color:var(--text-black-700); margin-bottom:30px;">
+                            <p style="color:var(--text-black-700); margin-bottom:30px;" data-i18n="cert_desc">
                                 Mes certifications et formations obtenues.
                             </p>
                         </div>
@@ -1098,12 +1223,12 @@ document.addEventListener('keydown', function(e) {
                             <div class="cert-thumb" onclick="openCertModal('images/certificat/Rodrigue OTSINA MINKO - Intro to Machine Learning.png', 'Intro to Machine Learning')">
                                 <img src="images/certificat/Rodrigue OTSINA MINKO - Intro to Machine Learning.png" alt="Intro to Machine Learning" loading="lazy">
                                 <div class="cert-thumb-overlay">
-                                    <span class="cert-zoom-btn"><i class="fas fa-search-plus"></i> Agrandir</span>
+                                    <span class="cert-zoom-btn"><i class="fas fa-search-plus"></i> <span data-i18n="cert_zoom">Agrandir</span></span>
                                 </div>
                             </div>
                             <h4>Intro to Machine Learning</h4>
                             <p class="cert-issuer"><i class="fas fa-award"></i> Kaggle / Google</p>
-                            <span class="cert-badge">Machine Learning</span>
+                            <span class="cert-badge" data-i18n="cert_badge_ml">Machine Learning</span>
                         </div>
 
                         <!-- Certification 2 -->
@@ -1111,12 +1236,12 @@ document.addEventListener('keydown', function(e) {
                             <div class="cert-thumb" onclick="openCertModal('images/certificat/Rodrigue OTSINA MINKO - Python.png', 'Python')">
                                 <img src="images/certificat/Rodrigue OTSINA MINKO - Python.png" alt="Python" loading="lazy">
                                 <div class="cert-thumb-overlay">
-                                    <span class="cert-zoom-btn"><i class="fas fa-search-plus"></i> Agrandir</span>
+                                    <span class="cert-zoom-btn"><i class="fas fa-search-plus"></i> <span data-i18n="cert_zoom">Agrandir</span></span>
                                 </div>
                             </div>
                             <h4>Python</h4>
                             <p class="cert-issuer"><i class="fas fa-award"></i> Kaggle / Google</p>
-                            <span class="cert-badge">Programmation</span>
+                            <span class="cert-badge" data-i18n="cert_badge_prog">Programmation</span>
                         </div>
 
                         <!-- Certification 3 -->
@@ -1124,12 +1249,12 @@ document.addEventListener('keydown', function(e) {
                             <div class="cert-thumb" onclick="openCertModal('images/certificat/Rodrigue OTSINA MINKO - Intro to SQL.png', 'Intro to SQL')">
                                 <img src="images/certificat/Rodrigue OTSINA MINKO - Intro to SQL.png" alt="Intro to SQL" loading="lazy">
                                 <div class="cert-thumb-overlay">
-                                    <span class="cert-zoom-btn"><i class="fas fa-search-plus"></i> Agrandir</span>
+                                    <span class="cert-zoom-btn"><i class="fas fa-search-plus"></i> <span data-i18n="cert_zoom">Agrandir</span></span>
                                 </div>
                             </div>
                             <h4>Intro to SQL</h4>
                             <p class="cert-issuer"><i class="fas fa-award"></i> Kaggle / Google</p>
-                            <span class="cert-badge">Bases de données</span>
+                            <span class="cert-badge" data-i18n="cert_badge_db">Bases de données</span>
                         </div>
 
                     </div>
@@ -1179,23 +1304,23 @@ document.addEventListener('keydown', function(e) {
                 <div class="container">
                     <div class="row">
                         <div class="section-title padd-15">
-                            <h2>Contactez - Moi</h2>
+                            <h2 data-i18n="contact_title">Contactez - Moi</h2>
                         </div>
                     </div>
-                    <h3 class="contact-title">Avez Vous Des Questions ?</h3>
-                    <h4 class="contact-sub-title">JE SUIS A VOTRE SERVICE</h4>
+                    <h3 class="contact-title" data-i18n="contact_q">Avez Vous Des Questions ?</h3>
+                    <h4 class="contact-sub-title" data-i18n="contact_sub">JE SUIS A VOTRE SERVICE</h4>
                     <div class="row">
                         <!-- Contact Info Start-->
                         <div class="contact-info-item">
                             <div class="icon"><i class="fa fa-phone"></i></div>
-                            <h4>Contactez moi au</h4>
+                            <h4 data-i18n="contact_call">Contactez moi au</h4>
                             <p><a href="tel:+24177122485" style="color: inherit;">+241 077 12 24 85</a></p>
                         </div>
                         <!-- Contact Info End -->
                         <!-- Contact Info Start-->
                         <div class="contact-info-item">
                             <div class="icon"><i class="fa fa-map-marker"></i></div>
-                            <h4>Localité</h4>
+                            <h4 data-i18n="contact_loc">Localité</h4>
                             <p>Libreville, Gabon</p>
                         </div>
                         <!-- Contact Info End -->
@@ -1208,26 +1333,26 @@ document.addEventListener('keydown', function(e) {
                         <!-- Contact Info End -->
                         <!-- Contact Info Start-->
                         <div class="contact-info-item">
-                            <div class="icon"><i class="fab fa-github"></i></div>
-                            <h4>GitHub</h4>
-                            <p><a href="https://github.com/RosnyMinko07" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">github.com/RosnyMinko07</a></p>
+                            <div class="icon"><i class="fab fa-whatsapp"></i></div>
+                            <h4>WhatsApp</h4>
+                            <p><a href="https://wa.me/24177122485" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">+241 077 12 24 85</a></p>
                         </div>
                         <!-- Contact Info End -->
                     </div>
-                    <h3 class="contact-title padd-15">ENVOYEZ MOI UN MESSAGE</h3>
-                    <h4 class="contact-sub-title padd-15">JE SUIS DISPONIBLE H24/24</h4>
+                    <h3 class="contact-title padd-15" data-i18n="contact_form_title">ENVOYEZ MOI UN MESSAGE</h3>
+                    <h4 class="contact-sub-title padd-15" data-i18n="contact_form_sub">JE SUIS DISPONIBLE H24/24</h4>
                     <!-- Contact Form -->
                   <div class="row">
   <form id="contactForm" class="contact-form padd-15">
     <div class="row">
       <div class="form-item col-6 padd-15">
         <div class="form-group">
-          <input type="text" name="name" id="name" class="form-control" placeholder="Nom complet" required>
+          <input type="text" name="name" id="name" class="form-control" placeholder="Nom complet" data-i18n-ph="contact_ph_name" required>
         </div>
       </div>
       <div class="form-item col-6 padd-15">
         <div class="form-group">
-          <input type="email" name="email" id="email" class="form-control" placeholder="Adresse E-mail" required>
+          <input type="email" name="email" id="email" class="form-control" placeholder="Adresse E-mail" data-i18n-ph="contact_ph_email" required>
         </div>
       </div>
     </div>
@@ -1235,7 +1360,7 @@ document.addEventListener('keydown', function(e) {
     <div class="row">
       <div class="form-item col-12 padd-15">
         <div class="form-group">
-          <input type="text" name="subject" id="subject" class="form-control" placeholder="Objet" required>
+          <input type="text" name="subject" id="subject" class="form-control" placeholder="Objet" data-i18n-ph="contact_ph_subj" required>
         </div>
       </div>
     </div>
@@ -1243,14 +1368,14 @@ document.addEventListener('keydown', function(e) {
     <div class="row">
       <div class="form-item col-12 padd-15">
         <div class="form-group">
-          <textarea name="message" id="message" class="form-control" placeholder="Message" rows="5" required></textarea>
+          <textarea name="message" id="message" class="form-control" placeholder="Message" data-i18n-ph="contact_ph_msg" rows="5" required></textarea>
         </div>
       </div>
     </div>
     
     <div class="row">
       <div class="form-item col-12 padd-15">
-        <button type="submit" class="btn">Envoyer</button>
+        <button type="submit" class="btn" data-i18n="contact_send_btn">Envoyer</button>
       </div>
     </div>
     
@@ -1266,8 +1391,8 @@ document.addEventListener('keydown', function(e) {
     e.preventDefault(); // empêche le rechargement de la page
 
     feedback.style.display = "block";
-    feedback.innerHTML = "Envoi en cours...";
-    feedback.style.color = "blue";
+    feedback.innerHTML = window.currentLang === 'en' ? "Sending..." : "Envoi en cours...";
+    feedback.style.color = "#38bdf8";
 
     const data = {
       name: form.name.value,
@@ -1288,16 +1413,16 @@ document.addEventListener('keydown', function(e) {
       const result = await response.json();
 
       if (result.success) {
-        feedback.innerHTML = "✅ " + result.message;
-        feedback.style.color = "green";
+        feedback.innerHTML = "✅ " + (window.currentLang === 'en' ? "Message sent successfully!" : result.message);
+        feedback.style.color = "#22c55e";
         form.reset(); // vide le formulaire
       } else {
         feedback.innerHTML = "❌ " + result.message;
-        feedback.style.color = "red";
+        feedback.style.color = "#ef4444";
       }
     } catch (err) {
-      feedback.innerHTML = "⚠️ Erreur réseau. Veuillez réessayer ou me contacter directement par email.";
-      feedback.style.color = "orange";
+      feedback.innerHTML = window.currentLang === 'en' ? "⚠️ Network error. Please try again or contact me directly by email." : "⚠️ Erreur réseau. Veuillez réessayer ou me contacter directement par email.";
+      feedback.style.color = "#f59e0b";
       console.error(err);
     }
     
@@ -1323,10 +1448,9 @@ document.addEventListener('keydown', function(e) {
             <div class="site-footer-left">
                 <span class="footer-logo-sm">Ros<span>Ny</span></span>
                 <span class="footer-sep">|</span>
-                <span>Développeur Web &amp; Mobile Freelance</span>
+                <span data-i18n="footer_role">Développeur Web &amp; Mobile Freelance</span>
             </div>
             <div class="site-footer-socials">
-                <a href="https://github.com/RosnyMinko07" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 <a href="https://wa.me/24177122485" target="_blank" rel="noopener noreferrer" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 <a href="mailto:rodrigueotsina@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
@@ -1342,7 +1466,7 @@ document.addEventListener('keydown', function(e) {
         <div class="style-switcher-toggler s-icon">
             <i class="fas fa-cog fa-spin"></i>
         </div>
-        <h4>Theme couleurs</h4>
+        <h4 data-i18n="switcher_title">Theme couleurs</h4>
         <div class="colors">
             <span class="color-1" onclick="setActiveStyle('color-1')"></span>
             <span class="color-2" onclick="setActiveStyle('color-2')"></span>
@@ -1363,7 +1487,7 @@ document.addEventListener('keydown', function(e) {
         <h4><i class="fas fa-robot"></i> Sophia - IA</h4>
         <span class="chatbot-status">
           <span class="status-dot"></span>
-          En ligne &bull; Voix féminine
+          <span data-i18n="chat_status">En ligne &bull; Voix féminine</span>
         </span>
       </div>
     </div>
@@ -1382,24 +1506,24 @@ document.addEventListener('keydown', function(e) {
         <img src="images/sophia.png" loading="lazy" alt="Sophia">
       </div>
       <div class="message-content">
-        <div class="chatbot-message bot">
+        <div class="chatbot-message bot" data-i18n="chat_welcome">
           Bonjour ! Je suis Sophia, l'assistante IA de Rosny OTSINA. Je peux vous parler de ses projets, compétences et services. Comment puis-je vous aider ?
         </div>
         <div class="message-audio-control">
-          <button class="audio-play-btn" id="welcome-play-btn" title="Lire ce message">
+          <button class="audio-play-btn" id="welcome-play-btn" title="Lire ce message" data-i18n-title="chat_play_title">
             <i class="fas fa-play"></i>
           </button>
           <div class="sound-waves">
             <span></span><span></span><span></span><span></span><span></span>
           </div>
-          <span class="message-time">À l'instant</span>
+          <span class="message-time" data-i18n="chat_now">À l'instant</span>
         </div>
       </div>
     </div>
   </div>
 
   <div class="chatbot-input">
-    <input type="text" id="chatbot-input" placeholder="Posez votre question à Sophia...">
+    <input type="text" id="chatbot-input" placeholder="Posez votre question à Sophia..." data-i18n-ph="chat_input_ph">
     <button id="chatbot-send"><i class="fas fa-paper-plane"></i></button>
   </div>
 </div>
@@ -1424,7 +1548,10 @@ document.addEventListener('keydown', function(e) {
     if (welcomeBtn) {
       welcomeBtn.addEventListener('click', function() {
         if (window.playMessageAudio) {
-          window.playMessageAudio(this, 'Bonjour ! Je suis Sophia, l\'assistante IA de Rosny OTSINA. Je peux vous parler de ses projets, compétences et services. Comment puis-je vous aider ?');
+          const welcomeText = window.currentLang === 'en'
+            ? "Hello! I am Sophia, the AI assistant of Rosny OTSINA. I can tell you all about his projects, skills, and services. How can I help you today?"
+            : "Bonjour ! Je suis Sophia, l'assistante IA de Rosny OTSINA. Je peux vous parler de ses projets, compétences et services. Comment puis-je vous aider ?";
+          window.playMessageAudio(this, welcomeText);
         }
       });
     }

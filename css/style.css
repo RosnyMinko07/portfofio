@@ -1,30 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Clicker+Script&family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
-/* ==================== VARIABLES ==================== */
+/* ==================== VARIABLES (Thème Soie Graphite & Verre Fumé) ==================== */
 :root {
-    --bg-black-900: #0b1120;
-    --bg-black-100: #1e293b;
-    --bg-black-50:  rgba(148, 163, 184, 0.14);
-    --text-black-900: #f8fafc;
+    --bg-black-900: #12161f;
+    --bg-black-100: rgba(28, 35, 45, 0.75);
+    --bg-black-50:  rgba(255, 255, 255, 0.09);
+    --text-black-900: #ffffff;
     --text-black-700: #94a3b8;
+    --skin-color: #ffffff;
+    --skin-color-rgb: 255, 255, 255;
+    --skin-btn-text: #0d121a;
 }
 
-/* Mode dark — Bleu Nuit velouté et doux */
+/* Mode dark — Palette Slate Monochrome & Glassmorphism */
 body.dark {
-    --bg-black-900: #0b1120;
-    --bg-black-100: #1e293b;
-    --bg-black-50:  rgba(148, 163, 184, 0.14);
-    --text-black-900: #f8fafc;
+    --bg-black-900: #12161f;
+    --bg-black-100: rgba(28, 35, 45, 0.75);
+    --bg-black-50:  rgba(255, 255, 255, 0.09);
+    --text-black-900: #ffffff;
     --text-black-700: #94a3b8;
+    --skin-color: #ffffff;
+    --skin-color-rgb: 255, 255, 255;
+    --skin-btn-text: #0d121a;
 }
 
-/* Fond global du body — Bleu nuit élégant avec lueurs diffuses */
+/* Fond global du body — Soie anthracite fluide & atmosphère sombre épurée */
 body {
-    background: #0b1120;
+    background: #12161f;
     background-image:
-        radial-gradient(ellipse at 20% 50%, rgba(56, 189, 248, 0.06) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
+        linear-gradient(rgba(18, 22, 29, 0.86), rgba(18, 22, 29, 0.90)),
+        url('../images/bg-silk.jpg');
+    background-size: cover;
+    background-position: center;
     background-attachment: fixed;
+    color: var(--text-black-900);
 }
 
 /* ==================== BASE STYLES ==================== */
@@ -71,7 +80,7 @@ body {
 }
 
 .section {
-    background: var(--bg-black-900);
+    background: transparent;
     min-height: auto;
     display: block;
     padding: 85px 30px 60px 30px;
@@ -159,20 +168,22 @@ body {
 }
 
 .btn {
-    font-size: 16px;
-    font-weight: 500;
-    padding: 12px 35px;
-    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 34px;
+    color: var(--skin-btn-text, #0f141c);
     border-radius: 40px;
     display: inline-block;
     white-space: nowrap;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.25);
     background: var(--skin-color);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
     transition: all 0.3s ease;
 }
 
 .btn:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 22px rgba(255, 255, 255, 0.22);
 }
 
 .shadow-dark {
@@ -186,9 +197,9 @@ body {
     left: 0;
     width: 100%;
     height: 75px;
-    background: rgba(11, 17, 32, 0.94);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(18, 22, 29, 0.78);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--bg-black-50);
     z-index: 1000;
     display: flex;
@@ -253,7 +264,7 @@ body {
     top: 0;
 }
 
-/* Liens de navigation bien à droite */
+/* Liens de navigation */
 .site-header .nav-menu {
     margin-left: auto;
 }
@@ -275,10 +286,10 @@ body {
 .site-header .nav li a {
     font-size: 15px;
     font-weight: 500;
-    color: var(--text-black-900);
-    padding: 8px 15px;
+    color: var(--text-black-700);
+    padding: 8px 16px;
     display: inline-block;
-    border-radius: 6px;
+    border-radius: 20px;
     transition: color 0.25s ease, background-color 0.25s ease;
     text-decoration: none;
     position: relative;
@@ -287,7 +298,66 @@ body {
 
 .site-header .nav li a:hover,
 .site-header .nav li a.active {
-    color: var(--skin-color);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Actions Header (Bouton Langue FR/EN + Burger) */
+.site-header .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 20px;
+}
+
+.lang-switch-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.lang-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    outline: none;
+}
+
+.lang-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.lang-toggle-btn .lang-opt {
+    transition: all 0.2s ease;
+    user-select: none;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+.lang-toggle-btn .lang-opt.active {
+    color: #ffffff;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+}
+
+.lang-toggle-btn .lang-sep {
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 300;
+    font-size: 12px;
 }
 
 /* Nav toggler burger (masqué sur desktop) */
@@ -737,6 +807,235 @@ h3.my-profession {
     font-size: 16px;
     color: var(--text-black-700);
     line-height: 25px;
+}
+
+/* ==================== PROCESS SECTION (Mon Processus de Travail) ==================== */
+.process-section .container {
+    padding-bottom: 60px;
+}
+
+.process-header-box {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 35px;
+}
+
+.process-lead {
+    font-size: 16px;
+    color: var(--text-black-700);
+    line-height: 1.7;
+    max-width: 860px;
+    margin: -10px 0 10px 0;
+}
+
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.process-card {
+    background: var(--bg-black-100);
+    border: 1px solid var(--bg-black-50);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 22px;
+    padding: 26px 18px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+}
+
+.process-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--skin-color), transparent);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.process-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 25px rgba(255, 255, 255, 0.06);
+}
+
+.process-card:hover::before {
+    opacity: 1;
+}
+
+.process-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.process-step-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--skin-color);
+    letter-spacing: -0.5px;
+    line-height: 1;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+.process-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--bg-black-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--skin-color);
+    font-size: 20px;
+    transition: all 0.35s ease;
+}
+
+.process-card:hover .process-icon {
+    background: var(--skin-color);
+    color: var(--skin-btn-text, #0d121a);
+    transform: rotate(6deg) scale(1.08);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+.process-step-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-black-900);
+    margin-bottom: 12px;
+    line-height: 1.35;
+}
+
+.process-step-desc {
+    font-size: 13.5px;
+    color: var(--text-black-700);
+    line-height: 1.6;
+    margin-bottom: 18px;
+    flex-grow: 1;
+}
+
+.process-step-list {
+    list-style: none;
+    padding: 14px 0 0 0;
+    margin: 0;
+    border-top: 1px dashed var(--bg-black-50);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.process-step-list li {
+    font-size: 12.5px;
+    color: var(--text-black-900);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.45;
+}
+
+.process-step-list li i {
+    color: var(--skin-color);
+    font-size: 12px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    opacity: 0.9;
+}
+
+/* Bannière Appel à l'action dans Processus */
+.process-cta-banner {
+    width: 100%;
+}
+
+.process-cta-content {
+    background: linear-gradient(135deg, rgba(28, 35, 45, 0.88), rgba(18, 22, 29, 0.92));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 22px;
+    padding: 28px 32px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.32);
+}
+
+.process-cta-text h4 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-black-900);
+    margin-bottom: 6px;
+}
+
+.process-cta-text p {
+    font-size: 14.5px;
+    color: var(--text-black-700);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.process-cta-action .btn {
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 30px;
+    background: var(--skin-color);
+    color: var(--skin-btn-text, #0d121a);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.process-cta-action .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.18);
+}
+
+/* Responsive Process Section */
+@media (max-width: 1250px) {
+    .process-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .process-grid {
+        grid-template-columns: 1fr;
+    }
+    .process-cta-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px 18px;
+    }
+    .process-cta-action {
+        width: 100%;
+    }
+    .process-cta-action .btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 /* ==================== PORTFOLIO SECTION ==================== */

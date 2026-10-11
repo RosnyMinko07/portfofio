@@ -47,7 +47,8 @@ module.exports = async (req, res) => {
         'service', 'tarif', 'prix', 'mission', 'client',
         'html', 'css', 'javascript', 'php', 'laravel', 'node',
         'python', 'flutter', 'react', 'vue', 'java',
-        'mysql', 'mongodb', 'base de données', 'web', 'mobile'
+        'mysql', 'mongodb', 'base de données', 'web', 'mobile',
+        'processus', 'méthode', 'workflow', 'étape', 'process', 'methodology'
       ];
       
       return rosnyKeywords.some(keyword => lowerText.includes(keyword));
@@ -71,7 +72,6 @@ INFORMATIONS SUR ROSNY:
 • Localisation: Libreville, Gabon
 • Email: rodrigueotsina@gmail.com
 • Téléphone: +241 077 12 24 85
-• GitHub: https://github.com/RosnyMinko07
 
 COMPÉTENCES TECHNIQUES:
 • Frontend: HTML/CSS/JavaScript, Vue.js/React.js, Bootstrap
@@ -232,9 +232,8 @@ Tu peux répondre à presque toutes les questions dans ces limites.`
         if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('téléphone') || lowerMessage.includes('tel')) {
           aiResponse = "📧 **Contact de Rosny OTSINA :**\n\n" +
                       "• Email : rodrigueotsina@gmail.com\n" +
-                      "• Téléphone : +241 077 12 24 85\n" +
-                      "• Localisation : Libreville, Gabon\n" +
-                      "• GitHub : github.com/RosnyMinko07\n\n" +
+                      "• Téléphone / WhatsApp : +241 077 12 24 85\n" +
+                      "• Localisation : Libreville, Gabon\n\n" +
                       "💼 Disponible pour vos projets web et mobile ! N'hésitez pas à le contacter.";
         } else if (lowerMessage.includes('compétence') || lowerMessage.includes('technique') || lowerMessage.includes('sait faire')) {
           aiResponse = "💼 **Compétences techniques de Rosny :**\n\n" +
@@ -262,8 +261,7 @@ Tu peux répondre à presque toutes les questions dans ces limites.`
         } else {
           aiResponse = "👋 Je suis l'assistant de **Rosny OTSINA**, développeur freelance Full Stack.\n\n" +
                       "📧 **Contact :** rodrigueotsina@gmail.com\n" +
-                      "📞 **Téléphone :** +241 077 12 24 85\n" +
-                      "💻 **GitHub :** github.com/RosnyMinko07\n\n" +
+                      "📞 **Téléphone / WhatsApp :** +241 077 12 24 85\n\n" +
                       "✨ Il est spécialisé en développement web, mobile et création d'API.\n\n" +
                       "❓ Pour toute question spécifique sur ses compétences ou projets, n'hésitez pas à le contacter directement !";
         }
@@ -298,8 +296,7 @@ Tu peux répondre à presque toutes les questions dans ces limites.`
                         "L'assistant rencontre des difficultés momentanées.\n\n" +
                         "📧 **Contacter Rosny OTSINA (développeur freelance) :**\n" +
                         "• Email : rodrigueotsina@gmail.com\n" +
-                        "• Téléphone : +241 077 12 24 85\n" +
-                        "• GitHub : github.com/RosnyMinko07\n\n" +
+                        "• Téléphone / WhatsApp : +241 077 12 24 85\n\n" +
                         "🔧 **Solution :** Rafraîchissez la page ou réessayez dans quelques instants.\n\n" +
                         "Merci pour votre compréhension !";
     

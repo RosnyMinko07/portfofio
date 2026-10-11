@@ -67,12 +67,25 @@ document.addEventListener('DOMContentLoaded', function () {
       .trim();
   }
 
-  // Obtenir une voix féminine française
+  // Obtenir une voix féminine
   function getFemaleVoice() {
     return new Promise((resolve) => {
       const tryFind = () => {
         const voices = synth.getVoices();
         if (!voices.length) return null;
+
+        const isEn = window.currentLang === 'en';
+        if (isEn) {
+          let v = voices.find(v => v.lang.startsWith('en') && (
+            v.name.toLowerCase().includes('female') ||
+            v.name.toLowerCase().includes('samantha') ||
+            v.name.toLowerCase().includes('victoria') ||
+            v.name.toLowerCase().includes('zira') ||
+            v.name.toLowerCase().includes('karen')
+          ));
+          if (!v) v = voices.find(v => v.lang.startsWith('en'));
+          if (v) return v;
+        }
 
         // Priorité 1 : voix féminine française explicite
         let v = voices.find(v =>
@@ -130,8 +143,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (currentUtterance) synth.cancel();
 
+    const isEn = window.currentLang === 'en';
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang    = 'fr-FR';
+    utterance.lang    = isEn ? 'en-US' : 'fr-FR';
     utterance.rate    = 0.92;
     utterance.pitch   = 1.15;
     utterance.volume  = 1;
@@ -244,7 +258,6 @@ document.addEventListener('DOMContentLoaded', function () {
     email: "rodrigueotsina@gmail.com",
     phone: "+241 077 12 24 85",
     location: "Libreville, Gabon",
-    github: "https://github.com/RosnyMinko07",
     disponibilite: "Disponible immédiatement",
     formation: {
       licence: "Licence professionnelle en Informatique - INPTIC (Génie Logiciel)",
@@ -264,6 +277,13 @@ document.addEventListener('DOMContentLoaded', function () {
       "Sécurité informatique",
       "Maintenance et support technique",
       "Déploiement et hébergement"
+    ],
+    processus: [
+      "1. Cadrage & Analyse : Recueil des besoins, KPIs et choix de la stack technologique.",
+      "2. Design & Architecture : Prototypage UI/UX, modélisation de base de données et architecture logicielle.",
+      "3. Développement & Tests : Code robuste et modulaire, tests unitaires et retours itératifs.",
+      "4. Déploiement & Livraison : Mise en production Cloud (CI/CD), optimisation SEO et documentation complète.",
+      "5. Suivi & Maintenance : Maintenance continue, monitoring des performances et évolutions selon vos besoins."
     ],
     projets: projets
   };
@@ -305,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (lower.includes('contact') || lower.includes('email') || lower.includes('téléphone') || lower.includes('joindre')) {
-      return `Pour contacter Rosny :\n\nEmail : ${rosnyData.email}\nTéléphone : ${rosnyData.phone}\nLocalisation : ${rosnyData.location}\nGitHub : ${rosnyData.github}\nDisponibilité : ${rosnyData.disponibilite}`;
+      return `Pour contacter Rosny :\n\nEmail : ${rosnyData.email}\nTéléphone / WhatsApp : ${rosnyData.phone}\nLocalisation : ${rosnyData.location}\nDisponibilité : ${rosnyData.disponibilite}`;
     }
 
     if (lower.includes('service') || lower.includes('offre') || lower.includes('propose')) {
@@ -324,8 +344,12 @@ document.addEventListener('DOMContentLoaded', function () {
       return `Bonjour ! Je suis Sophia, l'assistante IA de Rosny OTSINA. Comment puis-je vous aider aujourd'hui ? Je peux vous parler de ses projets, compétences, services ou vous donner ses coordonnées.`;
     }
 
-    if (lower.includes('merci') || lower.includes('thank')) {
-      return `De rien ! N'hésitez pas si vous avez d'autres questions sur Rosny ou ses projets.`;
+    if (lower.includes('processus') || lower.includes('méthode') || lower.includes('methode') || lower.includes('workflow') || lower.includes('comment tu travailles') || lower.includes('comment travail') || lower.includes('étape') || lower.includes('etape') || lower.includes('how do you work') || lower.includes('methodology')) {
+      const isEn = window.currentLang === 'en';
+      if (isEn) {
+        return `Here is Rosny's 5-step methodology for building projects:\n\n1. Discovery & Analysis\n2. Design & Architecture\n3. Development & Testing\n4. Cloud Deployment & Delivery\n5. Support & Maintenance\n\nYou can explore each step in detail in the "Process" section of this portfolio!`;
+      }
+      return `Voici le processus de travail en 5 étapes appliqué par Rosny pour chaque projet :\n\n${rosnyData.processus.join('\n\n')}\n\nVous pouvez découvrir chaque étape en détail dans la section « Processus » de ce portfolio !`;
     }
 
     return null; // Passer à l'API
