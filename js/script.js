@@ -118,13 +118,14 @@ const translations = {
 
         // Compétences
         skills_title: "Compétences",
-        skills_cat_front: "Frontend",
-        skills_cat_back: "Backend",
-        skills_cat_mobile: "Mobile",
-        skills_cat_db: "Base de données",
-        skills_cat_tools: "Outils & Autres",
-        skill_security: "Sécurité",
-        skill_deployment: "Déploiement",
+        skill_p1_title: "Développement Web & Backend",
+        skill_p1_desc: "Applications web modernes, architectures MVC et API REST performantes.",
+        skill_p2_title: "Mobile & Multiplateforme",
+        skill_p2_desc: "Applications multiplateformes réactives pour Android, iOS et logiciels de bureau.",
+        skill_p3_title: "Données & Intelligence Artificielle",
+        skill_p3_desc: "Gestion de bases de données relationnelles / NoSQL et intégration de modèles d'IA.",
+        skill_p4_title: "Conception & DevOps",
+        skill_p4_desc: "Modélisation préalable des besoins, gestion de versions et conteneurisation.",
 
         // Portfolio (Projets)
         portfolio_title: "Mes Projets",
@@ -312,14 +313,15 @@ const translations = {
         process_cta_btn: "Start a Project <i class=\"fas fa-arrow-right\"></i>",
 
         // Compétences
-        skills_title: "Technical Skills",
-        skills_cat_front: "Frontend",
-        skills_cat_back: "Backend",
-        skills_cat_mobile: "Mobile",
-        skills_cat_db: "Databases",
-        skills_cat_tools: "Tools & DevOps",
-        skill_security: "Security",
-        skill_deployment: "Deployment",
+        skills_title: "Core Competencies",
+        skill_p1_title: "Web & Backend Development",
+        skill_p1_desc: "Modern full-stack web applications, scalable MVC architectures, and high-performance REST APIs.",
+        skill_p2_title: "Mobile & Multiplatform",
+        skill_p2_desc: "Responsive cross-platform mobile apps for Android & iOS, and native desktop software.",
+        skill_p3_title: "Data & Artificial Intelligence",
+        skill_p3_desc: "Relational & NoSQL database architecture, query optimization, and AI model integration.",
+        skill_p4_title: "System Design & DevOps",
+        skill_p4_desc: "Functional specifications modeling, Git version control workflows, and containerized deployment.",
 
         // Portfolio (Projets)
         portfolio_title: "Featured Projects",

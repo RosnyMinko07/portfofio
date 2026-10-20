@@ -2052,64 +2052,111 @@ h3.my-profession {
     background: var(--bg-black-900);
 }
 
-.skills-category {
-    margin-bottom: 10px;
+.skills-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
 }
 
-.skills-cat-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--skin-color);
-    margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.skills-cat-title i {
-    font-size: 16px;
-}
-
-.skills-icons-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-}
-
-.skill-icon-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 105px;
-    padding: 20px 12px;
+.skill-pillar-card {
     background: var(--bg-black-100);
     border: 1px solid var(--bg-black-50);
-    border-radius: 14px;
-    cursor: default;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    border-radius: 18px;
+    padding: 26px 24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    backdrop-filter: blur(10px);
 }
 
-.skill-icon-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+.skill-pillar-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 32px rgba(0,0,0,0.16);
     border-color: var(--skin-color);
 }
 
-.skill-icon-card i {
-    font-size: 46px;
-    line-height: 1;
+.skill-pillar-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
 }
 
-.skill-icon-card span {
-    font-size: 12px;
-    font-weight: 600;
+.skill-pillar-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(var(--skin-color-rgb, 255, 255, 255), 0.08);
+    border: 1px solid rgba(var(--skin-color-rgb, 255, 255, 255), 0.16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.skill-pillar-card:hover .skill-pillar-icon {
+    transform: scale(1.08) rotate(3deg);
+    background: rgba(var(--skin-color-rgb, 255, 255, 255), 0.14);
+}
+
+.skill-pillar-icon i {
+    font-size: 24px;
+    color: var(--skin-color);
+}
+
+.skill-pillar-meta {
+    flex: 1;
+}
+
+.skill-pillar-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-black-900);
+    margin-bottom: 6px;
+    line-height: 1.35;
+}
+
+.skill-pillar-desc {
+    font-size: 13.5px;
     color: var(--text-black-700);
-    text-align: center;
-    line-height: 1.2;
+    line-height: 1.55;
+    margin: 0;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--bg-black-50);
+}
+
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 13px;
+    background: var(--bg-black-900);
+    border: 1px solid var(--bg-black-50);
+    border-radius: 20px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-black-900);
+    transition: all 0.25s ease;
+}
+
+.skill-tag i {
+    font-size: 14px;
+}
+
+.skill-tag:hover {
+    border-color: var(--skin-color);
+    background: rgba(var(--skin-color-rgb, 255, 255, 255), 0.06);
+    transform: translateY(-2px);
 }
 
 /* ==================== PORTFOLIO CARDS & CAROUSEL ==================== */
