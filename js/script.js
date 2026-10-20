@@ -133,7 +133,7 @@ const translations = {
         filter_mobile: "Mobile",
         filter_desktop: "Desktop",
 
-        proj_title_1: "Application de traduction des langues gabonaises",
+        proj_title_1: "Tradition-IA — Application de traduction des langues gabonaises",
         proj_desc_1: "Application web responsive permettant la traduction entre différentes langues locales du Gabon avec interface intuitive et base de données linguistique.",
         proj_title_2: "Application Web de Facturation — Tech Info Plus",
         proj_desc_2: "Système complet de facturation et de suivi de stock pour une PME à Port-Gentil. Gestion clients, fournisseurs, articles, devis, règlements et rapports.",
@@ -143,6 +143,10 @@ const translations = {
         proj_desc_4: "Plateforme e-commerce pour la gestion d'un mini market en ligne avec espace vendeur, panier, paiement et tableau de bord administrateur.",
         proj_title_5: "Application Mobile de Vote",
         proj_desc_5: "Application mobile pour la réalisation de votes électroniques en temps réel avec interface administrateur et saisie des résultats.",
+        proj_title_6: "AARTFLIX — Plateforme de Streaming",
+        proj_desc_6: "Plateforme de streaming vidéo avec catalogue multimédia interactif, lecteur fluide et administration optimisée du backend et de la base de données.",
+        proj_title_7: "HÔTEL YA — Système de Gestion Hôtelière",
+        proj_desc_7: "Solution complète de gestion hôtelière multiplateforme : réservations en ligne, facturation automatisée, gestion des stocks, suivi clients et tableau de bord administrateur.",
 
         btn_hide_images: "Masquer les images",
         btn_show_images: "Voir les images",
@@ -324,7 +328,7 @@ const translations = {
         filter_mobile: "Mobile",
         filter_desktop: "Desktop",
 
-        proj_title_1: "Gabonese Languages Translation Application",
+        proj_title_1: "Tradition-IA — Gabonese Languages Translation Application",
         proj_desc_1: "Responsive web application enabling instant translation between indigenous Gabonese languages with intuitive UI and lexical database.",
         proj_title_2: "Web Invoicing & Inventory App — Tech Info Plus",
         proj_desc_2: "Comprehensive invoicing and inventory control platform for an IT SME in Port-Gentil. Client CRM, vendors, products, quotations, settlements, and analytics.",
@@ -334,6 +338,10 @@ const translations = {
         proj_desc_4: "E-commerce platform for an online market with vendor storefront, shopping cart, checkout, and admin dashboard.",
         proj_title_5: "Mobile Electronic Voting App",
         proj_desc_5: "Mobile app for real-time electronic voting with election administrators dashboard and ballot results tabulation.",
+        proj_title_6: "AARTFLIX — Streaming Platform",
+        proj_desc_6: "On-demand video streaming platform featuring an interactive multimedia catalog, smooth media playback, and robust backend and database administration.",
+        proj_title_7: "HÔTEL YA — Hotel Management System",
+        proj_desc_7: "Comprehensive multiplatform hotel management solution: online bookings, automated invoicing, customer relationship management, inventory tracking, and executive dashboard.",
 
         btn_hide_images: "Hide images",
         btn_show_images: "View images",
