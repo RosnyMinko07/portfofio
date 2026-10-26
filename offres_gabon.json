@@ -1,0 +1,269 @@
+[
+  {
+    "job": {
+      "id": "GAB-DEV-001",
+      "titre": "Développeur Full Stack (H/F)",
+      "entreprise": "Cabinet AltEmploi Gabon (pour client Tech & Divertissement)",
+      "localisation": "Libreville, Gabon (Boulevard Triomphal)",
+      "type_contrat": "CDI",
+      "secteur": "Nouvelles Technologies & Logiciels",
+      "description": "Programmation d'applications web et logiciels métiers, conception d'architectures robustes, mise en place de tableaux de bord interactifs et API REST. Résolution de problématiques techniques complexes.",
+      "competences_requises": [
+        "JavaScript",
+        "HTML/CSS",
+        "Python",
+        "React",
+        "Node.js",
+        "Django ou Laravel",
+        "Bases de données SQL",
+        "Mobile (Android/Flutter) un plus"
+      ],
+      "experience": "Bac+3 à Bac+5 en Génie Logiciel / Informatique, 2 à 4 ans d'expérience",
+      "source": "AltEmploi Gabon (altemploi5.com)",
+      "lien": "https://www.altemploi5.com",
+      "contact_candidature": "recrutement@altemploi5.com / Candidature via le portail AltEmploi",
+      "date_publication": "Offre active 2025/2026",
+      "statut": "Ouvert"
+    },
+    "analysis": {
+      "score": 98,
+      "pointsForts": [
+        "Excellente maîtrise démontrée avec l'application de Facturation Tech Info Plus",
+        "Solide expérience Flutter prouvée avec l'application mobile de vote",
+        "Stack moderne Full Stack JavaScript validée par le portfolio interactif et chatbot",
+        "Disponibilité immédiate sur place à Libreville (aucun délai de déménagement)"
+      ],
+      "pointsVigilance": [
+        "Mettre l'accent sur les réalisations opérationnelles"
+      ],
+      "matchingSkills": [
+        "JavaScript / TypeScript",
+        "PHP / Laravel",
+        "Python / Django",
+        "Mobile Flutter",
+        "Bases de données SQL / NoSQL",
+        "API REST / Architecture",
+        "Localisation Gabon (Libreville)"
+      ]
+    }
+  },
+  {
+    "job": {
+      "id": "GAB-DEV-002",
+      "titre": "Développeur Web & Mobile Flutter / Laravel (H/F)",
+      "entreprise": "Gabon du Numérique (ESN & Solutions Digitales)",
+      "localisation": "Libreville, Gabon (Centre-ville)",
+      "type_contrat": "CDI / Mission Longue Durée",
+      "secteur": "Services Numériques & Solutions Métiers",
+      "description": "Conception et déploiement d'applications mobiles cross-platform pour des clients institutionnels et privés à Libreville. Intégration d'API backend en PHP/Laravel et Node.js. Maintenance évolutive et sécurité.",
+      "competences_requises": [
+        "Flutter",
+        "Dart",
+        "PHP/Laravel",
+        "REST API",
+        "MySQL/PostgreSQL",
+        "Git",
+        "Déploiement Cloud"
+      ],
+      "experience": "Bac+3 Licence Pro Génie Logiciel / Master IT (1 à 3 ans d'expérience ou projets solides démontrables)",
+      "source": "Gabon du Numérique & Réseau IT Libreville",
+      "lien": "https://gabondunumerique.com",
+      "contact_candidature": "rh@gabondunumerique.com",
+      "date_publication": "Offre active 2025/2026",
+      "statut": "Ouvert"
+    },
+    "analysis": {
+      "score": 98,
+      "pointsForts": [
+        "Excellente maîtrise démontrée avec l'application de Facturation Tech Info Plus",
+        "Solide expérience Flutter prouvée avec l'application mobile de vote",
+        "Disponibilité immédiate sur place à Libreville (aucun délai de déménagement)"
+      ],
+      "pointsVigilance": [
+        "Mettre l'accent sur les réalisations opérationnelles"
+      ],
+      "matchingSkills": [
+        "JavaScript / TypeScript",
+        "PHP / Laravel",
+        "Mobile Flutter",
+        "Bases de données SQL / NoSQL",
+        "API REST / Architecture",
+        "Sécurité & Déploiement",
+        "Localisation Gabon (Libreville)"
+      ]
+    }
+  },
+  {
+    "job": {
+      "id": "GAB-DEV-005",
+      "titre": "Consultant / Développeur Freelance Projets Spécifiques (Gabon & Télétravail)",
+      "entreprise": "PME & Startups Gabonaises (Missions Port-Gentil & Libreville)",
+      "localisation": "Libreville / Hybride Gabon",
+      "type_contrat": "Prestation Freelance / Contrat Projet",
+      "secteur": "E-Commerce, Facturation & Logiciels Métiers",
+      "description": "Réalisation clé en main de sites web dynamiques, plateformes e-commerce et applications de facturation pour des PME gabonaises en pleine digitalisation.",
+      "competences_requises": [
+        "Laravel",
+        "React / Vue",
+        "Système de facturation",
+        "Mobile",
+        "Autonomie complète"
+      ],
+      "experience": "Portfolio avec projets concrets livrés",
+      "source": "Réseau Entreprendre Gabon & Réseau Freelance",
+      "lien": "https://tech-info-plus.vercel.app/",
+      "contact_candidature": "Direct entreprises / Appels d'offres locaux",
+      "date_publication": "Permanent",
+      "statut": "Ouvert"
+    },
+    "analysis": {
+      "score": 98,
+      "pointsForts": [
+        "Excellente maîtrise démontrée avec l'application de Facturation Tech Info Plus",
+        "Solide expérience Flutter prouvée avec l'application mobile de vote",
+        "Stack moderne Full Stack JavaScript validée par le portfolio interactif et chatbot",
+        "Disponibilité immédiate sur place à Libreville (aucun délai de déménagement)"
+      ],
+      "pointsVigilance": [
+        "Mettre l'accent sur les réalisations opérationnelles"
+      ],
+      "matchingSkills": [
+        "JavaScript / TypeScript",
+        "PHP / Laravel",
+        "Mobile Flutter",
+        "API REST / Architecture",
+        "Sécurité & Déploiement",
+        "Localisation Gabon (Libreville)"
+      ]
+    }
+  },
+  {
+    "job": {
+      "id": "GAB-LNK-006",
+      "titre": "Développeur Logiciel & Solutions Digitales (H/F)",
+      "entreprise": "Groupe Télécom / Fintech & Partenaires LinkedIn Gabon",
+      "localisation": "Libreville, Gabon (Centre-ville / Hybride)",
+      "type_contrat": "CDI",
+      "secteur": "Services Informatiques & Digitalisation",
+      "description": "Développement et maintenance d'applications web et mobiles, interfaçage avec des passerelles de paiement locales (Airtel Money, Moov Money), collaboration agile sur Git et déploiement continu.",
+      "competences_requises": [
+        "PHP / Laravel ou Node.js",
+        "Flutter ou React",
+        "REST APIs",
+        "Bases de données SQL",
+        "Git / GitHub"
+      ],
+      "experience": "Licence Pro Génie Logiciel / Master informatique (1 à 3 ans ou réalisations de projets prouvées)",
+      "source": "LinkedIn Jobs Gabon",
+      "lien": "https://www.linkedin.com/jobs/search/?keywords=developpeur&location=Libreville%2C%20Gabon",
+      "contact_candidature": "Candidature via LinkedIn Jobs Gabon",
+      "date_publication": "Offre active 2025/2026",
+      "statut": "Ouvert"
+    },
+    "analysis": {
+      "score": 98,
+      "pointsForts": [
+        "Excellente maîtrise démontrée avec l'application de Facturation Tech Info Plus",
+        "Solide expérience Flutter prouvée avec l'application mobile de vote",
+        "Stack moderne Full Stack JavaScript validée par le portfolio interactif et chatbot",
+        "Disponibilité immédiate sur place à Libreville (aucun délai de déménagement)"
+      ],
+      "pointsVigilance": [
+        "Mettre l'accent sur les réalisations opérationnelles"
+      ],
+      "matchingSkills": [
+        "JavaScript / TypeScript",
+        "PHP / Laravel",
+        "Mobile Flutter",
+        "Bases de données SQL / NoSQL",
+        "API REST / Architecture",
+        "Localisation Gabon (Libreville)"
+      ]
+    }
+  },
+  {
+    "job": {
+      "id": "GAB-DEV-003",
+      "titre": "Ingénieur IT & Développement d'Applications (H/F)",
+      "entreprise": "Opérateur Télécom / Fintech Libreville",
+      "localisation": "Libreville, Gabon",
+      "type_contrat": "CDI",
+      "secteur": "Télécoms & Services Financiers Mobiles",
+      "description": "Participation à la conception, au déploiement et à la sécurisation des briques logicielles internes, outils d'automatisation et connecteurs de paiement. Support technique de niveau 3 et audit de code.",
+      "competences_requises": [
+        "Node.js ou Python",
+        "Java",
+        "Bases de données relationnelles & NoSQL",
+        "Docker",
+        "Sécurité informatique",
+        "Linux"
+      ],
+      "experience": "Bac+5 Master Informatique / IA ou Ingénieur Logiciel",
+      "source": "Portail Emploi.ga / AltEmploi",
+      "lien": "https://www.emploi.ga",
+      "contact_candidature": "recrutement-it@emploi.ga",
+      "date_publication": "Offre active 2025/2026",
+      "statut": "Ouvert"
+    },
+    "analysis": {
+      "score": 93,
+      "pointsForts": [
+        "Stack moderne Full Stack JavaScript validée par le portfolio interactif et chatbot",
+        "Disponibilité immédiate sur place à Libreville (aucun délai de déménagement)"
+      ],
+      "pointsVigilance": [
+        "Mettre l'accent sur les réalisations opérationnelles"
+      ],
+      "matchingSkills": [
+        "JavaScript / TypeScript",
+        "Python / Django",
+        "Bases de données SQL / NoSQL",
+        "Sécurité & Déploiement",
+        "Localisation Gabon (Libreville)"
+      ]
+    }
+  },
+  {
+    "job": {
+      "id": "GAB-DEV-004",
+      "titre": "Développeur Digital & Solutions Web (H/F)",
+      "entreprise": "Groupe Agro-industriel & Grande Distribution (SOBRAGA / Castel)",
+      "localisation": "Libreville / Owendo, Gabon",
+      "type_contrat": "CDI",
+      "secteur": "Industrie & Agroalimentaire",
+      "description": "Développement d'outils internes pour la traçabilité des stocks, facturation et outils RH. Digitalisation des processus d'entreprise, intégration de dashboards pour les directions métiers.",
+      "competences_requises": [
+        "PHP",
+        "JavaScript",
+        "HTML/CSS",
+        "MySQL",
+        "Notions ERP / Outils de gestion",
+        "Capacité à automatiser les tâches"
+      ],
+      "experience": "Bac+3 Informatique de Gestion ou Génie Logiciel, 2 ans d'expérience",
+      "source": "Gabon Opportunités / Jobartis Gabon",
+      "lien": "https://www.jobartis.ga",
+      "contact_candidature": "recrutement@sobraga.net / via Jobartis",
+      "date_publication": "Offre active 2025/2026",
+      "statut": "Ouvert"
+    },
+    "analysis": {
+      "score": 88,
+      "pointsForts": [
+        "Excellente maîtrise démontrée avec l'application de Facturation Tech Info Plus",
+        "Stack moderne Full Stack JavaScript validée par le portfolio interactif et chatbot",
+        "Disponibilité immédiate sur place à Libreville (aucun délai de déménagement)"
+      ],
+      "pointsVigilance": [
+        "Mettre en avant l'expérience WinDev / Logiciels de gestion pour appuyer l'adaptabilité ERP"
+      ],
+      "matchingSkills": [
+        "JavaScript / TypeScript",
+        "PHP / Laravel",
+        "Bases de données SQL / NoSQL",
+        "API REST / Architecture",
+        "Localisation Gabon (Libreville)"
+      ]
+    }
+  }
+]

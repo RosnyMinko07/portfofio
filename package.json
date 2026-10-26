@@ -5,7 +5,9 @@
   "main": "index.html",
   "scripts": {
     "dev": "vercel dev",
-    "build": "node build.js"
+    "build": "node build.js",
+    "hunt": "node scripts/run-daily-hunt.js",
+    "hunt:daemon": "node scripts/scheduler-daemon.js"
   },
   "keywords": [
     "portfolio",

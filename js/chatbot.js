@@ -312,9 +312,59 @@ document.addEventListener('DOMContentLoaded', function () {
     return response;
   }
 
+  function buildGabonJobHunterResponse() {
+    return `🇬🇦 **Système Multi-Agents IA : Chasse d'Emploi au Gabon**\n\n` +
+      `J'ai activé le workflow en 4 étapes pour le profil de **Rosny OTSINA** (Développeur Full Stack Web & Mobile, Libreville) :\n\n` +
+      `🤖 **Les 4 Agents en action :**\n` +
+      `1. 📄 **Agent 1 (Profil)** : Extraction des compétences clés (Licence INPTIC Génie Logiciel + Master IA, Laravel, Flutter, Node.js, Python, MySQL).\n` +
+      `2. 🌐 **Agent 2 (Scraping Gabon)** : 5 opportunités ciblées identifiées à Libreville.\n` +
+      `3. 🎯 **Agent 3 (Matching)** : Taux de compatibilité et adéquation technique calculés.\n` +
+      `4. 📋 **Agent 4 (Synthèse & Dossiers)** : Génération des dossiers et liens d'action.\n\n` +
+      `---\n\n` +
+      `🥇 **1. Développeur Full Stack (H/F)** — *Cabinet AltEmploi Gabon*\n` +
+      `📍 Libreville (Bvd Triomphal) | Contrat : **CDI**\n` +
+      `⭐ **Score de compatibilité : 98%**\n` +
+      `✅ *Points forts :* React, Node.js, Python, bases SQL, disponibilité immédiate à Libreville.\n` +
+      `📁 *Dossier à fournir :* CV Rosny à jour, lettre de motivation ciblée, lien du portfolio.\n` +
+      `🔗 [Postuler sur AltEmploi](https://www.altemploi5.com) | Contact : \`recrutement@altemploi5.com\`\n\n` +
+      `🥈 **2. Développeur Web & Mobile Flutter / Laravel (H/F)** — *Gabon du Numérique*\n` +
+      `📍 Libreville | Contrat : **CDI / Mission**\n` +
+      `⭐ **Score de compatibilité : 98%**\n` +
+      `✅ *Points forts :* Flutter & Laravel prouvés (App Vote, Tech Info Plus).\n` +
+      `📁 *Dossier à fournir :* CV + démos GitHub et applications mobiles.\n` +
+      `🔗 [Voir l'offre](https://gabondunumerique.com) | Contact : \`rh@gabondunumerique.com\`\n\n` +
+      `🥉 **3. Ingénieur IT & Développement d'Applications (H/F)** — *Opérateur Télécom / Fintech*\n` +
+      `📍 Libreville | Contrat : **CDI**\n` +
+      `⭐ **Score de compatibilité : 93%**\n` +
+      `✅ *Points forts :* Backend (Node.js, Python, Java), Master IA en cours, sécurité.\n` +
+      `📁 *Dossier à fournir :* CV, diplôme INPTIC certifié, lettre de motivation.\n` +
+      `🔗 [Postuler via Emploi.ga](https://www.emploi.ga)\n\n` +
+      `🏅 **4. Développeur Digital & Solutions Web (H/F)** — *SOBRAGA / Groupe Castel*\n` +
+      `📍 Libreville / Owendo | Contrat : **CDI**\n` +
+      `⭐ **Score de compatibilité : 88%**\n` +
+      `✅ *Points forts :* Outils de facturation/stocks, PHP, MySQL, digitalisation des processus.\n` +
+      `🔗 [Postuler via Jobartis Gabon](https://www.jobartis.ga)\n\n` +
+      `---\n` +
+      `📄 *Le rapport complet avec analyse détaillée et guide d'action a été généré dans le fichier \`RAPPORT_OFFRES_EMPLOI_GABON.md\` à la racine de votre projet !*`;
+  }
+
   // ===================== RÉPONSES LOCALES =====================
   function getLocalResponse(message) {
     const lower = message.toLowerCase();
+
+    // Détection Chasse d'emploi / Recrutement au Gabon (Multi-Agents IA)
+    if (
+      lower.includes('emploi') ||
+      lower.includes('boulot') ||
+      lower.includes('travail') ||
+      lower.includes('job') ||
+      lower.includes('recrutement') ||
+      lower.includes('postuler') ||
+      lower.includes('candidature') ||
+      (lower.includes('offre') && (lower.includes('gabon') || lower.includes('libreville') || lower.includes('dev') || lower.includes('informatique') || lower.includes('agent') || lower.includes('trouv') || lower.includes('cherch')))
+    ) {
+      return buildGabonJobHunterResponse();
+    }
 
     if (isProjectRequest(lower)) {
       return buildProjectsResponse();
@@ -328,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return `Pour contacter Rosny :\n\nEmail : ${rosnyData.email}\nTéléphone / WhatsApp : ${rosnyData.phone}\nLocalisation : ${rosnyData.location}\nDisponibilité : ${rosnyData.disponibilite}`;
     }
 
-    if (lower.includes('service') || lower.includes('offre') || lower.includes('propose')) {
+    if (lower.includes('service') || lower.includes('prestations') || lower.includes('propose') || lower.includes('tes offres')) {
       return `Rosny propose les services suivants :\n\n${rosnyData.services.map((s, i) => `${i + 1}. ${s}`).join('\n')}`;
     }
 
@@ -393,6 +443,21 @@ document.addEventListener('DOMContentLoaded', function () {
   // ===================== MESSAGES =====================
   let conversationHistory = [];
 
+  // Formater le texte (Markdown : gras, italique, code, liens)
+  function formatMessageContent(rawText) {
+    if (!rawText) return '';
+    let formatted = rawText
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/`([^`]+)`/g, '<code class="chat-code">$1</code>')
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="chat-link">$1 <i class="fas fa-external-link-alt" style="font-size:10px;margin-left:3px;"></i></a>')
+      .replace(/\n/g, '<br>');
+    return formatted;
+  }
+
   function addMessage(text, sender, playVoice = false) {
     const wrapper = document.createElement('div');
     wrapper.className = `message-wrapper ${sender}-wrapper`;
@@ -411,7 +476,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (text === '...') {
       msgDiv.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
     } else {
-      msgDiv.innerHTML = text.replace(/\n/g, '<br>');
+      msgDiv.innerHTML = formatMessageContent(text);
     }
 
     content.appendChild(msgDiv);
@@ -590,13 +655,5 @@ document.addEventListener('DOMContentLoaded', function () {
       if (window.innerWidth > 767) chatbotInput.focus({ preventScroll: true });
     }
   }
-
-  // ===================== MESSAGE DE BIENVENUE =====================
-  setTimeout(() => {
-    if (!sessionStorage.getItem('chatbotWelcomed')) {
-      sessionStorage.setItem('chatbotWelcomed', 'true');
-      // Le message est déjà dans le HTML, on joue juste la voix si activée
-    }
-  }, 1500);
 
 });

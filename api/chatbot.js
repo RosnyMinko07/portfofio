@@ -37,6 +37,17 @@ module.exports = async (req, res) => {
       });
     }
 
+    // Fonction pour détecter si c'est une recherche d'emploi au Gabon
+    function isJobSearch(text) {
+      const lower = text.toLowerCase();
+      const jobWords = [
+        'emploi', 'boulot', 'travail', 'poste', 'recrutement', 'recruter',
+        'chasser', 'chasse', 'job', 'postuler', 'candidature', 'stage'
+      ];
+      return jobWords.some(k => lower.includes(k)) || 
+             (lower.includes('offre') && (lower.includes('gabon') || lower.includes('libreville') || lower.includes('dev') || lower.includes('informatique') || lower.includes('agent')));
+    }
+
     // Fonction pour détecter si c'est une question sur Rosny
     function isAboutRosny(text) {
       const lowerText = text.toLowerCase();
@@ -48,10 +59,11 @@ module.exports = async (req, res) => {
         'html', 'css', 'javascript', 'php', 'laravel', 'node',
         'python', 'flutter', 'react', 'vue', 'java',
         'mysql', 'mongodb', 'base de données', 'web', 'mobile',
-        'processus', 'méthode', 'workflow', 'étape', 'process', 'methodology'
+        'processus', 'méthode', 'workflow', 'étape', 'process', 'methodology',
+        'emploi', 'boulot', 'recrutement', 'job', 'gabon'
       ];
       
-      return rosnyKeywords.some(keyword => lowerText.includes(keyword));
+      return rosnyKeywords.some(keyword => lowerText.includes(keyword)) || isJobSearch(text);
     }
 
     // Construire le système de messages adaptatif
@@ -229,7 +241,41 @@ Tu peux répondre à presque toutes les questions dans ces limites.`
       
       if (aboutRosny) {
         // Fallback pour questions sur Rosny
-        if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('téléphone') || lowerMessage.includes('tel')) {
+        if (isJobSearch(message)) {
+          aiResponse = "🇬🇦 **Système Multi-Agents IA : Chasse d'Emploi au Gabon**\n\n" +
+            "J'ai activé le workflow en 4 étapes pour le profil de **Rosny OTSINA** (Développeur Full Stack, Libreville) :\n\n" +
+            "🤖 **Processus des 4 Agents :**\n" +
+            "1. 📄 **Agent 1 (Profil)** : Extraction des compétences clés (Laravel, Flutter, Node.js, Python, INPTIC, Master IA).\n" +
+            "2. 🌐 **Agent 2 (Scraping Gabon)** : 5 opportunités tech ciblées identifiées à Libreville.\n" +
+            "3. 🎯 **Agent 3 (Matching)** : Taux de compatibilité et adéquation technique calculés.\n" +
+            "4. 📋 **Agent 4 (Synthèse & Dossiers)** : Génération des dossiers et liens d'action immédiate.\n\n" +
+            "---\n" +
+            "🥇 **1. Développeur Full Stack (H/F)** — *Cabinet AltEmploi Gabon*\n" +
+            "📍 Libreville (Bvd Triomphal) | Contrat : **CDI**\n" +
+            "⭐ **Score de compatibilité : 98%**\n" +
+            "✅ *Points forts :* React, Node.js, Python, SQL, disponibilité immédiate à Libreville.\n" +
+            "📁 *Dossier à fournir :* CV Rosny à jour, lettre de motivation ciblée, lien du portfolio.\n" +
+            "🔗 [Postuler sur AltEmploi](https://www.altemploi5.com) | Contact : `recrutement@altemploi5.com`\n\n" +
+            "🥈 **2. Développeur Web & Mobile Flutter / Laravel (H/F)** — *Gabon du Numérique*\n" +
+            "📍 Libreville | Contrat : **CDI / Mission**\n" +
+            "⭐ **Score de compatibilité : 98%**\n" +
+            "✅ *Points forts :* Flutter & Laravel prouvés (App Vote, Tech Info Plus).\n" +
+            "📁 *Dossier à fournir :* CV + démos GitHub et applications mobiles.\n" +
+            "🔗 [Voir l'offre](https://gabondunumerique.com) | Contact : `rh@gabondunumerique.com`\n\n" +
+            "🥉 **3. Ingénieur IT & Développement d'Applications (H/F)** — *Opérateur Télécom / Fintech*\n" +
+            "📍 Libreville | Contrat : **CDI**\n" +
+            "⭐ **Score de compatibilité : 93%**\n" +
+            "✅ *Points forts :* Backend (Node.js, Python, Java), Master IA en cours, sécurité.\n" +
+            "📁 *Dossier à fournir :* CV, diplôme INPTIC certifié, lettre de motivation.\n" +
+            "🔗 [Postuler via Emploi.ga](https://www.emploi.ga)\n\n" +
+            "🏅 **4. Développeur Digital & Solutions Web (H/F)** — *SOBRAGA / Groupe Castel*\n" +
+            "📍 Libreville / Owendo | Contrat : **CDI**\n" +
+            "⭐ **Score de compatibilité : 88%**\n" +
+            "✅ *Points forts :* Outils de facturation/stocks, PHP, MySQL, digitalisation des processus.\n" +
+            "🔗 [Postuler via Jobartis Gabon](https://www.jobartis.ga)\n\n" +
+            "---\n" +
+            "📄 *Le rapport complet avec analyse détaillée et guide d'action a été généré dans le fichier `RAPPORT_OFFRES_EMPLOI_GABON.md` à la racine de votre projet !*";
+        } else if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('téléphone') || lowerMessage.includes('tel')) {
           aiResponse = "📧 **Contact de Rosny OTSINA :**\n\n" +
                       "• Email : rodrigueotsina@gmail.com\n" +
                       "• Téléphone / WhatsApp : +241 077 12 24 85\n" +

@@ -20,6 +20,11 @@ const filesToCopy = [
   'js',
   'images',
   'pdf',
+  'scripts',
+  'services',
+  'candidatures',
+  'RAPPORT_OFFRES_EMPLOI_GABON.md',
+  'offres_gabon.json',
   'CONFIGURATION.md',
   'README_VERCEL.md',
   'README.mdgit'
