@@ -9,7 +9,7 @@ Direction des Ressources Humaines / Pôle Recrutement IT
 **Groupe Agro-industriel & Grande Distribution (SOBRAGA / Castel)**  
 📍 Libreville / Owendo, Gabon  
 
-**Libreville, le 27 octobre 2026**  
+**Libreville, le 5 novembre 2026**  
 
 ---
 

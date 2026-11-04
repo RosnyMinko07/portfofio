@@ -357,19 +357,28 @@ async function runJobHunterAgent(customProfile = null) {
   console.log("\n▶️ [Agent 4] Génération de la synthèse et des dossiers de candidature...");
   const reportMarkdown = Agent4_Synthesizer.generateReport(profile, analyzedJobs);
 
-  // Sauvegarde des résultats
+  // Sauvegarde des résultats (protégé pour environnement Cloud / Vercel Serverless)
   const rootDir = path.resolve(__dirname, '..');
   const reportPath = path.join(rootDir, 'RAPPORT_OFFRES_EMPLOI_GABON.md');
   const jsonPath = path.join(rootDir, 'offres_gabon.json');
 
-  fs.writeFileSync(reportPath, reportMarkdown, 'utf-8');
-  fs.writeFileSync(jsonPath, JSON.stringify(analyzedJobs, null, 2), 'utf-8');
+  try {
+    fs.writeFileSync(reportPath, reportMarkdown, 'utf-8');
+    fs.writeFileSync(jsonPath, JSON.stringify(analyzedJobs, null, 2), 'utf-8');
+  } catch (fsErr) {
+    console.warn('ℹ️ [Environnement Serverless / Vercel] Écriture sur disque local ignorée (système en lecture seule).');
+  }
 
-  // Étape 5 : Rédaction automatique des lettres de motivation ultra-personnalisées
+  // Étape 5 : Rédaction automatique des lettres de motivation
   console.log("\n▶️ [Agent 4+] Rédaction des lettres de motivation & emails personnalisés...");
-  const { saveAllCoverLetters } = require('../services/cover-letter-generator');
-  const lettersResult = saveAllCoverLetters(profile, analyzedJobs);
-  console.log(`   ✅ ${lettersResult.totalGenerated} lettres de motivation et candidatures générées dans 'candidatures/' !`);
+  let lettersResult = { totalGenerated: analyzedJobs.length, candidaturesDir: 'candidatures/' };
+  try {
+    const { saveAllCoverLetters } = require('../services/cover-letter-generator');
+    lettersResult = saveAllCoverLetters(profile, analyzedJobs);
+    console.log(`   ✅ ${lettersResult.totalGenerated} lettres de motivation générées !`);
+  } catch (letErr) {
+    console.warn('ℹ️ [Environnement Serverless / Vercel] Sauvegarde fichiers lettres ignorée:', letErr.message);
+  }
 
   console.log(`\n🎉 WORKFLOW TERMINÉ AVEC SUCCÈS !`);
   console.log(`📄 Rapport Markdown généré dans : ${reportPath}`);

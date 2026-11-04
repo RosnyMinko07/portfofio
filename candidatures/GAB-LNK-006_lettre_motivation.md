@@ -9,7 +9,7 @@ Direction des Ressources Humaines / Pôle Recrutement IT
 **Groupe Télécom / Fintech & Partenaires LinkedIn Gabon**  
 📍 Libreville, Gabon (Centre-ville / Hybride)  
 
-**Libreville, le 27 octobre 2026**  
+**Libreville, le 5 novembre 2026**  
 
 ---
 

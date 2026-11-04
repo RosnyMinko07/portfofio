@@ -79,7 +79,7 @@ Le système scanne le marché de l'emploi tech au Gabon (Libreville / Port-Genti
 ## 📱 1. Configuration WhatsApp (Gratuit en 10 secondes)
 
 Pour recevoir automatiquement les alertes sur ton WhatsApp (`+241 077 12 24 85`) via l'API CallMeBot :
-1. Enregistre le numéro du bot dans tes contacts WhatsApp : **`+34 941 83 20 12`** (ou `+34 644 44 20 72`).
+1. Enregistre le numéro du bot dans tes contacts WhatsApp : **`+34 623 78 64 49`** (ou `+34 644 44 20 72`).
 2. Envoie-lui le message suivant sur WhatsApp :
    ```
    I allow callmebot to send me messages

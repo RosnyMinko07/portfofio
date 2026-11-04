@@ -169,7 +169,7 @@ async function sendEmailNotification({ profile, analyzedJobs, recipientEmail = n
 
   try {
     const resend = new Resend(apiKey);
-    const fromAddress = process.env.RESEND_FROM || 'Alerte Emploi Gabon <onboarding@resend.dev>';
+    const fromAddress = process.env.RESEND_FROM || 'onboarding@resend.dev';
 
     const { data, error } = await resend.emails.send({
       from: fromAddress,
@@ -282,6 +282,83 @@ async function sendWhatsAppNotification({ profile, analyzedJobs, phone = null })
 /**
  * Dispatch complet des notifications (Email + WhatsApp)
  */
+
+/**
+ * Envoi d'une notification via Telegram Bot (100% gratuit, illimité, aucune saturation)
+ */
+async function sendTelegramNotification({ profile, analyzedJobs }) {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (!token || !chatId) {
+    return { success: false, skipped: true, reason: 'TELEGRAM_BOT_TOKEN ou TELEGRAM_CHAT_ID non configuré' };
+  }
+
+  const messageText = generateWhatsAppText(profile, analyzedJobs);
+  console.log(`\n✈️ [NOTIF TELEGRAM] Envoi du rapport vers Telegram (${chatId})...`);
+
+  try {
+    const url = `https://api.telegram.org/bot${token}/sendMessage`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: messageText,
+        parse_mode: 'Markdown'
+      })
+    });
+    const data = await res.json();
+    if (data.ok) {
+      console.log('✅ [NOTIF TELEGRAM] Message envoyé avec succès sur Telegram !');
+      return { success: true, provider: 'telegram', data };
+    } else {
+      console.error('❌ [NOTIF TELEGRAM] Erreur:', data.description);
+      return { success: false, error: data.description };
+    }
+  } catch (err) {
+    console.error('❌ [NOTIF TELEGRAM] Exception:', err.message);
+    return { success: false, error: err.message };
+  }
+}
+
+/**
+ * Envoi d'une notification push instantanée via ntfy.sh (0 inscription, gratuit, application mobile Android / iOS)
+ */
+async function sendNtfyNotification({ profile, analyzedJobs }) {
+  const topic = process.env.NTFY_TOPIC;
+  if (!topic) {
+    return { success: false, skipped: true, reason: 'NTFY_TOPIC non configuré' };
+  }
+
+  const topJob = analyzedJobs[0]?.job;
+  const title = `🇬🇦 Chasse Emploi : ${analyzedJobs.length} offres tech trouvées !`;
+  const body = topJob 
+    ? `Top offre : ${topJob.titre} chez ${topJob.entreprise} (${topJob.localisation})`
+    : 'Nouvelles opportunités détectées.';
+
+  console.log(`\n🔔 [NOTIF PUSH NTFY] Envoi de la notification push vers le sujet : ${topic}...`);
+
+  try {
+    const res = await fetch(`https://ntfy.sh/${topic}`, {
+      method: 'POST',
+      headers: {
+        'Title': encodeURIComponent(title),
+        'Priority': 'high',
+        'Tags': 'briefcase,gabon'
+      },
+      body
+    });
+    if (res.ok) {
+      console.log('✅ [NOTIF PUSH NTFY] Notification push envoyée sur ton téléphone !');
+      return { success: true, provider: 'ntfy' };
+    }
+  } catch (err) {
+    console.error('❌ [NOTIF PUSH NTFY] Exception:', err.message);
+  }
+  return { success: false };
+}
+
 async function dispatchDailyJobAlerts(profile, analyzedJobs) {
   console.log("\n===============================================================");
   console.log("🚀 ENVOI DES NOTIFICATIONS QUOTIDIENNES (EMAIL + WHATSAPP)");
@@ -289,10 +366,14 @@ async function dispatchDailyJobAlerts(profile, analyzedJobs) {
 
   const emailResult = await sendEmailNotification({ profile, analyzedJobs });
   const whatsappResult = await sendWhatsAppNotification({ profile, analyzedJobs });
+  const telegramResult = await sendTelegramNotification({ profile, analyzedJobs });
+  const ntfyResult = await sendNtfyNotification({ profile, analyzedJobs });
 
   return {
     email: emailResult,
     whatsapp: whatsappResult,
+    telegram: telegramResult,
+    ntfy: ntfyResult,
     timestamp: new Date().toISOString()
   };
 }
@@ -303,5 +384,7 @@ module.exports = {
   generateWhatsAppText,
   sendEmailNotification,
   sendWhatsAppNotification,
+  sendTelegramNotification,
+  sendNtfyNotification,
   dispatchDailyJobAlerts
 };

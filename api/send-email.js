@@ -96,7 +96,7 @@ module.exports = async (req, res) => {
     `;
 
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Rosny <onboarding@resend.dev>',
+      from: process.env.RESEND_FROM || 'onboarding@resend.dev',
       to: 'rodrigueotsina@gmail.com',
       replyTo: email,
       subject: `[Portfolio] ${subject} - ${name}`,
@@ -112,6 +112,52 @@ module.exports = async (req, res) => {
     }
 
     console.log('✅ Email envoyé avec succès:', data);
+
+    // Notification WhatsApp instantanée via CallMeBot (si configuré)
+    const callMeBotApiKey = process.env.CALLMEBOT_API_KEY || process.env.WHATSAPP_API_KEY;
+    const targetPhone = process.env.WHATSAPP_PHONE || '241077122485';
+    if (callMeBotApiKey) {
+      try {
+        const waMsg = `📬 *Nouveau message reçu depuis ton Portfolio !*\n\n👤 *Expéditeur :* ${name}\n📧 *Email :* ${email}\n📌 *Objet :* ${subject}\n\n💬 *Message :*\n${message}`;
+        fetch(`https://api.callmebot.com/whatsapp.php?phone=${targetPhone}&text=${encodeURIComponent(waMsg)}&apikey=${callMeBotApiKey}`)
+          .catch(e => console.warn('⚠️ Notification WhatsApp (CallMeBot):', e.message));
+      } catch (waErr) {
+        console.warn('⚠️ Notification WhatsApp (CallMeBot) exception:', waErr.message);
+      }
+    }
+    
+    // Notification Telegram instantanée (si configuré)
+    const tgToken = process.env.TELEGRAM_BOT_TOKEN;
+    const tgChatId = process.env.TELEGRAM_CHAT_ID;
+    if (tgToken && tgChatId) {
+      try {
+        const tgText = `📬 *Nouveau message reçu sur ton Portfolio !*\n\n👤 *De :* ${name} (${email})\n📌 *Objet :* ${subject}\n\n💬 *Message :*\n${message}`;
+        fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: tgChatId, text: tgText, parse_mode: 'Markdown' })
+        }).catch(err => console.warn('⚠️ Telegram notif error:', err.message));
+      } catch (tgErr) {
+        console.warn('⚠️ Telegram exception:', tgErr.message);
+      }
+    }
+
+    // Notification Push Mobile NTFY (si configuré)
+    const ntfyTopic = process.env.NTFY_TOPIC;
+    if (ntfyTopic) {
+      try {
+        fetch(`https://ntfy.sh/${ntfyTopic}`, {
+          method: 'POST',
+          headers: {
+            'Title': encodeURIComponent(`Nouveau message : ${name}`),
+            'Priority': 'high',
+            'Tags': 'email,envelope'
+          },
+          body: `${subject} : ${message}`
+        }).catch(() => {});
+      } catch (nErr) {}
+    }
+
     return res.status(200).json({
       success: true,
       message: 'Message envoyé avec succès ! Je vous répondrai très rapidement.'

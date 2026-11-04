@@ -1406,7 +1406,10 @@ document.addEventListener('keydown', function(e) {
     
     <div class="row">
       <div class="form-item col-12 padd-15">
-        <button type="submit" class="btn" data-i18n="contact_send_btn">Envoyer</button>
+        <button type="submit" class="btn" id="btnSubmitMail" data-i18n="contact_send_btn">Envoyer par Email</button>
+        <button type="button" class="btn" id="btnSendWhatsApp" style="background: #25D366; color: #ffffff; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; margin-left: 10px;">
+          <i class="fab fa-whatsapp" style="font-size: 1.1em;"></i> <span data-i18n="contact_send_wa_btn">Envoyer via WhatsApp</span>
+        </button>
       </div>
     </div>
     
@@ -1417,20 +1420,53 @@ document.addEventListener('keydown', function(e) {
 <script>
   const form = document.getElementById("contactForm");
   const feedback = document.getElementById("formFeedback");
+  const btnWhatsApp = document.getElementById("btnSendWhatsApp");
 
+  function getWhatsAppUrl(name, email, subject, message) {
+    let text = "Bonjour Rosny,\n\nJe vous contacte depuis votre portfolio.";
+    if (name) text += "\n👤 *Nom :* " + name;
+    if (email) text += "\n📧 *Email :* " + email;
+    if (subject) text += "\n📌 *Objet :* " + subject;
+    if (message) text += "\n\n💬 *Message :*\n" + message;
+    return "https://wa.me/24177122485?text=" + encodeURIComponent(text);
+  }
+
+  // Envoi direct via WhatsApp
+  if (btnWhatsApp) {
+    btnWhatsApp.addEventListener("click", () => {
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const subject = form.subject.value.trim();
+      const message = form.message.value.trim();
+
+      if (!message) {
+        feedback.style.display = "block";
+        feedback.innerHTML = window.currentLang === 'en' 
+          ? "⚠️ Please enter your message before sending via WhatsApp." 
+          : "⚠️ Veuillez saisir votre message avant d'envoyer sur WhatsApp.";
+        feedback.style.color = "#f59e0b";
+        return;
+      }
+
+      const waUrl = getWhatsAppUrl(name, email, subject, message);
+      window.open(waUrl, "_blank");
+    });
+  }
+
+  // Envoi par Email via l'API Resend
   form.addEventListener("submit", async (e) => {
     e.preventDefault(); // empêche le rechargement de la page
 
     feedback.style.display = "block";
-    feedback.innerHTML = window.currentLang === 'en' ? "Sending..." : "Envoi en cours...";
+    feedback.innerHTML = window.currentLang === 'en' ? "Sending email..." : "Envoi en cours...";
     feedback.style.color = "#38bdf8";
 
-    const data = {
-      name: form.name.value,
-      email: form.email.value,
-      subject: form.subject.value,
-      message: form.message.value,
-    };
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const subject = form.subject.value.trim();
+    const message = form.message.value.trim();
+
+    const data = { name, email, subject, message };
 
     try {
       const response = await fetch("/api/send-email", {
@@ -1448,19 +1484,29 @@ document.addEventListener('keydown', function(e) {
         feedback.style.color = "#22c55e";
         form.reset(); // vide le formulaire
       } else {
-        feedback.innerHTML = "❌ " + result.message;
+        const waFallback = getWhatsAppUrl(name, email, subject, message);
+        feedback.innerHTML = "❌ " + result.message + 
+          `<br><a href="${waFallback}" target="_blank" style="color: #25D366; font-weight: bold; text-decoration: underline; margin-top: 8px; display: inline-block;"><i class="fab fa-whatsapp"></i> ` + 
+          (window.currentLang === 'en' ? "Click here to send directly on WhatsApp" : "Cliquez ici pour m'envoyer ce message sur WhatsApp") + 
+          `</a>`;
         feedback.style.color = "#ef4444";
       }
     } catch (err) {
-      feedback.innerHTML = window.currentLang === 'en' ? "⚠️ Network error. Please try again or contact me directly by email." : "⚠️ Erreur réseau. Veuillez réessayer ou me contacter directement par email.";
+      const waFallback = getWhatsAppUrl(name, email, subject, message);
+      feedback.innerHTML = (window.currentLang === 'en' 
+        ? "⚠️ Network error sending email. " 
+        : "⚠️ Service email temporairement indisponible. ") +
+        `<br><a href="${waFallback}" target="_blank" style="color: #25D366; font-weight: bold; text-decoration: underline; margin-top: 8px; display: inline-block;"><i class="fab fa-whatsapp"></i> ` +
+        (window.currentLang === 'en' ? "Click here to send directly on WhatsApp" : "Cliquez ici pour m'envoyer ce message sur WhatsApp") +
+        `</a>`;
       feedback.style.color = "#f59e0b";
       console.error(err);
     }
     
-    // Cacher le message après 10 secondes
+    // Cacher le message après 15 secondes
     setTimeout(() => {
       feedback.style.display = "none";
-    }, 10000);
+    }, 15000);
   });
 </script>
 

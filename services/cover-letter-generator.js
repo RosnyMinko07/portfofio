@@ -364,8 +364,13 @@ function saveAllCoverLetters(profile, analyzedJobs) {
   const rootDir = path.resolve(__dirname, '..');
   const candidaturesDir = path.join(rootDir, 'candidatures');
 
-  if (!fs.existsSync(candidaturesDir)) {
-    fs.mkdirSync(candidaturesDir, { recursive: true });
+  let canWrite = true;
+  try {
+    if (!fs.existsSync(candidaturesDir)) {
+      fs.mkdirSync(candidaturesDir, { recursive: true });
+    }
+  } catch (e) {
+    canWrite = false;
   }
 
   const generatedFiles = [];
@@ -379,7 +384,9 @@ function saveAllCoverLetters(profile, analyzedJobs) {
     const markdownContent = formatLetterToMarkdown(letterData);
     const mdFileName = `${job.id}_lettre_motivation.md`;
     const mdFilePath = path.join(candidaturesDir, mdFileName);
-    fs.writeFileSync(mdFilePath, markdownContent, 'utf-8');
+    if (canWrite) {
+      try { fs.writeFileSync(mdFilePath, markdownContent, 'utf-8'); } catch(e){}
+    }
 
     // 2. HTML Imprimable PDF avec bouton 1-clic Gmail
     const htmlContent = formatLetterToPrintableHtml(letterData, job).replace(
@@ -397,13 +404,17 @@ function saveAllCoverLetters(profile, analyzedJobs) {
     );
     const htmlFileName = `${job.id}_lettre_motivation.html`;
     const htmlFilePath = path.join(candidaturesDir, htmlFileName);
-    fs.writeFileSync(htmlFilePath, htmlContent, 'utf-8');
+    if (canWrite) {
+      try { fs.writeFileSync(htmlFilePath, htmlContent, 'utf-8'); } catch(e){}
+    }
 
     // 3. Email d'accompagnement
     const emailDraft = generateEmailApplicationText(profile, job);
     const emailFileName = `${job.id}_email_candidature.txt`;
     const emailFilePath = path.join(candidaturesDir, emailFileName);
-    fs.writeFileSync(emailFilePath, emailDraft, 'utf-8');
+    if (canWrite) {
+      try { fs.writeFileSync(emailFilePath, emailDraft, 'utf-8'); } catch(e){}
+    }
 
     generatedFiles.push({
       jobId: job.id,
@@ -439,7 +450,9 @@ function saveAllCoverLetters(profile, analyzedJobs) {
   indexMd += `3. Joins ton CV (\`pdf/OTSINA MINKO Rodrigue cv.pdf\`) et clique sur **Envoyer** !\n`;
 
   const indexPath = path.join(candidaturesDir, 'INDEX_CANDIDATURES.md');
-  fs.writeFileSync(indexPath, indexMd, 'utf-8');
+  if (canWrite) {
+    try { fs.writeFileSync(indexPath, indexMd, 'utf-8'); } catch(e){}
+  }
 
   return {
     candidaturesDir,
