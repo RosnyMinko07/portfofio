@@ -146,12 +146,13 @@ function generateWhatsAppText(profile, analyzedJobs) {
 /**
  * Envoi d'un email via Resend
  */
-async function sendEmailNotification({ profile, analyzedJobs, recipientEmail = null }) {
+async function sendEmailNotification({ profile, analyzedJobs, recipientEmail = null, subject: customSubject = null, html: customHtml = null }) {
   const to = recipientEmail || process.env.NOTIFICATION_EMAIL || DEFAULT_RECIPIENT.email;
   const apiKey = process.env.RESEND_API_KEY;
 
-  const html = generateEmailHtml(profile, analyzedJobs);
-  const subject = `🇬🇦 [Alerte Emploi 8h00] ${analyzedJobs.length} offres tech trouvées à Libreville (Match jusqu'à ${analyzedJobs[0]?.analysis?.score || 98}%)`;
+  const newCount = (analyzedJobs || []).filter(j => j.job?.isNew !== false).length;
+  const html = customHtml || generateEmailHtml(profile, analyzedJobs);
+  const subject = customSubject || ('🇬🇦 [Alerte Emploi 8h00] ' + newCount + ' NOUVELLES offres tech à Libreville ! (Match jusqu\'à ' + (analyzedJobs[0]?.analysis?.score || 98) + '%)');
 
   console.log(`\n📧 [NOTIF EMAIL] Préparation de l'envoi vers ${to}...`);
 
@@ -325,17 +326,17 @@ async function sendTelegramNotification({ profile, analyzedJobs }) {
 /**
  * Envoi d'une notification push instantanée via ntfy.sh (0 inscription, gratuit, application mobile Android / iOS)
  */
-async function sendNtfyNotification({ profile, analyzedJobs }) {
+async function sendNtfyNotification({ profile, analyzedJobs, customTitle = null, customBody = null }) {
   const topic = process.env.NTFY_TOPIC;
   if (!topic) {
     return { success: false, skipped: true, reason: 'NTFY_TOPIC non configuré' };
   }
 
   const topJob = analyzedJobs[0]?.job;
-  const title = `🇬🇦 Chasse Emploi : ${analyzedJobs.length} offres tech trouvées !`;
-  const body = topJob 
-    ? `Top offre : ${topJob.titre} chez ${topJob.entreprise} (${topJob.localisation})`
-    : 'Nouvelles opportunités détectées.';
+  const title = customTitle || ('🇬🇦 Chasse Emploi : ' + analyzedJobs.length + ' nouvelles offres tech !');
+  const body = customBody || (topJob 
+    ? ('Top offre : ' + topJob.titre + ' chez ' + topJob.entreprise + ' (' + topJob.localisation + ')')
+    : 'Nouvelles opportunités détectées.');
 
   console.log(`\n🔔 [NOTIF PUSH NTFY] Envoi de la notification push vers le sujet : ${topic}...`);
 

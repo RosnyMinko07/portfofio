@@ -9,7 +9,7 @@ Direction des Ressources Humaines / Pôle Recrutement IT
 **Opérateur Télécom / Fintech Libreville**  
 📍 Libreville, Gabon  
 
-**Libreville, le 5 novembre 2026**  
+**Libreville, le 10 novembre 2026**  
 
 ---
 

@@ -16,3 +16,6 @@ npm-debug.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Historique anti-doublon (local uniquement, géré en mémoire sur Vercel)
+seen_jobs.json

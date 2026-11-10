@@ -59,9 +59,8 @@ const Agent1_Profiler = {
 const Agent2_JobHarvester = {
   name: "Agent 2 - Chasseur & Agrégateur d'Offres Gabon",
 
-  // Base de données actualisée des opportunités et annonces ciblées pour le Gabon
-  // (AltEmploi Gabon, Emploi.ga, Gabon du Numérique, ESN & Entreprises de Libreville)
-  async fetchJobs() {
+  // Offres de référence permanentes (filet de sécurité si le scraping est bloqué)
+  getFallbackJobs() {
     return [
       {
         id: "GAB-DEV-001",
@@ -160,6 +159,43 @@ const Agent2_JobHarvester = {
         statut: "Ouvert"
       }
     ];
+  },
+
+  // Moissonneur en direct — LinkedIn Jobs, AltEmploi, IA Gemini
+  async fetchJobs() {
+    const { harvestAllLiveJobs } = require('../services/live-job-scraper');
+    const { tagJobsWithHistory } = require('../services/seen-jobs-manager');
+
+    let liveJobs = [];
+    let usedFallback = false;
+
+    // 1. Récupération en direct
+    try {
+      liveJobs = await harvestAllLiveJobs();
+    } catch (err) {
+      console.warn('⚠️ [Agent 2] Erreur lors du moissonnage en direct:', err.message);
+    }
+
+    // 2. Si aucune offre en direct, utiliser les offres de référence
+    if (liveJobs.length === 0) {
+      console.log('ℹ️ [Agent 2] Aucune offre en direct — utilisation des offres de référence.');
+      liveJobs = this.getFallbackJobs();
+      usedFallback = true;
+    }
+
+    // 3. Identifier les NOUVELLES offres (non encore vues)
+    const analyzed = tagJobsWithHistory(liveJobs.map(job => ({ job, analysis: { score: 0 } })));
+    const newOnes = analyzed.filter(item => item.job.isNew).map(item => item.job);
+    const alreadySeen = analyzed.filter(item => !item.job.isNew).map(item => item.job);
+
+    console.log('   🆕 Nouvelles offres détectées : ' + newOnes.length);
+    console.log('   🔁 Offres déjà connues (ignorées) : ' + alreadySeen.length);
+    if (usedFallback) console.log('   ⚡ Mode de secours activé (offres de référence utilisées)');
+
+    // 4. Retourner les nouvelles offres uniquement
+    // Si live et 0 nouvelles → [] (message "aucune nouvelle offre")
+    // Si fallback et 0 nouvelles → [] également (idem)
+    return newOnes;
   },
 
   sourcesSurveillees: [
@@ -340,10 +376,21 @@ async function runJobHunterAgent(customProfile = null) {
   console.log(`   ✅ Profil chargé : ${profile.nom} | ${profile.titre}`);
   console.log(`   📍 Localisation : ${profile.localisation}`);
 
-  // Étape 2 : Récupération des offres
-  console.log("\n▶️ [Agent 2] Récupération et agrégation des offres d'emploi au Gabon...");
+  // Étape 2 : Récupération des offres en direct + filtre anti-doublon
+  console.log("\n▶️ [Agent 2] Moissonnage en direct (LinkedIn + AltEmploi + IA) + filtre anti-doublon...");
   const jobs = await Agent2_JobHarvester.fetchJobs();
-  console.log(`   ✅ ${jobs.length} opportunités tech ciblées identifiées à Libreville & Gabon.`);
+
+  if (jobs.length === 0) {
+    console.log("\nℹ️ Aucune nouvelle offre aujourd'hui — envoi de notification de veille à jour.");
+    const { sendEmailNotification, sendNtfyNotification } = require('../services/notifier');
+    const noNewSubject = '🇬🇦 Alerte Emploi 8h00 — Aucune nouvelle offre aujourd\'hui, vous êtes à jour !';
+    const noNewHtml = '<div style="font-family:sans-serif;padding:20px;max-width:600px;margin:auto"><h2>🇬🇦 Veille Emploi Gabon</h2><p>Bonjour <strong>Rosny</strong>,</p><p>Ton agent a scanné <strong>LinkedIn Jobs Gabon</strong>, <strong>AltEmploi</strong> et les portails tech ce matin.</p><p style="font-size:18px;font-weight:bold;color:#27ae60">✅ Aucune nouvelle offre aujourd\'hui — vous êtes parfaitement à jour !</p><p>Prochaine veille automatique demain à 08h00.</p></div>';
+    await sendEmailNotification({ profile, analyzedJobs: [], recipientEmail: null, subject: noNewSubject, html: noNewHtml }).catch(() => {});
+    await sendNtfyNotification({ profile, analyzedJobs: [], customTitle: '✅ Pas de nouvelle offre aujourd\'hui', customBody: 'Toutes les offres sont déjà connues. Prochaine veille à 08h00.' }).catch(() => {});
+    return { profile, analyzedJobs: [], reportMarkdown: '', reportPath: '', candidatures: { totalGenerated: 0 } };
+  }
+
+  console.log('   ✅ ' + jobs.length + ' nouvelles offres tech détectées à Libreville & Gabon.');
 
   // Étape 3 : Analyse & Matching
   console.log("\n▶️ [Agent 3] Calcul des taux de compatibilité et scoring IA...");
@@ -352,6 +399,15 @@ async function runJobHunterAgent(customProfile = null) {
     console.log(`   🎯 [${job.id}] ${job.titre} -> Match : ${analysis.score}%`);
     return { job, analysis };
   });
+
+  // Marquer toutes les nouvelles offres analysées comme "vues" pour éviter de les renvoyer demain
+  try {
+    const { markJobsAsSeen } = require('../services/seen-jobs-manager');
+    const seenResult = markJobsAsSeen(analyzedJobs);
+    console.log('   📌 ' + seenResult.newlyAdded + ' offre(s) ajoutée(s) à l\'historique (total mémorisées : ' + seenResult.totalSeen + ')');
+  } catch (seenErr) {
+    console.warn('ℹ️ [Seen Manager] Impossible de sauvegarder l\'historique:', seenErr.message);
+  }
 
   // Étape 4 : Synthèse et génération du rapport
   console.log("\n▶️ [Agent 4] Génération de la synthèse et des dossiers de candidature...");

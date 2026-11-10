@@ -1,6 +1,6 @@
 # 📁 Dossiers de Candidatures Automatisés — Rosny OTSINA
 
-> **Dernière génération :** 05/11/2026 00:27:36  
+> **Dernière génération :** 10/11/2026 23:32:41  
 > **Candidat :** Rosny OTSINA MINKO Jean Rodrigue Rismin (rodrigueotsina@gmail.com - +241 077 12 24 85 / 062 76 81 35)  
 
 Ce dossier regroupe toutes les lettres de motivation personnalisées et les liens pour postuler en 1 clic dans Gmail.

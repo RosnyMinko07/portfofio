@@ -9,7 +9,7 @@ Direction des Ressources Humaines / Pôle Recrutement IT
 **PME & Startups Gabonaises (Missions Port-Gentil & Libreville)**  
 📍 Libreville / Hybride Gabon  
 
-**Libreville, le 5 novembre 2026**  
+**Libreville, le 10 novembre 2026**  
 
 ---
 

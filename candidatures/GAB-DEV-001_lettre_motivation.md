@@ -9,7 +9,7 @@ Direction des Ressources Humaines / Pôle Recrutement IT
 **Cabinet AltEmploi Gabon (pour client Tech & Divertissement)**  
 📍 Libreville, Gabon (Boulevard Triomphal)  
 
-**Libreville, le 5 novembre 2026**  
+**Libreville, le 10 novembre 2026**  
 
 ---
 
