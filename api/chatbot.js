@@ -1,30 +1,81 @@
 // api/chatbot.js - Chatbot polyvalent (Rosny + questions générales)
-module.exports = async (req, res) => {
-  // Configuration CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+
+// Limites anti-abus (protègent les crédits OpenRouter)
+const MAX_MESSAGE_LENGTH = 1000;
+const MAX_HISTORY_MESSAGES = 10;
+const MAX_HISTORY_CONTENT_LENGTH = 2000;
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 10;
+
+// Limite par IP en mémoire : best-effort (réinitialisée à chaque démarrage à froid de la fonction)
+const rateLimitStore = new Map();
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const recent = (rateLimitStore.get(ip) || []).filter(t => now - t < RATE_LIMIT_WINDOW_MS);
+  recent.push(now);
+  rateLimitStore.set(ip, recent);
+  if (rateLimitStore.size > 5000) rateLimitStore.clear();
+  return recent.length > RATE_LIMIT_MAX_REQUESTS;
+}
+
+// Le site appelle /api/chatbot depuis la même origine : aucun en-tête CORS n'est nécessaire.
+// Une origine externe n'est acceptée que si elle est listée dans ALLOWED_ORIGINS (séparées par des virgules).
+function isForeignOriginBlocked(req) {
+  const origin = req.headers['origin'];
+  if (!origin) return false;
+  const host = req.headers['x-forwarded-host'] || req.headers['host'];
+  try {
+    if (new URL(origin).host === host) return false;
+  } catch (e) {
+    return true;
   }
-  
+  const allowed = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
+  return !allowed.includes(origin);
+}
+
+module.exports = async (req, res) => {
   if (req.method !== 'POST') {
-    return res.status(405).json({ 
-      success: false, 
-      message: 'Méthode non autorisée' 
+    return res.status(405).json({
+      success: false,
+      message: 'Méthode non autorisée'
+    });
+  }
+
+  if (isForeignOriginBlocked(req)) {
+    return res.status(403).json({ success: false, message: 'Origine non autorisée' });
+  }
+
+  const ip = String(req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown').split(',')[0].trim();
+  if (isRateLimited(ip)) {
+    return res.status(429).json({
+      success: false,
+      message: 'Trop de messages en peu de temps. Réessayez dans une minute.'
     });
   }
 
   try {
-    const { message, conversationHistory = [] } = req.body;
-    
-    if (!message || !message.trim()) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Le message ne peut pas être vide' 
+    const { message } = req.body || {};
+
+    if (typeof message !== 'string' || !message.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: 'Le message ne peut pas être vide'
       });
     }
+
+    if (message.length > MAX_MESSAGE_LENGTH) {
+      return res.status(400).json({
+        success: false,
+        message: `Message trop long (${MAX_MESSAGE_LENGTH} caractères maximum).`
+      });
+    }
+
+    // Historique : seulement les derniers messages, contenus tronqués
+    const conversationHistory = (Array.isArray(req.body.conversationHistory) ? req.body.conversationHistory : [])
+      .slice(-MAX_HISTORY_MESSAGES)
+      .filter(msg => msg && typeof msg.content === 'string')
+      .map(msg => ({ role: msg.role, content: msg.content.slice(0, MAX_HISTORY_CONTENT_LENGTH) }));
 
     // Vérifier la clé API OpenRouter
     const apiKey = process.env.OPENROUTER_API_KEY;

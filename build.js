@@ -13,21 +13,16 @@ if (fs.existsSync(publicDir)) {
 fs.mkdirSync(publicDir, { recursive: true });
 console.log('✅ Dossier public créé');
 
-// Copier tous les fichiers statiques dans public (sauf node_modules, .git, api, etc.)
+// Copier UNIQUEMENT les fichiers du site public.
+// Ne jamais ajouter ici scripts/, services/, candidatures/, offres_gabon.json
+// ou la documentation interne : tout ce qui est dans public/ est accessible à tous.
+// (Les fonctions dans api/ accèdent à scripts/ et services/ directement, sans passer par public/.)
 const filesToCopy = [
   'index.html',
   'css',
   'js',
   'images',
-  'pdf',
-  'scripts',
-  'services',
-  'candidatures',
-  'RAPPORT_OFFRES_EMPLOI_GABON.md',
-  'offres_gabon.json',
-  'CONFIGURATION.md',
-  'README_VERCEL.md',
-  'README.mdgit'
+  'pdf'
 ];
 
 const excludeDirs = ['node_modules', '.git', 'api', 'public', '.vercel', 'build.js', 'package.json', 'package-lock.json', 'vercel.json', '.env.local', '.env'];

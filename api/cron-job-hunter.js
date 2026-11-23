@@ -6,21 +6,16 @@ const { runJobHunterAgent } = require('../scripts/job-hunter-gabon');
 const { dispatchDailyJobAlerts } = require('../services/notifier');
 
 module.exports = async (req, res) => {
-  // En-têtes CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
-  // Vérification optionnelle de sécurité pour les appels Vercel Cron
+  // Authentification obligatoire : Vercel Cron envoie automatiquement
+  // "Authorization: Bearer <CRON_SECRET>" quand la variable CRON_SECRET est définie.
+  // Pour un déclenchement manuel : curl -H "Authorization: Bearer <CRON_SECRET>" .../api/cron-job-hunter
   const cronSecret = process.env.CRON_SECRET;
-  const authHeader = req.headers['authorization'];
-  if (cronSecret && authHeader !== `Bearer ${cronSecret}` && req.headers['x-vercel-cron'] !== '1') {
-    // Si un secret est défini mais non fourni (protection en production si souhaitée)
-    console.warn('⚠️ Avertissement d\'authentification Cron Secret');
+  if (!cronSecret) {
+    console.error('❌ CRON_SECRET non configurée : exécution refusée');
+    return res.status(500).json({ success: false, message: 'CRON_SECRET manquante sur le serveur.' });
+  }
+  if (req.headers['authorization'] !== `Bearer ${cronSecret}`) {
+    return res.status(401).json({ success: false, message: 'Non autorisé' });
   }
 
   try {
