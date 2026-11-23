@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const avatarImg       = document.getElementById('chatbot-avatar-img');
   const toggleImg       = document.getElementById('chatbot-toggle-img');
   // Avatar Sophia
-  const AVATAR_URL = 'images/sophia.png';
+  const AVATAR_URL = 'images/sophia.webp';
   const USER_AVATAR = null;
 
   // Fonction pour créer un avatar (icône ou image)

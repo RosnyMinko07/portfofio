@@ -29,7 +29,7 @@ body {
     background: #12161f;
     background-image:
         linear-gradient(rgba(18, 22, 29, 0.86), rgba(18, 22, 29, 0.90)),
-        url('../images/bg-silk.jpg');
+        url('../images/bg-silk.webp');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
