@@ -148,6 +148,10 @@ const translations = {
         proj_desc_6: "Plateforme de streaming vidéo avec catalogue multimédia interactif, lecteur fluide et administration optimisée du backend et de la base de données.",
         proj_title_7: "HÔTEL YA — Système de Gestion Hôtelière",
         proj_desc_7: "Solution complète de gestion hôtelière multiplateforme : réservations en ligne, facturation automatisée, gestion des stocks, suivi clients et tableau de bord administrateur.",
+        proj_meta_7: "Développeur Full-Stack Freelance · Depuis jan. 2026 · Libreville",
+        proj_meta_6: "Développeur Backend Freelance · Depuis avr. 2026 · Libreville",
+        proj_meta_2: "Développeur Full-Stack · Août – oct. 2025 · Port-Gentil",
+        proj_meta_4: "Projet scolaire",
 
         btn_hide_images: "Masquer les images",
         btn_show_images: "Voir les images",
@@ -345,6 +349,10 @@ const translations = {
         proj_desc_6: "On-demand video streaming platform featuring an interactive multimedia catalog, smooth media playback, and robust backend and database administration.",
         proj_title_7: "HÔTEL YA — Hotel Management System",
         proj_desc_7: "Comprehensive multiplatform hotel management solution: online bookings, automated invoicing, customer relationship management, inventory tracking, and executive dashboard.",
+        proj_meta_7: "Freelance Full-Stack Developer · Since Jan. 2026 · Libreville",
+        proj_meta_6: "Freelance Backend Developer · Since Apr. 2026 · Libreville",
+        proj_meta_2: "Full-Stack Developer · Aug. – Oct. 2025 · Port-Gentil",
+        proj_meta_4: "School project",
 
         btn_hide_images: "Hide images",
         btn_show_images: "View images",

@@ -595,72 +595,108 @@
             <button class="filter-btn" data-filter="desktop" data-i18n="filter_desktop">Desktop</button>
         </div>
 
-        <!-- ===== PROJET 1 ===== -->
-        <div class="project-card padd-15 reveal" data-category="web mobile">
+        <!-- ===== PROJET 7 (position 1) ===== -->
+        <div class="project-card padd-15 reveal" data-category="web mobile desktop">
             <div class="project-card-header">
+                <button type="button" class="project-cover" onclick="openModalFromCarousel('carousel-7', 0)" aria-label="Agrandir les captures : HÔTEL YA — Système de Gestion Hôtelière">
+                    <img src="images/photel ya page accueil.webp" loading="lazy" alt="Page d'accueil Hôtel YA">
+                    <span class="project-cover-count"><i class="fas fa-images"></i> 2</span>
+                </button>
                 <div class="project-card-info">
-                    <h2 data-i18n="proj_title_1">Tradition-IA — Application de traduction des langues gabonaises</h2>
-                    <p data-i18n="proj_desc_1">Application web responsive permettant la traduction entre différentes langues locales du Gabon avec interface intuitive et base de données linguistique.</p>
-                    <span class="project-tech-tag">HTML</span>
-                    <span class="project-tech-tag">CSS</span>
-                    <span class="project-tech-tag">JavaScript</span>
-                    <span class="project-tech-tag">PHP</span>
-                </div>
-                <div class="project-card-btns">
-                    <button class="proj-btn btn-images" onclick="openCarousel('carousel-1')">
-                        <i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">Masquer les images</span>
-                    </button>
-                    <a class="proj-btn btn-demo" href="https://tradition-ia.vercel.app/" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-external-link-alt"></i> <span data-i18n="btn_demo">Voir la démo</span>
-                    </a>
-                </div>
-            </div>
-            <!-- Carousel 1 -->
-            <div class="proj-carousel" id="carousel-1">
-                <button class="carousel-arrow left" onclick="slideCarousel('carousel-1',-1)"><i class="fas fa-chevron-left"></i></button>
-                <div class="carousel-track-wrap">
-                    <div class="carousel-track">
-                        <div class="carousel-slide"><img src="images/imagess/page de connexion new blanc.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Page de connexion"><span>Page de connexion</span></div>
-                        <div class="carousel-slide"><img src="images/imagess/page inscription new blanc.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Inscription (Mode clair)"><span>Inscription (Mode clair)</span></div>
-                        <div class="carousel-slide"><img src="images/imagess/page inscription new noir.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Inscription (Mode sombre)"><span>Inscription (Mode sombre)</span></div>
-                        <div class="carousel-slide"><img src="images/imagess/acceuilnew.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Page d'accueil"><span>Page d'accueil</span></div>
-                        <div class="carousel-slide"><img src="images/imagess/pageacceuil2.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Page d'accueil 2"><span>Page d'accueil 2</span></div>
-                        <div class="carousel-slide"><img src="images/imagess/page d'acceuil 3.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Page d'accueil (Découverte)"><span>Page d'accueil (Découverte)</span></div>
-                        <div class="carousel-slide"><img src="images/imagess/traducblanc.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Traduction (Mode clair)"><span>Traduction (Mode clair)</span></div>
-                        <div class="carousel-slide"><img src="images/imagess/traducnoire.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Traduction (Mode sombre)"><span>Traduction (Mode sombre)</span></div>
-                        <div class="carousel-slide"><img src="images/imagess/conversation1.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Conversation &amp; Chat"><span>Conversation & Chat</span></div>
-                        <div class="carousel-slide"><img src="images/imagess/conversation2.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Messagerie linguistique"><span>Messagerie linguistique</span></div>
-                        <div class="carousel-slide"><img src="images/imagess/conversation3.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Échanges communautaires"><span>Échanges communautaires</span></div>
-                        <div class="carousel-slide"><img src="images/imagess/profilblanc.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Profil utilisateur (Mode clair)"><span>Profil utilisateur (Mode clair)</span></div>
-                        <div class="carousel-slide"><img src="images/imagess/profillanguenoir.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Profil &amp; Choix des langues"><span>Profil & Choix des langues</span></div>
+                    <h2 data-i18n="proj_title_7">HÔTEL YA — Système de Gestion Hôtelière</h2>
+                    <p class="project-meta"><i class="fas fa-user-tie"></i> <span data-i18n="proj_meta_7">Développeur Full-Stack Freelance · Depuis jan. 2026 · Libreville</span></p>
+                    <p data-i18n="proj_desc_7">Solution complète de gestion hôtelière multiplateforme : réservations en ligne, facturation automatisée, gestion des stocks, suivi clients et tableau de bord administrateur.</p>
+                    <span class="project-tech-tag">React / Next.js</span>
+                    <span class="project-tech-tag">Flutter</span>
+                    <span class="project-tech-tag">MySQL</span>
+                    <span class="project-tech-tag">API REST</span>
+                    <div class="project-card-btns">
+                        <button class="proj-btn btn-images" onclick="openCarousel('carousel-7')">
+                            <i class="fas fa-images"></i> <span data-i18n="btn_show_images">Voir les images</span>
+                        </button>
                     </div>
                 </div>
-                <button class="carousel-arrow right" onclick="slideCarousel('carousel-1',1)"><i class="fas fa-chevron-right"></i></button>
-                <div class="carousel-dots" id="dots-carousel-1"></div>
+            </div>
+            <!-- Carousel 7 -->
+            <div class="proj-carousel closed" id="carousel-7">
+                <button class="carousel-arrow left" onclick="slideCarousel('carousel-7',-1)"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-track-wrap">
+                    <div class="carousel-track">
+                        <div class="carousel-slide"><img src="images/photel ya page accueil.webp" loading="lazy" alt="Page d'accueil Hôtel YA"><span>Page d'accueil Hôtel YA</span></div>
+                        <div class="carousel-slide"><img src="images/hotel ya admin.webp" loading="lazy" alt="Administration Hôtel YA"><span>Tableau de bord administrateur</span></div>
+                    </div>
+                </div>
+                <button class="carousel-arrow right" onclick="slideCarousel('carousel-7',1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="dots-carousel-7"></div>
             </div>
         </div>
 
-        <!-- ===== PROJET 2 ===== -->
+        <!-- ===== PROJET 6 (position 2) ===== -->
         <div class="project-card padd-15 reveal" data-category="web">
             <div class="project-card-header">
+                <button type="button" class="project-cover" onclick="openModalFromCarousel('carousel-6', 0)" aria-label="Agrandir les captures : AARTFLIX — Plateforme de Streaming">
+                    <img src="images/aartflix accueil.webp" loading="lazy" alt="Page d'accueil Aartflix">
+                    <span class="project-cover-count"><i class="fas fa-images"></i> 2</span>
+                </button>
+                <div class="project-card-info">
+                    <h2 data-i18n="proj_title_6">AARTFLIX — Plateforme de Streaming</h2>
+                    <p class="project-meta"><i class="fas fa-user-tie"></i> <span data-i18n="proj_meta_6">Développeur Backend Freelance · Depuis avr. 2026 · Libreville</span></p>
+                    <p data-i18n="proj_desc_6">Plateforme de streaming vidéo avec catalogue multimédia interactif, lecteur fluide et administration optimisée du backend et de la base de données.</p>
+                    <span class="project-tech-tag">Node.js</span>
+                    <span class="project-tech-tag">Express</span>
+                    <span class="project-tech-tag">PostgreSQL</span>
+                    <span class="project-tech-tag">Streaming</span>
+                    <span class="project-tech-tag">API REST</span>
+                    <div class="project-card-btns">
+                        <button class="proj-btn btn-images" onclick="openCarousel('carousel-6')">
+                            <i class="fas fa-images"></i> <span data-i18n="btn_show_images">Voir les images</span>
+                        </button>
+                        <a class="proj-btn btn-demo" href="https://aartflix.com" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-external-link-alt"></i> <span data-i18n="btn_demo">Voir la démo</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Carousel 6 -->
+            <div class="proj-carousel closed" id="carousel-6">
+                <button class="carousel-arrow left" onclick="slideCarousel('carousel-6',-1)"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-track-wrap">
+                    <div class="carousel-track">
+                        <div class="carousel-slide"><img src="images/aartflix accueil.webp" loading="lazy" alt="Page d'accueil Aartflix"><span>Page d'accueil Aartflix</span></div>
+                        <div class="carousel-slide"><img src="images/aartflix accueil 2.webp" loading="lazy" alt="Catalogue et streaming Aartflix"><span>Catalogue et streaming Aartflix</span></div>
+                    </div>
+                </div>
+                <button class="carousel-arrow right" onclick="slideCarousel('carousel-6',1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="dots-carousel-6"></div>
+            </div>
+        </div>
+
+        <!-- ===== PROJET 2 (position 3) ===== -->
+        <div class="project-card padd-15 reveal" data-category="web">
+            <div class="project-card-header">
+                <button type="button" class="project-cover" onclick="openModalFromCarousel('carousel-2', 1)" aria-label="Agrandir les captures : Application Web de Facturation — Tech Info Plus">
+                    <img src="images/dashboard1.webp" loading="lazy" alt="Capture d'écran Tech Info Plus (facturation) : Dashboard">
+                    <span class="project-cover-count"><i class="fas fa-images"></i> 27</span>
+                </button>
                 <div class="project-card-info">
                     <h2 data-i18n="proj_title_2">Application Web de Facturation — Tech Info Plus</h2>
+                    <p class="project-meta"><i class="fas fa-user-tie"></i> <span data-i18n="proj_meta_2">Développeur Full-Stack · Août – oct. 2025 · Port-Gentil</span></p>
                     <p data-i18n="proj_desc_2">Système complet de facturation et de suivi de stock pour une PME à Port-Gentil. Gestion clients, fournisseurs, articles, devis, règlements et rapports.</p>
                     <span class="project-tech-tag">Laravel</span>
                     <span class="project-tech-tag">MySQL</span>
                     <span class="project-tech-tag">Bootstrap</span>
-                </div>
-                <div class="project-card-btns">
-                    <button class="proj-btn btn-images" onclick="openCarousel('carousel-2')">
-                        <i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">Masquer les images</span>
-                    </button>
-                    <a class="proj-btn btn-demo" href="https://tech-info-plus.vercel.app/" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> <span data-i18n="btn_demo">Voir la démo</span>
-                    </a>
+                    <div class="project-card-btns">
+                        <button class="proj-btn btn-images" onclick="openCarousel('carousel-2')">
+                            <i class="fas fa-images"></i> <span data-i18n="btn_show_images">Voir les images</span>
+                        </button>
+                        <a class="proj-btn btn-demo" href="https://tech-info-plus.vercel.app/" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-external-link-alt"></i> <span data-i18n="btn_demo">Voir la démo</span>
+                        </a>
+                    </div>
                 </div>
             </div>
             <!-- Carousel 2 -->
-            <div class="proj-carousel" id="carousel-2">
+            <div class="proj-carousel closed" id="carousel-2">
                 <button class="carousel-arrow left" onclick="slideCarousel('carousel-2',-1)"><i class="fas fa-chevron-left"></i></button>
                 <div class="carousel-track-wrap">
                     <div class="carousel-track">
@@ -698,22 +734,112 @@
             </div>
         </div>
 
-        <!-- ===== PROJET 3 ===== -->
+        <!-- ===== PROJET 1 (position 4) ===== -->
+        <div class="project-card padd-15 reveal" data-category="web mobile">
+            <div class="project-card-header">
+                <button type="button" class="project-cover" onclick="openModalFromCarousel('carousel-1', 3)" aria-label="Agrandir les captures : Tradition-IA — Application de traduction des langues gabonaises">
+                    <img src="images/imagess/acceuilnew.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Page d'accueil">
+                    <span class="project-cover-count"><i class="fas fa-images"></i> 13</span>
+                </button>
+                <div class="project-card-info">
+                    <h2 data-i18n="proj_title_1">Tradition-IA — Application de traduction des langues gabonaises</h2>
+                    <p data-i18n="proj_desc_1">Application web responsive permettant la traduction entre différentes langues locales du Gabon avec interface intuitive et base de données linguistique.</p>
+                    <span class="project-tech-tag">HTML</span>
+                    <span class="project-tech-tag">CSS</span>
+                    <span class="project-tech-tag">JavaScript</span>
+                    <span class="project-tech-tag">PHP</span>
+                    <div class="project-card-btns">
+                        <button class="proj-btn btn-images" onclick="openCarousel('carousel-1')">
+                            <i class="fas fa-images"></i> <span data-i18n="btn_show_images">Voir les images</span>
+                        </button>
+                        <a class="proj-btn btn-demo" href="https://tradition-ia.vercel.app/" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-external-link-alt"></i> <span data-i18n="btn_demo">Voir la démo</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Carousel 1 -->
+            <div class="proj-carousel closed" id="carousel-1">
+                <button class="carousel-arrow left" onclick="slideCarousel('carousel-1',-1)"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-track-wrap">
+                    <div class="carousel-track">
+                        <div class="carousel-slide"><img src="images/imagess/page de connexion new blanc.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Page de connexion"><span>Page de connexion</span></div>
+                        <div class="carousel-slide"><img src="images/imagess/page inscription new blanc.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Inscription (Mode clair)"><span>Inscription (Mode clair)</span></div>
+                        <div class="carousel-slide"><img src="images/imagess/page inscription new noir.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Inscription (Mode sombre)"><span>Inscription (Mode sombre)</span></div>
+                        <div class="carousel-slide"><img src="images/imagess/acceuilnew.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Page d'accueil"><span>Page d'accueil</span></div>
+                        <div class="carousel-slide"><img src="images/imagess/pageacceuil2.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Page d'accueil 2"><span>Page d'accueil 2</span></div>
+                        <div class="carousel-slide"><img src="images/imagess/page d'acceuil 3.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Page d'accueil (Découverte)"><span>Page d'accueil (Découverte)</span></div>
+                        <div class="carousel-slide"><img src="images/imagess/traducblanc.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Traduction (Mode clair)"><span>Traduction (Mode clair)</span></div>
+                        <div class="carousel-slide"><img src="images/imagess/traducnoire.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Traduction (Mode sombre)"><span>Traduction (Mode sombre)</span></div>
+                        <div class="carousel-slide"><img src="images/imagess/conversation1.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Conversation &amp; Chat"><span>Conversation & Chat</span></div>
+                        <div class="carousel-slide"><img src="images/imagess/conversation2.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Messagerie linguistique"><span>Messagerie linguistique</span></div>
+                        <div class="carousel-slide"><img src="images/imagess/conversation3.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Échanges communautaires"><span>Échanges communautaires</span></div>
+                        <div class="carousel-slide"><img src="images/imagess/profilblanc.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Profil utilisateur (Mode clair)"><span>Profil utilisateur (Mode clair)</span></div>
+                        <div class="carousel-slide"><img src="images/imagess/profillanguenoir.webp" loading="lazy" alt="Capture d'écran Tradition-IA : Profil &amp; Choix des langues"><span>Profil & Choix des langues</span></div>
+                    </div>
+                </div>
+                <button class="carousel-arrow right" onclick="slideCarousel('carousel-1',1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="dots-carousel-1"></div>
+            </div>
+        </div>
+
+        <!-- ===== PROJET 5 (position 5) ===== -->
+        <div class="project-card padd-15 reveal" data-category="mobile">
+            <div class="project-card-header">
+                <button type="button" class="project-cover" onclick="openModalFromCarousel('carousel-5', 3)" aria-label="Agrandir les captures : Application Mobile de Vote">
+                    <img src="images/vote (4).webp" loading="lazy" alt="Capture d'écran Application mobile de vote : Dashboard administrateur">
+                    <span class="project-cover-count"><i class="fas fa-images"></i> 6</span>
+                </button>
+                <div class="project-card-info">
+                    <h2 data-i18n="proj_title_5">Application Mobile de Vote</h2>
+                    <p data-i18n="proj_desc_5">Application mobile pour la réalisation de votes électroniques en temps réel avec interface administrateur et saisie des résultats.</p>
+                    <span class="project-tech-tag">Flutter</span>
+                    <span class="project-tech-tag">Firebase</span>
+                    <div class="project-card-btns">
+                        <button class="proj-btn btn-images" onclick="openCarousel('carousel-5')">
+                            <i class="fas fa-images"></i> <span data-i18n="btn_show_images">Voir les images</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Carousel 5 -->
+            <div class="proj-carousel closed" id="carousel-5">
+                <button class="carousel-arrow left" onclick="slideCarousel('carousel-5',-1)"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-track-wrap">
+                    <div class="carousel-track">
+                        <div class="carousel-slide"><img src="images/vote (1).webp" loading="lazy" alt="Capture d'écran Application mobile de vote : Écran de démarrage"><span>Écran de démarrage</span></div>
+                        <div class="carousel-slide"><img src="images/vote (2).webp" loading="lazy" alt="Capture d'écran Application mobile de vote : Interface de connexion"><span>Interface de connexion</span></div>
+                        <div class="carousel-slide"><img src="images/vote (3).webp" loading="lazy" alt="Capture d'écran Application mobile de vote : Interface d'inscription"><span>Interface d'inscription</span></div>
+                        <div class="carousel-slide"><img src="images/vote (4).webp" loading="lazy" alt="Capture d'écran Application mobile de vote : Dashboard administrateur"><span>Dashboard administrateur</span></div>
+                        <div class="carousel-slide"><img src="images/vote (5).webp" loading="lazy" alt="Capture d'écran Application mobile de vote : Menu burger"><span>Menu burger</span></div>
+                        <div class="carousel-slide"><img src="images/vote (14).webp" loading="lazy" alt="Capture d'écran Application mobile de vote : Saisie des résultats"><span>Saisie des résultats</span></div>
+                    </div>
+                </div>
+                <button class="carousel-arrow right" onclick="slideCarousel('carousel-5',1)"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="dots-carousel-5"></div>
+            </div>
+        </div>
+
+        <!-- ===== PROJET 3 (position 6) ===== -->
         <div class="project-card padd-15 reveal" data-category="desktop">
             <div class="project-card-header">
+                <button type="button" class="project-cover" onclick="openModalFromCarousel('carousel-3', 2)" aria-label="Agrandir les captures : Application GABON — Lieux populaires">
+                    <img src="images/windev1 (3).webp" loading="lazy" alt="Capture d'écran Application GABON Lieux populaires : Page d'Accueil">
+                    <span class="project-cover-count"><i class="fas fa-images"></i> 9</span>
+                </button>
                 <div class="project-card-info">
                     <h2 data-i18n="proj_title_3">Application GABON — Lieux populaires</h2>
                     <p data-i18n="proj_desc_3">Application répertoriant les endroits populaires de tout le Gabon avec système de connexion, inscription et navigation par région.</p>
                     <span class="project-tech-tag">WinDev</span>
-                </div>
-                <div class="project-card-btns">
-                    <button class="proj-btn btn-images" onclick="openCarousel('carousel-3')">
-                        <i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">Masquer les images</span>
-                    </button>
+                    <div class="project-card-btns">
+                        <button class="proj-btn btn-images" onclick="openCarousel('carousel-3')">
+                            <i class="fas fa-images"></i> <span data-i18n="btn_show_images">Voir les images</span>
+                        </button>
+                    </div>
                 </div>
             </div>
             <!-- Carousel 3 -->
-            <div class="proj-carousel" id="carousel-3">
+            <div class="proj-carousel closed" id="carousel-3">
                 <button class="carousel-arrow left" onclick="slideCarousel('carousel-3',-1)"><i class="fas fa-chevron-left"></i></button>
                 <div class="carousel-track-wrap">
                     <div class="carousel-track">
@@ -733,25 +859,30 @@
             </div>
         </div>
 
-        <!-- ===== PROJET 4 ===== -->
+        <!-- ===== PROJET 4 (position 7) ===== -->
         <div class="project-card padd-15 reveal" data-category="web">
             <div class="project-card-header">
+                <button type="button" class="project-cover" onclick="openModalFromCarousel('carousel-4', 0)" aria-label="Agrandir les captures : Application Web Mini Market (Projet Scolaire)">
+                    <img src="images/ordi (1).webp" loading="lazy" alt="Capture d'écran Mini Market : Page d'accueil">
+                    <span class="project-cover-count"><i class="fas fa-images"></i> 10</span>
+                </button>
                 <div class="project-card-info">
                     <h2 data-i18n="proj_title_4">Application Web Mini Market (Projet Scolaire)</h2>
+                    <p class="project-meta"><i class="fas fa-user-tie"></i> <span data-i18n="proj_meta_4">Projet scolaire</span></p>
                     <p data-i18n="proj_desc_4">Plateforme e-commerce pour la gestion d'un mini market en ligne avec espace vendeur, panier, paiement et tableau de bord administrateur.</p>
                     <span class="project-tech-tag">HTML</span>
                     <span class="project-tech-tag">CSS</span>
                     <span class="project-tech-tag">PHP</span>
                     <span class="project-tech-tag">MySQL</span>
-                </div>
-                <div class="project-card-btns">
-                    <button class="proj-btn btn-images" onclick="openCarousel('carousel-4')">
-                        <i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">Masquer les images</span>
-                    </button>
+                    <div class="project-card-btns">
+                        <button class="proj-btn btn-images" onclick="openCarousel('carousel-4')">
+                            <i class="fas fa-images"></i> <span data-i18n="btn_show_images">Voir les images</span>
+                        </button>
+                    </div>
                 </div>
             </div>
             <!-- Carousel 4 -->
-            <div class="proj-carousel" id="carousel-4">
+            <div class="proj-carousel closed" id="carousel-4">
                 <button class="carousel-arrow left" onclick="slideCarousel('carousel-4',-1)"><i class="fas fa-chevron-left"></i></button>
                 <div class="carousel-track-wrap">
                     <div class="carousel-track">
@@ -769,105 +900,6 @@
                 </div>
                 <button class="carousel-arrow right" onclick="slideCarousel('carousel-4',1)"><i class="fas fa-chevron-right"></i></button>
                 <div class="carousel-dots" id="dots-carousel-4"></div>
-            </div>
-        </div>
-
-        <!-- ===== PROJET 5 ===== -->
-        <div class="project-card padd-15 reveal" data-category="mobile">
-            <div class="project-card-header">
-                <div class="project-card-info">
-                    <h2 data-i18n="proj_title_5">Application Mobile de Vote</h2>
-                    <p data-i18n="proj_desc_5">Application mobile pour la réalisation de votes électroniques en temps réel avec interface administrateur et saisie des résultats.</p>
-                    <span class="project-tech-tag">Flutter</span>
-                    <span class="project-tech-tag">Firebase</span>
-                </div>
-                <div class="project-card-btns">
-                    <button class="proj-btn btn-images" onclick="openCarousel('carousel-5')">
-                        <i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">Masquer les images</span>
-                    </button>
-                </div>
-            </div>
-            <!-- Carousel 5 -->
-            <div class="proj-carousel" id="carousel-5">
-                <button class="carousel-arrow left" onclick="slideCarousel('carousel-5',-1)"><i class="fas fa-chevron-left"></i></button>
-                <div class="carousel-track-wrap">
-                    <div class="carousel-track">
-                        <div class="carousel-slide"><img src="images/vote (1).webp" loading="lazy" alt="Capture d'écran Application mobile de vote : Écran de démarrage"><span>Écran de démarrage</span></div>
-                        <div class="carousel-slide"><img src="images/vote (2).webp" loading="lazy" alt="Capture d'écran Application mobile de vote : Interface de connexion"><span>Interface de connexion</span></div>
-                        <div class="carousel-slide"><img src="images/vote (3).webp" loading="lazy" alt="Capture d'écran Application mobile de vote : Interface d'inscription"><span>Interface d'inscription</span></div>
-                        <div class="carousel-slide"><img src="images/vote (4).webp" loading="lazy" alt="Capture d'écran Application mobile de vote : Dashboard administrateur"><span>Dashboard administrateur</span></div>
-                        <div class="carousel-slide"><img src="images/vote (5).webp" loading="lazy" alt="Capture d'écran Application mobile de vote : Menu burger"><span>Menu burger</span></div>
-                        <div class="carousel-slide"><img src="images/vote (14).webp" loading="lazy" alt="Capture d'écran Application mobile de vote : Saisie des résultats"><span>Saisie des résultats</span></div>
-                    </div>
-                </div>
-                <button class="carousel-arrow right" onclick="slideCarousel('carousel-5',1)"><i class="fas fa-chevron-right"></i></button>
-                <div class="carousel-dots" id="dots-carousel-5"></div>
-            </div>
-        </div>
-
-        <!-- ===== PROJET 6 ===== -->
-        <div class="project-card padd-15 reveal" data-category="web">
-            <div class="project-card-header">
-                <div class="project-card-info">
-                    <h2 data-i18n="proj_title_6">AARTFLIX — Plateforme de Streaming</h2>
-                    <p data-i18n="proj_desc_6">Plateforme de streaming vidéo avec catalogue multimédia interactif, lecteur fluide et administration optimisée du backend et de la base de données.</p>
-                    <span class="project-tech-tag">Node.js</span>
-                    <span class="project-tech-tag">Express</span>
-                    <span class="project-tech-tag">PostgreSQL</span>
-                    <span class="project-tech-tag">Streaming</span>
-                    <span class="project-tech-tag">API REST</span>
-                </div>
-                <div class="project-card-btns">
-                    <button class="proj-btn btn-images" onclick="openCarousel('carousel-6')">
-                        <i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">Masquer les images</span>
-                    </button>
-                    <a class="proj-btn btn-demo" href="https://aartflix.com" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-external-link-alt"></i> <span data-i18n="btn_demo">Voir la démo</span>
-                    </a>
-                </div>
-            </div>
-            <!-- Carousel 6 -->
-            <div class="proj-carousel" id="carousel-6">
-                <button class="carousel-arrow left" onclick="slideCarousel('carousel-6',-1)"><i class="fas fa-chevron-left"></i></button>
-                <div class="carousel-track-wrap">
-                    <div class="carousel-track">
-                        <div class="carousel-slide"><img src="images/aartflix accueil.webp" loading="lazy" alt="Page d'accueil Aartflix"><span>Page d'accueil Aartflix</span></div>
-                        <div class="carousel-slide"><img src="images/aartflix accueil 2.webp" loading="lazy" alt="Catalogue et streaming Aartflix"><span>Catalogue et streaming Aartflix</span></div>
-                    </div>
-                </div>
-                <button class="carousel-arrow right" onclick="slideCarousel('carousel-6',1)"><i class="fas fa-chevron-right"></i></button>
-                <div class="carousel-dots" id="dots-carousel-6"></div>
-            </div>
-        </div>
-
-        <!-- ===== PROJET 7 ===== -->
-        <div class="project-card padd-15 reveal" data-category="web mobile desktop">
-            <div class="project-card-header">
-                <div class="project-card-info">
-                    <h2 data-i18n="proj_title_7">HÔTEL YA — Système de Gestion Hôtelière</h2>
-                    <p data-i18n="proj_desc_7">Solution complète de gestion hôtelière multiplateforme : réservations en ligne, facturation automatisée, gestion des stocks, suivi clients et tableau de bord administrateur.</p>
-                    <span class="project-tech-tag">React / Next.js</span>
-                    <span class="project-tech-tag">Flutter</span>
-                    <span class="project-tech-tag">MySQL</span>
-                    <span class="project-tech-tag">API REST</span>
-                </div>
-                <div class="project-card-btns">
-                    <button class="proj-btn btn-images" onclick="openCarousel('carousel-7')">
-                        <i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">Masquer les images</span>
-                    </button>
-                </div>
-            </div>
-            <!-- Carousel 7 -->
-            <div class="proj-carousel" id="carousel-7">
-                <button class="carousel-arrow left" onclick="slideCarousel('carousel-7',-1)"><i class="fas fa-chevron-left"></i></button>
-                <div class="carousel-track-wrap">
-                    <div class="carousel-track">
-                        <div class="carousel-slide"><img src="images/photel ya page accueil.webp" loading="lazy" alt="Page d'accueil Hôtel YA"><span>Page d'accueil Hôtel YA</span></div>
-                        <div class="carousel-slide"><img src="images/hotel ya admin.webp" loading="lazy" alt="Administration Hôtel YA"><span>Tableau de bord administrateur</span></div>
-                    </div>
-                </div>
-                <button class="carousel-arrow right" onclick="slideCarousel('carousel-7',1)"><i class="fas fa-chevron-right"></i></button>
-                <div class="carousel-dots" id="dots-carousel-7"></div>
             </div>
         </div>
 
@@ -983,9 +1015,6 @@ document.addEventListener('DOMContentLoaded', function() {
     ['carousel-1','carousel-2','carousel-3','carousel-4','carousel-5','carousel-6','carousel-7'].forEach(function(id) {
         if (document.getElementById(id)) {
             initCarousel(id);
-            // Mettre le bouton en mode "masquer" puisque ouvert par défaut
-            var btn = document.getElementById(id).closest('.project-card').querySelector('.btn-images');
-            if (btn) btn.innerHTML = '<i class="fas fa-chevron-up"></i> <span data-i18n="btn_hide_images">' + (window.currentLang === 'en' ? 'Hide images' : 'Masquer les images') + '</span>';
         }
     });
 });
