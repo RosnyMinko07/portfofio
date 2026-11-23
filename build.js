@@ -16,7 +16,7 @@ console.log('✅ Dossier public créé');
 // Copier UNIQUEMENT les fichiers du site public.
 // Ne jamais ajouter ici scripts/, services/, candidatures/, offres_gabon.json
 // ou la documentation interne : tout ce qui est dans public/ est accessible à tous.
-// (Les fonctions dans api/ accèdent à scripts/ et services/ directement, sans passer par public/.)
+// (La veille emploi dans scripts/ et services/ tourne sur GitHub Actions, pas sur le site.)
 const filesToCopy = [
   'index.html',
   'css',

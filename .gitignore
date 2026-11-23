@@ -22,3 +22,8 @@ seen_jobs.json
 
 # Mémoire de la veille emploi (locale / cache GitHub Actions)
 .data/
+
+# Données personnelles de candidature (gardées en local, jamais publiées)
+candidatures/
+offres_gabon.json
+RAPPORT_OFFRES_EMPLOI_GABON.md
