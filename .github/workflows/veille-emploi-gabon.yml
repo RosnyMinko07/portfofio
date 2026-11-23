@@ -44,6 +44,11 @@ jobs:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
           RESEND_FROM: ${{ secrets.RESEND_FROM }}
+          # Analyse IA (optionnelle : sans clé, tri par mots-clés)
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
+          # "faible" = tout recevoir (défaut), "moyenne" ou "forte" pour filtrer Telegram
+          TELEGRAM_NIVEAU_MIN: ${{ vars.TELEGRAM_NIVEAU_MIN }}
 
       - name: Sauvegarder la mémoire des offres vues
         if: always() && hashFiles('.data/seen-jobs.json') != ''

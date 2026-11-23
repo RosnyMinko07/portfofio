@@ -1,5 +1,6 @@
 // services/gabon-job-sources.js
-// Récupère les VRAIES offres d'emploi publiées au Gabon (tous secteurs) sur plusieurs plateformes.
+// Récupère les VRAIES offres d'emploi publiées au Gabon (tous secteurs) : emploi.ga et LinkedIn.
+// (Jobartis Gabon a été écarté : ses offres affichées sont toutes fermées depuis 2020.)
 // Aucune offre n'est inventée : si une plateforme ne répond pas, elle est simplement ignorée.
 
 const USER_AGENT =
@@ -60,43 +61,6 @@ async function fetchEmploiGa(pages = 2) {
 }
 
 /**
- * Jobartis Gabon — dernières offres affichées en page d'accueil.
- */
-async function fetchJobartis() {
-  const html = await fetchHtml('https://www.jobartis.ga/');
-  const jobs = [];
-  const re = /<a class="[^"]*" href="(\/emploi-[^"]+)"><div class="top_job row">([\s\S]*?)<\/a>/g;
-  for (const m of html.matchAll(re)) {
-    const block = m[2];
-    const details = [...block.matchAll(/<small>([\s\S]*?)<\/small>/g)].map(x => decodeHtml(x[1]));
-    jobs.push({
-      id: 'JOBARTIS-' + m[1].replace(/^\/emploi-/, ''),
-      titre: decodeHtml((block.match(/<h5>([\s\S]*?)<\/h5>/) || [])[1]),
-      entreprise: details[0] || 'Non précisée',
-      localisation: details[1] || '',
-      contrat: '',
-      date: '',
-      source: 'Jobartis Gabon',
-      lien: 'https://www.jobartis.ga' + m[1]
-    });
-  }
-  // Jobartis publie aussi des offres à l'étranger : on ne garde que le Gabon
-  return jobs.filter(j => j.titre && isInGabon(j.localisation));
-}
-
-const GABON_PLACES = [
-  'gabon', 'estuaire', 'haut-ogooue', 'moyen-ogooue', 'ngounie', 'nyanga', 'ogooue-ivindo',
-  'ogooue-lolo', 'ogooue-maritime', 'woleu-ntem', 'libreville', 'port-gentil', 'franceville',
-  'oyem', 'moanda', 'lambarene', 'mouila', 'tchibanga', 'koulamoutou', 'makokou', 'bitam',
-  'owendo', 'akanda', 'ntoum', 'gamba', 'lastoursville', 'okondja'
-];
-
-function isInGabon(location = '') {
-  const norm = location.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, '-');
-  return GABON_PLACES.some(p => norm.includes(p));
-}
-
-/**
  * LinkedIn — offres publiées au Gabon ces dernières 24 h (API publique "guest").
  * LinkedIn limite souvent ces requêtes (HTTP 429) : la source est alors ignorée pour ce passage.
  */
@@ -130,9 +94,79 @@ async function fetchLinkedIn(pages = 2) {
   return jobs;
 }
 
+// ---------- Détail d'une offre (lu seulement pour les NOUVELLES offres) ----------
+
+function htmlToText(html = '') {
+  return html
+    .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<br\s*\/?>|<\/(p|li|div|h\d|ul|ol)>/gi, '\n')
+    .replace(/<li[^>]*>/gi, '• ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&#0?39;|&rsquo;|&lsquo;|&acute;|´/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
+    .replace(/&[a-z]+;/gi, ' ')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\n[ \t]+/g, '\n')
+    .replace(/\n{2,}/g, '\n')
+    .trim();
+}
+
+function between(html, startMarker, endMarker) {
+  const a = html.indexOf(startMarker);
+  if (a < 0) return '';
+  const b = endMarker ? html.indexOf(endMarker, a + startMarker.length) : -1;
+  return html.slice(a, b > a ? b : a + 8000);
+}
+
+
+const MAX_DESCRIPTION_LENGTH = 3000;
+
+/**
+ * Lit la page d'une offre et renvoie { description, dateLimite, fermee }.
+ * En cas d'échec, renvoie une description vide (l'offre est quand même envoyée).
+ */
+async function fetchJobDetails(job) {
+  const empty = { description: '', dateLimite: '', fermee: false };
+  try {
+    if (job.source === 'emploi.ga') {
+      const html = await fetchHtml(job.lien);
+      const block = between(html, 'class="job-description"', "Critères de l'annonce");
+      return { ...empty, description: htmlToText(block.replace(/^[^>]*>/, '')).slice(0, MAX_DESCRIPTION_LENGTH) };
+    }
+
+    if (job.source === 'LinkedIn') {
+      const id = job.id.replace('LINKEDIN-', '');
+      const html = await fetchHtml(`https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/${id}`);
+      const desc = htmlToText(between(html, 'show-more-less-html__markup', 'show-more-less-html__button').replace(/^[^>]*>/, ''));
+      const criteria = htmlToText(between(html, 'description__job-criteria-list', '</ul>').replace(/^[^>]*>/, ''));
+      const fermee = /No longer accepting applications|n'accepte plus de candidatures/i.test(html);
+      return { description: (desc + (criteria ? '\n' + criteria : '')).slice(0, MAX_DESCRIPTION_LENGTH), dateLimite: '', fermee };
+    }
+  } catch (e) {
+    console.warn(`Détail indisponible pour ${job.id} : ${e.message}`);
+  }
+  return empty;
+}
+
+/**
+ * Ajoute les détails à une liste d'offres (4 pages lues en parallèle au maximum).
+ */
+async function addJobDetails(jobs, limit = 25) {
+  const result = jobs.map(j => ({ ...j, description: '', dateLimite: '', fermee: false }));
+  const toFetch = result.slice(0, limit);
+  for (let i = 0; i < toFetch.length; i += 4) {
+    const batch = toFetch.slice(i, i + 4);
+    const details = await Promise.all(batch.map(fetchJobDetails));
+    batch.forEach((job, k) => Object.assign(job, details[k]));
+  }
+  return result;
+}
+
 const SOURCES = [
   { nom: 'emploi.ga', run: () => fetchEmploiGa() },
-  { nom: 'Jobartis Gabon', run: () => fetchJobartis() },
   { nom: 'LinkedIn', run: () => fetchLinkedIn() }
 ];
 
@@ -158,4 +192,4 @@ async function harvestGabonJobs() {
   return { jobs: [...byId.values()], status };
 }
 
-module.exports = { harvestGabonJobs, fetchEmploiGa, fetchJobartis, fetchLinkedIn };
+module.exports = { harvestGabonJobs, fetchEmploiGa, fetchLinkedIn, fetchJobDetails, addJobDetails };
