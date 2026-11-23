@@ -1,0 +1,53 @@
+name: Veille emploi Gabon
+
+on:
+  schedule:
+    # Toutes les 30 minutes (GitHub peut décaler un passage de quelques minutes)
+    - cron: '*/30 * * * *'
+  workflow_dispatch: {}
+
+# Un seul passage à la fois, pour ne jamais envoyer deux fois la même offre
+concurrency:
+  group: veille-emploi-gabon
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  veille:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - run: npm ci --omit=dev
+
+      # Mémoire des offres déjà envoyées, conservée d'un passage à l'autre
+      - name: Restaurer la mémoire des offres vues
+        uses: actions/cache/restore@v4
+        with:
+          path: .data/seen-jobs.json
+          key: seen-jobs-${{ github.run_id }}
+          restore-keys: seen-jobs-
+
+      - name: Chercher et envoyer les nouvelles offres
+        run: node scripts/job-alert-watch.js
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+          RESEND_FROM: ${{ secrets.RESEND_FROM }}
+
+      - name: Sauvegarder la mémoire des offres vues
+        if: always() && hashFiles('.data/seen-jobs.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: .data/seen-jobs.json
+          key: seen-jobs-${{ github.run_id }}

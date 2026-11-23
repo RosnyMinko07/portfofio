@@ -19,3 +19,6 @@ Thumbs.db
 
 # Historique anti-doublon (local uniquement, géré en mémoire sur Vercel)
 seen_jobs.json
+
+# Mémoire de la veille emploi (locale / cache GitHub Actions)
+.data/

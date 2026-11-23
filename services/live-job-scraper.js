@@ -198,10 +198,11 @@ Renvoie STRICTEMENT un tableau JSON valide sans formatage markdown, avec les cl�
 async function harvestAllLiveJobs() {
   console.log('🌐 [HARVESTER] Lancement du moissonnage en direct (LinkedIn + AltEmploi + IA)...');
   
-  const [linkedInJobs, altJobs, geminiJobs] = await Promise.all([
+  // La source IA Gemini a été retirée : elle inventait des offres plausibles mais fictives.
+  const geminiJobs = [];
+  const [linkedInJobs, altJobs] = await Promise.all([
     fetchLinkedInLiveJobs(),
-    fetchAltEmploiLiveJobs(),
-    fetchGeminiAiJobs()
+    fetchAltEmploiLiveJobs()
   ]);
 
   console.log(`   📡 LinkedIn Jobs : ${linkedInJobs.length} offre(s) en direct trouvée(s)`);

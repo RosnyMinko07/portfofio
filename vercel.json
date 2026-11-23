@@ -1,10 +1,4 @@
 {
   "outputDirectory": "public",
-  "framework": null,
-  "crons": [
-    {
-      "path": "/api/cron-job-hunter",
-      "schedule": "0 7 * * *"
-    }
-  ]
+  "framework": null
 }

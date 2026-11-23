@@ -176,12 +176,7 @@ const Agent2_JobHarvester = {
       console.warn('⚠️ [Agent 2] Erreur lors du moissonnage en direct:', err.message);
     }
 
-    // 2. Si aucune offre en direct, utiliser les offres de référence
-    if (liveJobs.length === 0) {
-      console.log('ℹ️ [Agent 2] Aucune offre en direct — utilisation des offres de référence.');
-      liveJobs = this.getFallbackJobs();
-      usedFallback = true;
-    }
+    // 2. Aucune offre de référence/fictive n'est utilisée si les sites ne répondent pas
 
     // 3. Identifier les NOUVELLES offres (non encore vues)
     const analyzed = tagJobsWithHistory(liveJobs.map(job => ({ job, analysis: { score: 0 } })));
